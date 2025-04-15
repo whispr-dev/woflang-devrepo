@@ -1,6 +1,13 @@
 // woflang_vm_executor.cpp
 // WOFLANG virtual machine executor with double-buffered file loading
 
+#include "load_woflang_plugins.cpp"
+#include "dynamic_glyph_loader.cpp"
+#include "wof_watch_autostart_patch.cpp"
+#include "wofreplrc_loader_extended.cpp"
+#include "load_phase1_mathlib_plugins.cpp"
+#include "wof_keybind_autoload_patch.cpp"
+
 #include <iostream>
 #include <unordered_map>
 #include <functional>

@@ -1,15 +1,17 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.14)
 project(woflang)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
-include_directories(core simd parser repl ops io)
+add_executable(woflang
+    main.cpp
+    wof_interpreter.cpp
+    plugin_loader.cpp
+    repl_commands.cpp
+)
 
-file(GLOB_RECURSE SOURCES
-     "core/*.cpp"
-     "parser/*.cpp"
-     "repl/*.cpp"
-     "ops/*.cpp"
-     "io/*.cpp")
+# include dirs if needed
+target_include_directories(woflang PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(woflang ${SOURCES})
+# for dynamic loading
+target_link_libraries(woflang dl)
