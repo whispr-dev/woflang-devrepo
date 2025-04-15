@@ -258,3 +258,9 @@ if (line.starts_with(":suggest ++ ")) {
 }
 
 
+if (line.starts_with(":solve ++ ")) {
+    auto sym = parseSolveInput(line.substr(10));
+    interpreter.pushSymbol(sym);     // hypothetical method
+    interpreter.executeOpcode(3201); // or 3202 for advanced
+    continue;
+}
