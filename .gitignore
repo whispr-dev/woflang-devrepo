@@ -1,3 +1,8 @@
+# temp is for tempry files
+temp/
+docs/junky/
+docs/math_archive/
+
 # Prerequisites
 *.d
 
