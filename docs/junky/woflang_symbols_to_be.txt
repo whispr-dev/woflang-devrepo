@@ -1,0 +1,58 @@
+齊                     隶丶                     丿                     x / y if y != 0 else float('inf')      # Anal Divide  0x2F03 slash
+而                     或⊕                     无                     -x,                          		# Anal NOT                      	0x2F46          	not
+无‍而                   无‍或                    -(max(x, y)              # Anal NOR                      	0x2F46-0x200D-0x6216       not-or
+若                     则另                     門                     y ← x                                 # Anal Assignment       0x2FA8          	gate
+大                     小卜                     丨                     x != y                                 # Anal Does Not Equal0x2F18          	line
+走                     夊老                     至                    (for)                                  # for                           		0x2F84          	arrive
+舛                    自 又                                        (x in list)                    	# in                            		U+5165          	in
+止                    出 
+氏/ 谷己                 辵    比                    (bool x)                              # bool                          	0x2F50          	compare
+終    響釆    
+卩    押
+支    ⽰眠    ⺒                    (http)                                  # http                          	U+2E92          	snake
+⺨    ⽪⽓    待                    (wait)                                  # wait                          	U+5F85          	wait
+⻤    ⺙    ⺆⺘                    (function)                        # function                   U+2E98          	hand
+工     ⺣                    (attribute)                     # attribute                 U+2EA3          	fire
+巡     非                   (error)                                 # error                         	0x2FAE          	wrong
+道     ⺢                   (type x)                                # type                          	U+2EA2          	water
+字     読                   (read x)                                # read                          	U+8AAD          	read
+艮     ⻔                    (gate)                              	   # gate                          	0x2FA4          	gate
+1      2                    (two)                           	       	  # 2
+3                    (three)                    	       	     # 3
+4                    (four)                        	       	    # 4
+5                    (five)                                	  # 5
+6                    (six)                                   	 # 6
+7                    (seven)                                # 7
+8                    (eight)                               # 8
+9                    (nine)                                  # 9
+q                    (Q)                           	         # Q
+w                    (W)                                  	  # W
+e                    (E)                                      	# E
+r                    (R)                                     	 # R
+t                    (T)                                      	# T
+y                    (Y)                                      	# Y
+u                    (U)                                      	# U
+i                    (I)                                      	# I
+o                    (O)                                      	# O
+p                    (P)                                      	# P
+a                    (A)                                      	# A
+s                    (S)                                      	# S
+d                    (D)                                      	# D
+g                    (G)                                      	# G
+h                    (H)                                      	# H
+j                    (J)                                      	# J
+k                    (K)                                      	# K
+l                    (L)                                      	# L
+z                    (Z)                                      	# Z
+x                    (X)                                      	# X
+c                    (C)                                      	# C
+v                    (V)                                      	# V
+b                    (B)                                      	# B
+n                    (N)                                      	# N
+m                    (M)                                      	# M
+[                    ([)                                      	# LSB
+]                    (])                                      	# RSB
+(                    (()                                      	# LCB
+)                    ())                                      	# RCB
+_                    (_)                                      	# U_S
+'                    (')                                      	# Ap'

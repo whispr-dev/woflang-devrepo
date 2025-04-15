@@ -1,4 +1,4 @@
-# 🌌 WOFLANG — The Symbolic Programming Language of Glyphs
+# WOFLANG — The Symbolic Programming Language of Glyphs
 
 Welcome to **WOFLANG**, a fully stack-based, Unicode-powered, REPL-driven symbolic programming language.
 
@@ -6,7 +6,7 @@ WOFLANG is designed for math, AI, and expressive power — built from the ground
 
 ---
 
-## 🧠 Why WOFLANG?
+## Why WOFLANG?
 
 - Glyphs make structure *visible*
 - Functions are boxed, blocks are bounded
@@ -17,9 +17,9 @@ WOFLANG is built not just to *compute*, but to *communicate thought*.
 
 ---
 
-## 🔧 Getting Started
+## Getting Started
 
-### 📦 Folder Layout
+### Folder Layout
 
 ```
 woflang/
@@ -33,7 +33,7 @@ woflang/
 └── CMakeLists.txt     # Build config
 ```
 
-### 🛠️ Build & Run
+### Build & Run
 
 ```bash
 mkdir build && cd build
@@ -44,32 +44,32 @@ make
 
 ---
 
-## 🧱 Language Overview
+## Language Overview
 
 WOFLANG is:
 
 - **Stack-based**: Values are pushed and popped
-- **Block-structured**: Code grouped via `⺆ ... ⺘`
+- **Block-structured**: Code grouped via
 - **Unicode-native**: Every operation is a glyph
 
 ---
 
-### 🔣 Key Syntax
+### Key Syntax
 
-| Glyph | Meaning      | Description |
-|-------|--------------|-------------|
-| ⊕     | `define`     | Define a function |
-| ⺆ ⺘   | `begin/end`  | Encloses blocks |
-| 若 則 或 | `if then else` | Conditional execution |
-| 至     | `return`     | End a function or block |
-| ⟳     | `loop`       | Infinite loop block |
-| ⨯     | `repeat`     | Repeat N times |
-| ⍺     | `for`        | For loop with loop var `i` |
-| 🛑 ↻   | `break/cont` | Exit or continue loop |
+| Glyph     | Meaning        | Description                |
+|-----------|----------------|----------------------------|
+| ⊕        | `define`       | Define a function          |
+| ⺆ ⺘     | `begin/end`    | Encloses blocks            |
+| 若 則 或  | `if then else` | Conditional execution      |
+| 至        | `return`       | End a function or block    |
+| ⟳        | `loop`         | Infinite loop block        |
+| ⨯        | `repeat`       | Repeat N times              |
+| ⍺        | `for`          | For loop with loop var `i`  |
+| ↻        | `break/cont`   | Exit or continue loop       |
 
 ---
 
-### 📦 Example
+### Example
 
 ```wof
 ⊕double ⺆
@@ -85,7 +85,7 @@ emit
 
 ---
 
-## 🧮 Math Features
+## Math Features
 
 WOFLANG supports symbolic and numerical math via plugins:
 
@@ -103,7 +103,7 @@ WOFLANG supports symbolic and numerical math via plugins:
 
 ---
 
-## 🔁 Control Flow
+## Control Flow
 
 ```wof
 push 0
@@ -120,7 +120,7 @@ Creates a for-loop from 0 to 10 by 1 using `i` as the loop variable.
 
 ---
 
-## 🧩 Lists
+## Lists
 
 WOFLANG supports lists using brackets:
 
@@ -132,7 +132,7 @@ You can `get`, `append`, `map`, `reduce`, and even nest them infinitely.
 
 ---
 
-## 🧰 REPL Features
+## .EPL Features
 
 ```txt
 :stack        # view current stack
@@ -147,7 +147,7 @@ You can `get`, `append`, `map`, `reduce`, and even nest them infinitely.
 
 ---
 
-### 🔎 Sample Trace Output
+### Sample Trace Output
 
 ```txt
 [TRACE] IP 3 | Glyph: emit | Opcode: 88 | In Block: ⺆ IP 0 (loop) → ⺘ IP 7 | Stack: [42] | Scope: { i=6 }
@@ -155,7 +155,7 @@ You can `get`, `append`, `map`, `reduce`, and even nest them infinitely.
 
 ---
 
-## 🔤 Input Aliases
+## Input Aliases
 
 ```wof
 :bind df ∂
@@ -166,7 +166,7 @@ Aliases are saved in `~/.wofbinds` and loaded automatically on startup.
 
 ---
 
-## 🔌 Plugin System
+## Plugin System
 
 - `.glyphmap` defines glyph → opcode
 - `.cpp` file defines opcode logic
@@ -182,18 +182,18 @@ extern "C" void register_woflang_plugin(WofInterpreter& vm) {
 
 ---
 
-## 📐 Internal Structure
+## Internal Structure
 
 ### Stack Frame Diagram
 
 ```
-+--------------------+
-|  returnStack       |
-|  blockStack        |
-|  scopeStack        |
-|  loopContext       |
++---------------------------+
+|  returnStack              |
+|  blockStack               |
+|  scopeStack               |
+|  loopContext              |
 |  valueStack (int, list)   |
-+--------------------+
++---------------------------+
 ```
 
 ### Block Parsing Tree
@@ -211,7 +211,7 @@ extern "C" void register_woflang_plugin(WofInterpreter& vm) {
 
 ---
 
-## 🔭 Extending the Language
+## Extending the Language
 
 Want to add a new glyph?
 
@@ -222,7 +222,7 @@ Want to add a new glyph?
 
 ---
 
-## 🧱 Design Philosophy
+## Design Philosophy
 
 > A language for the future of thinking.
 
@@ -232,7 +232,7 @@ Want to add a new glyph?
 
 ---
 
-## 🗺️ Roadmap Highlights
+## Roadmap Highlights
 
 - [x] Full REPL with trace, scope, stack, reload
 - [x] Plugin loader (.so + .glyphmap)
@@ -246,8 +246,8 @@ Want to add a new glyph?
 
 ---
 
-## 🧙 License
+## License
 
-🌀 MIT License  
+MIT License  
 Made by glyphs, with glyphs, for glyphs.
 
