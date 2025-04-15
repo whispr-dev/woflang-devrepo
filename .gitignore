@@ -7,7 +7,7 @@ docs/math_archive/
 *.d
 
 # likely large files such as arhcives
-.zip
+*.zip
 
 # Compiled Object files
 *.slo
