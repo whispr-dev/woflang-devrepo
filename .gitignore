@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# likely large files such as arhcives
+.zip
+
 # Compiled Object files
 *.slo
 *.lo
