@@ -1,6 +1,8 @@
 #include "wof_interpreter.hpp"
 #include "plugin_loader.cpp"
-#include "repl_commands.cpp"
+#include "repl/wofreplrc_loader.cpp"
+#include "repl/repl_keybind_expansion_patch.cpp"
+#include "repl/repl_plugin_watch_support.cpp"
 
 #include <iostream>
 #include <string>
@@ -49,7 +51,6 @@ int main() {
         line = expandKeybindings(line, keybinds);
         check_suggestion_trigger(line);
 
-        // For now just echo
         std::cout << "You entered: " << line << "\n";
     }
 

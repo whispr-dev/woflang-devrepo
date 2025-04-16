@@ -1,5 +1,5 @@
 #include "wof_interpreter.hpp"
-#include <dlfcn.h>
+#include <windows.h>
 #include <filesystem>
 #include <iostream>
 
@@ -7,7 +7,7 @@ void load_all_woflang_plugins(WofInterpreter& vm) {
     std::string pluginDir = "./plugins/";
     for (const auto& entry : std::filesystem::directory_iterator(pluginDir)) {
         if (entry.path().extension() == ".so") {
-            void* handle = dlopen(entry.path().c_str(), RTLD_LAZY);
+            HMODULE handle = LoadLibraryA(path.c_str());
             if (!handle) {
                 std::cerr << "[plugin] Failed to load " << entry.path() << ": " << dlerror() << std::endl;
                 continue;
