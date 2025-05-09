@@ -1,3 +1,6 @@
+# likely large files such as arhcives
+*.zip
+
 # temp is for tempry files
 temp/
 docs/junky/
@@ -5,9 +8,6 @@ docs/math_archive/
 
 # Prerequisites
 *.d
-
-# likely large files such as arhcives
-*.zip
 
 # Compiled Object files
 *.slo
