@@ -1,0 +1,578 @@
+; this is v0.1.0 developed from a question about v0.0.9 hence the following:
+; fren, will this code be able to handle complex strings of code containing
+; both unsigned/signed, integer/float, plaintext, hexadecimal, code
+; adn more even when mixed in the same term in verying orders and lengths?
+; 
+; v0.1.0 is mostly parsing additions this time tho also some further attmepts to 
+; consolidate everything so far into a single coherent wodge of code that
+; could actually function. this is ofc a learning exercise but i'm still tryring
+; to do the best job i can and learn lots so it's gonna have all the bells n
+; whistles as well as some interesting features unique that are of my own
+; devising... hopefully by the  time we reach v.0.1.0 i'll be doing actual
+; asm not just pseudo.
+
+
+
+; Initialize Registers and Memory
+MOV R0, 0    ; Initialize R0 (General purpose register)
+MOV R1, 0    ; Initialize R1 (General purpose register)
+MOV R2, 0    ; Initialize R2 (General purpose register)
+MOV R3, 0    ; Initialize R3 (General purpose register)
+MOV R4, 0    ; Initialize R4 (General purpose register)
+MOV R5, 0    ; Initialize R5 (General purpose register)
+MOV R6, 0    ; Initialize R6 (General purpose register)
+MOV R7, 0    ; Initialize R7 (General purpose register)
+MOV R8, 0    ; Initialize R8 (General purpose register)
+MOV R9, 0    ; Initialize R9 (General purpose register)
+MOV R10, 0   ; Initialize R10 (General purpose register)
+MOV R11, 0   ; Initialize R11 (General purpose register)
+MOV R12, 0   ; Initialize R12 (General purpose register)
+MOV R13, 0   ; Initialize R13 (General purpose register)
+MOV R14, 0   ; Initialize R14 (General purpose register)
+MOV R15, 0   ; Initialize R15 (General purpose register)
+MOV R16, 0   ; Initialize R16 (General purpose register)
+MOV R17, 0   ; Initialize R17 (General purpose register)
+MOV R18, 0   ; Initialize R18 (General purpose register)
+MOV R19, 0   ; Initialize R19 (General purpose register)
+MOV R20, 0   ; Initialize R20 (General purpose register)
+MOV R21, 0   ; Initialize R21 (General purpose register)
+MOV R22, 0   ; Initialize R22 (General purpose register)
+MOV R23, 0   ; Initialize R23 (General purpose register)
+MOV R24, 0   ; Initialize R24 (General purpose register)
+MOV R25, 0   ; Initialize R25 (General purpose register)
+MOV R26, 0   ; Initialize R26 (General purpose register)
+MOV R27, 0   ; Initialize R27 (General purpose register)
+MOV R28, 0   ; Initialize R28 (General purpose register)
+MOV R29, 0   ; Initialize R29 (General purpose register)
+MOV R30, 0   ; Initialize R30 (General purpose register)
+MOV R31, 0   ; Initialize R31 (General purpose register)
+MOV R32, 0   ; Initialize R32 (General purpose register)
+MOV R33, 0   ; Initialize R33 (General purpose register)
+MOV R34, 0   ; Initialize R34 (General purpose register)
+MOV R35, 0   ; Initialize R35 (General purpose register)
+MOV R36, 0   ; Initialize R36 (General purpose register)
+MOV R37, 0   ; Initialize R37 (General purpose register)
+MOV R38, 0   ; Initialize R38 (General purpose register)
+MOV R39, 0   ; Initialize R39 (General purpose register)
+MOV R40, 0   ; Initialize R40 (General purpose register)
+MOV R41, 0   ; Initialize R41 (General purpose register)
+MOV R42, 0   ; Initialize R42 (General purpose register)
+MOV R43, 0   ; Initialize R43 (General purpose register)
+MOV R44, 0   ; Initialize R44 (General purpose register)
+MOV R45, 0   ; Initialize R45 (General purpose register)
+MOV R46, 0   ; Initialize R46 (General purpose register)
+MOV R47, 0   ; Initialize R47 (General purpose register)
+MOV R48, 0   ; Initialize R48 (General purpose register)
+MOV R49, 0   ; Initialize R49 (General purpose register)
+MOV R50, 0   ; Initialize R50 (General purpose register)
+MOV R51, 0   ; Initialize R51 (General purpose register)
+MOV R52, 0   ; Initialize R52 (General purpose register)
+MOV R53, 0   ; Initialize R53 (General purpose register)
+MOV R54, 0   ; Initialize R54 (General purpose register)
+MOV R55, 0   ; Initialize R55 (General purpose register)
+MOV R56, 0   ; Initialize R56 (General purpose register)
+MOV R57, 0   ; Initialize R57 (General purpose register)
+MOV R58, 0   ; Initialize R58 (General purpose register)
+MOV R59, 0   ; Initialize R59 (General purpose register)
+MOV R60, 0   ; Initialize R60 (General purpose register)
+MOV R61, 0   ; Initialize R61 (General purpose register)
+MOV R62, 0   ; Initialize R62 (General purpose register)
+MOV R63, 0   ; Initialize R63 (General purpose register)
+MOV R64, 0   ; Initialize R64 (General purpose register)
+MOV R65, 0   ; Initialize R65 (General purpose register)
+MOV R66, 0   ; Initialize R66 (General purpose register)
+MOV R67, 0   ; Initialize R67 (General purpose register)
+MOV R68, 0   ; Initialize R68 (General purpose register)
+MOV R69, 0   ; Initialize R69 (General purpose register)
+MOV R70, 0   ; Initialize R70 (General purpose register)
+MOV R71, 0   ; Initialize R71 (General purpose register)
+MOV R72, 0   ; Initialize R72 (General purpose register)
+MOV R73, 0   ; Initialize R73 (General purpose register)
+MOV R74, 0   ; Initialize R74 (General purpose register)
+MOV R75, 0   ; Initialize R75 (General purpose register)
+MOV R76, 0   ; Initialize R76 (General purpose register)
+MOV R77, 0   ; Initialize R77 (General purpose register)
+MOV R78, 0   ; Initialize R78 (General purpose register)
+MOV R79, 0   ; Initialize R79 (General purpose register)
+MOV R80, 0   ; Initialize R80 (General purpose register)
+MOV R81, 0   ; Initialize R81 (General purpose register)
+MOV R82, 0   ; Initialize R82 (General purpose register)
+MOV R83, 0   ; Initialize R83 (General purpose register)
+MOV R84, 0   ; Initialize R84 (General purpose register)
+MOV R85, 0   ; Initialize R85 (General purpose register)
+MOV R86, 0   ; Initialize R86 (General purpose register)
+MOV R87, 0   ; Initialize R87 (General purpose register)
+MOV R88, 0   ; Initialize R88 (General purpose register)
+MOV R89, 0   ; Initialize R89 (General purpose register)
+MOV R90, 0   ; Initialize R90 (General purpose register)
+MOV R91, 0   ; Initialize R91 (General purpose register)
+MOV R92, 0   ; Initialize R92 (General purpose register)
+MOV R93, 0   ; Initialize R93 (General purpose register)
+
+
+; Initialize Registers
+MOV R0, 0       ; R0: Pointer to current character in the command
+MOV R1, 0       ; R1: Start position of the current token
+MOV R2, 0       ; R2: Current token length
+MOV R3, MEM[100]; R3: Start address of the command string in memory
+MOV R4, 0       ; R4: Register to hold the current character
+MOV R5, 0       ; R5: Register to hold the current token type (INTEGER, FLOAT, STRING, etc.)
+MOV R6, 0       ; R6: Temporary register
+
+; Pattern Identifiers (Types)
+INTEGER EQU 1
+FLOAT EQU 2
+STRING EQU 3
+COMMAND EQU 4
+SYMBOL EQU 5
+
+; Token Parsing Loop
+PARSE_LOOP:
+    LOAD R4, [R3 + R0]     ; Load the current character
+    CMP R4, 0              ; Check for end of string (null terminator)
+    JE PARSE_END           ; If end of string, end parsing
+
+    ; Check if the character is a digit
+    CMP R4, '0'
+    JL NOT_DIGIT
+    CMP R4, '9'
+    JG NOT_DIGIT
+    ; It's a digit
+    MOV R5, INTEGER        ; Set token type to INTEGER if it hasn't been set
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+NOT_DIGIT:
+    ; Check if the character is a dot (.)
+    CMP R4, '.'
+    JE IS_FLOAT
+    ; Check if the character is a letter
+    CMP R4, 'A'
+    JL NOT_LETTER
+    CMP R4, 'Z'
+    JG CHECK_LOWERCASE
+    ; It's an uppercase letter
+    MOV R5, STRING
+    ADD R2, 1
+    JMP NEXT_CHAR
+
+CHECK_LOWERCASE:
+    CMP R4, 'a'
+    JL NOT_LETTER
+    CMP R4, 'z'
+    JG NOT_LETTER
+    ; It's a lowercase letter
+    MOV R5, STRING
+    ADD R2, 1
+    JMP NEXT_CHAR
+
+NOT_LETTER:
+    ; Check if the character is a command symbol
+    CMP R4, '門'
+    JE IS_COMMAND
+    CMP R4, '('
+    JE IS_SYMBOL
+    ; Add more checks for symbols if needed
+
+IS_FLOAT:
+    MOV R5, FLOAT          ; Set token type to FLOAT if a dot is found
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+IS_COMMAND:
+    MOV R5, COMMAND        ; Set token type to COMMAND
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+IS_SYMBOL:
+    MOV R5, SYMBOL         ; Set token type to SYMBOL
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+NEXT_CHAR:
+    ADD R0, 1              ; Move to the next character
+    JMP PARSE_LOOP         ; Continue parsing
+
+PARSE_END:
+    ; Parsing is complete, handle the final token
+    ; Save or process the token based on type in R5
+
+    ; Reset R1, R2, R5 for next token
+    MOV R1, R0             ; Set start position for the next token
+    MOV R2, 0              ; Reset token length
+    MOV R5, 0              ; Reset token type
+    ; Continue to the next part of your program or loop back if processing more input
+    JMP NEXT_COMMAND       ; Jump to handle the next command or end
+
+NEXT_COMMAND:
+    ; Handle the next command or complete program logic
+    HALT                   ; Stop execution for this example
+
+
+; Memory setup for intermediate values and additional variables
+MOV MEM[100], 0  ; Memory address 100 for intermediate results
+MOV MEM[101], 0  ; Memory address 101 for intermediate results
+MOV MEM[102], 0  ; Memory address 102 for intermediate results
+; Continue to initialize additional memory addresses as needed...
+
+
+; Define Constants for Blocks
+HEADER          EQU 0x01   ; 1 for HEADER type
+VAR             EQU 0x02   ; 2 for Variable definition type
+FUNC            EQU 0x03   ; 3 for Function definition type
+MAIN            EQU 0x04   ; 4 for Main logic type
+
+; Expected Block Strings
+EXPECTED_HEADER DB 'WFL_HEADER'
+VAR_BLOCK       DB 'VAR'
+FUNC_BLOCK      DB 'FUNC'
+MAIN_BLOCK      DB 'MAIN'
+
+; Error Codes
+ERR_DUPLICATE_BLOCK EQU 0xFF01   ; Error code for duplicate block
+ERR_UNRECOGNIZED_CMD EQU 0xFF02  ; Error code for unrecognized command
+ERR_MISSING_MAIN     EQU 0xFF03  ; Error code for missing MAIN block
+ERR_EOF              EQU 0xFF04  ; Error code for improper end of file
+
+
+; Initialization
+MOV R1, 0       ; Initialize the current line type
+MOV R2, HEADER  ; The first expected block type
+MOV R3, MEM[100]; Start reading the file from the beginning
+
+; Flags for Duplicate Checks
+MOV R10, 0      ; Flag for VAR block
+MOV R11, 0      ; Flag for FUNC block
+MOV R12, 0      ; Flag for MAIN block
+
+
+; Main Loop: Read lines and check order
+MAIN_LOOP:
+    READ R0, R3             ; Read the current line into R0
+    MOV R4, VAR_BLOCK
+    CALL STRCMP             ; Check if line is VAR block
+    JZ VAR_FOUND            ; If yes, jump to VAR_FOUND
+    
+    MOV R4, FUNC_BLOCK
+    CALL STRCMP             ; Check if line is FUNC block
+    JZ FUNC_FOUND           ; If yes, jump to FUNC_FOUND
+    
+    MOV R4, MAIN_BLOCK
+    CALL STRCMP             ; Check if line is MAIN block
+    JZ MAIN_FOUND           ; If yes, jump to MAIN_FOUND
+
+    ; Check if reached end of the file without finding MAIN
+    CMP R3, EOF
+    JE CHECK_MISSING_MAIN   ; Jump to check for missing MAIN
+
+    ; Check for unrecognized commands
+    CALL CHECK_UNRECOGNIZED_COMMAND
+    JZ ERROR_UNRECOGNIZED_COMMAND ; If unrecognized, jump to error
+
+    ; Otherwise, keep reading the next line
+    ADD R3, 1
+    JMP MAIN_LOOP
+
+
+VAR_FOUND:
+    CMP R10, 1              ; Check if VAR block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R10, 1              ; Set flag indicating VAR block has been found
+    CMP R2, VAR             ; Check if VAR is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, FUNC            ; Expect FUNC next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+FUNC_FOUND:
+    CMP R11, 1              ; Check if FUNC block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R11, 1              ; Set flag indicating FUNC block has been found
+    CMP R2, FUNC            ; Check if FUNC is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, MAIN            ; Expect MAIN next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+MAIN_FOUND:
+    CMP R12, 1              ; Check if MAIN block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R12, 1              ; Set flag indicating MAIN block has been found
+    CMP R2, MAIN            ; Check if MAIN is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    ; Now entering the MAIN block
+    ADD R3, 1               ; Move to next line
+    MOV R2, END             ; Set the next expected block to END
+    JMP MAIN_EXECUTION      ; Proceed to execute MAIN logic
+
+
+MAIN_EXECUTION:
+    ; The logic of MAIN block begins here
+    ; Parse and execute various functionalities and structures
+    READ R0, R3             ; Read the current line into R0
+    CALL PARSE_COMMAND      ; Parse the command and arguments
+
+    ; ADD Functionality
+    CMP R0, '齊'            ; Check if command is ADD (齊)
+    JEQ ADD_ROUTINE
+
+    ; SUBTRACT Functionality
+    CMP R0, '隶'            ; Check if command is SUBTRACT (隶)
+    JEQ SUB_ROUTINE
+
+    ; MULTIPLY Functionality
+    CMP R0, '丶'            ; Check if command is MULTIPLY (丶)
+    JEQ MUL_ROUTINE
+
+    ; DIVIDE Functionality
+    CMP R0, '丿'            ; Check if command is DIVIDE (丿)
+    JEQ DIV_ROUTINE
+
+    ; MIN (AND) Functionality
+    CMP R0, '而'            ; Check if command is MIN (AND) (而)
+    JEQ AND_ROUTINE
+
+    ; MAX (OR) Functionality
+    CMP R0, '或'            ; Check if command is MAX (OR) (或)
+    JEQ OR_ROUTINE
+
+    ; XOR Functionality
+    CMP R0, '⊕'             ; Check if command is XOR (⊕)
+    JEQ XOR_ROUTINE
+
+    ; NOT Functionality
+    CMP R0, '无'            ; Check if command is NOT (无)
+    JEQ NOT_ROUTINE
+
+    ; NAND Functionality
+    CMP R0, '无‍而'         ; Check if command is NAND (无‍而)
+    JEQ NAND_ROUTINE
+
+    ; NOR Functionality
+    CMP R0, '无‍或'         ; Check if command is NOR (无‍或)
+    JEQ NOR_ROUTINE
+
+    ; IF Functionality
+    CMP R0, '若'            ; Check if command is IF (若)
+    JEQ IF_ROUTINE
+
+    ; THEN Functionality
+    CMP R0, '则'            ; Check if command is THEN (则)
+    JEQ THEN_ROUTINE
+
+    ; ELSE Functionality
+    CMP R0, '另'            ; Check if command is ELSE (另)
+    JEQ ELSE_ROUTINE
+
+    ; Greater Than Functionality
+    CMP R0, '大'            ; Check if command is Greater Than (大)
+    JEQ GT_ROUTINE
+
+    ; Less Than Functionality
+    CMP R0, '小'            ; Check if command is Less Than (小)
+    JEQ LT_ROUTINE
+
+    ; Equals Functionality
+    CMP R0, '卜'            ; Check if command is Equals (卜)
+    JEQ EQ_ROUTINE
+
+    ; Does Not Equal Functionality
+    CMP R0, '丨'            ; Check if command is Does Not Equal (丨)
+    JEQ DNE_ROUTINE
+
+    ; Greater Than or Equal Functionality
+    CMP R0, '走'            ; Check if command is Greater Than or Equal (走)
+    JEQ GTE_ROUTINE
+
+    ; Less Than or Equal Functionality
+    CMP R0, '夊'            ; Check if command is Less Than or Equal (夊)
+    JEQ LTE_ROUTINE
+
+    ; While Loop Functionality
+    CMP R0, '老'            ; Check if command is WHILE (老)
+    JEQ WHILE_ROUTINE
+
+    ; For Loop Functionality
+    CMP R0, '至'            ; Check if command is FOR (至)
+    JEQ FOR_ROUTINE
+
+    ; Except Functionality
+    CMP R0, '舛'            ; Check if command is EXCEPT (舛)
+    JEQ EXCEPT_ROUTINE
+
+    ; Define Functionality
+    CMP R0, '自'            ; Check if command is DEFINE (自)
+    JEQ DEFINE_ROUTINE
+
+    ; Return Functionality
+    CMP R0, '又'            ; Check if command is RETURN (又)
+    JEQ RETURN_ROUTINE
+
+    ; In Functionality
+    CMP R0, '入'            ; Check if command is IN (入)
+    JEQ IN_ROUTINE
+
+    ; Break Functionality
+    CMP R0, '止'            ; Check if command is BREAK (止)
+    JEQ BREAK_ROUTINE
+
+    ; Out (Print/Output) Functionality
+    CMP R0, '出'            ; Check if command is OUT (出)
+    JEQ OUT_ROUTINE
+
+    ; Int/UInt Functionality
+    CMP R0, '氏'            ; Check if command is INT (氏)
+    JEQ INT_ROUTINE
+    CMP R0, '谷'            ; Check if command is UINT (谷)
+    JEQ UINT_ROUTINE
+
+    ; String Functionality
+    CMP R0, '己'            ; Check if command is STRING (己)
+    JEQ STR_ROUTINE
+
+    ; Constant Functionality
+    CMP R0, '辵'            ; Check if command is CONSTANT (辵)
+    JEQ CONST_ROUTINE
+
+    ; Boolean Functionality
+    CMP R0, '比'            ; Check if command is BOOLEAN (比)
+    JEQ BOOL_ROUTINE
+
+    ; End Functionality
+    CMP R0, '終'            ; Check if command is END (終)
+    JEQ END_ROUTINE
+
+    ; Echo Functionality
+    CMP R0, '響'            ; Check if command is ECHO (響)
+    JEQ ECHO_ROUTINE
+
+    ; Done Functionality
+    CMP R0, '釆'            ; Check if command is DONE (釆)
+    JEQ DONE_ROUTINE
+
+    ; Exit Functionality
+    CMP R0, '卩'            ; Check if command is EXIT (卩)
+    JEQ EXIT_ROUTINE
+
+    ; Prompt Functionality
+    CMP R0, '押'            ; Check if command is PROMPT (押)
+    JEQ PROMPT_ROUTINE
+
+    ; Count Functionality
+    CMP R0, '支'            ; Check if command is COUNT (支)
+    JEQ COUNT_ROUTINE
+
+    ; Input Functionality
+    CMP R0, '⽰'            ; Check if command is INPUT (⽰)
+    JEQ INPUT_ROUTINE
+
+    ; Sleep Functionality
+    CMP R0, '眠'            ; Check if command is SLEEP (眠)
+    JEQ SLEEP_ROUTINE
+
+    ; HTTP Functionality
+    CMP R0, '⺒'            ; Check if command is HTTP (⺒)
+    JEQ HTTP_ROUTINE
+
+    ; Proxy Functionality
+    CMP R0, '⺨'            ; Check if command is PROXY (⺨)
+    JEQ PROXY_ROUTINE
+
+    ; User Agent Functionality
+    CMP R0, '⽪'            ; Check if command is USER_AGENT (⽪)
+    JEQ USER_AGENT_ROUTINE
+
+    ; Server Functionality
+    CMP R0, '⽓'            ; Check if command is SERVER (⽓)
+    JEQ SERVER_ROUTINE
+
+    ; Wait Functionality
+    CMP R0, '待'            ; Check if command is WAIT (待)
+    JEQ WAIT_ROUTINE
+
+    ; Null Functionality
+    CMP R0, '⻤'            ; Check if command is NULL (⻤)
+    JEQ NULL_ROUTINE
+
+    ; Print Functionality
+    CMP R0, '⺙'            ; Check if command is PRINT (⺙)
+    JEQ PRINT_ROUTINE
+
+    ; System Call Functionality
+    CMP R0, '⺆'            ; Check if command is SYS_CALL (⺆)
+    JEQ SYS_CALL_ROUTINE
+
+    ; Function Call Functionality
+    CMP R0, '⺘'            ; Check if command is FUNCTION (⺘)
+    JEQ FUNCTION_ROUTINE
+
+    ; Move Functionality
+    CMP R0, '工'            ; Check if command is MOVE (工)
+    JEQ MOVE_ROUTINE
+
+    ; Attribute Functionality
+    CMP R0, '⺣'            ; Check if command is ATTRIBUTE (⺣)
+    JEQ ATTRIBUTE_ROUTINE
+
+    ; Path Functionality
+    CMP R0, '道'            ; Check if command is PATH (道)
+    JEQ PATH_ROUTINE
+
+    ; Type Functionality
+    CMP R0, '⺢'            ; Check if command is TYPE (⺢)
+    JEQ TYPE_ROUTINE
+
+    ; Character Functionality
+    CMP R0, '字'            ; Check if command is CHAR (字)
+    JEQ CHAR_ROUTINE
+
+    ; Read Functionality
+    CMP R0, '読'            ; Check if command is READ (読)
+    JEQ READ_ROUTINE
+
+    ; Continue reading the next command
+    ADD R3, 1
+    JMP MAIN_EXECUTION
+
+
+MAIN_END:
+    ; End of MAIN logic
+    ; Proceed to the next section or EOF
+    JMP END_OF_FILE
+
+
+CHECK_MISSING_MAIN:
+    CMP R12, 0              ; Check if MAIN block was never found
+    JE ERROR_MISSING_MAIN   ; If missing, jump to error
+    JMP PROGRAM_END         ; If all is well, proceed to end of program
+
+END_OF_FILE:
+    ; Handle end of file if all checks passed
+    JMP PROGRAM_END
+
+ERROR_HEADER:
+    ; Handle missing or incorrect header
+    HALT
+
+ERROR_BLOCK_ORDER:
+    ; Handle incorrect code block order
+    HALT
+
+ERROR_DUPLICATE_BLOCK:
+    ; Handle duplicate block error
+    HALT
+
+ERROR_UNRECOGNIZED_COMMAND:
+    ; Handle unrecognized command error
+    HALT
+
+ERROR_MISSING_MAIN:
+    ; Handle missing MAIN block error
+    HALT
+
+PROGRAM_END:
+    ; End of program
+    HALT
+
+
+; Add routines for each Woflang command as needed...

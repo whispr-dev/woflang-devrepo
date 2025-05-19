@@ -1,0 +1,21 @@
+; lgc.asm
+
+LGC_AND:
+    AND R14, R14, R15
+    JMP LGC_LOOP
+
+LGC_OR:
+    OR R14, R14, R15
+    JMP LGC_LOOP
+
+LGC_XOR:
+    XOR R14, R14, R15
+    JMP LGC_LOOP
+
+LGC_NOT:
+    NOT R14, R14
+    JMP LGC_LOOP
+
+LGC_LOOP:
+    MOV MEM[201], R14  ; Store result
+    RET

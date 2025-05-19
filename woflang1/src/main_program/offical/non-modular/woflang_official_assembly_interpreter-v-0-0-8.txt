@@ -1,0 +1,369 @@
+; v0.0.8 is mostly error checking added this time thos also some attmept to 
+; consolidate everything so far into a single coherent wodge of code that
+; could actually function. this is ofc a learning exercise but i'm still tryring
+; to do the best job i can and learn lots so it's gonna have all the bells n
+; whistles as well as some interesting features unique that are of my own
+; devising... hopefully by the  time we reach v.0.1.0 i'll be doing actual
+; asm not just pseudo.
+
+
+; Initialize Registers and Memory
+MOV R0, 0    ; Initialize R0 (General purpose register)
+MOV R1, 0    ; Initialize R1 (General purpose register)
+MOV R2, 0    ; Initialize R2 (General purpose register)
+MOV R3, 0    ; Initialize R3 (General purpose register)
+MOV R4, 0    ; Initialize R4 (General purpose register)
+MOV R5, 0    ; Initialize R5 (General purpose register)
+MOV R6, 0    ; Initialize R6 (General purpose register)
+MOV R7, 0    ; Initialize R7 (General purpose register)
+MOV R8, 0    ; Initialize R8 (General purpose register)
+MOV R9, 0    ; Initialize R9 (General purpose register)
+MOV R10, 0   ; Initialize R10 (General purpose register)
+MOV R11, 0   ; Initialize R11 (General purpose register)
+MOV R12, 0   ; Initialize R12 (General purpose register)
+MOV R13, 0   ; Initialize R13 (General purpose register)
+MOV R14, 0   ; Initialize R14 (General purpose register)
+MOV R15, 0   ; Initialize R15 (General purpose register)
+MOV R16, 0   ; Initialize R16 (General purpose register)
+MOV R17, 0   ; Initialize R17 (General purpose register)
+MOV R18, 0   ; Initialize R18 (General purpose register)
+MOV R19, 0   ; Initialize R19 (General purpose register)
+MOV R20, 0   ; Initialize R20 (General purpose register)
+MOV R21, 0   ; Initialize R21 (General purpose register)
+MOV R22, 0   ; Initialize R22 (General purpose register)
+MOV R23, 0   ; Initialize R23 (General purpose register)
+MOV R24, 0   ; Initialize R24 (General purpose register)
+MOV R25, 0   ; Initialize R25 (General purpose register)
+MOV R26, 0   ; Initialize R26 (General purpose register)
+MOV R27, 0   ; Initialize R27 (General purpose register)
+MOV R28, 0   ; Initialize R28 (General purpose register)
+MOV R29, 0   ; Initialize R29 (General purpose register)
+MOV R30, 0   ; Initialize R30 (General purpose register)
+MOV R31, 0   ; Initialize R31 (General purpose register)
+MOV R32, 0   ; Initialize R32 (General purpose register)
+MOV R33, 0   ; Initialize R33 (General purpose register)
+MOV R34, 0   ; Initialize R34 (General purpose register)
+MOV R35, 0   ; Initialize R35 (General purpose register)
+MOV R36, 0   ; Initialize R36 (General purpose register)
+MOV R37, 0   ; Initialize R37 (General purpose register)
+MOV R38, 0   ; Initialize R38 (General purpose register)
+MOV R39, 0   ; Initialize R39 (General purpose register)
+MOV R40, 0   ; Initialize R40 (General purpose register)
+MOV R41, 0   ; Initialize R41 (General purpose register)
+MOV R42, 0   ; Initialize R42 (General purpose register)
+MOV R43, 0   ; Initialize R43 (General purpose register)
+MOV R44, 0   ; Initialize R44 (General purpose register)
+MOV R45, 0   ; Initialize R45 (General purpose register)
+MOV R46, 0   ; Initialize R46 (General purpose register)
+MOV R47, 0   ; Initialize R47 (General purpose register)
+MOV R48, 0   ; Initialize R48 (General purpose register)
+MOV R49, 0   ; Initialize R49 (General purpose register)
+MOV R50, 0   ; Initialize R50 (General purpose register)
+MOV R51, 0   ; Initialize R51 (General purpose register)
+MOV R52, 0   ; Initialize R52 (General purpose register)
+MOV R53, 0   ; Initialize R53 (General purpose register)
+MOV R54, 0   ; Initialize R54 (General purpose register)
+MOV R55, 0   ; Initialize R55 (General purpose register)
+MOV R56, 0   ; Initialize R56 (General purpose register)
+MOV R57, 0   ; Initialize R57 (General purpose register)
+MOV R58, 0   ; Initialize R58 (General purpose register)
+MOV R59, 0   ; Initialize R59 (General purpose register)
+MOV R60, 0   ; Initialize R60 (General purpose register)
+MOV R61, 0   ; Initialize R61 (General purpose register)
+MOV R62, 0   ; Initialize R62 (General purpose register)
+MOV R63, 0   ; Initialize R63 (General purpose register)
+MOV R64, 0   ; Initialize R64 (General purpose register)
+MOV R65, 0   ; Initialize R65 (General purpose register)
+MOV R66, 0   ; Initialize R66 (General purpose register)
+MOV R67, 0   ; Initialize R67 (General purpose register)
+MOV R68, 0   ; Initialize R68 (General purpose register)
+MOV R69, 0   ; Initialize R69 (General purpose register)
+MOV R70, 0   ; Initialize R70 (General purpose register)
+MOV R71, 0   ; Initialize R71 (General purpose register)
+MOV R72, 0   ; Initialize R72 (General purpose register)
+MOV R73, 0   ; Initialize R73 (General purpose register)
+MOV R74, 0   ; Initialize R74 (General purpose register)
+MOV R75, 0   ; Initialize R75 (General purpose register)
+MOV R76, 0   ; Initialize R76 (General purpose register)
+MOV R77, 0   ; Initialize R77 (General purpose register)
+MOV R78, 0   ; Initialize R78 (General purpose register)
+MOV R79, 0   ; Initialize R79 (General purpose register)
+MOV R80, 0   ; Initialize R80 (General purpose register)
+MOV R81, 0   ; Initialize R81 (General purpose register)
+MOV R82, 0   ; Initialize R82 (General purpose register)
+MOV R83, 0   ; Initialize R83 (General purpose register)
+MOV R84, 0   ; Initialize R84 (General purpose register)
+MOV R85, 0   ; Initialize R85 (General purpose register)
+MOV R86, 0   ; Initialize R86 (General purpose register)
+MOV R87, 0   ; Initialize R87 (General purpose register)
+MOV R88, 0   ; Initialize R88 (General purpose register)
+MOV R89, 0   ; Initialize R89 (General purpose register)
+MOV R90, 0   ; Initialize R90 (General purpose register)
+MOV R91, 0   ; Initialize R91 (General purpose register)
+MOV R92, 0   ; Initialize R92 (General purpose register)
+MOV R93, 0   ; Initialize R93 (General purpose register)
+
+
+
+; Memory setup for intermediate values and additional variables
+MOV R0, 0    ; Initialize R0 (General purpose register)
+MOV R1, 0    ; Initialize R1 (General purpose register)
+...
+MOV R100, 0  ; Initialize more registers as needed
+MOV MEM[100], 0  ; Initialize memory locations
+...
+; Continue to initialize additional memory addresses as needed...
+
+
+; Define Constants for Blocks
+HEADER          EQU 0x01   ; 1 for HEADER type
+VAR             EQU 0x02   ; 2 for Variable definition type
+FUNC            EQU 0x03   ; 3 for Function definition type
+MAIN            EQU 0x04   ; 4 for Main logic type
+
+; Expected Block Strings
+EXPECTED_HEADER DB 'WFL_HEADER'
+VAR_BLOCK       DB 'VAR'
+FUNC_BLOCK      DB 'FUNC'
+MAIN_BLOCK      DB 'MAIN'
+
+
+; Error Codes
+ERR_DUPLICATE_BLOCK EQU 0xFF01   ; Error code for duplicate block
+ERR_UNRECOGNIZED_CMD EQU 0xFF02  ; Error code for unrecognized command
+ERR_MISSING_MAIN     EQU 0xFF03  ; Error code for missing MAIN block
+ERR_EOF              EQU 0xFF04  ; Error code for improper end of file
+
+; Initialization
+MOV R1, 0       ; Initialize the current line type
+MOV R2, HEADER  ; The first expected block type
+MOV R3, MEM[100]; Start reading the file from the beginning
+
+; Flags for Duplicate Checks
+MOV R10, 0      ; Flag for VAR block
+MOV R11, 0      ; Flag for FUNC block
+MOV R12, 0      ; Flag for MAIN block
+
+
+; Main Loop: Read lines and check order
+MAIN_LOOP:
+    READ R0, R3             ; Read the current line into R0
+    MOV R4, VAR_BLOCK
+    CALL STRCMP             ; Check if line is VAR block
+    JZ VAR_FOUND            ; If yes, jump to VAR_FOUND
+    
+    MOV R4, FUNC_BLOCK
+    CALL STRCMP             ; Check if line is FUNC block
+    JZ FUNC_FOUND           ; If yes, jump to FUNC_FOUND
+    
+    MOV R4, MAIN_BLOCK
+    CALL STRCMP             ; Check if line is MAIN block
+    JZ MAIN_FOUND           ; If yes, jump to MAIN_FOUND
+
+    ; Check if reached end of the file without finding MAIN
+    CMP R3, EOF
+    JE CHECK_MISSING_MAIN   ; Jump to check for missing MAIN
+
+    ; Check for unrecognized commands
+    CALL CHECK_UNRECOGNIZED_COMMAND
+    JZ ERROR_UNRECOGNIZED_COMMAND ; If unrecognized, jump to error
+
+    ; Otherwise, keep reading the next line
+    ADD R3, 1
+    JMP MAIN_LOOP
+
+
+VAR_FOUND:
+    CMP R10, 1              ; Check if VAR block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R10, 1              ; Set flag indicating VAR block has been found
+    CMP R2, VAR             ; Check if VAR is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, FUNC            ; Expect FUNC next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+FUNC_FOUND:
+    CMP R11, 1              ; Check if FUNC block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R11, 1              ; Set flag indicating FUNC block has been found
+    CMP R2, FUNC            ; Check if FUNC is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, MAIN            ; Expect MAIN next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+MAIN_FOUND:
+    CMP R12, 1              ; Check if MAIN block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R12, 1              ; Set flag indicating MAIN block has been found
+    CMP R2, MAIN            ; Check if MAIN is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    ; Now entering the MAIN block
+    ADD R3, 1               ; Move to next line
+    MOV R2, END             ; Set the next expected block to END
+    JMP MAIN_EXECUTION      ; Proceed to execute MAIN logic
+
+
+MAIN_EXECUTION:
+    ; The logic of MAIN block begins here
+    ; Parse and execute various functionalities and structures
+    READ R0, R3             ; Read the current line into R0
+    CALL PARSE_COMMAND      ; Parse the command and arguments
+
+    CMP R0, 'ADD'           ; Check if command is ADD
+    JEQ ADD_ROUTINE
+
+    CMP R0, 'SUB'           ; Check if command is SUB
+    JEQ SUB_ROUTINE
+
+    CMP R0, 'MUL'           ; Check if command is MUL
+    JEQ MUL_ROUTINE
+
+    CMP R0, 'DIV'           ; Check if command is DIV
+    JEQ DIV_ROUTINE
+
+    CMP R0, 'LOOP'          ; Check if command is LOOP
+    JEQ LOOP_ROUTINE
+
+    CMP R0, 'COND'          ; Check if command is CONDITIONAL
+    JEQ CONDITIONAL_ROUTINE
+
+    CMP R0, 'CALL'          ; Check if command is FUNCTION CALL
+    JEQ FUNC_CALL_ROUTINE
+
+    ; Check if reached end of MAIN block
+    CMP R3, END_MAIN
+    JE MAIN_END
+
+    ; Continue reading the next command
+    ADD R3, 1
+    JMP MAIN_EXECUTION
+
+MAIN_END:
+    ; End of MAIN logic
+    ; Proceed to the next section or EOF
+    JMP END_OF_FILE
+
+
+CHECK_MISSING_MAIN:
+    CMP R12, 0              ; Check if MAIN block was never found
+    JE ERROR_MISSING_MAIN   ; If missing, jump to error
+    JMP PROGRAM_END         ; If all is well, proceed to end of program
+
+END_OF_FILE:
+    ; Handle end of file if all checks passed
+    JMP PROGRAM_END
+
+ERROR_HEADER:
+    ; Handle missing or incorrect header
+    HALT
+
+ERROR_BLOCK_ORDER:
+    ; Handle incorrect code block order
+    HALT
+
+ERROR_DUPLICATE_BLOCK:
+    ; Handle duplicate block error
+    HALT
+
+ERROR_UNRECOGNIZED_COMMAND:
+    ; Handle unrecognized command error
+    HALT
+
+ERROR_MISSING_MAIN:
+    ; Handle missing MAIN block error
+    HALT
+
+PROGRAM_END:
+    ; End of program
+    HALT
+
+
+; Check for unrecognized command
+CHECK_UNRECOGNIZED_COMMAND:
+    ; Check the command in R0 against known commands
+    CMP R0, 'ADD'
+    JEQ RECOGNIZED
+    CMP R0, 'SUB'
+    JEQ RECOGNIZED
+    CMP R0, 'MUL'
+    JEQ RECOGNIZED
+    CMP R0, 'DIV'
+    JEQ RECOGNIZED
+    CMP R0, 'LOOP'
+    JEQ RECOGNIZED
+    CMP R0, 'COND'
+    JEQ RECOGNIZED
+    CMP R0, 'CALL'
+    JEQ RECOGNIZED
+    MOV R1, ERR_UNRECOGNIZED_CMD
+    JMP UNRECOGNIZED
+
+RECOGNIZED:
+    MOV R1, 0
+    JMP END_CHECK_COMMAND
+
+UNRECOGNIZED:
+    MOV R1, 1
+
+
+END_CHECK_COMMAND:
+    RET
+
+
+; String Compare Routine
+STRCMP:
+    MOV R5, 0          ; Index register for string comparison
+COMPARE_LOOP:
+    LOAD R6, [R0 + R5] ; Load character from string1
+    LOAD R7, [R4 + R5] ; Load character from string2
+    CMP R6, R7         ; Compare characters
+    JNE STRCMP_END     ; If characters do not match, exit with non-zero
+    ADD R5, 1          ; Increment index
+    CMP R6, 0          ; Check if end of string1
+    JNE COMPARE_LOOP   ; If not end, continue comparing
+STRCMP_END:
+    CMP R6, R7         ; Final comparison for zero flag setting
+    RET                ; Return to caller
+
+
+; Command Parsing Routine
+PARSE_COMMAND:
+    ; Implement command parsing logic here
+    ; Extract command and arguments from R0
+    RET                ; Return to caller
+
+; Arithmetic Routines
+ADD_ROUTINE:
+    ; Perform addition
+    ADD R1, R2, R3     ; Example: R1 = R2 + R3
+    JMP MAIN_EXECUTION ; Return to MAIN block
+
+SUB_ROUTINE:
+    ; Perform subtraction
+    SUB R1, R2, R3     ; Example: R1 = R2 - R3
+    JMP MAIN_EXECUTION ; Return to MAIN block
+
+MUL_ROUTINE:
+    ; Perform multiplication
+    MUL R1, R2, R3     ; Example: R1 = R2 * R3
+    JMP MAIN_EXECUTION ; Return to MAIN block
+
+DIV_ROUTINE:
+    ; Perform division
+    DIV R1, R2, R3     ; Example: R1 = R2 / R3
+    JMP MAIN_EXECUTION ; Return to MAIN block
+
+LOOP_ROUTINE:
+    ; Implement loop logic here
+    JMP MAIN_EXECUTION ; Return to MAIN block
+
+CONDITIONAL_ROUTINE:
+    ; Implement conditional logic here
+    JMP MAIN_EXECUTION ; Return to MAIN block
+
+
+FUNC_CALL_ROUTINE:
+    ; Implement function call logic here
+    JMP MAIN_EXECUTION ; Return to MAIN block

@@ -1,0 +1,179 @@
+**fren, how do i turn this:**
+
+```asm
+DD_ROUTINE:
+   ; Assuming R1 and R2 hold the operands, and R3 is the result register
+   ; Check if R1 is an integer or float
+   CMP TYPE[R1], INTEGER
+   JEQ ADD_INTEGER
+   CMP TYPE[R1], FLOAT
+   JEQ ADD_FLOAT
+   CMP TYPE[R1], STRING
+   JEQ ERROR_TYPE_MISMATCH
+   ; Other type checks as needed...
+DD_INTEGER:
+   ; Check if R2 is also an integer
+   CMP TYPE[R2], INTEGER
+   JNE ERROR_TYPE_MISMATCH
+   ADD R3, R1, R2 ; Perform integer addition
+   MOV TYPE[R3], INTEGER ; Set the result type to integer
+   JMP MAIN_EXECUTION ; Continue
+DD_FLOAT:
+   ; Convert R1 and R2 to float if necessary
+   ; Then perform the float addition
+   FADD R3, R1, R2 ; Floating-point addition
+   MOV TYPE[R3], FLOAT ; Set result type to float
+   JMP MAIN_EXECUTION ; Continue
+RROR_TYPE_MISMATCH:
+   ; Handle type mismatch error
+```
+
+**into something wth the capabilities of this:**
+
+```python
+def parse_tokens(command):
+    # Improved regex to match floating-point numbers correctly and other tokens
+    pattern = r"[-+]?\d*\.\d+|\b\d+\b|\b\w+_\w+\b|\b\w+\b|[齊隶丶丿而或⊕无无‍而无‍或()門]"
+    return [token for token in re.findall(pattern, command) if token.strip()]
+```
+
+**please?**
+
+
+**ChatGPT** _said:_
+
+To transform your assembly code snippet into something akin to the Python function parse_tokens, we need to enhance the assembly code to:
+
+Parse and Identify Tokens: Like the Python regex function, the assembly code must recognize different types of data (integers, floats, strings, etc.).
+Classify Tokens: Just as the Python function does, the assembly needs to determine what each token represents (integer, float, command, etc.).
+Handle Mixed Types: The assembly code should be able to parse mixed expressions (e.g., 123 + 4.56 - abc).
+Since assembly language is low-level and doesn't directly support regular expressions like Python, you'll need to break down the process into smaller steps:
+
+Steps to Translate parse_tokens Logic to Assembly
+- Read the Input Command: Use assembly instructions to read the input command.
+- Character Classification: Identify each character in the command to determine if it's part of a number, letter, or special symbol.
+- Token Parsing: Construct tokens by grouping characters based on their classification.
+- Type Determination: Determine the type of each token (integer, float, command, etc.).
+
+Here’s an approach to implement a simplified token parser in assembly, using basic string manipulation and checking instructions.
+
+Assembly Code for Token Parsing
+```asm
+; Initialize Registers
+MOV R0, 0       ; R0: Pointer to current character in the command
+MOV R1, 0       ; R1: Start position of the current token
+MOV R2, 0       ; R2: Current token length
+MOV R3, MEM[100]; R3: Start address of the command string in memory
+MOV R4, 0       ; R4: Register to hold the current character
+MOV R5, 0       ; R5: Register to hold the current token type (INTEGER, FLOAT, STRING, etc.)
+MOV R6, 0       ; R6: Temporary register
+
+; Pattern Identifiers (Types)
+INTEGER EQU 1
+FLOAT EQU 2
+STRING EQU 3
+COMMAND EQU 4
+SYMBOL EQU 5
+
+; Token Parsing Loop
+PARSE_LOOP:
+    LOAD R4, [R3 + R0]     ; Load the current character
+    CMP R4, 0              ; Check for end of string (null terminator)
+    JE PARSE_END           ; If end of string, end parsing
+
+    ; Check if the character is a digit
+    CMP R4, '0'
+    JL NOT_DIGIT
+    CMP R4, '9'
+    JG NOT_DIGIT
+    ; It's a digit
+    MOV R5, INTEGER        ; Set token type to INTEGER if it hasn't been set
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+NOT_DIGIT:
+    ; Check if the character is a dot (.)
+    CMP R4, '.'
+    JE IS_FLOAT
+    ; Check if the character is a letter
+    CMP R4, 'A'
+    JL NOT_LETTER
+    CMP R4, 'Z'
+    JG CHECK_LOWERCASE
+    ; It's an uppercase letter
+    MOV R5, STRING
+    ADD R2, 1
+    JMP NEXT_CHAR
+
+CHECK_LOWERCASE:
+    CMP R4, 'a'
+    JL NOT_LETTER
+    CMP R4, 'z'
+    JG NOT_LETTER
+    ; It's a lowercase letter
+    MOV R5, STRING
+    ADD R2, 1
+    JMP NEXT_CHAR
+
+NOT_LETTER:
+    ; Check if the character is a command symbol
+    CMP R4, '門'
+    JE IS_COMMAND
+    CMP R4, '('
+    JE IS_SYMBOL
+    ; Add more checks for symbols if needed
+
+IS_FLOAT:
+    MOV R5, FLOAT          ; Set token type to FLOAT if a dot is found
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+IS_COMMAND:
+    MOV R5, COMMAND        ; Set token type to COMMAND
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+IS_SYMBOL:
+    MOV R5, SYMBOL         ; Set token type to SYMBOL
+    ADD R2, 1              ; Increment token length
+    JMP NEXT_CHAR
+
+NEXT_CHAR:
+    ADD R0, 1              ; Move to the next character
+    JMP PARSE_LOOP         ; Continue parsing
+
+PARSE_END:
+    ; Parsing is complete, handle the final token
+    ; Save or process the token based on type in R5
+
+    ; Reset R1, R2, R5 for next token
+    MOV R1, R0             ; Set start position for the next token
+    MOV R2, 0              ; Reset token length
+    MOV R5, 0              ; Reset token type
+    ; Continue to the next part of your program or loop back if processing more input
+    JMP NEXT_COMMAND       ; Jump to handle the next command or end
+
+NEXT_COMMAND:
+    ; Handle the next command or complete program logic
+    HALT                   ; Stop execution for this example
+```
+
+Explanation
+-Character Reading: The PARSE_LOOP reads each character of the input command one by one using a pointer (R3 + R0).
+- Classification by Character: It checks if the character is a digit, letter, symbol, or special character. This part of the code emulates the behavior of Python's regex by manually checking character ranges and specific symbols.
+- Token Type Identification: Sets the token type based on the character type:
+- Digits ('0'-'9'): Token type is set to INTEGER.
+- Dot ('.'): Changes the token type to FLOAT.
+- Letters ('A'-'Z', 'a'-'z'): Token type is set to STRING.
+- Command Symbols ('門', '()'): Token type is set to COMMAND or SYMBOL.
+- Token Length Tracking: R2 keeps track of the length of the current token being parsed.
+- End of String Check: If a null terminator (0) is found, parsing ends.
+- Handling Mixed and Complex Expressions
+
+To handle mixed and complex expressions:
+Store tokens as they are parsed and classify them based on their type.
+Build a command execution routine that can handle operations based on the token type.
+Use stack-based or register-based evaluation for complex expressions.
+
+Conclusion
+This assembly implementation emulates the functionality of Python's parse_tokens using basic string operations and checks. It can handle multiple types of input and lays the groundwork for a more complex interpreter that supports various types and expressions. Further enhancements, such as better error checking and support for additional types, can build upon this foundation.

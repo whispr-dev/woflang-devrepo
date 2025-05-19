@@ -1,0 +1,101 @@
+# WoflangCPP Command Dictionary
+# Format: Unicode_Symbol Command_Name Description
+
+# Basic Mathematical Operations
+⊕   cmdAdd          # Addition operator
+⊖   cmdSub          # Subtraction operator
+⊗   cmdMul          # Multiplication operator
+⊘   cmdDiv          # Division operator
+≈   cmdCmp          # Comparison operator
+
+CJK Symbols for Additional Operations
+齊   cmdEven        # Test if number is even
+隶   cmdSlave       # Nested operation marker
+丶   cmdDot         # Dot product operator
+丿   cmdSlash       # Division alternative
+
+# Logical Operations
+∧   cmdAnd          # Logical AND
+∨   cmdOr           # Logical OR
+⊕   cmdXor          # Logical XOR (exclusive OR)
+¬   cmdNot          # Logical NOT
+⊼   cmdNand         # Logical NAND
+⊽   cmdNor          # Logical NOR
+
+Flow Control
+若   cmdIf          # If statement
+则   cmdThen        # Then statement
+另   cmdElse        # Else statement
+老   cmdWhile       # While loop
+至   cmdFor         # For loop
+
+# Comparison Operations
+≡   cmdEq           # Equals
+≠   cmdDNE          # Does not equal
+>   cmdGT           # Greater than
+<   cmdLT           # Less than
+≥   cmdGTE          # Greater than or equal
+≤   cmdLTE          # Less than or equal
+
+# Flow Control
+若   cmdIf           # If statement (Chinese: if)
+则   cmdThen         # Then statement (Chinese: then)
+另   cmdElse         # Else statement (Chinese: other)
+⽼   cmdWhile        # While loop (Kangxi: old)
+⾄   cmdFor          # For loop (Kangxi: until)
+
+# Buffer and Memory Operations
+⽛   cmdBuf          # Buffer operation (Kangxi: tooth)
+⾃   cmdInhibit      # Inhibit operation (Kangxi: self)
+⼜   cmdEquiv        # Equivalence (Kangxi: again)
+⼊   cmdId           # Identity operation (Kangxi: enter)
+
+# Logic Conversion
+⼌   cmdBin2Fuz      # Binary to fuzzy conversion (Kangxi: down)
+⼎   cmdFuz2Bin      # Fuzzy to binary conversion (Kangxi: right)
+⼓   cmdBool         # Boolean operation (Kangxi: cover)
+
+# Vector Operations
+⽮   cmdVectAdd      # Vector addition (Kangxi: arrow)
+⾶   cmdVectSub      # Vector subtraction (Kangxi: fly)
+⽃   cmdDotProd      # Dot product (Kangxi: dipper)
+
+# Matrix Operations
+⽥   cmdMtrxDet      # Matrix determinant (Kangxi: field)
+⾪   cmdMtrxInv      # Matrix inverse (Kangxi: arrive)
+⾕   cmd3x3Det       # 3x3 determinant (Kangxi: valley)
+⽊   cmdMtrxAnd      # Matrix AND operation (Kangxi: tree)
+
+# Control Flow and System Operations
+⽌   cmdBreak        # Break operation (Kangxi: stop)
+⽇   cmdEnd          # End operation (Kangxi: sun)
+⽉   cmdExit         # Exit operation (Kangxi: moon)
+⽆   cmdPrompt       # Prompt operation (Kangxi: not)
+⾻   cmdDone         # Done operation (Kangxi: bone)
+
+# Network and File Operations
+⾢   cmdProxy        # Proxy operation (Kangxi: city)
+⾣   cmdGetProxy     # Get proxy operation (Kangxi: wine)
+⾫   cmdServer       # Server operation (Kangxi: ghost)
+⺣   cmdUserAgent    # User agent operation (Radical: fire)
+
+# Attribute and Type Operations
+⺖   cmdFnct         # Function operation (Radical: wrap)
+⺘   cmdAttribute    # Attribute operation (Radical: box)
+⼯   cmdType         # Type operation (Kangxi: work)
+
+# System Control Operations
+⺩   cmdWait         # Wait operation (Radical: king)
+⺫   cmdSleep        # Sleep operation (Radical: eye)
+⾮   cmdPrint        # Print operation (Kangxi: wrong)
+⾸   cmdChar         # Character operation (Kangxi: head)
+⽹   cmdRead         # Read operation (Kangxi: net)
+
+# Additional Operations
+⾐   cmdMove         # Move operation (Kangxi: clothes)
+⾱   cmdNull         # Null operation (Kangxi: hemp)
+⽺   cmdPath         # Path operation (Kangxi: sheep)
+
+Extended Operations
+読   cmdRead        # Read operation
+字   cmdChar        # Character operation

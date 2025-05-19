@@ -1,0 +1,8 @@
+# Define the initial state for the Rule 90 cellular automaton
+initial_state: 0, 0, 0, 0, 1, 0, 0, 0, 0
+
+# Define the rule for the cellular automaton (Rule 90)
+rule: 90
+
+# Number of rows to display
+rows: 100

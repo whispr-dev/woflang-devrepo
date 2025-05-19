@@ -1,0 +1,27 @@
+aim is to create a programming language where math fucntions are replaced by single unicode characters. idea being long complex equations could be entered in a single keystroke by simply hitting the relevant unicode input.
+
+- the `commend.h` and `command.cpp` files contain the code defining which unicode chars substitute for chich amth operators.
+- the `string_parser.h` and `string_parser.cpp` read and translate these inputs into terms the computer can understand.
+- `main.cpp` contains the core functionalty running the whle set of modules.
+- `utils.h` and `utils.cpp` contain routines to manage various functions needing to be kept out the way of main functionality
+- `err_chk.h` and `err_chk.cpp` contain err handling functionality
+- the adv math and logic plugin files are supposed to be plugins for various kinds of math function that will be loaded dynamically
+
+
+-----------------------------
+
+- want it to be modular code
+- there's the core files - main, commands, utils, err_chk and string_parsing;
+also
+- _want_ dynamic plugin modules for the math calcs: [see existing files and `woflang_desired_math_functn_list.txt`]
+basicmath_plugin1; arithmetic
+logic_plugin1; basic  boolean logic
+logic_plugin2; fuzzy logic
+advmath_plugin1; ?
+advmath_plugin2; ?
+etc.
+- needs full err_chk everywhere
+- files are currenly labelled for what i want them to be not what they are necessarily
+- all files need full check, rewrite and optimize
+
+-----------------------------

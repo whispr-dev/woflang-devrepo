@@ -1,0 +1,42 @@
+Security issues
+
+Because of the security implications of self-modifying code, all of the major operating systems are careful to remove such vulnerabilities as they become known. The concern is typically not that programs will intentionally modify themselves, but that they could be maliciously changed by an exploit.
+
+One mechanism for preventing malicious code modification is an operating system feature called W^X (for "write xor execute"). This mechanism prohibits a program from making any page of memory both writable and executable. Some systems prevent a writable page from ever being changed to be executable, even if write permission is removed.[citation needed] Other systems provide a 'back door' of sorts, allowing multiple mappings of a page of memory to have different permissions. A relatively portable way to bypass W^X is to create a file with all permissions, then map the file into memory twice. On Linux, one may use an undocumented SysV shared memory flag to get executable shared memory without needing to create a file.[citation needed] 
+
+On modern processors with an instruction pipeline, code that modifies itself frequently may run more slowly, if it modifies instructions that the processor has already read from memory into the pipeline. On some such processors, the only way to ensure that the modified instructions are executed correctly is to flush the pipeline and reread many instructions.
+
+Self-modifying code cannot be used at all in some environments, such as the following:
+
+    Application software running under an operating system with strict W^X security cannot execute instructions in pages it is allowed to write to—only the operating system is allowed to both write instructions to memory and later execute those instructions.
+    Many Harvard architecture microcontrollers cannot execute instructions in read-write memory, but only instructions in memory that it cannot write to, ROM or non-self-programmable flash memory.
+    A multithreaded application may have several threads executing the same section of self-modifying code, possibly resulting in computation errors and application failures.
+
+
+Optimizing a state-dependent loop
+
+Pseudocode example:
+
+repeat N times {
+    if STATE is 1
+        increase A by one
+    else
+        decrease A by one
+    do something with A
+}
+
+Self-modifying code, in this case, would simply be a matter of rewriting the loop like this:
+
+repeat N times {
+    increase A by one
+    do something with A
+    when STATE has to switch {
+        replace the opcode "increase" above with the opcode to decrease, or vice versa
+    }
+}
+
+Note that two-state replacement of the opcode can be easily written as 'xor var at address with the value "opcodeOf(Inc) xor opcodeOf(dec)"'.
+
+Choosing this solution must depend on the value of N and the frequency of state changing. 
+
+

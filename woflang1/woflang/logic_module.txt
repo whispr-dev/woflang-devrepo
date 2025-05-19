@@ -1,0 +1,29 @@
+class LogicOperations {
+public:
+    void vectorizedAnd(std::span<const double> a, 
+                      std::span<const double> b,
+                      std::span<double> result);
+    
+    void vectorizedOr(std::span<const double> a,
+                     std::span<const double> b,
+                     std::span<double> result);
+};
+
+
+
+
+class FuzzyLogic {
+    static constexpr double EPSILON = 1e-10;
+    
+    inline double fuzzyAnd(double a, double b) {
+        return std::min(a, b);
+    }
+    
+    inline double fuzzyOr(double a, double b) {
+        return std::max(a, b);
+    }
+    
+    inline double fuzzyNot(double a) {
+        return FUZZY_100 - a;
+    }
+};

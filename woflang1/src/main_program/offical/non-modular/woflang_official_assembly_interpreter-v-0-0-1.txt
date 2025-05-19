@@ -1,0 +1,70 @@
+# woflang_official_assembly_inyerpreter-v-0-0-1.py see .md
+# unfancy
+
+; Assembly-like Woflang Interpreter
+
+; Define registers
+R0 = 0 ; Register 0
+R1 = 0 ; Register 1
+R2 = 0 ; Register 2
+; ... Define more registers as needed
+
+; Define memory addresses
+MEM[100] = 0 ; Memory location 100
+MEM[101] = 0 ; Memory location 101
+; ... Define more memory locations as needed
+
+; Start of the program
+START:
+    ; Load the input script into memory
+    CALL LOAD_SCRIPT ; Load the Woflang script into memory
+
+    ; Tokenize the input script
+    CALL TOKENIZE ; Convert the script into tokens
+
+    ; Interpret the tokens
+    CALL INTERPRET ; Execute the instructions based on tokens
+
+    ; End of program
+    JMP END
+
+LOAD_SCRIPT:
+    ; Implementation of loading script goes here
+    RET
+
+TOKENIZE:
+    ; Implementation of tokenizer goes here
+    RET
+
+INTERPRET:
+    ; Loop through tokens and execute operations
+    ; Example for handling an addition operation:
+    ; Assume tokens are already loaded in MEM[100] onwards
+
+    MOV R0, MEM[100] ; Load first number into R0
+    MOV R1, MEM[101] ; Load second number into R1
+    ADD R2, R0, R1   ; R2 = R0 + R1 (store result in R2)
+    MOV MEM[102], R2 ; Store result back into memory
+
+    ; Handle other operations like subtraction, multiplication, etc.
+
+    ; Example for if-then-else (若...则...另):
+    ; Assume condition result is in R0
+
+    CMP R0, 0        ; Compare R0 with 0
+    JE ELSE_BLOCK    ; Jump to ELSE_BLOCK if R0 == 0
+    ; THEN block instructions
+    ; ...
+    JMP END_IF       ; Jump to end of if-else
+
+ELSE_BLOCK:
+    ; ELSE block instructions
+    ; ...
+
+END_IF:
+    ; Continue with the rest of the script
+
+    RET
+
+END:
+    HLT ; Halt the program

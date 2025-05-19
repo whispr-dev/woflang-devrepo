@@ -1,0 +1,991 @@
+; `woflang_symbol_modul64.asm` optimised main translation core for woflang x086 64bit float fuzzy.
+; Module Header Information
+MODULE_NAME      db 'woflangSymbolModule', 0x00
+MODULE_VERSION   db 'v0.0.4', 0x00
+MODULE_INIT_FUNC equ INIT_SYMBOL_MODULE
+
+http_request_format db 'GET / HTTP/1.1', 0x0D, 0x0A, 'Host: ', 0x00 ; Placeholder for host name
+response_buffer resb 1024       ; Buffer for storing server response
+http_post_format db 'POST / HTTP/1.1', 0x0D, 0x0A, 'Host: ', 0x00 ; Placeholder for host name
+post_content_type db 'Content-Type: application/x-www-form-urlencoded', 0x0D, 0x0A
+post_content_length db 'Content-Length: ', 0x00
+post_data db 'key1=value1&key2=value2', 0x0D, 0x0A, 0x00 ; Placeholder for actual POST data
+response_buffer resb 1024       ; Buffer for storing server response
+some_float_constant dq 1.2345678901234567
+file_path db 'C:\example.txt', 0x00  ; Null-terminated string for DOS
+port db 8080               ; Port number to listen on (example: 8080)
+backlog db 5               ; Number of allowed pending connections (backlog)
+ip_address db 0            ; Use 0.0.0.0 for INADDR_ANY
+socket_fd dd 0             ; File descriptor for the server socket
+proxy_env_prefix db 'export ', 0x00                ; Command prefix for setting environment variable
+http_proxy_var db 'http_proxy=', 0x00              ; Environment variable name for HTTP proxy
+https_proxy_var db 'https_proxy=', 0x00            ; Environment variable name for HTTPS proxy
+new_line db 0x0A                                   ; Newline character
+fuzzy_100 dq 100.0       ; Define a double-precision float representing 100
+
+; Character Map or List
+CHARACTER_MAP:
+; logic
+    db '&', 0          ; AND Command (而)
+    db '|', 0          ; OR Command (或)
+    db '⊕', 0          ; XOR Command (⊕)
+    db '!', 0          ; NOT Command (无)
+    db '⊼', 0          ; NAND Command (无‍而)
+    db '⊽', 0          ; NOR Command (无‍或)
+    db '⇒', 0          ; IF Command (若)
+    db '⇔', 0          ; THEN Command (则)
+    db '?', 0          ; ELSE Command (?)
+
+; arithmetic
+    db '+', 0          ; ADD Command (齊)
+    db '-', 0          ; SUBTRACT Command (隶)
+    db '*', 0          ; MULTIPLY Command (丶)
+    db '/', 0          ; DIVIDE Command (丿)
+    db '>', 0          ; GREATER Command (大)
+    db '<', 0          ; LESS Command (小)
+    db '=', 0          ; EQUALS Command (卜)
+    db '≠', 0          ; DOES NOT EQUAL Command (丨)
+    db '≥', 0          ; GREATER THAN OR EQUALS Command (走)
+    db '≤', 0          ; LESS THAN OR EQUALS Command (夊)
+
+; loop
+    db 'W', 0          ; WHILE Command (老)
+    db 'F', 0          ; FOR Command (至)
+    db '!', 0          ; EXCEPT Command (舛)
+    db 'B', 0          ; BREAK Command (止)
+    db 'S', 0          ; STRING Command (己)
+    db '#', 0          ; COUNT Command (支)
+    db 'B', 0          ; BOOLEAN Command (比)
+
+; command
+    db 'E', 0          ; END Command (終)
+    db 'E', 0          ; ECHO Command (響)
+    db 'D', 0          ; DONE Command (釆)
+    db 'X', 0          ; EXIT Command (卩)
+    db 'P', 0          ; PROMPT Command (押)
+    db 'I', 0          ; INPUT Command (⽰)
+    db 'Z', 0          ; SLEEP Command (眠)
+
+; interwebs
+    db 'H', 0          ; HTTP Command (⺒)
+    db 'P', 0          ; PROXY Command (⺨)
+    db 'U', 0          ; USER_AGENT Command (⽪)
+    db 'S', 0          ; SERVER Command (⽓)
+
+; memory & printing
+    db 'W', 0          ; WAIT Command (待)
+    db 'N', 0          ; NULL Command (⻤)
+    db 'P', 0          ; PRINT Command (⺙)
+    db 'S', 0          ; SYS_CALL Command (⺆)
+    db 'F', 0          ; FUNCTION Command (⺘)
+    db 'M', 0          ; MOVE Command (工)
+    db 'A', 0          ; ATTRIBUTE Command (⺣)
+    db 'P', 0          ; PATH Command (道)
+    db 'T', 0          ; TYPE Command (⺢)
+    db 'C', 0          ; CHAR Command (字)
+    db 'R', 0          ; READ Command (読)
+
+; simd vectors and matrices
+    db 'V', 0          ; vect_add (⼉)
+    db 'V', 0          ; vect_sub (⼐)
+    db 'D', 0          ; dot_prod (⼝)
+    db 'M', 0          ; matrix_det (⼍)
+    db 'I', 0          ; matrix_inv (⼹)
+    db 'T', 0          ; 3x3_det (⼺)
+
+; fuzzy logic specials
+    db 'B', 0          ; bin2fuzz (⽇)
+    db 'F', 0          ; fuzz2bin (⼨)
+    db 'I', 0          ; imply (⽫)
+    db 'N', 0          ; nimply (⽬)
+    db 'N', 0          ; null (⽊)
+    db 'I', 0          ; inhibit_xy (⽥)
+    db 'B', 0          ; buffer (⽱)
+    db 'I', 0          ; inhibit (⽾)
+    db 'E', 0          ; equiv (⽺)
+    db 'C', 0          ; cmp (⽠)
+    db 'I', 0          ; identity (⽲)
+
+section.bss
+    socket_fd resd 1                ; File descriptor for the socket
+
+    ; Command to Function Handler Mapping
+    SYMBOL_COMMANDS:
+
+SYMBOL_COMMANDS:
+        db 'ADD_SYMBOL', 0x00
+        dd ADD_SYMBOL_HANDLER
+        db 'SUB_SYMBOL', 0x00
+        dd SUB_SYMBOL_HANDLER
+        db 'MUL_SYMBOL', 0x00
+        dd MUL_SYMBOL_HANDLER
+        db 'DIV_SYMBOL', 0x00
+        dd DIV_SYMBOL_HANDLER
+        db 'GT_SYMBOL', 0x00
+        dd GT_SYMBOL_HANDLER
+        db 'LT_SYMBOL', 0x00
+        dd LT_SYMBOL_HANDLER
+        db 'EQ_SYMBOL', 0x00
+        dd EQ_SYMBOL_HANDLER
+        db 'DNE_SYMBOL', 0x00
+        dd DNE_SYMBOL_HANDLER
+        db 'GTE_SYMBOL', 0x00
+        dd GTE_SYMBOL_HANDLER
+        db 'LTE_SYMBOL', 0x00
+        dd LTE_SYMBOL_HANDLER
+        db 'AND_SYMBOL', 0x00
+        dd AND_SYMBOL_HANDLER
+        db 'OR_SYMBOL', 0x00
+        dd OR_SYMBOL_HANDLER
+        db 'XOR_SYMBOL', 0x00
+        dd XOR_SYMBOL_HANDLER
+        db 'NOT_SYMBOL', 0x00
+        dd NOT_SYMBOL_HANDLER
+        db 'NAND_SYMBOL', 0x00
+        dd NAND_SYMBOL_HANDLER
+        db 'NOR_SYMBOL', 0x00
+        dd NOR_SYMBOL_HANDLER
+        db 'IF_SYMBOL', 0x00
+        dd IF_SYMBOL_HANDLER
+        db 'THEN_SYMBOL', 0x00
+        dd THEN_SYMBOL_HANDLER
+        db 'ELSE_SYMBOL', 0x00
+        dd ELSE_SYMBOL_HANDLER
+        db 'WHILE_SYMBOL', 0x00
+        dd WHILE_SYMBOL_HANDLER
+        db 'FOR_SYMBOL', 0x00
+        dd FOR_SYMBOL_HANDLER
+        db 'EXCEPT_SYMBOL', 0x00
+        dd EXCEPT_SYMBOL_HANDLER
+        db 'BREAK_SYMBOL', 0x00
+        dd BREAK_SYMBOL_HANDLER
+        db 'STR_SYMBOL', 0x00
+        dd STR_SYMBOL_HANDLER
+        db 'COUNT_SYMBOL', 0x00
+        dd COUNT_SYMBOL_HANDLER
+        db 'BOOL_SYMBOL', 0x00
+        dd BOOL_SYMBOL_HANDLER
+        db 'END_SYMBOL', 0x00
+        dd END_SYMBOL_HANDLER
+        db 'ECHO_SYMBOL', 0x00
+        dd ECHO_SYMBOL_HANDLER
+        db 'DONE_SYMBOL', 0x00
+        dd DONE_SYMBOL_HANDLER
+        db 'EXIT_SYMBOL', 0x00
+        dd EXIT_SYMBOL_HANDLER
+        db 'PROMPT_SYMBOL', 0x00
+        dd PROMPT_SYMBOL_HANDLER
+        db 'INPUT_SYMBOL', 0x00
+        dd INPUT_SYMBOL_HANDLER
+        db 'SLEEP_SYMBOL', 0x00
+        dd SLEEP_SYMBOL_HANDLER
+        db 'HTTP_SYMBOL', 0x00
+        dd HTTP_SYMBOL_HANDLER
+        db 'PROXY_SYMBOL', 0x00
+        dd PROXY_SYMBOL_HANDLER
+        db 'USER_AGENT_SYMBOL', 0x00
+        dd USER_AGENT_SYMBOL_HANDLER
+        db 'SERVER_SYMBOL', 0x00
+        dd SERVER_SYMBOL_HANDLER
+        db 'WAIT_SYMBOL', 0x00
+        dd WAIT_SYMBOL_HANDLER
+        db 'NULL_SYMBOL', 0x00
+        dd NULL_SYMBOL_HANDLER
+        db 'PRINT_SYMBOL', 0x00
+        dd PRINT_SYMBOL_HANDLER
+        db 'SYS_CALL_SYMBOL', 0x00
+        dd SYS_CALL_SYMBOL_HANDLER
+        db 'FUNCTION_SYMBOL', 0x00
+        dd FUNCTION_SYMBOL_HANDLER
+        db 'MOVE_SYMBOL', 0x00
+        dd MOVE_SYMBOL_HANDLER
+        db 'ATTRIBUTE_SYMBOL', 0x00
+        dd ATTRIBUTE_SYMBOL_HANDLER
+        db 'PATH_SYMBOL', 0x00
+        dd PATH_SYMBOL_HANDLER
+        db 'TYPE_SYMBOL', 0x00
+        dd TYPE_SYMBOL_HANDLER
+        db 'CHAR_SYMBOL', 0x00
+        dd CHAR_SYMBOL_HANDLER
+        db 'READ_SYMBOL', 0x00
+        dd READ_SYMBOL_HANDLER
+        db 'VECT_ADD_SYMBOL
+        dd VECT_ADD_SYMBOL HANDLER
+        db 'VECT_SUB_SYMBOL', 0x00
+        dd VECT_SUB_SYMBOL_HANDLER
+        db 'DOT_PROD_SYMBOL', 0x00
+        dd  DOT_PROD_SYMBOL_HANDLER
+        db 'MATRIX_DET_SYMBOL', 0x00
+        dd  MATRIX_DET_SYMBOL_HANDLER
+        db 'MATRIX_INV_SYMBOL', 0x00
+        dd MATRIX_INV_SYMBOL_HANDLER
+        db '3X3_DET_SYMBOL', 0x00
+        dd 3X3_DET_SYMBOL_HANDLER
+        db'BIN-2-FUZZ_SYMBOL', 0x00
+        dd BIN-2-FUZZ_SYMBOL_HANDLER
+        db 'FUZZ-2-BIN_SYMBOL', 0x00
+        dd FUZZ-2-BIN_SYMBOL_HANDLER
+        db 'IMPLY_SYMBOL', 0x00
+        dd IMPLY_SYMBOL_HANDLER
+        db 'NIMPLY', 0x00
+        dd NIMPLY_SYMBOL_HANDLER
+        db 'NULL', 0x00
+        dd NULL_SYMBOL_HANDLER
+        db 'INHIBITION_XY', 0x00
+        dd INHIBITION_XY_SYMBOL_HANDLER
+        db 'BUFFER', 0x00
+        dd BUFFER_SYMBOL_HANDLER
+        db 'INHIBITION', 0x00
+        dd INHIBITION_SYMBOL_HANDLER
+        db 'EQUIVALENCE', 0x00
+        dd EQUIVALENCE_SYMBOL_HANDLER
+        db 'IMPLICATION', 0x00
+        dd IMPLICATION_SYMBOL_HANDLER
+        db 'IDENTITY', 0x00
+        dd IDENTITY_SYMBOL_HANDLER
+        db 'CMP', 0x00
+        dd CMP_SYMBOL_HANDLER
+
+; `woflang_symbol_module.asm` main translation core for woflang x086 64bit float.
+
+section .data
+align 32
+
+section .text
+global INIT_SYMBOL_MODULE   ; init main symbol ref and defs
+global ADD_SYMBOL_HANDLER, SUB_SYMBOL_HANDLER, MUL_SYMBOL_HANDLER, DIV_SYMBOL_HANDLER   ; core arithmetic
+global AND_ROUTINE, OR_ROUTINE, XOR_ROUTINE, NOT_ROUTINE    ; core logic
+global NAND_ROUTINE, NOR_ROUTINE, IF_ROUTINE, THEN_ROUTINE, ELSE_ROUTINE    ; basic logic
+; global LOGIC_HANDLER    
+global GT_SYMBOL_HANDLER, LT_SYMBOL_HANDLER, EQ_SYMBOL_HANDLER, DNE_SYMBOL_HANDLER  ; basic arithmetic
+global GTE_SYMBOL_HANDLER, LTE_SYMBOL_HANDLER, WHILE_SYMBOL_HANDLER, FOR_SYMBOL_HANDLER ; logic 1
+global EXCEPT_SYMBOL_HANDLER, BREAK_SYMBOL_HANDLER, STR_SYMBOL_HANDLER, COUNT_SYMBOL_HANDLER    ; logic 2
+global BOOL_SYMBOL_HANDLER, END_SYMBOL_HANDLER, ECHO_SYMBOL_HANDLER, DONE_SYMBOL_HANDLER    ; commands 1
+global EXIT_SYMBOL_HANDLER, PROMPT_SYMBOL_HANDLER, INPUT_SYMBOL_HANDLER, SLEEP_SYMBOL_HANDLER   ; cmmands 2
+global HTTP_SYMBOL_HANDLER, PROXY_SYMBOL_HANDLER, USER_AGENT_SYMBOL_HANDLER, SERVER_SYMBOL_HANDLER  ; interwebs
+global WAIT_SYMBOL_HANDLER, NULL_SYMBOL_HANDLER, PRINT_SYMBOL_HANDLER, SYS_CALL_SYMBOL_HANDLER  ; memory 1
+global FUNCTION_SYMBOL_HANDLER, MOVE_SYMBOL_HANDLER, ATTRIBUTE_SYMBOL_HANDLER, PATH_SYMBOL_HANDLER  ; misc 1
+global TYPE_SYMBOL_HANDLER, CHAR_SYMBOL_HANDLER, READ_SYMBOL_HANDLER    ; misc 2
+global VECT_ADD_SYMBOL,  VECT_SUB_SYMBOL, DOT_PROD_SYMBOL, MATRIX_INV_SYMBOL, 3X3_DET_SYMBOL    ; vector math  & matrices
+global http_get_request_SYMBOL_HANDLER, http_post_request_SYMBOL_HANDLER, start_server_routine_SYMBOL_HANDLER, stop_server_routine_SYMBOL_HANDLER ; interwebs 2
+global set_attribute_value_SYMBOL_HANDLER, set_proxy_server_SYMBOL_HANDLER    ; interwebs 3
+global BINARY_TO_FUZZY_SYMBOL_HANDLER, FUZZY_TO_BINARY_SYMBOL_HANDLER, IMPLY_SYMBOL HANDLER, NIMPLY_SYMBOL_HANDLER; fuzzy logic
+global NULL_SYMBOL_HANDLER, INHIBITION_XY_SYMBOL_HANDLER, BUFFER_SYMBOL_HANDLER, INHIBITION_SYMBOL_HANDLER  ; fuzzy logic 1
+global EQUIVALENCE_SYMBOL_HANDLER, IMPLICATION_SYMBOL_HANDLER, IDENTITY_SYMBOL_HANDLER, CMP_SYMBOL_HANDLER  ; fuzzy logic 2
+
+; Initialize Symbol Module
+INIT_SYMBOL_MODULE:
+    mov esi, SYMBOL_COMMANDS  ; Load address of command mappings
+    call register_commands    ; Register commands with the main system
+    ret
+  
+; Handler Functions for Commands
+
+ADD_SYMBOL_HANDLER:
+    addsd xmm0, xmm1          ; xmm0 = xmm0 + xmm1
+    ret
+
+SUB_SYMBOL_HANDLER:
+    subsd xmm0, xmm1          ; xmm0 = xmm0 - xmm1
+    ret
+
+MUL_SYMBOL_HANDLER:
+    mov eax, [R1]
+    imul eax, [R2]
+    mov [R0], eax
+    ret
+
+DIV_SYMBOL_HANDLER:
+    mov eax, [R1]
+    xor edx, edx
+    div dword [R2]
+    mov [R0], eax
+    ret
+
+GT_SYMBOL_HANDLER:
+    mov eax, [R1]
+    cmp eax, [R2]
+    setg al
+    movzx eax, al
+    mov [R0], eax
+    ret
+
+LT_SYMBOL_HANDLER:
+    mov eax, [R1]
+    cmp eax, [R2]
+    setl al
+    movzx eax, al
+    mov [R0], eax
+    ret
+
+EQ_SYMBOL_HANDLER:
+    mov eax, [R1]
+    cmp eax, [R2]
+    sete al
+    movzx eax, al
+    mov [R0], eax
+    ret
+
+DNE_SYMBOL_HANDLER:
+    mov eax, [R1]
+    cmp eax, [R2]
+    setne al
+    movzx eax, al
+    mov [R0], eax
+    ret
+
+GTE_SYMBOL_HANDLER:
+    mov eax, [R1]
+    cmp eax, [R2]
+    setge al
+    movzx eax, al
+    mov [R0], eax
+    ret
+
+LTE_SYMBOL_HANDLER:
+    mov eax, [R1]
+    cmp eax, [R2]
+    setle al
+    movzx eax, al
+    mov [R0], eax
+    ret
+
+AND_ROUTINE:
+    and eax, ecx
+    ret
+
+OR_ROUTINE:
+    or eax, ecx
+    ret
+
+XOR_ROUTINE:
+    xor eax, ecx
+    ret
+
+NOT_ROUTINE:
+    not eax
+    ret
+
+NAND_ROUTINE:
+    and eax, ecx
+    not eax
+    ret
+
+NOR_ROUTINE:
+    or eax, ecx
+    not eax
+    ret
+
+IF_ROUTINE:
+    test edx, edx
+    cmovz eax, ebx
+    cmovnz eax, ecx
+    ret
+
+THEN_ROUTINE:
+    cmp eax, 0
+    cmove edx, ebx
+    ret
+
+ELSE_ROUTINE:
+    mov edx, 0
+    ret
+
+END_LOGIC_HANDLER:
+    mov dword [MEM + 201], eax
+    ret
+
+ADD_LOGIC_ERR_ROUTINE:
+    ret
+
+WHILE_SYMBOL_HANDLER:
+.loop:
+    call [R1]
+    test eax, eax
+    jz .end_while
+    jmp .loop
+.end_while:
+    ret
+
+FOR_SYMBOL_HANDLER:
+    mov ecx, [R1]
+.for_loop:
+    cmp ecx, [R2]
+    jge .end_for
+    add ecx, [R3]
+    jmp .for_loop
+.end_for:
+    ret
+
+EXCEPT_SYMBOL_HANDLER:
+    mov eax, [R1]
+    sub eax, [R2]
+    mov [R0], eax
+    ret
+
+BREAK_SYMBOL_HANDLER:
+    mov eax, 1
+    mov [R0], eax
+    ret
+
+STR_SYMBOL_HANDLER:
+    mov esi, [R1]
+    mov edi, [R0]
+    cld
+    rep movsb
+    mov esi, [R2]
+    rep movsb
+    ret
+
+COUNT_SYMBOL_HANDLER:
+    mov eax, [R1]
+    xor ecx, ecx
+.count_loop:
+    cmp byte [eax], 0
+    je .count_done
+    inc ecx
+    inc eax
+    jmp .count_loop
+.count_done:
+    mov [R0], ecx
+    ret
+
+BOOL_SYMBOL_HANDLER:
+    test [R1], [R1]
+    setnz al
+    movzx eax, al
+    mov [R0], eax
+    ret
+
+END_SYMBOL_HANDLER:
+    xor eax, eax
+    mov [R0], eax
+    ret
+
+DONE_SYMBOL_HANDLER:
+    mov eax, 1
+    mov [R0], eax
+    ret
+
+EXIT_SYMBOL_HANDLER:
+    mov eax, 0
+    mov [R0], eax
+    ret
+
+PROMPT_SYMBOL_HANDLER:
+    call show_prompt
+    ret
+
+INPUT_SYMBOL_HANDLER:
+    call read_input
+    ret
+
+SLEEP_SYMBOL_HANDLER:
+    mov eax, [R1]
+    call sleep_routine
+    ret
+
+WAIT_SYMBOL_HANDLER:
+    mov eax, [R1]
+    call wait_routine
+    ret
+
+NULL_SYMBOL_HANDLER:
+    xor eax, eax
+    mov [R0], eax
+    ret
+
+PRINT_SYMBOL_HANDLER:
+    mov eax, [R1]
+    call print_string
+    ret
+
+SYS_CALL_SYMBOL_HANDLER:
+    mov eax, [R1]
+    int 0x80
+    mov [R0], eax
+    ret
+
+FUNCTION_SYMBOL_HANDLER:
+    call [R1]
+    ret
+
+ECHO_SYMBOL_HANDLER:
+    mov eax, [R1]
+    call print_value
+    ret
+
+MOVE_SYMBOL_HANDLER:
+    mov eax, [R1]
+    mov [R2], eax
+    ret
+
+TYPE_SYMBOL_HANDLER:
+    mov eax, [R1]
+    call check_type
+    ret
+
+CHAR_SYMBOL_HANDLER:
+    mov eax, [R1]
+    call handle_char
+    ret
+
+READ_SYMBOL_HANDLER:
+    call read_data
+    ret
+
+HTTP_SYMBOL_HANDLER:
+    push eax
+    push ebx
+    push ecx
+    push edx
+
+    mov eax, [R1]
+    mov ebx, [R2]
+    cmp ebx, 'GET'
+    jne .check_post
+
+    call http_get_request
+    jmp .done
+
+.check_post:
+    cmp ebx, 'POST'
+    jne .done
+    
+    mov ecx, [R3]
+    call http_post_request
+
+.done:
+    pop edx
+    pop ecx
+    pop ebx
+    pop eax
+    ret
+
+http_get_request:
+    mov eax, 1
+    mov ebx, 1
+    mov ecx, 0x00000201
+    int 0x80
+    test eax, eax
+    js socket_error
+    mov [socket_fd], eax
+
+    mov ecx, esp
+    sub esp, 16
+    xor edx, edx
+    mov word [ecx], 0x0002
+    mov ax, [R2]
+    xchg ax, [ecx + 2]
+    mov eax, [R1]
+    mov [ecx + 4], eax
+
+    mov eax, 1
+    mov ebx, 3
+    mov ecx, [socket_fd]
+    int 0x80
+    test eax, eax
+    js connect_error
+    
+    push dword '1.1 '
+    push dword '/ HTTP/'
+    push dword 'T GE'
+    mov esi, esp
+    mov edi, http_request_format + 7
+    mov ecx, 12
+    rep movsb
+
+    mov eax, 1
+    mov ebx, 4
+    mov ecx, [socket_fd]
+    mov edx, http_request_format
+    mov esi, 17
+    int 0x80
+    test eax, eax
+    js send_error
+    
+    mov eax, 1
+    mov ebx, 5
+    mov ecx, [socket_fd]
+    mov edx, response_buffer
+    mov esi, 1024
+    int 0x80
+    test eax, eax
+    js recv_error
+
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
+
+socket_error:
+    mov eax, 1
+    mov ebx, 1
+    int 0x80
+
+connect_error:
+    mov eax, 1
+    mov ebx, 2
+    int 0x80
+
+send_error:
+    mov eax, 1
+    mov ebx, 3
+    int 0x80
+
+recv_error:
+    mov eax, 1
+    mov ebx, 4
+    int 0x80
+
+http_post_request:
+    mov eax, 1
+    mov ebx, 1
+    mov ecx, 0x00000201
+    int 0x80
+    test eax, eax
+    js socket_error
+    mov [socket_fd], eax
+
+    mov ecx, esp
+    sub esp, 16
+    xor edx, edx
+    mov word [ecx], 0x0002
+    mov ax, [R2]
+    xchg ax, [ecx + 2]
+    mov eax, [R1]
+    mov [ecx + 4], eax
+
+    mov eax, 1
+    mov ebx, 3
+    mov ecx, [socket_fd]
+    int 0x80
+    test eax, eax
+    js connect_error
+    
+    push dword '1.1 '
+    push dword '/ HTTP/'
+    push dword 'T SOP'
+    mov esi, esp
+    mov edi, http_post_format + 8
+    mov ecx, 12
+    rep movsb
+
+    mov eax, 1
+    mov ebx, 4
+    mov ecx, [socket_fd]
+    mov edx, http_post_format
+    mov esi, 47
+    int 0x80
+    test eax, eax
+    js send_error
+    
+    mov eax, 1
+    mov ebx, 4
+    mov ecx, [socket_fd]
+    mov edx, R3
+    mov esi, [R3 + 8]
+    int 0x80
+    test eax, eax
+    js send_error
+    
+    mov eax, 1
+    mov ebx, 5
+    mov ecx, [socket_fd]
+    mov edx, response_buffer
+    mov esi, 1024
+    int 0x80
+    test eax, eax
+    js recv_error
+    
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
+
+PROXY_SYMBOL_HANDLER:
+    push eax
+    push ebx
+    push ecx
+
+    mov esi, proxy_env_prefix
+    mov edi, environment_buffer
+    call copy_string
+
+    mov esi, [R2]
+    mov edi, environment_buffer
+    add edi, 7
+    call compare_http_https
+    jz set_http_proxy
+    cmp esi, 'https'
+    jz set_https_proxy
+    jmp invalid_proxy_type
+
+set_http_proxy:
+    mov esi, http_proxy_var
+    mov edi, environment_buffer
+    add edi, 7
+    call copy_string
+
+    jmp setup_proxy_command
+
+set_https_proxy:
+    mov esi, https_proxy_var
+    mov edi, environment_buffer
+    add edi, 7
+    call copy_string
+    
+    jmp setup_proxy_command
+
+setup_proxy_command:
+    mov esi, [R1]
+    mov edi, environment_buffer
+    add edi, 18
+    call copy_string
+
+    mov byte [edi], new_line
+    inc edi
+
+    mov eax, 11
+    mov ebx, environment_buffer
+    xor ecx, ecx
+    xor edx, edx
+    int 0x80
+
+    ret
+
+compare_http_https:
+    mov edi, 'http'
+    repe cmpsb
+    ret
+
+copy_string:
+.copy_loop:
+    lodsb
+    stosb
+    test al, al
+    jnz .copy_loop
+    ret
+
+restore_register_data:
+    pop ecx
+    pop ebx
+    pop eax
+    ret
+
+invalid_proxy_type:
+    ret
+
+USER_AGENT_SYMBOL_HANDLER:
+    push eax
+    mov eax, [R1]
+    call set_user_agent_string
+    pop eax
+    ret
+
+set_user_agent_string:
+    ret
+
+SERVER_SYMBOL_HANDLER:
+    push eax
+    mov eax, [R1]
+    cmp eax, 'start'
+    jne .stop_server
+
+    call start_server_routine
+    jmp .done
+
+.stop_server:
+    call stop_server_routine
+
+.done:
+    pop eax
+    ret
+
+start_server_routine:
+    mov eax, 0x66
+    mov ebx, 1
+    mov ecx, esp
+    push dword 0
+    push dword 1
+    push dword 2
+    int 0x80
+    mov [socket_fd], eax
+
+    cmp eax, 0
+    jl socket_error
+
+    mov eax, 0x66
+    mov ebx, 2
+    mov ecx, esp
+    push byte 16
+    push dword sock_addr
+    push dword [socket_fd]
+    int 0x80
+
+    cmp eax, 0
+    jl bind_error
+
+    mov eax, 0x66
+    mov ebx, 4
+    mov ecx, esp
+    push dword [backlog]
+    push dword [socket_fd]
+    int 0x80
+
+    cmp eax, 0
+    jl listen_error
+
+accept_loop:
+    mov eax, 0x66
+    mov ebx, 5
+    mov ecx, esp
+    push dword 0
+    push dword 0
+    push dword [socket_fd]
+    int 0x80
+
+    cmp eax, 0
+    jl accept_error
+
+    jmp accept_loop
+
+socket_error:
+    mov dword [error_code], ERR_SOCKET_CREATION
+    call REPORT_ERROR
+    ret
+
+bind_error:
+    mov dword [error_code], ERR_BIND
+    call REPORT_ERROR
+    ret
+
+listen_error:
+    mov dword [error_code], ERR_LISTEN
+    call REPORT_ERROR
+    ret
+
+accept_error:
+    mov dword [error_code], ERR_ACCEPT
+    call REPORT_ERROR
+    ret
+    
+stop_server_routine:
+    mov eax, 6
+    mov ebx, [socket_fd]
+    int 0x80
+
+    cmp eax, 0
+    jl close_error
+
+    ret
+
+close_error:
+    mov dword [error_code], ERR_CLOSE
+    call REPORT_ERROR
+    ret
+
+ATTRIBUTE_SYMBOL_HANDLER:
+    push eax
+    push ebx
+
+    mov eax, [R1]
+    mov ebx, [R2]
+    call set_attribute_value
+
+    pop ebx
+    pop eax
+    ret
+
+set_attribute_value:
+    mov ah, 0x43
+    mov al, 0x01
+    mov dx, file_path
+    mov cx, 0x01
+    
+    int 0x21
+    jc attribute_error
+    ret
+
+attribute_error:
+    mov ax, 0x1
+    ret
+
+PATH_SYMBOL_HANDLER:
+    push eax
+
+    mov eax, [R1]
+    call set_system_path
+
+    pop eax
+    ret
+
+FFT_SYMBOL_HANDLER:
+    call FFT_ROUTINE
+    ret
+
+ADD_VECTOR_SYMBOL_HANDLER:
+    call ADD_VECTOR_ROUTINE
+    ret
+
+SUB_VECTOR_SYMBOL_HANDLER:
+    call SUB_VECTOR_ROUTINE
+    ret
+
+DOT_PRODUCT_SYMBOL_HANDLER:
+    call DOT_PRODUCT_ROUTINE
+    ret
+
+MATRIX_DETERMINANT_SYMBOL_HANDLER:
+    call MATRIX_DETERMINANT_ROUTINE
+    ret
+
+MATRIX_INVERSE_SYMBOL_HANDLER:
+    call MATRIX_INVERSE_ROUTINE
+    ret
+
+MATRIX_DETERMINANT_3X3_SYMBOL_HANDLER:
+    call MATRIX_DETERMINANT_3X3_ROUTINE
+    ret
+
+BINARY_TO_FUZZY_CONV_SYMBOL_HANDLER:
+    call BINARY_TO_FUZZY_ROUTINE
+    ret
+
+FUZZY_TO_BINARY_CONV_SYMBOL_HANDLER:
+    call FUZZY_TO_BINARY_ROUTINE
+    ret
+
+IMPLY_SYMBOL_HANDLER:
+    call IMPLY_ROUTINE
+    ret
+
+NIMPLY_SYMBOL_HANDLER:
+    call NIMPLY_ROUTINE
+    ret
+
+NULL_SYMBOL_HANDLER:
+    call NULL_ROUTINE
+    ret
+
+INHIBITION_SYMBOL_HANDLER:
+    call INHIBITION_ROUTINE
+    ret
+
+BUFFER_SYMBOL_HANDLER:
+    call BUFFER_ROUTINE
+    ret
+
+INHIBITION_XY_SYMBOL_HANDLER:
+    call INHIBITION_XY_ROUTINE
+    ret
+
+EQUIVALENCE_SYMBOL_HANDLER:
+    call EQUIVALENCE_ROUTINE
+    ret
+
+IDENTITY_SYMBOL_HANDLER:
+    call IDENTITY_ROUTINE
+    ret
+
+error_command_not_found:
+    mov dword [error_code], ERR_UNRECOGNIZED_COMMAND
+    ret

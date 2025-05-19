@@ -1,0 +1,39 @@
+; Neural Network Program for woflang classic 64bit float x086 fuzzy
+; This program initializes weights and defines the neural network operations
+
+; weights
+α = 4.6640750169
+β = 65.8476897008
+γ = 87.5588982776
+δ = 96.3902119033
+ε = 40.6665870439
+ζ = 11.0266718749
+η = 87.4723957682
+θ = 47.3531412325
+ι = 44.7436164608
+κ = 76.4872156589 ; Changed from '!=' to '=' for consistency
+0x00 ; End of weights
+
+; network operations
+β ∧ λ AND μ       ; Using '∧' instead of '&' for AND
+ι ⊼ ν NAND ξ      ; Using '⊼' instead of '&' for NAND
+ε × ο × π         ; Using '×' instead of '*' for MULTIPLY
+ε ∨ ρ OR σ        ; Using '∨' instead of '|' for OR
+δ + τ + υ          ; Addition remains '+'
+δ − φ − χ          ; Using '−' instead of '-' for SUBTRACT
+ι ⊼ ψ ⊼ ω         ; Using '⊼' for NAND
+κ ≠ ς             ; Using '≠' instead of '!=' for DOES NOT EQUAL
+ι × τ × α'         ; Using '×' instead of '*' for MULTIPLY
+ε ∧ β' AND γ'     ; Using '∧' for AND
+ι × δ' × ε'        ; Using '×' for MULTIPLY
+κ × ζ' × η'        ; Using '×' for MULTIPLY
+κ ∨ θ' OR ι'      ; Using '∨' for OR
+ε ÷ κ' ÷ λ'        ; Using '÷' instead of '/' for DIVIDE
+δ ⊕ μ' ⊕ ν'       ; Using '⊕' for XOR
+β ∧ ξ' AND ο'     ; Using '∧' for AND
+κ ≠ π'            ; Using '≠' for DOES NOT EQUAL
+δ ⊕ ρ' ⊕ σ'       ; Using '⊕' for XOR
+ι ∧ τ' AND υ'     ; Using '∧' for AND
+IF δ > φ' THEN ζ = χ' ELSE β = ψ'  ; Conditional remains the same
+
+0x00 ; End of network

@@ -1,0 +1,126 @@
+; woflang_official_assembly_interpreter-v-0-0-2.asm see .md
+
+; Assume we read each line and parse it, placing values into memory/registers
+; Register definitions for storing Woflang variables
+
+; Initialize registers
+MOV R0, 0   ; R0: θ
+MOV R1, 0   ; R1: 齊
+MOV R2, 0   ; R2: m
+MOV R3, 0   ; R3: n
+MOV R4, 0   ; R4: b
+MOV R5, 0   ; R5: v
+MOV R6, 0   ; R6: c
+MOV R7, 0   ; R7: x
+MOV R8, 0   ; R8: z
+MOV R9, 0   ; R9: l
+MOV R10, 0  ; R10: k
+MOV R11, 0  ; R11: v
+MOV R12, 0  ; R12: h
+MOV R13, 0  ; R13: g 
+MOV R14, 0  ; R14: d
+MOV R15, 0  ; R15: s
+MOV R16, 0  ; R16: a
+MOV R17, 0  ; R17: p
+MOV R18, 0  ; R18: o
+MOV R19, 0  ; R19: i
+MOV R20, 0  ; R20: u
+MOV R21, 0  ; R21: y
+MOV R22, 0  ; R22: t
+MOV R23, 0  ; R23: r
+MOV R24, 0  ; R24: e
+MOV R25, 0  ; R25: w
+MOV R26, 0  ; R26: q
+MOV R27, 0  ; R27: 9
+MOV R28, 0  ; R28: 8
+MOV R29, 0  ; R29: 7
+MOV R30, 0  ; R30: 6 
+MOV R31, 0  ; R31: 5
+MOV R32, 0  ; R32: 4 
+MOV R33, 0  ; R33: 3 
+MOV R34, 0  ; R34: 2
+MOV R35, 0  ; R35: 1
+MOV R36, 0  ; R36: ⻔
+MOV R37, 0  ; R37: 艮
+MOV R38, 0  ; R38: 読
+MOV R39, 0  ; R39: 字
+MOV R40, 0  ; R40: ⺢
+MOV R41, 0  ; R41: 道
+MOV R42, 0  ; R42: 非
+MOV R43, 0  ; R43: 巡
+MOV R44, 0  ; R44: ⺣
+MOV R45, 0  ; R45: 工
+MOV R46, 0  ; R46: ⺘
+MOV R47, 0  ; R47: ⺆
+MOV R48, 0  ; R48: ⺙
+MOV R49, 0  ; R49: ⻤
+MOV R50, 0  ; R50: 待
+MOV R51, 0  ; R51: ⽓
+MOV R52, 0  ; R52: ⽪
+MOV R53, 0  ; R53: ⺨
+MOV R54, 0  ; R54: ⺒
+MOV R55, 0  ; R55: 眠
+MOV R56, 0  ; R56: ⽰
+MOV R57, 0  ; R57: 支
+MOV R58, 0  ; R58: 押
+MOV R59, 0  ; R59: 卩
+MOV R60, 0  ; R60: 釆
+MOV R61, 0  ; R61: 響
+MOV R62, 0  ; R62: 終
+MOV R63, 0  ; R63: 比
+MOV R64, 0  ; R64: 辵
+MOV R65, 0  ; R65: 己
+MOV R66, 0  ; R66: 氏
+MOV R67, 0  ; R67: 出
+MOV R68, 0  ; R68: 止
+MOV R69, 0  ; R69: 入
+MOV R70, 0  ; R70: 又
+MOV R71, 0  ; R71: 自
+MOV R72, 0  ; R72: 舛
+MOV R73, 0  ; R73: 至
+MOV R74, 0  ; R74: 老
+MOV R75, 0  ; R75: 夊
+MOV R76, 0  ; R76: 走
+MOV R77, 0  ; R77: 丨
+MOV R78, 0  ; R78: 卜
+MOV R79, 0  ; R79: 小
+MOV R80, 0  ; R80: 大
+MOV R81, 0  ; R81: 門
+MOV R82, 0  ; R82: 另
+MOV R83, 0  ; R83: 则
+MOV R84, 0  ; R84: 若
+MOV R85, 0  ; R85: 无
+MOV R86, 0  ; R86: ‍
+MOV R87, 0  ; R87: 无
+MOV R88, 0  ; R88: ⊕ 
+MOV R89, 0  ; R89: Z
+MOV R90, 0  ; R90: 而
+MOV R91, 0  ; R91: Z
+MOV R92, 0  ; R92: 丶
+MOV R93, 0  ; R93: 隶
+
+; Memory setup for intermediate values and additional variables
+MOV MEM[100], 0  ; Memory address 100 for intermediate results
+MOV MEM[101], 0  ; Memory address 101 for intermediate results
+MOV MEM[102], 0  ; Memory address 102 for intermediate results
+; Continue to initialize additional memory addresses as needed...
+
+; Load configuration
+LOAD R0, 'input.wfl'      ; Load the input file path into R0
+OPEN R0                   ; Open the file specified in R0
+
+; Example Arithmetic Operation
+ADD R0, R0, R1        ; R0 = R0 + R1 (1 = 1 + θ)
+SUB R2, R2, R5        ; R2 = R2 - R5 (1 = 1 - 1)
+
+; Example Loop Operation
+LOOP_START:           ; Start of loop
+CMP R3, R12           ; Compare current index (in R3) with total rows (in R12)
+JL LOOP_START         ; If R3 < R12, jump back to LOOP_START
+LOOP_END:             ; End of loop
+
+; Store final results to memory
+MOV MEM[112], R0      ; Store iA (in R0) to memory address 112
+
+; End program
+HALT                  ; Stop execution

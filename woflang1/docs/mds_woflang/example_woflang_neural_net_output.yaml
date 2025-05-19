@@ -1,0 +1,101 @@
+(woflang_env) PS C:\Users\User\Desktop\analog_logic_lang> python input_interpreter_for_woflang_v-0-0-9.py
+Script started
+Processing command: i_1 門 20
+Processing command: i_1 門 20
+Tokens: ['i_1', '門', '20']
+Processing command: i_2 門 10
+Processing command: i_2 門 10
+Tokens: ['i_2', '門', '10']
+Processing command: w_1 門 0.5
+Processing command: w_1 門 0.5
+Tokens: ['w_1', '門', '0', '5']
+Processing command: w_2 門 1.0
+Processing command: w_2 門 1.0
+Tokens: ['w_2', '門', '1', '0']
+Processing command: v_A 門 (i_1 丶 w_1) 齊 (i_2 丶 w_2)
+Processing command: v_A 門 (i_1 丶 w_1) 齊 (i_2 丶 w_2)
+Tokens: ['v_A', '門', '(', 'i_1', '丶', 'w_1', ')', '齊', '(', 'i_2', '丶', 'w_2', ')']
+Processing command: theta_A 門 15
+Processing command: theta_A 門 15
+Tokens: ['theta_A', '門', '15']
+Processing command: v_A 門 v_A 隶 theta_A
+Processing command: v_A 門 v_A 隶 theta_A
+Tokens: ['v_A', '門', 'v_A', '隶', 'theta_A']
+Processing command: 若 v_A 大 0 则 a_A 門 v_A 另 a_A 門 0
+Processing command: 若 v_A 大 0 则 a_A 門 v_A 另 a_A 門 0
+Tokens: ['若', 'v_A', '大', '0', '则', 'a_A', '門', 'v_A', '另', 'a_A', '門', '0']
+Processing command: i_1_B 門 -30
+Processing command: i_1_B 門 -30
+Tokens: ['i_1_B', '門', '-30']
+Processing command: i_2_B 門 40
+Processing command: i_2_B 門 40
+Tokens: ['i_2_B', '門', '40']
+Processing command: w_1_B 門 -1.5
+Processing command: w_1_B 門 -1.5
+Tokens: ['w_1_B', '門', '-1.5']
+Processing command: w_2_B 門 0.75
+Processing command: w_2_B 門 0.75
+Tokens: ['w_2_B', '門', '0', '75']
+Processing command: v_B 門 (i_1_B 丶 w_1_B) 齊 (i_2_B 丶 w_2_B)
+Processing command: v_B 門 (i_1_B 丶 w_1_B) 齊 (i_2_B 丶 w_2_B)
+Tokens: ['v_B', '門', '(', 'i_1_B', '丶', 'w_1_B', ')', '齊', '(', 'i_2_B', '丶', 'w_2_B', ')']
+Processing command: theta_B 門 50
+Processing command: theta_B 門 50
+Tokens: ['theta_B', '門', '50']
+Processing command: v_B 門 v_B 隶 theta_B
+Processing command: v_B 門 v_B 隶 theta_B
+Tokens: ['v_B', '門', 'v_B', '隶', 'theta_B']
+Processing command: 若 v_B 大 0 则 a_B 門 v_B 另 a_B 門 0
+Processing command: 若 v_B 大 0 则 a_B 門 v_B 另 a_B 門 0
+Tokens: ['若', 'v_B', '大', '0', '则', 'a_B', '門', 'v_B', '另', 'a_B', '門', '0']
+Processing command: i_1_C 門 a_A
+Processing command: i_1_C 門 a_A
+Tokens: ['i_1_C', '門', 'a_A']
+Processing command: i_2_C 門 a_B
+Processing command: i_2_C 門 a_B
+Tokens: ['i_2_C', '門', 'a_B']
+Processing command: w_1_C 門 1.0
+Processing command: w_1_C 門 1.0
+Tokens: ['w_1_C', '門', '1', '0']
+Processing command: w_2_C 門 -0.5
+Processing command: w_2_C 門 -0.5
+Tokens: ['w_2_C', '門', '-0.5']
+Processing command: v_C 門 (i_1_C 丶 w_1_C) 齊 (i_2_C 丶 w_2_C)
+Processing command: v_C 門 (i_1_C 丶 w_1_C) 齊 (i_2_C 丶 w_2_C)
+Tokens: ['v_C', '門', '(', 'i_1_C', '丶', 'w_1_C', ')', '齊', '(', 'i_2_C', '丶', 'w_2_C', ')']
+Processing command: theta_C 門 -5
+Processing command: theta_C 門 -5
+Tokens: ['theta_C', '門', '-5']
+Processing command: v_C 門 v_C 隶 theta_C
+Processing command: v_C 門 v_C 隶 theta_C
+Tokens: ['v_C', '門', 'v_C', '隶', 'theta_C']
+Processing command: 若 v_C 大 0 则 a_C 門 v_C 另 a_C 門 0
+Processing command: 若 v_C 大 0 则 a_C 門 v_C 另 a_C 門 0
+Tokens: ['若', 'v_C', '大', '0', '则', 'a_C', '門', 'v_C', '另', 'a_C', '門', '0']
+Full variables history:
+Step 0: {'i_1': 20.0}
+Step 1: {'i_1': 20.0, 'i_2': 10.0}
+Step 2: {'i_1': 20.0, 'i_2': 10.0}
+Step 3: {'i_1': 20.0, 'i_2': 10.0}
+Step 4: {'i_1': 20.0, 'i_2': 10.0}
+Step 5: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0}
+Step 6: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None}
+Step 7: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None}
+Step 8: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0}
+Step 9: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0}
+Step 10: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5}
+Step 11: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5}
+Step 12: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5}
+Step 13: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0}
+Step 14: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None}
+Step 15: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None}
+Step 16: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None}
+Step 17: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None, 'i_2_C': None}
+Step 18: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None, 'i_2_C': None}
+Step 19: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None, 'i_2_C': None, 'w_2_C': -0.5}
+Step 20: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None, 'i_2_C': None, 'w_2_C': -0.5}
+Step 21: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None, 'i_2_C': None, 'w_2_C': -0.5, 'theta_C': -5.0}
+Step 22: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None, 'i_2_C': None, 'w_2_C': -0.5, 'theta_C': -5.0, 'v_C': None}
+Step 23: {'i_1': 20.0, 'i_2': 10.0, 'theta_A': 15.0, 'v_A': None, 'a_A': None, 'i_1_B': -30.0, 'i_2_B': 40.0, 'w_1_B': -1.5, 'theta_B': 50.0, 'v_B': None, 'a_B': None, 'i_1_C': None, 'i_2_C': None, 'w_2_C': -0.5, 'theta_C': -5.0, 'v_C': None, 'a_C': None}
+Script completed
+(woflang_env) PS C:\Users\User\Desktop\analog_logic_lang>

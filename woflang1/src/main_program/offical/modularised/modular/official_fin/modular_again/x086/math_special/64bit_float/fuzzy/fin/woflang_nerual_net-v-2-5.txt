@@ -1,0 +1,38 @@
+; Neural Network Program for woflang classic 64bit float x086 fuzzy
+; This program initializes weights and defines the neural network operations
+
+; weights
+α = 4.6640750169
+β = 65.8476897008
+γ = 87.5588982776
+δ = 96.3902119033
+ε = 40.6665870439
+ζ = 11.0266718749
+η = 87.4723957682
+θ = 47.3531412325
+ι = 44.7436164608
+κ = 76.4872156589 ; Changed from '!=' to '=' for consistency
+0x00 ; End of weights
+
+; network operations
+β & λ AND μ
+ι & ν NAND ξ
+ε * ο * π
+ε | ρ OR σ
+δ + τ + υ
+δ - φ - χ
+ι NAND ψ NAND ω
+κ != ς
+ι * τ * α'
+ε & β' AND γ'
+ι * δ' * ε'
+κ * ζ' * η'
+κ | θ' OR ι'
+ε / κ' / λ'
+δ XOR μ' XOR ν'
+β & ξ' AND ο'
+κ != π'
+δ XOR ρ' XOR σ'
+ι & τ' AND υ'
+IF δ > φ' THEN ζ = χ' ELSE β = ψ'
+0x00 ; End of network

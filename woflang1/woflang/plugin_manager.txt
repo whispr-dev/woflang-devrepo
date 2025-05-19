@@ -1,0 +1,20 @@
+class PluginManager {
+public:
+    template<typename T>
+    std::shared_ptr<T> loadPlugin(const std::string& name) {
+        static_assert(std::is_base_of_v<WoflangPlugin, T>);
+        auto plugin = std::make_shared<T>();
+        if (plugin->initialize(createContext())) {
+            plugins[name] = plugin;
+            return std::static_pointer_cast<T>(plugin);
+        }
+        return nullptr;
+    }
+    
+private:
+    std::unordered_map<std::string, std::shared_ptr<WoflangPlugin>> plugins;
+    
+    InitContext createContext() {
+        return {cmdSystem, dict, errorSystem};
+    }
+};

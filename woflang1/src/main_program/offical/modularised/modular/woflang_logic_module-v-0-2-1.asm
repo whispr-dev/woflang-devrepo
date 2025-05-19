@@ -1,0 +1,75 @@
+; Logic Module
+
+; Module Header
+MODULE_NAME      DB 'woflLogicModule', 0x00
+MODULE_VERSION   DB 'v0.0.1', 0x00
+MODULE_INIT_FUNC EQU INIT_LOGIC_MODULE
+
+; Function Table
+FUNC_MIN         EQU LOGIC_MIN_FUNC
+FUNC_MAX         EQU LOGIC_MAX_FUNC
+FUNC_XOR         EQU LOGIC_XOR_FUNC
+FUNC_NOT         EQU LOGIC_NOT_FUNC
+FUNC_NAND        EQU LOGIC_NAND_FUNC
+FUNC_NOR         EQU LOGIC_NOR_FUNC
+FUNC_IF          EQU LOGIC_IF_FUNC
+FUNC_THEN        EQU LOGIC_THEN_FUNC
+FUNC_ELSE        EQU LOGIC_ELSE_FUNC
+
+INIT_LOGIC_MODULE:
+    ; Initialize the Logic module and register functions
+    MOV [MODULE_TABLE_BASE], FUNC_MIN
+    MOV [MODULE_TABLE_BASE + 4], FUNC_MAX
+    MOV [MODULE_TABLE_BASE + 8], FUNC_XOR
+    MOV [MODULE_TABLE_BASE + 12], FUNC_NOT
+    MOV [MODULE_TABLE_BASE + 16], FUNC_NAND
+    MOV [MODULE_TABLE_BASE + 20], FUNC_NOR
+    MOV [MODULE_TABLE_BASE + 24], FUNC_IF
+    MOV [MODULE_TABLE_BASE + 28], FUNC_THEN
+    MOV [MODULE_TABLE_BASE + 32], FUNC_ELSE
+    RET
+
+LOGIC_MIN_FUNC:
+    ; AND Functionality
+    MIN R1, R1, R2
+    RET
+
+LOGIC_MAX_FUNC:
+    ; OR Functionality
+    MAX R1, R1, R2
+    RET
+
+LOGIC_XOR_FUNC:
+    ; XOR Functionality
+    XOR R1, R1, R2
+    RET
+
+LOGIC_NOT_FUNC:
+    ; NOT Functionality
+    NOT R1
+    RET
+
+LOGIC_NAND_FUNC:
+    ; NAND Functionality
+    NAND R1, R1, R2
+    RET
+
+LOGIC_NOR_FUNC:
+    ; NOR Functionality
+    NOR R1, R1, R2
+    RET
+
+LOGIC_IF_FUNC:
+    ; IF Functionality
+    IF R1, R1, R2
+    RET
+
+LOGIC_THEN_FUNC:
+    ; THEN Functionality
+    THEN R1, R1, R2
+    RET
+
+LOGIC_ELSE_FUNC:
+    ; ELSE Functionality
+    ELSE R1, R1, R2
+    RET

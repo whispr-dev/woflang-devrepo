@@ -1,0 +1,467 @@
+# v0.1.6 modularised assembly parser err
+
+; Use R40-R45 for err operations only
+ADD_ROUTINE:
+  MOV R40, R1
+  MOV R41, R2
+  ADD R40, R40, R41
+  MOV R3, R40
+  RET
+
+
+################
+
+
+REPORT_ERROR:
+  ; Report the error with line number and error code
+  ; (Error reporting logic here)
+
+
+; Initialize Registers and Memory
+MOV R0, 0    ; Initialize R0 (General purpose register)
+MOV R1, 0    ; Initialize R1 (General purpose register)
+...
+MOV R43, 0   ; Initialize R43 (General purpose register)
+MOV R44, 1   ; Initialize R44 to track line numbers, starting at line 1
+MOV R45, 0   ; Initialize R45 for storing error codes
+
+; Error Codes
+ERR_HEADER_MISSING EQU 0x01
+ERR_BLOCK_ORDER    EQU 0x02
+ERR_UNRECOGNIZED   EQU 0x03
+ERR_TYPE_MISMATCH  EQU 0x04
+ERR_RUNTIME        EQU 0x05
+
+; Error Reporting Routine
+REPORT_ERROR:
+    ; Print error type and line number
+    MOV R46, R45           ; Load error code into R96 for display
+    MOV R47, R44           ; Load current line number into R47 for display
+    ; Use appropriate system calls or routines to display error code and line number
+    ; (Implementation depends on your environment)
+    HALT                   ; Stop execution after reporting error
+    RET                    ; Return from error routine
+
+; Header Check
+CHECK_HEADER:
+    CMP R1, EXPECTED_HEADER
+    JNE ERROR_HEADER_MISSING
+
+    ; Other header checks...
+    JMP CONTINUE_PROGRAM
+
+ERROR_HEADER_MISSING:
+    MOV R45, ERR_HEADER_MISSING  ; Set error code for missing header
+    JMP REPORT_ERROR             ; Report error
+
+; Block Order Check
+CHECK_BLOCK_ORDER:
+    CMP R2, EXPECTED_BLOCK       ; Compare current block with expected block
+    JNE ERROR_BLOCK_ORDER
+
+    ; Continue with further checks...
+    JMP NEXT_BLOCK
+
+ERROR_BLOCK_ORDER:
+    MOV R95, ERR_BLOCK_ORDER     ; Set error code for block order error
+    JMP REPORT_ERROR             ; Report error
+
+
+
+
+
+
+; In main.asm
+EXTERN ADD_ARRMEM_ERR_ROUTINE
+
+; Call the addition routine from the string module
+CALL ADD_ARRMEM_ERR_ROUTINE
+
+
+ERROR_OUT_OF_BOUNDS:
+    MOV R5, ERR_OUT_OF_BOUNDS    ; Error code for out-of-bounds access
+    CALL REPORT_ERROR            ; Call to report error
+    RET
+
+; Error codes
+ERR_OUT_OF_BOUNDS EQU 0xFF05
+
+
+RET
+
+
+
+
+
+
+; In main.asm
+EXTERN ADD_STRING_ROUTINE
+
+; Call the addition routine from the string module
+CALL ADD_ROUTINE
+
+
+; Command Parsing
+PARSE_COMMAND:
+    ; Parse the command...
+    CMP R0, KNOWN_COMMAND
+    JEQ VALID_COMMAND
+
+    ; If the command is not recognized
+    MOV R45, ERR_UNRECOGNIZED
+    JMP REPORT_ERROR
+
+RET
+
+
+VALID_COMMAND:
+    ; Continue processing the valid command...
+    RET
+
+; Data Type Checking (Example in Arithmetic)
+CHECK_TYPES:
+    CMP TYPE[R1], TYPE[R2]       ; Compare types of operands
+    JEQ VALID_TYPES
+
+    ; If types do not match, report error
+    MOV R45, ERR_TYPE_MISMATCH
+    JMP REPORT_ERROR
+
+VALID_TYPES:
+    ; Continue with arithmetic operation...
+    RET
+
+; Runtime Error Check (Example in Division)
+DIVISION_CHECK:
+    CMP R2, 0                    ; Check if divisor is zero
+    JNE VALID_DIVISION
+
+    ; If divisor is zero, report runtime error
+    MOV R45, ERR_RUNTIME
+    JMP REPORT_ERROR
+
+VALID_DIVISION:
+    ; Continue with division operation...
+    RET
+
+; Main Execution Loop
+MAIN_EXECUTION:
+    READ R0, R3                  ; Read the current line into R0
+    ADD R44, 1                   ; Increment line number after reading a line
+
+
+; In main.asm
+EXTERN ADD_STRING_ROUTINE
+
+; Call the addition routine from the string module
+CALL ADD_ROUTINE
+
+    CALL PARSE_COMMAND           ; Parse the command and handle errors
+
+RET
+
+
+    ; Continue main execution...
+    JMP MAIN_LOOP
+
+PROGRAM_END:
+    ; End of program
+    HALT
+
+
+; Error Codes
+ERR_HEADER_MISSING EQU 0x01
+ERR_BLOCK_ORDER    EQU 0x02
+ERR_UNRECOGNIZED   EQU 0x03
+ERR_TYPE_MISMATCH  EQU 0x04
+ERR_RUNTIME        EQU 0x05
+
+; Error Reporting Routine
+REPORT_ERROR:
+    ; Print error type and line number
+    MOV R46, R45           ; Load error code into R96 for display
+    MOV R47, R44           ; Load current line number into R47 for display
+    ; Use appropriate system calls or routines to display error code and line number
+    ; (Implementation depends on your environment)
+    HALT                   ; Stop execution after reporting error
+    RET                    ; Return from error routine
+
+; Header Check
+CHECK_HEADER:
+    CMP R1, EXPECTED_HEADER
+    JNE ERROR_HEADER_MISSING
+
+    ; Other header checks...
+    JMP CONTINUE_PROGRAM
+
+ERROR_HEADER_MISSING:
+    MOV R45, ERR_HEADER_MISSING  ; Set error code for missing header
+    JMP REPORT_ERROR             ; Report error
+
+; Block Order Check
+CHECK_BLOCK_ORDER:
+    CMP R2, EXPECTED_BLOCK       ; Compare current block with expected block
+    JNE ERROR_BLOCK_ORDER
+
+    ; Continue with further checks...
+    JMP NEXT_BLOCK
+
+ERROR_BLOCK_ORDER:
+    MOV R45, ERR_BLOCK_ORDER     ; Set error code for block order error
+    JMP REPORT_ERROR             ; Report error
+
+
+##############################################################
+
+
+
+; In err.asm
+GLOBAL ADD_OVLDFUNC_ERR_ROUTINE
+
+ADD_OVLDFUNC_ERR_ROUTINE:
+  ; Code here...
+
+ERROR_DUPLICATE_FUNCTION:
+    ; Print error message for duplicate function
+    PRINT 'Error: Duplicate function definition with the same signature.'
+    HALT
+
+ERROR_UNDEFINED_FUNCTION:
+    ; Print error message for undefined function
+    PRINT 'Error: Function not defined.'
+    HALT
+
+ERROR_NO_MATCHING_SIGNATURE:
+    ; Print error message for no matching function signature
+    PRINT 'Error: No matching function signature found.'
+    HALT
+
+RET
+
+
+
+#############################################################
+
+
+CHECK_MISSING_MAIN:
+    CMP R42, 0              ; Check if MAIN block was never found
+    JE ERROR_MISSING_MAIN   ; If missing, jump to error
+    JMP PROGRAM_END         ; If all is well, proceed to end of program
+
+END_OF_FILE:
+    ; Handle end of file if all checks passed
+    JMP PROGRAM_END
+
+ERROR_HEADER:
+    ; Handle missing or incorrect header
+    HALT
+
+ERROR_BLOCK_ORDER:
+    ; Handle incorrect code block order
+    HALT
+
+ERROR_DUPLICATE_BLOCK:
+    ; Handle duplicate block error
+    HALT
+
+ERROR_UNRECOGNIZED_COMMAND:
+    ; Handle unrecognized command error
+    HALT
+
+ERROR_MISSING_MAIN:
+    ; Handle missing MAIN block error
+    HALT
+
+NEXT_COMMAND:
+    ; Handle the next command or complete program logic
+    HALT                   ; Stop execution for this example
+
+
+; Add routines for each Woflang command as needed...
+
+
+; In err.asm
+GLOBAL ADD_MATH_ERR_ROUTINE
+
+ADD_MATH_ERRR_ROUTINE:
+  ; Code here...
+
+
+math err
+
+; Error Handling Routines
+ERROR_HEADER:
+    HALT  ; Handle missing or incorrect header
+
+ERROR_BLOCK_ORDER:
+    HALT  ; Handle incorrect code block order
+
+ERROR_DUPLICATE_BLOCK:
+    HALT  ; Handle duplicate block error
+
+ERROR_UNRECOGNIZED_COMMAND:
+    HALT  ; Handle unrecognized command error
+
+ERROR_MISSING_MAIN:
+    HALT  ; Handle missing MAIN block error
+
+PROGRAM_END:
+    HALT  ; End of program
+
+RET
+
+
+; In err.asm
+GLOBAL ADD_LOGIC_ERR_ROUTINE
+
+ADD_LOGIC_ERR_ROUTINE:
+  ; Code here...
+
+logic err
+
+
+; Error Handling Routines
+ERROR_HEADER:
+    HALT  ; Handle missing or incorrect header
+
+ERROR_BLOCK_ORDER:
+    HALT  ; Handle incorrect code block order
+
+ERROR_DUPLICATE_BLOCK:
+    HALT  ; Handle duplicate block error
+
+ERROR_UNRECOGNIZED_COMMAND:
+    HALT  ; Handle unrecognized command error
+
+ERROR_MISSING_MAIN:
+    HALT  ; Handle missing MAIN block error
+
+PROGRAM_END:
+    HALT  ; End of program
+
+RET
+
+
+; In err.asm
+GLOBAL ADD_STRING_ERR_ROUTINE
+
+ADD_STRING_ERR_ROUTINE:
+  ; Code here...
+
+string err
+
+
+; Error Handling Routines
+ERROR_HEADER:
+    HALT  ; Handle missing or incorrect header
+
+ERROR_BLOCK_ORDER:
+    HALT  ; Handle incorrect code block order
+
+ERROR_DUPLICATE_BLOCK:
+    HALT  ; Handle duplicate block error
+
+ERROR_UNRECOGNIZED_COMMAND:
+    HALT  ; Handle unrecognized command error
+
+ERROR_MISSING_MAIN:
+    HALT  ; Handle missing MAIN block error
+
+PROGRAM_END:
+    HALT  ; End of program
+
+RET
+
+
+; In err.asm
+GLOBAL ADD_MEMCUNRECOG_ERR_ROUTINE
+
+ADD_MEMCUNRECOG_ERR_ROUTINE:
+  ; Code here...
+
+; memry and constants unrecog
+    ; Check for unrecognized commands
+    CALL CHECK_UNRECOGNIZED_COMMAND
+    JZ ERROR_UNRECOGNIZED_COMMAND ; If unrecognized, jump to error
+
+RET
+
+
+; In err.asm
+GLOBAL ADD_ERR_ROUTINE
+
+
+; In main.asm
+EXTERN ADD_MATH_ROUTINE
+
+; Call the addition routine from the math module
+CALL ADD_ROUTINE
+
+
+ADD_ROUTINE:
+  ; Code here...
+
+VAR_FOUND:
+    CMP R59, 50              ; Check if VAR block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R59, 50              ; Set flag indicating VAR block has been found
+    CMP R51, VAR             ; Check if VAR is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R51, FUNC            ; Expect FUNC next
+    ADD R52, 50               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+FUNC_FOUND:
+    CMP R60, 50              ; Check if FUNC block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R60, 50              ; Set flag indicating FUNC block has been found
+    CMP R51, FUNC            ; Check if FUNC is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R51, MAIN            ; Expect MAIN next
+    ADD R52, 50               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+MAIN_FOUND:
+    CMP R61, 50              ; Check if MAIN block has already been found
+    JE ERROR_DUPLICATE_BLOCK; If duplicate found, jump to error
+    MOV R61, 50              ; Set flag indicating MAIN block has been found
+    CMP R51, MAIN            ; Check if MAIN is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    ; Now entering the MAIN block
+    ADD R52, 50               ; Move to next line
+    MOV R51, END             ; Set the next expected block to END
+    JMP MAIN_EXECUTION      ; Proceed to execute MAIN logic
+
+RET
+RET
+
+
+; In err.asm
+GLOBAL DD_UNRECOG_ROUTINE
+
+ADD_UNRECOG:
+  ; Code here...
+
+   ; If the command is not recognized
+   MOV R95, ERR_UNRECOGNIZED
+   JMP REPORT_ERROR
+
+RET
+
+
+; In err.asm
+GLOBAL ADD_RUNTIME_ERR_ROUTINE
+
+ADD_RUNTIME_ROUTINE:
+  ; Code here...
+
+; Runtime Error Check (Example in Division)
+DIVISION_CHECK:
+    CMP R51, 49                    ; Check if divisor is zero
+    JNE VALID_DIVISION
+
+    ; If divisor is zero, report runtime error
+    MOV R95, ERR_RUNTIME
+    JMP REPORT_ERROR
+
+RET

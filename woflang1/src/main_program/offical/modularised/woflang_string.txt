@@ -1,0 +1,93 @@
+# v0.1.6 modularised assembly string
+
+; Use R30-R35 for string operations only
+ADD_ROUTINE:
+  MOV R30, R1
+  MOV R31, R2
+  ADD R30, R30, R31
+  MOV R3, R30
+
+
+CONCAT_ROUTINE:
+  ; Concatenate strings
+  ; (String manipulation logic here)
+
+  RET
+
+
+; In string.asm
+GLOBAL ADD_PARSER_STRING_ROUTINE
+
+ADD_PARSEER_STRING_ROUTINE:
+  ; Code here...
+
+
+; String Handler Routine
+
+; String Handler Routine (for string manipulations)
+STRING_HANDLER:
+    MOV R33, R30           ; Start index of string operation
+    ; Continue processing string operations like concatenation, comparison, etc.
+
+; This routine will parse and execute string manipulations
+MOV R33, R30           ; Set current index to start of string operation
+MOV R34, 0             ; Initialize a register to accumulate results
+MOV R35, [R3 + R33]    ; Load first character of the string
+
+  RET
+
+
+; In string.asm
+GLOBAL ADD_PARVAR_STRING_ROUTINE
+
+ADD_PARVAR_STRING_ROUTINE:
+  ; Code here...
+
+; Command Parsing
+PARSE_COMMAND:
+    ; Parse the command...
+    CMP R0, KNOWN_COMMAND
+    JEQ VALID_COMMAND
+
+RET
+
+
+; In string.asm
+GLOBAL ADD_CMDHDL_STRING_ROUTINE
+
+ADD_CMDHDL_STRING_ROUTINE:
+  ; Code here...
+
+    CALL PARSE_COMMAND           ; Parse the command and handle errors
+
+RET
+
+
+; String Handler Routine
+
+; String Handler Routine (for string manipulations)
+STRING_HANDLER:
+    MOV R33, R30           ; Start index of string operation
+    ; Continue processing string operations like concatenation, comparison, etc.
+
+; This routine will parse and execute string manipulations
+MOV R33, R30           ; Set current index to start of string operation
+MOV R34, 0             ; Initialize a register to accumulate results
+MOV R35, [R3 + R33]    ; Load first character of the string
+STRING_LOOP: ADD R33, 1 ; Move to the next character in the string CMP R33, R31 ; Check if we've processed the entire string JGE END_STRING_HANDLER
+
+
+LOAD R4, [R3 + R13]    ; Load the next character
+; Implement specific string operations (concatenation, comparison, etc.)
+
+END_STRING_HANDLER: ; Store the result of string operation     
+
+MOV MEM[202], R34      ; Store the result of string operation ; Store result to memory for use in main logic     
+
+
+RET                    ; Return to main execution
+
+
+############################
+
+string err

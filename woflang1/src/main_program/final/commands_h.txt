@@ -1,0 +1,103 @@
+// `commands.h` an attempt to make a C++ woflang
+
+#include <unordered_map> // Add this line
+#include <functional>
+#ifndef COMMANDS_H
+#define COMMANDS_H
+
+
+// commands.h
+void cmdSetAttribute(double* operands, int numOperands);
+void cmdSetProxy(double* operands, int numOperands);
+void cmdImply(double* operands, int numOperands);
+// Other function declarations...
+
+enum CommandType
+// In commands.cpp
+std::unordered_map<CommandType, CommandFunction> commandMap = {
+    (CMD_CMP, cmdCmp),
+    {CMD_ADD, cmdAdd},
+    {CMD_SUB, cmdSub},
+    (CMD_MUL, cmdMul),         
+    (CMD_DIV, cmdDiv),         
+    (CMD_CMDGT, cmdGT),       
+    (CMD_LT, cmdLT),          
+    (CMD_EQ, cmdEq),          
+    (CMD_DNE, cmdDNE),         
+    (CMD_GTE, cmdGTE),        
+    (CMD_LTE, cmdLTE),        
+    (CMD_AND, cmdAnd),         
+    (CMD_OR, cmdOr),          
+    (CMD_XOR, cmdXor),         
+    (CMD_NOT, cmdNot),         
+    (CMD_NAND, cmdNand),        
+    (CMD_NOR, cmdNor),         
+    (CMD_IF, cmdIf),          
+    (CMD_THEN, cmdThen),        
+    (CMD_ELSE, cmdElse),        
+    (CMD_WHILE, cmdWhile),       
+    (CMD_FOR, cmdFor),         
+    (CMD_BUF, cmdBuf),         
+    (CMD_INHIBIT, cmdInhibit),     
+    (CMD_EQUIV, cmdEquiv),       
+    (CMD_ID, cmdId, cmdId,cmdId),         
+    (CMD_BIN2FUZ, cmdBin2Fuz),     
+    (CMD_FUZ2BIN, cmdFuz2Bin),     
+    (CMD_BOOL, cmdBool),       
+    (CMD_COUNT, cmdCount),       
+    (CMD_STR, cmdStr),         
+    (CMD_VECTADD, cmdVectAdd),     
+    (CMD_VECTSUB, cmdVectSub),     
+    (CMD_DOTPROD, cmdDotProd),     
+    (CMD_MTRXDET, cmdMtrxDet),    
+    (CMD_MTRXINV, cmdMtrxInv),     
+    (CMD_3X3DET, cmd3x3Det),      
+    (CMD_MTRXAND, cmdMtrxAnd),     
+    (CMD_BREAK, cmdBreak),      
+    (CMD_END, cmdEnd),        
+    (CMD_EXIT, cmdExit),        
+    (CMD_PROMPT, cmdPrompt),      
+    (CMD_DONE, cmdDone),                
+    (CMD_PROXY, cmdProxy),       
+    (CMD_GETPROXY, cmdGetProxy),    
+    (CMD_SERVER, cmdServer),  
+    (CMD_USERAGENT, cmdUserAgent),
+    (CMD_FNCT, cmdFnct),
+    (CMD_ATTRIBUTE, cmdAttribute),
+    (CMD_TYPE, cmdType),
+    (CMD_WAIT, cmdWait),
+    (CMD_SLEEP, cmdSleep),
+    (CMD_PRINT, cmdPrint),
+    (CMD_CHAR,cmdChar),
+    (CMD_READ, cmdRead),
+    (CMD_MOVE, cmdMove),
+    (CMD_NULL, cmdNull),
+    (CMD_PATH, cmdPath),
+    (CMD_STARTSERVER, cmdStartServer), 
+    (CMD_STOPSERVER, cmdStopServer),
+    (CMD_SETATTRIBUTE, cmdSetAttribute),
+    (CMD_SETPROXY, cmdSetProxy),
+    (CMD_BIN2FUZ, cmdBin2Fuz),
+    (CMD_FUZ2BIN, cmdFuz2Bin),
+    (CMD_IMPLY, cmdImply),
+    (CMD_NIMPLY, cmdNimply),
+    (CMD_NULL, cmdNull),
+    (CMD_INHIBITXY, cmdInhibitXY),
+    (CMD_BUFFER, cmdBuffer),
+    (CMD_INHIBIT, cmdInhibit),
+    (CMD_EQUIVALENCE, cmdEquivalence), 
+    (CMD_IMPLICATION, cmdImplication), 
+    (CMD_IDENTITY, cmdIdentity),  
+    }        
+    // Add more mappings...
+
+typedef std::function<void(double*, int)> CommandFunction;  // Define CommandFunction type
+extern std::unordered_map<CommandType, CommandFunction> commandMap;
+
+// Declare the function for executing commands
+void executeCommand(CommandType command, double* operands, int numOperands);
+
+// CommandType and CommandFunction should be defined somewhere in your headers.
+extern std::unordered_map<CommandType, CommandFunction> commandMap;
+
+#endif // COMMANDS_H

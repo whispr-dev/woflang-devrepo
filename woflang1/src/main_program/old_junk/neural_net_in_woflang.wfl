@@ -1,0 +1,41 @@
+; Define inputs (ι) and weights (ω) for Neuron A (ν_A)
+ι₁ ← 20
+ι₂ ← 10
+ω₁ ← 0.5
+ω₂ ← 1.0
+
+; Weighted sum for Neuron A (ν_A)
+ν_A ← (ι₁ ✖ ω₁) ➕ (ι₂ ✖ ω₂)
+
+; Threshold activation (σ) for Neuron A (ν_A)
+θ_A ← 15
+ν_A ← ν_A ➖ θ_A
+IF ν_A > 0 THEN α_A ← ν_A ELSE α_A ← 0
+
+; Define inputs (ι) and weights (ω) for Neuron B (ν_B)
+ι₁_B ← -30
+ι₂_B ← 40
+ω₁_B ← -1.5
+ω₂_B ← 0.75
+
+; Weighted sum for Neuron B (ν_B)
+ν_B ← (ι₁_B ✖ ω₁_B) ➕ (ι₂_B ✖ ω₂_B)
+
+; Threshold activation (σ) for Neuron B (ν_B)
+θ_B ← 50
+ν_B ← ν_B ➖ θ_B
+IF ν_B > 0 THEN α_B ← ν_B ELSE α_B ← 0
+
+; Neuron C (ν_C) receives input from Neuron A (ν_A) and Neuron B (ν_B)
+ι₁_C ← α_A
+ι₂_C ← α_B
+ω₁_C ← 1.0
+ω₂_C ← -0.5
+
+; Weighted sum for Neuron C (ν_C)
+ν_C ← (ι₁_C ✖ ω₁_C) ➕ (ι₂_C ✖ ω₂_C)
+
+; Threshold activation (σ) for Neuron C (ν_C)
+θ_C ← -5
+ν_C ← ν_C ➖ θ_C
+IF ν_C > 0 THEN α_C ← ν_C ELSE α_C ← 0

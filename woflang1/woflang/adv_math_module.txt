@@ -1,0 +1,11 @@
+class LinearAlgebraPlugin : public WoflangPlugin {
+    // LU, QR, SVD decompositions
+};
+
+class StatisticsPlugin : public WoflangPlugin {
+    // Regression, correlation, distributions
+};
+
+class FourierPlugin : public WoflangPlugin {
+    // FFT and inverse FFT
+};

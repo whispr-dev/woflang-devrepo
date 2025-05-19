@@ -1,0 +1,23 @@
+; woflang neural ent encoded in classic logic ssymbology form
+
+CHARACTER_MAP:
+    db '&', 0          ; AND Command (而)
+    db ''∨', 0          ; OR Command (或)
+    db '⊕', 0          ; XOR Command (⊕)
+    db '¬', 0          ; NOT Command (无)
+    db '⊼', 0          ; NAND Command (无‍而)
+    db '⊽', 0          ; NOR Command (无‍或)
+    db '⇒', 0          ; IF Command (若)
+    db '⇔', 0          ; THEN Command (则)
+    db '∄', 0          ; ELSE Command (另)
+    db '+', 0          ; ADD Command (齊)
+    db '-', 0          ; SUBTRACT Command (隶)
+    db '*', 0          ; MULTIPLY Command (丶)
+    db '÷'', 0          ; DIVIDE Command (丿)
+    db '>', 0          ; GREATER Command (大)
+    db '<', 0          ; LESS Command (小)
+    db '=', 0          ; EQUALS Command (卜)
+    db '≠', 0          ; DOES NOT EQUAL Command (丨)
+    db '≥', 0          ; GREATER THAN OR EQUALS Command (走)
+    db '≤', 0          ; LESS THAN OR EQUALS Command (夊)
+    

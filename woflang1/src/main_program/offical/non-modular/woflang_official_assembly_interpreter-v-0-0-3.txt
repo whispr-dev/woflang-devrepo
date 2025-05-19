@@ -1,0 +1,271 @@
+; woflang_official_assembly_interpreter-v-0-0-3.asm and see .md
+; this one is chatGPT4o's tidied up version - an in flight repair if you will
+
+
+; Register definitions for storing Woflang variables
+; Initialize registers
+
+MOV R0, 0   ; θ
+MOV R1, 0   ; 齊
+MOV R2, 0   ; m
+MOV R3, 0   ; n
+MOV R4, 0   ; b
+MOV R5, 0   ; v
+MOV R6, 0   ; c
+MOV R7, 0   ; x
+MOV R8, 0   ; z
+MOV R9, 0   ; l
+MOV R10, 0  ; k
+MOV R11, 0  ; v
+MOV R12, 0  ; h
+MOV R13, 0  ; g 
+MOV R14, 0  ; d
+MOV R15, 0  ; s
+MOV R16, 0  ; a
+MOV R17, 0  ; p
+MOV R18, 0  ; o
+MOV R19, 0  ; i
+MOV R20, 0  ; u
+MOV R21, 0  ; y
+MOV R22, 0  ; t
+MOV R23, 0  ; r
+MOV R24, 0  ; e
+MOV R25, 0  ; w
+MOV R26, 0  ; q
+MOV R27, 0  ; 9
+MOV R28, 0  ; 8
+MOV R29, 0  ; 7
+MOV R30, 0  ; 6 
+MOV R31, 0  ; 5
+MOV R32, 0  ; 4 
+MOV R33, 0  ; 3 
+MOV R34, 0  ; 2
+MOV R35, 0  ; 1
+MOV R36, 0  ; ⻔
+MOV R37, 0  ; 艮
+MOV R38, 0  ; 読
+MOV R39, 0  ; 字
+MOV R40, 0  ; ⺢
+MOV R41, 0  ; 道
+MOV R42, 0  ; 非
+MOV R43, 0  ; 巡
+MOV R44, 0  ; ⺣
+MOV R45, 0  ; 工
+MOV R46, 0  ; ⺘
+MOV R47, 0  ; ⺆
+MOV R48, 0  ; ⺙
+MOV R49, 0  ; ⻤
+MOV R50, 0  ; 待
+MOV R51, 0  ; ⽓
+MOV R52, 0  ; ⽪
+MOV R53, 0  ; ⺨
+MOV R54, 0  ; ⺒
+MOV R55, 0  ; 眠
+MOV R56, 0  ; ⽰
+MOV R57, 0  ; 支
+MOV R58, 0  ; 押
+MOV R59, 0  ; 卩
+MOV R60, 0  ; 釆
+MOV R61, 0  ; 響
+MOV R62, 0  ; 終
+MOV R63, 0  ; 比
+MOV R64, 0  ; 辵
+MOV R65, 0  ; 己
+MOV R66, 0  ; 氏
+MOV R67, 0  ; 出
+MOV R68, 0  ; 止
+MOV R69, 0  ; 入
+MOV R70, 0  ; 又
+MOV R71, 0  ; 自
+MOV R72, 0  ; 舛
+MOV R73, 0  ; 至
+MOV R74, 0  ; 老
+MOV R75, 0  ; 夊
+MOV R76, 0  ; 走
+MOV R77, 0  ; 丨
+MOV R78, 0  ; 卜
+MOV R79, 0  ; 小
+MOV R80, 0  ; 大
+MOV R81, 0  ; 門
+MOV R82, 0  ; 另
+MOV R83, 0  ; 则
+MOV R84, 0  ; 若
+MOV R85, 0  ; 无
+MOV R86, 0  ; ‍
+MOV R87, 0  ; 无
+MOV R88, 0  ; ⊕ 
+MOV R89, 0  ; Z
+MOV R90, 0  ; 而
+MOV R91, 0  ; Z
+MOV R92, 0  ; 丶
+MOV R93, 0  ; 隶
+
+
+
+; Memory setup for intermediate values and additional variables
+MOV MEM[100], 0  ; Memory address 100 for intermediate results
+MOV MEM[101], 0  ; Memory address 101 for intermediate results
+MOV MEM[102], 0  ; Memory address 102 for intermediate results
+MOV MEM[103], 0  ; Memory address 103 for intermediate results
+MOV MEM[104], 0  ; Memory address 104 for intermediate results
+MOV MEM[105], 0  ; Memory address 105 for intermediate results
+MOV MEM[106], 0  ; Memory address 106 for intermediate results
+MOV MEM[107], 0  ; Memory address 107 for intermediate results
+MOV MEM[108], 0  ; Memory address 108 for intermediate results
+MOV MEM[109], 0  ; Memory address 109 for intermediate results
+MOV MEM[110], 0  ; Memory address 110 for intermediate results
+MOV MEM[111], 0  ; Memory address 111 for intermediate results
+MOV MEM[112], 0  ; Memory address 112 for intermediate results
+MOV MEM[113], 0  ; Memory address 113 for intermediate results
+MOV MEM[114], 0  ; Memory address 114 for intermediate results
+MOV MEM[115], 0  ; Memory address 115 for intermediate results
+MOV MEM[116], 0  ; Memory address 116 for intermediate results
+MOV MEM[117], 0  ; Memory address 117 for intermediate results
+MOV MEM[118], 0  ; Memory address 118 for intermediate results
+MOV MEM[119], 0  ; Memory address 119 for intermediate results
+
+
+
+; Pseudocode for loading configuration - actual file I/O is simulated here
+LOAD R0, 'input.wfl'      ; Load the input file path into R0
+OPEN R0                   ; Open the file specified in R0
+
+LOAD R1,  'input2.wfl'    ; Load the input file2 path into R1
+OPEN R1                   ; Open the file specified in R1
+
+LOAD R2,  'input3.wfl'    ; Load the input file3 path into R2
+OPEN R2                   ; Open the file specified in R2
+
+LOAD R3, 'input4.wfl'     ; Load the input file4 path into R3
+OPEN R3                   ; Open the file specified in R3
+
+
+READ MEM[100], R0         ; Read initial state into memory starting at address 100
+READ MEM[101], R1         ; Read constant into R1
+READ MEM[102], R2         ; Read variable into R2
+
+; Initialize registers and memory for the loaded configuration
+MOV R10, MEM[100]         ; Move the variable2 into R10 for further operations
+MOV R11, MEM[101]         ; Move the constant into R11 for further operations
+MOV R12, MEM[102]         ; Move the variable into R12 for further operations
+
+
+READ MEM[103], R3         ; Read initial state into memory starting at address 103
+READ MEM[104], R4         ; Read constant into R4
+READ MEM[105], R5         ; Read variable4 into R5
+
+; Initialize registers and memory for the loaded configuration
+MOV R13, MEM[103]         ; Move the variable4 into R13 for further operations
+MOV R14, MEM[104]         ; Move the constant into
+
+
+READ MEM[106], R6         ; Read initial state into memory starting at address 100
+READ MEM[107], R7         ; Read constant into R7
+READ MEM[108], R8         ; Read variable5 into R8
+
+; Initialize registers and memory for the loaded configuration
+MOV R16, MEM[106]         ; Move the variable5 into R16 for further operations
+MOV R17, MEM[107]         ; Move the constant into R17 for further operations
+MOV R18, MEM[108]         ; Move the variable6 into R18 for further operations
+
+
+READ MEM [109] , R9      ; Read initial state into memory starting at adress 103
+READ MEM [110] , R10   ; Read constant into R10
+READ MEM [111] , R11   ; Read variable7 into R11
+
+; Initialize registers and memory for the loaded configuration2
+MOV R19, MEM [109]      ; Read initial7 into R19 for further operations
+MOV R20, MEM [110]      ; Read constant into R20 for further operations
+MOV R21, MEM [111]      ; Read variable8 into R21 for further operations
+
+; ... Continue initializing other registers as needed
+
+
+
+; ...
+; Arithmmetic
+; ... Continue initializing other memory addresses as needed
+; additon
+; Example operation: 1 齊 θ -> 1 = 1 + θ
+; Assuming 1 is in R0 and θ is in R1
+
+; ADD R0, R0, R1        ; R0 = R0 + R1 (1 = 1 + θ)
+
+; subtraction
+; Example operation: 1 隶 1 -> 1 = 1 - 1
+; Assuming 1 is in R2 and 1 is in R5
+
+; SUB R2, R2, R5        ; R2 = R2 - R5 (1 = 1 - 1)
+
+; multiply
+; Example operation: 2 丶 θ -> 2 = 2_B * θ
+; Assuming 2 is in R6 and θ is in R7
+
+; MUL R6, R6, R7        ; R6 = R6 * R7 (2 = 2 * θ)
+
+; divide
+; Example operation: 1 丿 2 -> 1 = 1/ 2
+; Assuming 1 is in R5 and 2 is in R6
+
+; DIV R5, R5, R6        ; R5 = R5 / R6 (1 = 1 / 2)
+
+
+
+; Conditionals
+; Example conditional: 若 iB 大 18.4271902292 则 wB 38.1672696857 另 iA 67.0942191332
+
+; CMP R5, 18.4271902292 ; Compare iB (in R5) with 18.4271902292
+; JLE SKIP_BLOCK        ; If iB <= 18.4271902292, jump to SKIP_BLOCK
+
+; If condition is met, execute the following instructions
+; MOV R2, 38.1672696857 ; Set wB to 38.1672696857 in R2
+; MOV R4, 67.0942191332 ; Set iA to 67.0942191332 in R4
+
+; SKIP_BLOCK:           ; Label to skip block
+
+; Now use R0-R3 for operations involving iC, θ, wB, wC
+
+
+
+; Loop Operation
+; Example loop: 巡 Start Loop_End
+
+; LOOP_START:           ; Start of loop
+
+; (Loop body goes here)
+
+; CMP R3, R12           ; Compare current index (in R3) with total rows (in R12)
+; JL LOOP_START         ; If R3 < R12, jump back to LOOP_START
+
+; LOOP_END:             ; End of loop
+
+
+
+; Storing Results and Ending the PRogram
+; Store final results to memory
+MOV MEM[112], R0      ; Store iA (in R0) to memory address 112
+MOV MEM[113], R1      ; Store θA (in R1) to memory address 113
+MOV MEM[114], R2      ; Store wB (in R2) to memory address 114
+
+MOV MEM[115], R3      ; Store iB (in R3) to memory address 115
+MOV MEM[116], R4      ; Store θB (in R4) to memory address 116
+MOV MEM[117], R5      ; Store xB (in R5) to memory address 117
+
+MOV MEM[118], R6      ; Store iC (in R6) to memory address 118
+MOV MEM[119], R7      ; Store θC (in R7) to memory address 119
+MOV MEM[120], R8      ; Store yB (in R8) to memory address 120
+
+MOV MEM[121], R9      ; Store iD (in R9) to memory address 121
+MOV MEM[122], R10   ; Store θA (in R10) to memory address 122
+MOV MEM[123], R11   ; Store zB (in R11) to memory address 123
+
+
+
+
+; End program
+HALT                  ; Stop execution
+
+
+; iA 齊 θA
+
+; Assuming iA is in R0 and θA is in R1

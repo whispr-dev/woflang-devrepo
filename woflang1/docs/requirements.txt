@@ -1,0 +1,4 @@
+# library dependencies for woflang interpreter
+matplotlib
+plotly
+numpy

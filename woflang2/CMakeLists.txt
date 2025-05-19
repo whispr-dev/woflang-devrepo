@@ -1,11 +1,17 @@
-cmake_minimum_required(VERSION 3.16)
-project(woflang2)
+cmake_minimum_required(VERSION 3.14)
+project(woflang)
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(src)
-add_subdirectory(plugins)
-add_subdirectory(tests)
+add_executable(woflang
+    main.cpp
+    wof_interpreter.cpp
+    plugin_loader.cpp
+    repl_commands.cpp
+)
 
-# if not then "The source directory .../woflang2/src does not contain a CMakeLists.txt file."
+# include dirs if needed
+target_include_directories(woflang PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+# for dynamic loading
+target_link_libraries(woflang dl)

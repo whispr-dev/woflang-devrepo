@@ -1,0 +1,366 @@
+**fren, coud you show me how to change this code:**
+
+
+```asm
+; Initialize Registers and Memory
+MOV R0, 0    ; Initialize R0 (General purpose register)
+MOV R1, 0    ; Initialize R1 (General purpose register)
+...
+MOV R100, 0  ; Initialize more registers as needed
+MOV MEM[100], 0  ; Initialize memory locations
+...
+
+
+
+; General Command Parsing Routine
+LOAD R0, 'script.wfl'   ; Load the Woflang script file path into R0
+OPEN R0                 ; Open the file specified in R0
+
+READ COMMAND, R0        ; Read the next command into R0
+
+; Main Command Handling Loop
+COMMAND_LOOP:
+  ; Parse the command
+  PARSE R0, COMMAND_TYPE, ARGS ; Parse command type and arguments
+  
+
+  ; Check command type and execute the corresponding routine
+  CMP COMMAND_TYPE, 'ADD'
+  JEQ ADD_ROUTINE
+  CMP COMMAND_TYPE, 'SUB'
+  JEQ SUB_ROUTINE
+  CMP COMMAND_TYPE, 'MUL'
+  JEQ MUL_ROUTINE
+  CMP COMMAND_TYPE, 'DIV'
+  JEQ DIV_ROUTINE
+  CMP COMMAND_TYPE, 'MOV'
+  JEQ MOV_ROUTINE
+  CMP COMMAND_TYPE, 'JMP'
+  JEQ JMP_ROUTINE
+  CMP COMMAND_TYPE, 'CMP'
+  JEQ CMP_ROUTINE
+  ; Add more command checks as necessary
+  
+  ; End of command processing
+  JMP NEXT_COMMAND
+  
+
+; Define Routines for Each Command
+ADD_ROUTINE:
+  ; Perform addition operation based on ARGS
+  ; Assume ARGS are parsed to registers or memory addresses
+  ADD R1, R2, R3     ; Example: R1 = R2 + R3
+  JMP COMMAND_LOOP   ; Go back to command loop
+
+SUB_ROUTINE:
+  ; Perform subtraction operation
+  SUB R1, R2, R3     ; Example: R1 = R2 - R3
+  JMP COMMAND_LOOP   ; Continue command loop
+
+MUL_ROUTINE:
+  ; Perform multiplication
+  MUL R1, R2, R3     ; Example: R1 = R2 * R3
+  JMP COMMAND_LOOP   ; Continue command loop
+
+DIV_ROUTINE:
+  ; Perform division
+  DIV R1, R2, R3     ; Example: R1 = R2 / R3
+  JMP COMMAND_LOOP   ; Continue command loop
+
+MOV_ROUTINE:
+  ; Move data between registers or memory
+  MOV R1, R2         ; Example: Move value in R2 to R1
+  JMP COMMAND_LOOP   ; Continue command loop
+
+JMP_ROUTINE:
+  ; Handle jump command
+  JMP LABEL          ; Example: Jump to LABEL
+  JMP COMMAND_LOOP   ; Continue command loop
+
+CMP_ROUTINE:
+  ; Compare values
+  CMP R1, R2         ; Compare R1 and R2
+  JMP COMMAND_LOOP   ; Continue command loop
+
+; Continue defining routines for each command type...
+...
+
+
+
+; Store final results to memory
+MOV MEM[112], R0      ; Store iA (in R0) to memory address 112
+
+; End program
+HALT                  ; Stop execution
+
+
+
+
+
+
+
+
+; Assume registers and memory setup
+; R0: Register to hold the current character
+; R1: Register to hold current line type (HEADER, VAR, FUNC, MAIN)
+; R2: Register to check block order
+; R3: Register to read from the file
+; R4: Temporary register for string comparison
+; MEM[100]: Start of the file in memory
+; MEM[200]: Memory space for temporary strings for comparison
+
+; Constants
+HEADER          EQU 0x01   ; 1 for HEADER type
+VAR             EQU 0x02   ; 2 for Variable definition type
+FUNC            EQU 0x03   ; 3 for Function definition type
+MAIN            EQU 0x04   ; 4 for Main logic type
+
+EXPECTED_HEADER DB 'WFL_HEADER'
+VAR_BLOCK       DB 'VAR'
+FUNC_BLOCK      DB 'FUNC'
+MAIN_BLOCK      DB 'MAIN'
+
+; Initialization
+MOV R1, 0       ; Initialize the current line type
+MOV R2, HEADER  ; The first expected block type
+MOV R3, MEM[100]; Start reading the file from the beginning
+
+; Check Header
+READ R0, R3           ; Read the first line
+MOV R4, EXPECTED_HEADER
+CALL STRCMP R0, R4    ; Compare the line with the expected header string
+JZ HEADER_OK          ; If zero flag is set, header matches, jump to HEADER_OK
+JMP ERROR_HEADER      ; If no match, jump to error handler
+
+HEADER_OK:
+    ; Continue reading the next lines
+    ADD R3, 1          ; Move to the next line address
+    MOV R2, VAR        ; Next, we expect the VAR block
+
+; Main Loop: Read lines and check order
+MAIN_LOOP:
+    READ R0, R3             ; Read the current line into R0
+    MOV R4, VAR_BLOCK
+    CALL STRCMP R0, R4      ; Check if line is VAR block
+    JZ VAR_FOUND            ; If yes, jump to VAR_FOUND
+    
+    MOV R4, FUNC_BLOCK
+    CALL STRCMP R0, R4      ; Check if line is FUNC block
+    JZ FUNC_FOUND           ; If yes, jump to FUNC_FOUND
+    
+    MOV R4, MAIN_BLOCK
+    CALL STRCMP R0, R4      ; Check if line is MAIN block
+    JZ MAIN_FOUND           ; If yes, jump to MAIN_FOUND
+    
+    ; Check if reached end of the file
+    CMP R3, EOF
+    JE END_OF_FILE
+
+    ; Otherwise, keep reading the next line
+    ADD R3, 1
+    JMP MAIN_LOOP
+
+VAR_FOUND:
+    CMP R2, VAR             ; Check if VAR is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, FUNC            ; Expect FUNC next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+FUNC_FOUND:
+    CMP R2, FUNC            ; Check if FUNC is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, MAIN            ; Expect MAIN next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+MAIN_FOUND:
+    CMP R2, MAIN            ; Check if MAIN is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    ; After MAIN found, we can read until the end of the file
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+END_OF_FILE:
+    ; Handle end of file if all checks passed
+    ; Continue with interpretation or exit successfully
+    JMP PROGRAM_END
+
+ERROR_HEADER:
+    ; Handle missing or incorrect header
+    ; Display error or exit
+    HALT
+
+ERROR_BLOCK_ORDER:
+    ; Handle incorrect code block order
+    ; Display error or exit
+    HALT
+
+PROGRAM_END:
+    ; End of program
+    HALT
+
+; STRCMP: Function to compare two strings
+; Assumes R0 contains address of string1, R4 contains address of string2
+STRCMP:
+    MOV R5, 0          ; Index register for string comparison
+COMPARE_LOOP:
+    LOAD R6, [R0 + R5] ; Load character from string1
+    LOAD R7, [R4 + R5] ; Load character from string2
+    CMP R6, R7         ; Compare characters
+    JNE STRCMP_END     ; If characters do not match, exit with non-zero
+    ADD R5, 1          ; Increment index
+    CMP R6, 0          ; Check if end of string1
+    JNE COMPARE_LOOP   ; If not end, continue comparing
+STRCMP_END:
+    CMP R6, R7         ; Final comparison for zero flag setting
+    RET                ; Return to caller
+```
+
+**such that it repeatedly checks for further [ver, fun, main] blocks until there are no more and then progress to EOF to carry out error checking, closing and HALT?**
+
+
+**ChatGPT** _said:_
+
+To modify your assembly code to repeatedly check for further VAR, FUNC, MAIN blocks until there are no more and then progress to the end of the file (EOF) for error checking and termination, you'll need to adjust the logic of the main loop to allow for multiple occurrences of these blocks.
+
+Changes Needed:
+- Modify the Main Loop to continue reading lines after detecting a VAR, FUNC, or MAIN block, allowing for repeated occurrences.
+- Check if a block has been found multiple times, and only progress to EOF after the last occurrence of the MAIN block.
+- Update the block order checking logic to reset the expected block sequence after processing a complete set of blocks.
+- Handle errors appropriately if blocks are out of order or missing.
+
+Modified Assembly Code
+Here is the modified version of your code with the adjustments:
+
+```asm
+; Initialize Registers and Memory
+MOV R0, 0    ; Initialize R0 (General purpose register)
+MOV R1, 0    ; Initialize R1 (General purpose register)
+...
+MOV R100, 0  ; Initialize more registers as needed
+MOV MEM[100], 0  ; Initialize memory locations
+...
+
+; Constants
+HEADER          EQU 0x01   ; 1 for HEADER type
+VAR             EQU 0x02   ; 2 for Variable definition type
+FUNC            EQU 0x03   ; 3 for Function definition type
+MAIN            EQU 0x04   ; 4 for Main logic type
+
+EXPECTED_HEADER DB 'WFL_HEADER'
+VAR_BLOCK       DB 'VAR'
+FUNC_BLOCK      DB 'FUNC'
+MAIN_BLOCK      DB 'MAIN'
+
+; Initialization
+MOV R1, 0       ; Initialize the current line type
+MOV R2, HEADER  ; The first expected block type
+MOV R3, MEM[100]; Start reading the file from the beginning
+
+; Check Header
+READ R0, R3           ; Read the first line
+MOV R4, EXPECTED_HEADER
+CALL STRCMP           ; Compare the line with the expected header string
+JZ HEADER_OK          ; If zero flag is set, header matches, jump to HEADER_OK
+JMP ERROR_HEADER      ; If no match, jump to error handler
+
+HEADER_OK:
+    ; Continue reading the next lines
+    ADD R3, 1          ; Move to the next line address
+    MOV R2, VAR        ; Next, we expect the VAR block
+
+; Main Loop: Read lines and check order
+MAIN_LOOP:
+    READ R0, R3             ; Read the current line into R0
+    MOV R4, VAR_BLOCK
+    CALL STRCMP             ; Check if line is VAR block
+    JZ VAR_FOUND            ; If yes, jump to VAR_FOUND
+    
+    MOV R4, FUNC_BLOCK
+    CALL STRCMP             ; Check if line is FUNC block
+    JZ FUNC_FOUND           ; If yes, jump to FUNC_FOUND
+    
+    MOV R4, MAIN_BLOCK
+    CALL STRCMP             ; Check if line is MAIN block
+    JZ MAIN_FOUND           ; If yes, jump to MAIN_FOUND
+    
+    ; Check if reached end of the file
+    CMP R3, EOF
+    JE END_OF_FILE
+
+    ; Otherwise, keep reading the next line
+    ADD R3, 1
+    JMP MAIN_LOOP
+
+VAR_FOUND:
+    CMP R2, VAR             ; Check if VAR is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, FUNC            ; Expect FUNC next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+FUNC_FOUND:
+    CMP R2, FUNC            ; Check if FUNC is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, MAIN            ; Expect MAIN next
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+MAIN_FOUND:
+    CMP R2, MAIN            ; Check if MAIN is in the correct order
+    JNE ERROR_BLOCK_ORDER   ; Jump to error if not in order
+    MOV R2, VAR             ; Reset block order to expect VAR again
+    ADD R3, 1               ; Move to next line
+    JMP MAIN_LOOP           ; Continue loop
+
+END_OF_FILE:
+    ; Handle end of file if all checks passed
+    ; Continue with interpretation or exit successfully
+    JMP PROGRAM_END
+
+ERROR_HEADER:
+    ; Handle missing or incorrect header
+    ; Display error or exit
+    HALT
+
+ERROR_BLOCK_ORDER:
+    ; Handle incorrect code block order
+    ; Display error or exit
+    HALT
+
+PROGRAM_END:
+    ; End of program
+    HALT
+
+; STRCMP: Function to compare two strings
+; Assumes R0 contains address of string1, R4 contains address of string2
+STRCMP:
+    MOV R5, 0          ; Index register for string comparison
+COMPARE_LOOP:
+    LOAD R6, [R0 + R5] ; Load character from string1
+    LOAD R7, [R4 + R5] ; Load character from string2
+    CMP R6, R7         ; Compare characters
+    JNE STRCMP_END     ; If characters do not match, exit with non-zero
+    ADD R5, 1          ; Increment index
+    CMP R6, 0          ; Check if end of string1
+    JNE COMPARE_LOOP   ; If not end, continue comparing
+STRCMP_END:
+    CMP R6, R7         ; Final comparison for zero flag setting
+    RET                ; Return to caller
+```
+
+Key Changes Explained:
+- Reset Block Order After Each Full Set:
+After detecting the MAIN block, we reset R2 (the expected block type) to VAR to allow for another set of blocks.
+
+- Loop Continues After Finding Blocks:
+Each block (VAR, FUNC, MAIN) now jumps back to MAIN_LOOP instead of ending, allowing multiple sets.
+
+- End of File (EOF) Handling:
+The loop runs until it reaches EOF. After the last set of VAR, FUNC, MAIN blocks, it jumps to PROGRAM_END.
+
+- Error Handling:
+Errors are detected if the block order is incorrect, or if EOF is reached prematurely.
+
+This modification should help in repeatedly checking for blocks until all are processed.

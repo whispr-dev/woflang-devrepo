@@ -1,0 +1,13 @@
+namespace woflang::math {
+    class CoreMathModule {
+    public:
+        // Basic operations with SIMD support
+        virtual Vector add(const Vector& a, const Vector& b);
+        virtual Vector multiply(const Vector& a, const Vector& b);
+        virtual Vector divide(const Vector& a, const Vector& b);
+        
+        // Matrix operations
+        virtual Matrix matrixMultiply(const Matrix& a, const Matrix& b);
+        virtual Matrix transpose(const Matrix& a);
+    };
+}

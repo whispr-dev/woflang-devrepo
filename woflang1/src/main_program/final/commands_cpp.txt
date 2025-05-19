@@ -1,0 +1,691 @@
+// `commands.cpp` an attempt to make a C++  version of woflang
+
+#include <iostream>
+#include <unordered_map>
+#include <functional>
+#include <cmath>       // For mathematical operations
+#include <bitset>      // For bitwise operations
+#include <cstring>     // For memcpy
+#include <algorithm>   // For std::min and std::max
+#include "utils.h"
+#include "commands.h"
+
+
+// Now use utils functions directly
+// void executeCommand(const std::string& command) {
+//     CommandType commandType = parseCommand(command);
+    // Use commandType in your logic...
+// }
+
+// commands.cpp
+void cmdSetAttribute(double* operands, int numOperands) {
+    // Your implementation
+}
+
+void cmdSetProxy(double* operands, int numOperands) {
+    // Your implementation
+}
+
+void cmdImply(double* operands, int numOperands) {
+    // Your implementation
+}
+
+// Implement the other missing functions similarly...
+
+std::unordered_map<CommandType, CommandFunction> commandMap = {
+    (CMD_CMP, cmdCmp),
+    {CMD_ADD, cmdAdd},
+    {CMD_SUB, cmdSub},
+    (CMD_MUL, cmdMul),         
+    (CMD_DIV, cmdDiv),         
+    (CMD_CMDGT, cmdGT),       
+    (CMD_LT, cmdLT),          
+    (CMD_EQ, cmdEq),          
+    (CMD_DNE, cmdDNE),         
+    (CMD_GTE, cmdGTE),        
+    (CMD_LTE, cmdLTE),        
+    (CMD_AND, cmdAnd),         
+    (CMD_OR, cmdOr),          
+    (CMD_XOR, cmdXor),         
+    (CMD_NOT, cmdNot),         
+    (CMD_NAND, cmdNand),        
+    (CMD_NOR, cmdNor),         
+    (CMD_IF, cmdIf),          
+    (CMD_THEN, cmdThen),        
+    (CMD_ELSE, cmdElse),        
+    (CMD_WHILE, cmdWhile),       
+    (CMD_FOR, cmdFor),         
+    (CMD_BUF, cmdBuf),         
+    (CMD_INHIBIT, cmdInhibit),     
+    (CMD_EQUIV, cmdEquiv),       
+    (CMD_ID, cmdId, cmdId,cmdId),         
+    (CMD_BIN2FUZ, cmdBin2Fuz),     
+    (CMD_FUZ2BIN, cmdFuz2Bin),     
+    (CMD_BOOL, cmdBool),       
+    (CMD_COUNT, cmdCount),       
+    (CMD_STR, cmdStr),         
+    (CMD_VECTADD, cmdVectAdd),     
+    (CMD_VECTSUB, cmdVectSub),     
+    (CMD_DOTPROD, cmdDotProd),     
+    (CMD_MTRXDET, cmdMtrxDet),    
+    (CMD_MTRXINV, cmdMtrxInv),     
+    (CMD_3X3DET, cmd3x3Det),      
+    (CMD_MTRXAND, cmdMtrxAnd),     
+    (CMD_BREAK, cmdBreak),      
+    (CMD_END, cmdEnd),        
+    (CMD_EXIT, cmdExit),        
+    (CMD_PROMPT, cmdPrompt),      
+    (CMD_DONE, cmdDone),                
+    (CMD_PROXY, cmdProxy),       
+    (CMD_GETPROXY, cmdGetProxy),    
+    (CMD_SERVER, cmdServer),  
+    (CMD_USERAGENT, cmdUserAgent),
+    (CMD_FNCT, cmdFnct),
+    (CMD_ATTRIBUTE, cmdAttribute),
+    (CMD_TYPE, cmdType),
+    (CMD_WAIT, cmdWait),
+    (CMD_SLEEP, cmdSleep),
+    (CMD_PRINT, cmdPrint),
+    (CMD_CHAR,cmdChar),
+    (CMD_READ, cmdRead),
+    (CMD_MOVE, cmdMove),
+    (CMD_NULL, cmdNull),
+    (CMD_PATH, cmdPath),
+    (CMD_STARTSERVER, cmdStartServer), 
+    (CMD_STOPSERVER, cmdStopServer),
+    (CMD_SETATTRIBUTE, cmdSetAttribute),
+    (CMD_SETPROXY, cmdSetProxy),
+    (CMD_BIN2FUZ, cmdBin2Fuz),
+    (CMD_FUZ2BIN, cmdFuz2Bin),
+    (CMD_IMPLY, cmdImply),
+    (CMD_NIMPLY, cmdNimply),
+    (CMD_NULL, cmdNull),
+    (CMD_INHIBITXY, cmdInhibitXY),
+    (CMD_BUFFER, cmdBuffer),
+    (CMD_INHIBIT, cmdInhibit),
+    (CMD_EQUIVALENCE, cmdEquivalence), 
+    (CMD_IMPLICATION, cmdImplication), 
+    (CMD_IDENTITY, cmdIdentity),  
+    }        
+    // Add more mappings...
+};
+
+// In commands.h
+void cmdStartServer(double* operands, int numOperands);
+void cmdStopServer(double* operands, int numOperands);
+// Other function declarations...
+// In commands.cpp
+void cmdStartServer(double* operands, int numOperands) {
+    // Implement the function
+}
+void cmdStopServer(double* operands, int numOperands) {
+    // Implement the function
+}
+
+// Error codes
+const int ERR_HEADER_MISSING = 0x01;
+const int ERR_BLOCK_ORDER = 0x02;
+const int ERR_UNRECOGNIZED = 0x03;
+const int ERR_TYPE_MISMATCH = 0x04;
+const int ERR_RUNTIME = 0x05;
+const int ERR_OUT_OF_BOUNDS = 0xFF05;
+const int ERR_SOCKET_CREATION = 0x06;
+const int ERR_BIND = 0x07;
+const int ERR_LISTEN = 0x08;
+const int ERR_ACCEPT = 0x09;
+const int ERR_CLOSE = 0x0A;
+const int ERR_ATTRIBUTE = 0x0B;
+const int ERR_RUNTIME_DIV_ZERO = 0x11;
+const int ERR_RUNTIME_NULL_PTR = 0x12;
+const int ERR_RUNTIME_OVF = 0x13;
+const int ERR_MEM_INVALID_ADDRESS = 0x40;
+const int ERR_MEM_INVALID_OP = 0x41;
+const int ERR_STRING_NULL_PTR = 0x30;
+const int ERR_STRING_OVERFLOW = 0x31;
+const int ERR_STRING_INVALID_OP = 0x32;
+const int ERR_LOGIC_UNDEFINED_OP = 0x20;
+const int ERR_LOGIC_INVALID_COND = 0x21;
+const int ERR_LOGIC_INCONSISTENT = 0x22;
+const int ERR_MATH_OVERFLOW = 0x10;
+const int ERR_MATH_DIV_ZERO = 0x11;
+const int ERR_MATH_INVALID_OPERAND = 0x12;
+const int ERR_FP_EXCEPTION = 0x0C;
+const int ERR_FP_OVERFLOW = 0x0D;
+const int ERR_FP_UNDERFLOW = 0x0E;
+const int ERR_FP_INVALID = 0x0F;
+const int ERR_UNRECOGNIZED_COMMAND = 0x03;
+
+// Typedef for function pointer for command execution
+typedef std::function<void(double*, int)> CommandFunction;
+
+// Function prototypes
+void cmdCmp(double* operands, int numOperands);
+void cmdAdd(double* operands, int numOperands);
+void cmdSub(double* operands, int numOperands);
+void cmdMul(double* operands, int numOperands);
+void cmdDiv(double* operands, int numOperands);
+void cmdEq(double* operands, int numOperands);
+void cmdDNE(double* operands, int numOperands);
+void cmdGT(double* operands, int numOperands);
+void cmdLT(double* operands, int numOperands);
+void cmdGTE(double* operands, int numOperands);
+void cmdLTE(double* operands, int numOperands);
+void cmdAnd(double* operands, int numOperands);
+void cmdOr(double* operands, int numOperands);
+void cmdXor(double* operands, int numOperands);
+void cmdNot(double* operands, int numOperands);
+void cmdNand(double* operands, int numOperands);
+void cmdNor(double* operands, int numOperands);
+void cmdIf(double* operands, int numOperands);
+void cmdThen(double* operands, int numOperands);
+void cmdElse(double* operands, int numOperands);
+void cmdWhile(double* operands, int numOperands);
+void cmdFor(int start, int end, int step, std::function<void(int)> body);
+void cmdBuf(double* operands, int numOperands);
+void cmdInhibit(double* operands, int numOperands);
+void cmdEquiv(double* operands, int numOperands);
+void cmdId(double* operands, int numOperands);
+void cmdBin2Fuz(double* operands, int numOperands);
+void cmdFuz2Bin(double* operands, int numOperands);
+void cmdBool(double* operands, int numOperands);
+void cmdCount(double* operands, int numOperands);
+void cmdStr(double* operands, int numOperands);
+void cmdVectAdd(double* operands, int numOperands);
+void cmdVectSub(double* operands, int numOperands);
+void cmdDotProd(double* operands, int numOperands);
+void cmdMtrxDet(double* operands, int numOperands);
+void cmdMtrxInv(double* operands, int numOperands);
+void cmd3x3Det(double* operands, int numOperands);
+void cmdMtrxAnd(double* operands, int numOperands);
+void cmdBreak(double* operands, int numOperands);
+void cmdEnd(double* operands, int numOperands);
+void cmdExit(double* operands, int numOperands);
+void cmdPrompt(double* operands, int numOperands);
+void cmdDone(double* operands, int numOperands);
+void cmdHttp(double* operands, int numOperands);
+void cmdProxy(double* operands, int numOperands);
+void cmdGetProxy(double* operands, int numOperands);
+void cmdServer(double* operands, int numOperands);
+void cmdUserAgent(double* operands, int numOperands);
+void cmdFnct(double* operands, int numOperands);
+void cmdAttribute(double* operands, int numOperands);
+void cmdType(double* operands, int numOperands);
+void cmdWait(double* operands, int numOperands);
+void cmdSleep(double* operands, int numOperands);
+void cmdPrint(double* operands, int numOperands);
+void cmdChar(double* operands, int numOperands);
+void cmdRead(double* operands, int numOperands);
+void cmdMove(double* operands, int numOperands);
+void cmdNull(double* operands, int numOperands);
+void cmdPath(double* operands, int numOperands);
+
+// Map command types to their functions
+std::unordered_map<int, CommandFunction> commandMap = {
+    {0x4C, cmdCmp},       // CMP
+    {0x01, cmdAdd},         // Add
+    {0x02, cmdSub},         // Subtract
+    {0x03, cmdMul},         // Multiply
+    {0x04, cmdDiv},         // Divide
+    {0x05, cmdGT},          // Greater Than
+    {0x06, cmdLT},          // Less Than
+    {0x07, cmdEq},          // Equals
+    {0x08, cmdDNE},         // Does Not Equal
+    {0x09, cmdGTE},         // Greater Than or Equal To
+    {0x0A, cmdLTE},         // Less Than or Equal To
+    {0x0B, cmdAnd},         // AND
+    {0x0C, cmdOr},          // OR
+    {0x0D, cmdXor},         // XOR
+    {0x0E, cmdNot},         // NOT
+    {0x0F, cmdNand},        // NAND
+    {0x10, cmdNor},         // NOR
+    {0x11, cmdIf},          // IF
+    {0x12, cmdThen},        // THEN
+    {0x13, cmdElse},        // ELSE
+    {0x14, cmdWhile},       // WHILE
+    {0x15, cmdFor},         // FOR
+    {0x16, cmdBuf},         // BUFFER
+    {0x17, cmdInhibit},     // INHIBIT
+    {0x18, cmdEquiv},       // EQUIVALENT
+    {0x19, cmdId},          // IDENTITY
+    {0x1A, cmdBin2Fuz},     // BINARY TO FUZZY
+    {0x1B, cmdFuz2Bin},     // FUZZY TO BINARY
+    {0x1C, cmdBool},        // BOOLEAN
+    {0x1D, cmdCount},       // COUNT
+    {0x1E, cmdStr},         // STRING
+    {0x1F, cmdVectAdd},     // VECTOR ADD
+    {0x20, cmdVectSub},     // VECTOR SUB
+    {0x21, cmdDotProd},     // DOT PRODUCT
+    {0x22, cmdMtrxDet},     // MATRIX DETERMINANT
+    {0x23, cmdMtrxInv},     // MATRIX INVERSE
+    {0x24, cmd3x3Det},      // 3X3 MATRIX DETERMINANT
+    {0x25, cmdMtrxAnd},     // MATRIX AND
+    {0x26, cmdBreak},       // BREAK
+    {0x27, cmdEnd},         // END
+    {0x28, cmdExit},        // EXIT
+    {0x29, cmdPrompt},      // PROMPT
+    {0x2A, cmdDone},        // DONE
+    {0x2C, cmdProxy},       // PROXY
+    {0x2D, cmdGetProxy},    // GET PROXY
+    {0x2E, cmdServer},      // SERVER
+    {0x2F, cmdUserAgent},  // USER AGENT
+    {0x30, cmdFnct},       // FUNCTION
+    {0x31, cmdAttribute},  // ATTRIBUTE
+    {0x32, cmdType},       // TYPE
+    {0x33, cmdWait},       // WAIT
+    {0x34, cmdSleep},      // SLEEP
+    {0x35, cmdPrint},      // PRINT
+    {0x36, cmdChar},       // CHAR
+    {0x37, cmdRead},       // READ
+    {0x38, cmdMove},       // MOVE
+    {0x39, cmdNull},       // NULL
+    {0x3A, cmdPath},       // PATH
+    {0x3D, cmdStartServer}, // START SERVER
+    {0x3E, cmdStopServer}, // STOP SERVER
+    // {0x3F, cmdSetAttribute}, // SET ATTRIBUTE
+   // {0x40, cmdSetProxy},   // SET PROXY
+    {0x41, cmdBin2Fuz},    // BINARY TO FUZZY
+    {0x42, cmdFuz2Bin},    // FUZZY TO BINARY
+   // {0x43, cmdImply},      // IMPLY
+   // {0x44, cmdNimply},     // NIMPLY
+    {0x45, cmdNull},       // NULL
+    // {0x46, cmdInhibitXY},  // INHIBIT XY
+    // {0x47, cmdBuffer},     // BUFFER
+    // {0x48, cmdInhibit},    // INHIBIT
+    //{0x49, cmdEquivalence}, // EQUIVALENCE
+    //{0x4A, cmdImplication}, // IMPLICATION
+   // {0x4B, cmdIdentity},   // IDENTITY
+};
+
+// Utility function to clamp values to the range [0, 100]
+double clamp(double value) {
+    return std::max(0.0, std::min(100.0, value));
+}
+
+// Command functions
+void cmdCmp(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] > operands[1]) ? 100 : 0;  // Fuzzy comparison
+        std::cout << "Result (CMP): " << result << std::endl;
+    }
+}
+
+void cmdAdd(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = operands[0] + operands[1];
+        result = std::min(result, 100.0);  // Clamp to max 100
+        std::cout << "Result (ADD): " << result << std::endl;
+    }
+}
+
+void cmdSub(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = operands[0] - operands[1];
+        result = std::max(result, 0.0);  // Clamp to min 0
+        std::cout << "Result (SUBTRACT): " << result << std::endl;
+    }
+}
+
+void cmdMul(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] * operands[1]) / 100.0;  // Normalize product
+        std::cout << "Result (MULTIPLY): " << result << std::endl;
+    }
+}
+
+void cmdDiv(double* operands, int numOperands) {
+    if (numOperands >= 2 && operands[1] != 0) {
+        double result = (operands[0] / operands[1]) * 100;  // Normalize division
+        std::cout << "Result (DIVIDE): " << result << std::endl;
+    } else {
+        std::cerr << "Error: Division by zero" << std::endl;
+    }
+}
+
+void cmdEq(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] == operands[1]) ? 100 : 0;  // 100 if equal
+        std::cout << "Result (EQUALS): " << result << std::endl;
+    }
+}
+
+void cmdDNE(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] != operands[1]) ? 100 : 0;  // 100 if not equal
+        std::cout << "Result (DOES NOT EQUAL): " << result << std::endl;
+    }
+}
+
+void cmdGT(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] > operands[1]) ? 100 : 0;  // 100 if greater
+        std::cout << "Result (GREATER THAN): " << result << std::endl;
+    }
+}
+
+void cmdLT(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] < operands[1]) ? 100 : 0;  // 100 if less
+        std::cout << "Result (LESS THAN): " << result << std::endl;
+    }
+}
+
+void cmdGTE(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] >= operands[1]) ? 100 : 0;  // 100 if greater or equal
+        std::cout << "Result (GREATER THAN OR EQUAL): " << result << std::endl;
+    }
+}
+
+void cmdLTE(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = (operands[0] <= operands[1]) ? 100 : 0;  // 100 if less or equal
+        std::cout << "Result (LESS THAN OR EQUAL): " << result << std::endl;
+    }
+}
+
+void cmdAnd(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = std::min(operands[0], operands[1]);  // Fuzzy AND: MIN function
+        std::cout << "Result (AND): " << result << std::endl;
+    }
+}
+
+void cmdOr(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = std::max(operands[0], operands[1]);  // Fuzzy OR: MAX function
+        std::cout << "Result (OR): " << result << std::endl;
+    }
+}
+
+void cmdXor(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double result = std::fabs(operands[0] - operands[1]);  // Fuzzy XOR: Absolute difference
+        std::cout << "Result (XOR): " << result << std::endl;
+    }
+}
+
+void cmdNot(double* operands, int numOperands) {
+    if (numOperands >= 1) {
+        double result = 100 - operands[0];  // Fuzzy NOT: Inversion
+        std::cout << "Result (NOT): " << result << std::endl;
+    }
+}
+
+void cmdNand(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double andResult = std::min(operands[0], operands[1]);
+        double result = 100 - andResult;  // Fuzzy NAND: NOT of AND
+        std::cout << "Result (NAND): " << result << std::endl;
+    }
+}
+
+void cmdNor(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        double orResult = std::max(operands[0], operands[1]);
+        double result = 100 - orResult;  // Fuzzy NOR: NOT of OR
+        std::cout << "Result (NOR): " << result << std::endl;
+    }
+}
+
+void cmdIf(double* operands, int numOperands) {
+    if (numOperands >= 3) {
+        double result = (operands[0] > 0) ? operands[1] : operands[2];  // Fuzzy IF: Conditional selection
+        std::cout << "Result (IF): " << result << std::endl;
+    }
+}
+
+void cmdThen(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (THEN): " << clamp(operands[0] ? operands[1] : 0) << std::endl;
+    }
+}
+
+void cmdElse(double* operands, int numOperands) {
+    if (numOperands >= 1) {
+        std::cout << "Result (ELSE): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdWhile(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        while (operands[0] > 0) {
+            std::cout << "Executing (WHILE) with operand: " << clamp(operands[0]) << std::endl;
+            operands[0]--;  // Example loop decrement
+        }
+    }
+}
+
+void cmdFor(int start, int end, int step, std::function<void(int)> body) {
+    for (int i = start; i < end; i += step) {
+        body(i);
+    }
+}
+
+void cmdBuf(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (BUFFER): " << clamp((operands[0] = operands[1])) << std::endl;
+    }
+}
+
+void cmdInhibit(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (INHIBIT): " << clamp((operands[0] = operands[0])) << std::endl;
+    }
+}
+
+void cmdEquiv(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (EQUIV): " << clamp(operands[0] == operands[1] ? 100 : 0) << std::endl;
+    }
+}
+
+void cmdId(double* operands, int numOperands) {
+    if (numOperands >= 1) {
+        std::cout << "Result (IDENTITY): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdBool(double* operands, int numOperands) {
+    if (numOperands >= 1) {
+        std::cout << "Result (BOOLEAN): " << (operands[0] != 0 ? "true" : "false") << std::endl;
+    }
+}
+
+void cmdBin2Fuz(double* operands, int numOperands) {
+    if (numOperands >= 1) {
+        std::cout << "Result (BINARY-2-FUZZY): " << clamp(100 - operands[0]) << std::endl;
+    }
+}
+
+void cmdFuz2Bin(double* operands, int numOperands) {
+    if (numOperands >= 1) {
+        std::cout << "Result (FUZZY-2-BINARY): " << clamp(operands[0]) << std::endl;  // Assuming fuzzy value is already in [0, 100]
+    }
+}
+
+void cmdVectAdd(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (VECTOR ADD): " << clamp(operands[0] + operands[1]) << std::endl;
+    }
+}
+
+void cmdVectSub(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (VECTOR SUB): " << clamp(operands[0] - operands[1]) << std::endl;
+    }
+}
+
+void cmdDotProd(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (DOT PRODUCT): " << clamp(operands[0] * operands[1]) << std::endl;
+    }
+}
+
+void cmdMtrxDet(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        // Example operation, replace with actual matrix determinant calculation
+        std::cout << "Result (MATRIX DET): " << clamp(operands[0] * operands[1]) << std::endl;
+    }
+}
+
+void cmdMtrxInv(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        // Example operation, replace with actual matrix inversion calculation
+        std::cout << "Result (MATRIX INV): " << clamp(operands[0] / operands[1]) << std::endl;
+    }
+}
+
+void cmd3x3Det(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        // Example operation, replace with actual 3x3 matrix determinant calculation
+        std::cout << "Result (3X3 DET): " << clamp(operands[0] * operands[1]) << std::endl;
+    }
+}
+
+void cmdMtrxAnd(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        // Example operation, replace with actual matrix AND calculation
+        std::cout << "Result (MATRIX AND): " << clamp(operands[0] && operands[1] ? 100 : 0) << std::endl;
+    }
+}
+
+void cmdBreak(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (BREAK): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdEnd(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (END): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdExit(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (EXIT): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdPrompt(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (PROMPT): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdDone(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (DONE): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+
+void cmdProxy(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (PROXY): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdGetProxy(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (GET PROXY): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdServer(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (SERVER): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdUserAgent(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (USER AGENT): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdFnct(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (FUNCTION): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdAttribute(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (ATTRIBUTE): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdType(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (TYPE): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdWait(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (WAIT): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdSleep(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (SLEEP): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdPrint(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (PRINT): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdChar(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (CHAR): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdRead(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (READ): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdMove(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (MOVE): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdNull(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (NULL): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void cmdPath(double* operands, int numOperands) {
+    if (numOperands >= 2) {
+        std::cout << "Result (PATH): " << clamp(operands[0]) << std::endl;
+    }
+}
+
+void executeCommand(int commandType, double* operands, int numOperands) {
+    auto it = commandMap.find(commandType);
+    if (it != commandMap.end()) {
+        it->second(operands, numOperands);
+    } else {
+        std::cerr << "Unknown command" << std::endl;
+        std::cerr << "Error code: " << ERR_UNRECOGNIZED << std::endl;
+    }
+}
+
+int main() {
+    double operands[] = {5.0, 3.0};
+    int numOperands = 2;
+
+    executeCommand(0x01, operands, numOperands); // Example usage for ADD
+    executeCommand(0x04, operands, numOperands);
+
+    return 0;
+} // Ensure this closing brace is present

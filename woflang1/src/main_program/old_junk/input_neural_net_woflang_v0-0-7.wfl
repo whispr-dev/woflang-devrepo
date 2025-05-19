@@ -1,0 +1,39 @@
+i_1 門 20
+i_2 門 10
+w_1 門 0.5
+w_2 門 1.0
+# Weighted sum for Neuron A (v_A)
+v_A 門 (i_1 丶 w_1) 齊 (i_2 丶 w_2)
+theta_A 門 15
+v_A 門 v_A 隶 theta_A
+# Threshold activation (a) for Neuron A (v_A)
+若 v_A > 0 则 a_A 門 v_A 另 a_A 門 0
+# Define inputs (i) and weights (w) for Neuron B (v_B)
+i_1_B 門 -30
+i_2_B 門 40
+w_1_B 門 -1.5
+w_2_B 門 0.75
+# Weighted sum for Neuron B (v_B)
+v_B 門 (i_1_B 丶 w_1_B) 齊 (i_2_B 丶 w_2_B)
+# Threshold activation (a) for Neuron B (v_B)
+theta_B 門 50
+v_B 門 v_B 隶 theta_B
+若 v_B > 0 则 a_B 門 v_B 另 a_B 門 0
+# Neuron C (v_C) receives input from Neuron A (v_A) and Neuron B (v_B)
+i_1_C 門 a_A
+i_2_C 門 a_B
+w_1_C 門 1.0
+w_2_C 門 -0.5
+# Weighted sum for Neuron C (v_C)
+v_C 門 (i_1_C 丶 w_1_C) 齊 (i_2_C 丶 w_2_C)
+# Threshold activation (σ) for Neuron C (v_C)
+theta_C 門 -5
+v_C 門 v_C 隶 theta_C
+若 v_C > 0 则 a_C 門 v_C 另 a_C 門 0
+
+# example translations
+# 
+# x  ← (y1 * z1) + (y2 * z2)
+# theta z ← -5
+# x ← y - theta z
+# IF x > 0 THEN y ← z ELSE ← 0
