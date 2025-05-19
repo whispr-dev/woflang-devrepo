@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{60EBD58E-C8B2-3C9C-809C-3E97C8B4FEC3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\woflang\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/woflang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/woflang -BC:/woflang/build --check-stamp-file C:/woflang/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\woflang\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/woflang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/woflang -BC:/woflang/build --check-stamp-file C:/woflang/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\woflang\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/woflang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/woflang -BC:/woflang/build --check-stamp-file C:/woflang/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\woflang\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/woflang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/woflang -BC:/woflang/build --check-stamp-file C:/woflang/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake;C:\woflang\build\CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\woflang\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\woflang\build\ZERO_CHECK.vcxproj">
+      <Project>{DE43742E-38FB-33BC-BAAE-2DF8170B0C07}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\chemistry_ops.vcxproj">
+      <Project>{93044139-EB7E-367D-A60B-23F5DDF688C6}</Project>
+      <Name>chemistry_ops</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\crypto_ops.vcxproj">
+      <Project>{99A9415C-1DFE-3355-BA08-7F9A06C0E7C5}</Project>
+      <Name>crypto_ops</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\duality_op.vcxproj">
+      <Project>{8D13B938-221F-3D57-8EBE-2067001CA4A4}</Project>
+      <Name>duality_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\egg_op.vcxproj">
+      <Project>{21757B5C-E7DC-3B33-AEF6-DBCAB0AB75C2}</Project>
+      <Name>egg_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\entropy_op.vcxproj">
+      <Project>{BE419C01-8E77-3F1D-81DD-EDE1C40FD1B2}</Project>
+      <Name>entropy_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\forbidden_echo_op.vcxproj">
+      <Project>{59C12838-603A-3ACB-94BE-74F94ACED5BB}</Project>
+      <Name>forbidden_echo_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\forbidden_mode.vcxproj">
+      <Project>{97F31F79-E7B2-31DA-8C41-50B6DA5EEA46}</Project>
+      <Name>forbidden_mode</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\fractal_ops.vcxproj">
+      <Project>{6B7452D8-1FA9-3D58-825D-5FF3FFC76CAA}</Project>
+      <Name>fractal_ops</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\glyph_prophecy_op.vcxproj">
+      <Project>{D8C6EB7B-2AD6-3411-BB1A-D33FDEFED4D3}</Project>
+      <Name>glyph_prophecy_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\glyph_rain.vcxproj">
+      <Project>{A93284EE-E83A-31BD-A363-444EBCB07D86}</Project>
+      <Name>glyph_rain</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\kanji_ops.vcxproj">
+      <Project>{95FFECD7-C972-3A40-8197-0B5A12A4F4B2}</Project>
+      <Name>kanji_ops</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\learning_mode.vcxproj">
+      <Project>{E098D55F-61F4-3D8F-A5F2-9967FF6FBF55}</Project>
+      <Name>learning_mode</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\load_modellica_constants.vcxproj">
+      <Project>{E5B2A9E5-E85E-350C-B264-232EF982B05D}</Project>
+      <Name>load_modellica_constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\load_physics_constants.vcxproj">
+      <Project>{7C399060-4C67-3920-961A-736EA0767094}</Project>
+      <Name>load_physics_constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\logic_ops.vcxproj">
+      <Project>{D5DC16BC-3168-3185-AD85-0A816DB2DF90}</Project>
+      <Name>logic_ops</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\markov_suggest.vcxproj">
+      <Project>{8C37FC35-477A-35D2-B17F-E40CBB5CA429}</Project>
+      <Name>markov_suggest</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\math_constants.vcxproj">
+      <Project>{E8E7FA91-1CC5-3D38-8C29-58620FC4AA18}</Project>
+      <Name>math_constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\math_greek.vcxproj">
+      <Project>{8E07FEC1-043B-3928-A0EA-B58AEB0A5642}</Project>
+      <Name>math_greek</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\mathlib_calculus.vcxproj">
+      <Project>{93FF73B5-4D53-3DAA-8C7F-5A83EB3EBC07}</Project>
+      <Name>mathlib_calculus</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\mathlib_constant.vcxproj">
+      <Project>{2B2330DE-E5CE-35EC-9878-5936AAC1D833}</Project>
+      <Name>mathlib_constant</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\mathlib_exponentials.vcxproj">
+      <Project>{1ED05818-CC7D-3715-B55F-5A4B46AC0B75}</Project>
+      <Name>mathlib_exponentials</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\music_ops.vcxproj">
+      <Project>{A1A3DB6F-6A65-3E53-A94C-2F1337A9F880}</Project>
+      <Name>music_ops</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\omega_op.vcxproj">
+      <Project>{60042C8D-A524-396C-848E-0C3BF1A5BCBE}</Project>
+      <Name>omega_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\ops_forbidden_stack_slayer.vcxproj">
+      <Project>{C957D676-30B7-3299-9762-8CF6C32B5DF5}</Project>
+      <Name>ops_forbidden_stack_slayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\ops_symbolic_simplify_rules.vcxproj">
+      <Project>{A32DC30D-8C80-30F5-B544-2C5D6497C3C1}</Project>
+      <Name>ops_symbolic_simplify_rules</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\ops_symbolic_solve_linear.vcxproj">
+      <Project>{D2E3A624-4885-30D0-BA41-65659363EAFE}</Project>
+      <Name>ops_symbolic_solve_linear</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\ops_symbolic_solve_patterns.vcxproj">
+      <Project>{C654B6C1-49F5-37C2-9B44-43F3A5AF620D}</Project>
+      <Name>ops_symbolic_solve_patterns</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\over_unity_op.vcxproj">
+      <Project>{F74D390F-6AC3-3080-BCE0-C14C84D2136A}</Project>
+      <Name>over_unity_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\prophecy_chain_op.vcxproj">
+      <Project>{E5235EF5-8145-329F-B0D9-E802E5EE7351}</Project>
+      <Name>prophecy_chain_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\prophecy_op.vcxproj">
+      <Project>{B078454B-ACAC-3D51-9A41-C9A13CDA9AFA}</Project>
+      <Name>prophecy_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\quantum_ops.vcxproj">
+      <Project>{0F1E43AA-8FEA-3164-A4FD-BD4BF64C0874}</Project>
+      <Name>quantum_ops</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\repl_egg_command.vcxproj">
+      <Project>{11819421-C0C2-311F-92A0-AEC4AABCAEA6}</Project>
+      <Name>repl_egg_command</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\repl_history_commands.vcxproj">
+      <Project>{BE18FF12-D79E-36D1-AFD4-F3E448D576BE}</Project>
+      <Name>repl_history_commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\repl_prophecy_command.vcxproj">
+      <Project>{56549006-001F-349D-B597-F44EF71E5530}</Project>
+      <Name>repl_prophecy_command</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\repl_suggest_command.vcxproj">
+      <Project>{43BA33B9-433A-39C4-A332-473DD6F00AA0}</Project>
+      <Name>repl_suggest_command</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\sigil_map_op.vcxproj">
+      <Project>{3C0C5875-2F27-3E72-962B-21C75E38CF5E}</Project>
+      <Name>sigil_map_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\stack_slayer_op.vcxproj">
+      <Project>{FF3CFA05-863E-350B-BD16-4176D4165C0D}</Project>
+      <Name>stack_slayer_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\stack_void_divison.vcxproj">
+      <Project>{098DCB53-06D5-30E4-9B3A-1FABC2133740}</Project>
+      <Name>stack_void_divison</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\symbolic_solve.vcxproj">
+      <Project>{D75D2B8A-709C-30B3-8459-FB926CABDA92}</Project>
+      <Name>symbolic_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\void_division_op.vcxproj">
+      <Project>{28D10CD8-77DB-3560-B2E7-F90BFC9F8BD1}</Project>
+      <Name>void_division_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\plugins\wof_markov_math_suggestions.vcxproj">
+      <Project>{3328AD1E-E37D-34C2-A93A-A9391901BB96}</Project>
+      <Name>wof_markov_math_suggestions</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\src\woflang_core.vcxproj">
+      <Project>{AC6E881C-C3F9-37D4-BBFA-0EF28659CEAF}</Project>
+      <Name>woflang_core</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\woflang\build\src\woflang_repl.vcxproj">
+      <Project>{A861F5F6-0199-3CF7-998F-581D4DB68B37}</Project>
+      <Name>woflang_repl</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

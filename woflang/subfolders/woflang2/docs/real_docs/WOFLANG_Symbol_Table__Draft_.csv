@@ -1,0 +1,47 @@
+Symbol,Name,Description
+⊕,def,Define function or symbol
+無,nop,No-op or nullify
+若,if,Start of conditional block
+則,then,Then block of conditional
+或,else,Alternative block of conditional
+另,elif,Else if block or jump target
+而,join,Logical join or continuation
+丿,arrow,Flow arrow or transition
+丶,sep,Statement separator
+⺆,block_open,Open code block
+⺘,block_close,Close code block
+門,module,Open module or namespace
+⻔,mod_scope,Module scope or call
+谷,var,Variable declaration
+己,self,Self or current context
+比,cmp,Compare
+支,set,Assign value
+卜,stack_push,Push to stack
+卩,stack_pop,Pop from stack
+工,op,Generic operation marker
+⽰,ctx_mark,Contextual marker
+字,define_sym,Define new symbol
+読,read_sym,Read a symbol
+自,recur,Recursion or self-call
+又,alt,Alternate or fork
+大,gt,Greater than
+小,lt,Less than
+齊,eq,Equality check
+非,not,Logical NOT
+止,halt,Stop execution
+出,exit,Exit or break
+至,ret,Return from function
+押,bind,Bind or alias symbol
+巡,call,Function call
+響,emit,Emit or print
+⺢,import,Import or invoke module
+⻤,macro,Macro or meta-op
+終,end,Program end
+待,await,Wait or delay
+眠,sleep,Pause execution
+⺣,err,Error or crash
+⺨,wild,Wildcard or random
+舛,fail,Failure or mismatch
+⺙,meta,Metadata or directive
+⻙,flag,Flag or toggle
+老,legacy,Fallback or old behavior

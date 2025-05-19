@@ -1,0 +1,4 @@
+10 m 2 m mul_unit print
+20 s 10 s mul_unit print
+A 1 * simplify_patterns print
+B 0 + simplify_patterns print

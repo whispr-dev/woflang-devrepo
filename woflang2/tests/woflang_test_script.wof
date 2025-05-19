@@ -1,0 +1,10 @@
+2 2 + print
+pi print
+2 m 3 m mul_unit print
+X X + simplify print
+
+2 X = 4 solve
+X 1 * simplify_patterns print
+X 0 + simplify_patterns print
+
+suggest_math
