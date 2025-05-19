@@ -1,0 +1,68 @@
+WOFLANG_PLUGIN_EXPORT void register_plugin(WoflangInterpreter& interp) {
+    static SymbolicSimplifyRulesPlugin plugin;
+    plugin.register_ops(interp);
+}
+ops_symbolic_solve_linear.cpp (Fixed)
+cpp#include "../../src/core/woflang.hpp"
+#include <iostream>
+
+// Simple linear solver (for 2 X = 4)
+class SymbolicSolveLinearPlugin : public WoflangPlugin {
+public:
+    void register_ops(WoflangInterpreter& interp) override {
+        interp.register_op("solve_linear", [](WoflangInterpreter& interp) {
+            if (interp.stack.size() < 4) {
+                std::cout << "solve_linear: Need 4 values (coeff var = rhs)\n";
+                return;
+            }
+            
+            auto rhs = interp.stack.back(); 
+            interp.stack.pop_back();
+            
+            auto eq = interp.stack.back(); 
+            interp.stack.pop_back();
+            
+            auto var = interp.stack.back(); 
+            interp.stack.pop_back();
+            
+            auto coeff = interp.stack.back(); 
+            interp.stack.pop_back();
+
+            // Type check before solving
+            if (coeff.type == WofType::Integer && 
+                var.type == WofType::Symbol && 
+                eq.type == WofType::String && 
+                std::get<std::string>(eq.value) == "=" &&
+                rhs.type == WofType::Integer) {
+                
+                // Handle divide by zero
+                int64_t coeff_val = std::get<int64_t>(coeff.value);
+                if (coeff_val == 0) {
+                    std::cout << "solve_linear: Division by zero\n";
+                    interp.stack.push_back(coeff);
+                    interp.stack.push_back(var);
+                    interp.stack.push_back(eq);
+                    interp.stack.push_back(rhs);
+                    return;
+                }
+                
+                int64_t result = std::get<int64_t>(rhs.value) / coeff_val;
+                std::string var_name = std::get<std::string>(var.value);
+                
+                std::cout << var_name << " = " << result << "\n";
+                interp.stack.emplace_back(result);
+            } else {
+                std::cout << "[solve_linear] Could not solve; stack state unchanged.\n";
+                interp.stack.push_back(coeff);
+                interp.stack.push_back(var);
+                interp.stack.push_back(eq);
+                interp.stack.push_back(rhs);
+            }
+        });
+    }
+};
+
+WOFLANG_PLUGIN_EXPORT void register_plugin(WoflangInterpreter& interp) {
+    static SymbolicSolveLinearPlugin plugin;
+    plugin.register_ops(interp);
+}

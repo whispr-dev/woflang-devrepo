@@ -1,0 +1,3 @@
+C:/woflang/build/CMakeFiles/woflang.dir
+C:/woflang/build/CMakeFiles/ALL_BUILD.dir
+C:/woflang/build/CMakeFiles/ZERO_CHECK.dir
