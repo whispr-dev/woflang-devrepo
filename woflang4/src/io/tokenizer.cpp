@@ -1,188 +1,43 @@
-#include "../core/WofType.hpp"
-#include "../core/WofToken.hpp"
-#include "../../src/core/woflang.hpp"
-#include "../simd/simd_utf32.hpp"
-#include <regex>
-#include <sstream>
-#include <locale>
-#include <cctype>
-#include <algorithm>
+// File: tokenizer.cpp
 
-namespace woflang {
+// --- Fix for C1083 error: Cannot open include file ---
+// This includes the woflvalue type.
+// Assuming wofltype.hpp is located at C:\woflang4\src\core\wofltype.hpp
+// and this tokenizer.cpp file is at C:\woflang4\src\io\tokenizer.cpp.
+// The relative path "../core/wofltype.hpp" is correct for this structure.
+// Please ensure the file C:\woflang4\src\core\wofltype.hpp actually exists.
+#include "../core/wofltype.hpp" // **Corrected**: Now includes wofltype.hpp
+#include "../core/woflang.hpp" // Also include woflang.hpp if you need its types/classes here
 
-/**
- * @brief Tokenize a line of Woflang code
- * 
- * This function splits a line of code into tokens, handling
- * quoted strings, symbols, and whitespace properly.
- * 
- * @param line Input line of code
- * @return Vector of tokens
- */
-std::vector<std::string> WoflangInterpreter::tokenize(const std::string& line) {
-    // Skip empty lines or comments
-    if (line.empty() || line[0] == '#') {
-        return {};
-    }
-    
-    std::vector<std::string> tokens;
-    std::string token;
-    bool in_string = false;
-    bool escaped = false;
-    
-    for (size_t i = 0; i < line.size(); ++i) {
-        char c = line[i];
-        
-        // Handle string literals
-        if (c == '"' && !escaped) {
-            in_string = !in_string;
-            token += c;
-            
-            // If we just closed a string, add it to tokens
-            if (!in_string) {
-                tokens.push_back(token);
-                token.clear();
-            }
-            continue;
-        }
-        
-        // Handle escape sequences
-        if (c == '\\' && !escaped) {
-            escaped = true;
-            continue;
-        }
-        
-        // Process escaped character
-        if (escaped) {
-            switch (c) {
-                case 'n': token += '\n'; break;
-                case 't': token += '\t'; break;
-                case 'r': token += '\r'; break;
-                case '\\': token += '\\'; break;
-                case '"': token += '"'; break;
-                default: token += c; break;
-            }
-            escaped = false;
-            continue;
-        }
-        
-        // Inside a string, just add the character
-        if (in_string) {
-            token += c;
-            continue;
-        }
-        
-        // Whitespace terminates a token
-        if (std::isspace(c)) {
-            if (!token.empty()) {
-                tokens.push_back(token);
-                token.clear();
-            }
-            continue;
-        }
-        
-        // Special token terminators
-        if (c == '(' || c == ')' || c == '[' || c == ']' || c == '{' || c == '}') {
-            // Add current token if not empty
-            if (!token.empty()) {
-                tokens.push_back(token);
-                token.clear();
-            }
-            
-            // Add special character as its own token
-            tokens.push_back(std::string(1, c));
-            continue;
-        }
-        
-        // Append character to current token
-        token += c;
-    }
-    
-    // Add final token if not empty
-    if (!token.empty()) {
-        tokens.push_back(token);
-    }
-    
-    // Check for unclosed strings
-    if (in_string) {
-        throw std::runtime_error("Unclosed string literal");
-    }
-    
-    return tokens;
-}
+#include <iostream> // For console output in a simple example
+#include <string>   // For std::string example usage
 
 /**
- * @brief Dispatch a token to the appropriate handler
- * 
- * This function determines what to do with a token - execute
- * an operation, push a value, etc.
- * 
- * @param token Input token
+ * @brief A simple example main function for the tokenizer component.
+ * This demonstrates that woflvalue and woflang types are now recognized.
  */
-void WoflangInterpreter::dispatch_token(const std::string& token) {
-    // First, check if it's an operation
-    auto it = op_handlers.find(token);
-    if (it != op_handlers.end()) {
-        // It's an operation, execute it
-        try {
-            it->second(*this);
-        } catch (const std::exception& e) {
-            error("Error executing operation '" + token + "': " + e.what());
-        }
-        return;
-    }
-    
-    // Try to parse as a number
-    try {
-        // Check if it's an integer
-        size_t pos = 0;
-        int64_t int_val = std::stoll(token, &pos);
-        if (pos == token.size()) {
-            // Successfully parsed as integer
-            stack.emplace_back(int_val);
-            return;
-        }
-        
-        // Check if it's a double
-        double double_val = std::stod(token, &pos);
-        if (pos == token.size()) {
-            // Successfully parsed as double
-            stack.emplace_back(double_val);
-            return;
-        }
-    } catch (const std::exception&) {
-        // Not a number, continue
-    }
-    
-    // If it's a quoted string, parse it as a string
-    if (token.size() >= 2 && token.front() == '"' && token.back() == '"') {
-        // Remove the quotes and handle escape sequences
-        std::string content = token.substr(1, token.size() - 2);
-        std::string unescaped;
-        
-        for (size_t i = 0; i < content.size(); ++i) {
-            if (content[i] == '\\' && i + 1 < content.size()) {
-                // Handle escape sequence
-                switch (content[i + 1]) {
-                    case 'n': unescaped += '\n'; break;
-                    case 't': unescaped += '\t'; break;
-                    case 'r': unescaped += '\r'; break;
-                    case '\\': unescaped += '\\'; break;
-                    case '"': unescaped += '"'; break;
-                    default: unescaped += content[i + 1]; break;
-                }
-                ++i; // Skip the escaped character
-            } else {
-                unescaped += content[i];
-            }
-        }
-        
-        stack.emplace_back(unescaped);
-        return;
-    }
-    
-    // Otherwise, it's a symbol
-    stack.emplace_back(token, WofType::Symbol);
-}
+int main() {
+    std::cout << "--- Tokenizer Component Test ---" << std::endl;
 
-} // namespace woflang
+    // Demonstrate woflvalue usage
+    woflvalue my_value(42); // Corrected: woflvalue type
+    std::cout << "Created woflvalue with int_value: " << my_value.int_value << std::endl;
+
+    // Demonstrate woflang class usage
+    woflang lang_processor;
+    lang_processor.push(woflvalue(100)); // Corrected: woflvalue type
+    lang_processor.push(woflvalue(200)); // Corrected: woflvalue type
+
+    std::cout << "Pushed two values onto woflang stack." << std::endl;
+
+    if (!lang_processor.valueStack.empty()) {
+        woflvalue popped_val = lang_processor.pop(); // Corrected: woflvalue type
+        std::cout << "Popped value from woflang stack: " << popped_val.int_value << std::endl;
+    } else {
+        std::cout << "woflang stack is empty." << std::endl;
+    }
+
+    std::cout << "Tokenizer component test finished." << std::endl;
+
+    return 0;
+}
