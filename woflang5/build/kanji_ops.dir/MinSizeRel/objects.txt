@@ -1,0 +1,1 @@
+C:/woflang5/build/kanji_ops.dir/MinSizeRel/kanji_ops.obj

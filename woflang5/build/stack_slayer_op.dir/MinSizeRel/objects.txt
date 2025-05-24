@@ -1,0 +1,1 @@
+C:/woflang5/build/stack_slayer_op.dir/MinSizeRel/stack_slayer_op.obj
