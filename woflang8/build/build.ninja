@@ -158,6 +158,45 @@ build bin/plugins/libkanji_ops.dll lib/libkanji_ops.dll.a: CXX_SHARED_LIBRARY_LI
   TARGET_PDB = bin\plugins\libkanji_ops.pdb
 
 # =============================================================================
+# Object build statements for SHARED_LIBRARY target chess_ops
+
+
+#############################################
+# Order-only phony target for chess_ops
+
+build cmake_object_order_depends_target_chess_ops: phony || cmake_object_order_depends_target_woflang_core
+
+build CMakeFiles/chess_ops.dir/plugins/chess_ops.cpp.obj: CXX_COMPILER__chess_ops_unscanned_ D$:/code/woflang/woflang8/plugins/chess_ops.cpp || cmake_object_order_depends_target_chess_ops
+  DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dchess_ops_EXPORTS
+  DEP_FILE = CMakeFiles\chess_ops.dir\plugins\chess_ops.cpp.obj.d
+  FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
+  INCLUDES = -ID:/code/woflang/woflang8/src/core -ID:/code/woflang/woflang8/src/io -ID:/code/woflang/woflang8/src
+  OBJECT_DIR = CMakeFiles\chess_ops.dir
+  OBJECT_FILE_DIR = CMakeFiles\chess_ops.dir\plugins
+  TARGET_COMPILE_PDB = CMakeFiles\chess_ops.dir\
+  TARGET_PDB = bin\plugins\libchess_ops.pdb
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target chess_ops
+
+
+#############################################
+# Link the shared library bin\plugins\libchess_ops.dll
+
+build bin/plugins/libchess_ops.dll lib/libchess_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__chess_ops_ CMakeFiles/chess_ops.dir/plugins/chess_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+  LINK_FLAGS = -static-libgcc -static-libstdc++ -static-libgcc -static-libstdc++ -static
+  LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\chess_ops.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  RESTAT = 1
+  TARGET_COMPILE_PDB = CMakeFiles\chess_ops.dir\
+  TARGET_FILE = bin\plugins\libchess_ops.dll
+  TARGET_IMPLIB = lib\libchess_ops.dll.a
+  TARGET_PDB = bin\plugins\libchess_ops.pdb
+
+# =============================================================================
 # Object build statements for SHARED_LIBRARY target prophecy_op
 
 
@@ -653,6 +692,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build chemistry_ops: phony bin/plugins/libchemistry_ops.dll
 
+build chess_ops: phony bin/plugins/libchess_ops.dll
+
 build crypto_ops: phony bin/plugins/libcrypto_ops.dll
 
 build entropy_ops: phony bin/plugins/libentropy_ops.dll
@@ -662,6 +703,8 @@ build fractal_ops: phony bin/plugins/libfractal_ops.dll
 build kanji_ops: phony bin/plugins/libkanji_ops.dll
 
 build libchemistry_ops.dll: phony bin/plugins/libchemistry_ops.dll
+
+build libchess_ops.dll: phony bin/plugins/libchess_ops.dll
 
 build libcrypto_ops.dll: phony bin/plugins/libcrypto_ops.dll
 
@@ -719,7 +762,7 @@ build woflang_core: phony lib/libwoflang_core.a
 #############################################
 # Folder: D:/code/woflang/woflang8/build
 
-build all: phony lib/libwoflang_core.a bin/woflang.exe bin/plugins/libkanji_ops.dll bin/plugins/libprophecy_op.dll bin/plugins/libmath_greek_ops.dll bin/plugins/libstack_slayer_op.dll bin/plugins/libmusic.dll bin/plugins/libquantum_ops.dll bin/plugins/libcrypto_ops.dll bin/plugins/libfractal_ops.dll bin/plugins/libchemistry_ops.dll bin/plugins/liblogic_ops.dll bin/plugins/libmath_ops.dll bin/plugins/libentropy_ops.dll bin/plugins/libvoid_division_ops.dll
+build all: phony lib/libwoflang_core.a bin/woflang.exe bin/plugins/libkanji_ops.dll bin/plugins/libchess_ops.dll bin/plugins/libprophecy_op.dll bin/plugins/libmath_greek_ops.dll bin/plugins/libstack_slayer_op.dll bin/plugins/libmusic.dll bin/plugins/libquantum_ops.dll bin/plugins/libcrypto_ops.dll bin/plugins/libfractal_ops.dll bin/plugins/libchemistry_ops.dll bin/plugins/liblogic_ops.dll bin/plugins/libmath_ops.dll bin/plugins/libentropy_ops.dll bin/plugins/libvoid_division_ops.dll
 
 # =============================================================================
 # Built-in targets

@@ -103,6 +103,7 @@ endfunction()
 
 # Build existing plugins
 add_woflang_plugin(kanji_ops kanji_ops.cpp)
+add_woflang_plugin(chess_ops chess_ops.cpp)
 add_woflang_plugin(prophecy_op prophecy_op.cpp)
 add_woflang_plugin(math_greek_ops math_greek_ops.cpp)
 add_woflang_plugin(stack_slayer_op stack_slayer_op.cpp)

@@ -1,6 +1,0 @@
-WofLang Stack File
-Stack Size: 3
-Stack Values:
-Value 0
-Value 1
-Value 2

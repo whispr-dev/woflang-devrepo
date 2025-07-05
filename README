@@ -1,0 +1,445 @@
+WofLang v1.1.0 - Complete Documentation Suite
+╦ ╦┌─┐┌─┐┬  ┌─┐┌┐┌┌─┐
+║║║│ │├┤ │  ├─┤││││ ┬
+╚╩╝└─┘└  ┴─┘┴ ┴┘└┘└─┘ v1.1.0
+A Unicode-native stack language
+
+Table of Contents
+
+Quick Start Guide
+Installation & Building
+User Manual
+Command Reference & Cheat Sheet
+Plugin System Overview
+Mathematical Foundations
+Testing & Benchmarking
+Advanced Usage
+Development Guide
+Troubleshooting
+
+
+Quick Start Guide
+What is WofLang?
+WofLang is a revolutionary Unicode-native stack-based programming language designed for mathematical exploration, quantum computing simulation, cryptographic operations, and creative expression. It combines the elegance of Forth-like stack operations with cutting-edge mathematical plugins.
+30-Second Start
+bash# Build and run
+cd woflang
+./build_woflang.sh
+./build/bin/woflang
+
+# Your first calculations
+wof> 5 3 +
+wof> .              # Display result: 8
+wof> 42 prime_check
+wof> .              # Display result: 0 (not prime)
+wof> |0⟩ H show     # Create quantum superposition
+wof> quit
+Core Concepts
+
+Stack-based: Numbers and operations use a stack (Last In, First Out)
+Postfix notation: 5 3 + means 5 + 3
+Unicode support: Use symbols like π, |0⟩, mathematical operators
+Plugin architecture: Extend functionality with specialized mathematical domains
+
+
+Installation & Building
+Prerequisites
+
+C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)
+CMake 3.10+
+Git
+
+Linux/macOS Build
+bashgit clone <repository-url>
+cd woflang
+chmod +x build_woflang.sh
+./build_woflang.sh
+Windows Build (MSYS2/MinGW)
+bash# Install MSYS2, then:
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake
+cd woflang
+./build_woflang.sh
+Manual Build
+bashmkdir build && cd build
+cmake ..
+make -j4
+Verify Installation
+bash./build/bin/woflang --version
+./build/bin/woflang --test     # Run test suite
+
+User Manual
+Starting WofLang
+bash# Interactive mode
+./woflang
+
+# Run tests
+./woflang --test
+
+# Benchmark performance
+./woflang --benchmark
+
+# Show help
+./woflang --help
+Basic Stack Operations
+WofLang uses a stack to store values. Numbers are pushed onto the stack, operations consume stack values.
+woflang# Push numbers
+42          # Stack: [42]
+3.14        # Stack: [42, 3.14]
+-17         # Stack: [42, 3.14, -17]
+
+# Display stack top
+.           # Prints: -17, Stack: [42, 3.14]
+
+# Stack manipulation
+dup         # Duplicate top: [42, 3.14, 3.14]
+swap        # Swap top two: [42, 3.14, 3.14]
+drop        # Remove top: [42, 3.14]
+Arithmetic Operations
+woflang# Basic arithmetic
+5 3 +       # Addition: Stack has 8
+10 4 -      # Subtraction: Stack has 6
+6 7 *       # Multiplication: Stack has 42
+20 4 /      # Division: Stack has 5
+
+# Advanced math
+2 8 pow     # Power: 2^8 = 256
+16 sqrt     # Square root: 4
+pi sin      # sin(π) ≈ 0
+Interactive Commands
+woflangquit        # Exit WofLang
+exit        # Alternative exit
+help        # Show help
+benchmark   # Run performance benchmarks
+stack_slayer # Clear entire stack dramatically
+
+Command Reference & Cheat Sheet
+Stack Operations
+CommandEffectExampledupDuplicate top5 dup → [5, 5]dropRemove top5 3 drop → [5]swapSwap top two5 3 swap → [3, 5]overCopy second to top5 3 over → [5, 3, 5]rotRotate top three1 2 3 rot → [2, 3, 1].Display top42 . → prints 42.sDisplay entire stackShows full stack
+Arithmetic
+CommandEffectExample+Add5 3 + → 8-Subtract10 3 - → 7*Multiply4 5 * → 20/Divide20 4 / → 5modModulo10 3 mod → 1powPower2 8 pow → 256sqrtSquare root16 sqrt → 4absAbsolute value-5 abs → 5
+Trigonometry
+CommandEffectExamplesinSine (radians)pi 2 / sin → 1cosCosine0 cos → 1tanTangentpi 4 / tan → 1asinArcsine1 asin → π/2acosArccosine0 acos → π/2atanArctangent1 atan → π/4
+Constants
+CommandValueDescriptionpi3.14159...π (pi)e2.71828...Euler's numbertau6.28318...2πphi1.61803...Golden ratio
+Unit Conversion
+CommandEffectdeg2radConvert degrees to radiansrad2degConvert radians to degrees
+
+Plugin System Overview
+WofLang's power comes from its extensive plugin architecture. Each plugin adds specialized mathematical capabilities.
+Available Plugins
+Core Mathematical Operations (math_ops.dll)
+
+Purpose: Fundamental arithmetic, trigonometry, logarithms
+Key Commands: +, -, *, /, sin, cos, ln, sqrt
+Theory: Standard mathematical functions with optimized implementations
+
+Greek Mathematical Symbols (math_greek_ops.dll)
+
+Purpose: Unicode mathematical symbols and operations
+Key Commands: α, β, γ, π, Σ, ∫
+Usage: π 2 * for 2π, α 30 deg2rad for angle operations
+
+Cryptography (crypto_ops.dll)
+
+Purpose: Prime testing, modular arithmetic, cryptographic functions
+Key Commands:
+
+prime_check - Miller-Rabin primality test
+prime_check_ultra - Ultra-fast Fermat test
+miller_rabin - Custom rounds Miller-Rabin
+mod_pow - Modular exponentiation
+gcd - Greatest common divisor
+speed_compare - Compare algorithm speeds
+
+
+Theory: Implements state-of-the-art probabilistic primality testing with deterministic witnesses for small numbers
+
+Quantum Computing (quantum_ops.dll)
+
+Purpose: Quantum state simulation and gate operations
+Key Commands:
+
+|0⟩, |1⟩ - Create basis states
+H - Hadamard gate (superposition)
+X, Y, Z - Pauli gates
+show - Display quantum state
+measure - Collapse wavefunction
+bell - Create Bell state
+
+
+Theory: Simulates quantum computation using complex amplitudes and unitary operations
+
+Chemistry (chemistry_ops.dll)
+
+Purpose: Chemical calculations and periodic table operations
+Key Commands:
+
+element_info - Get element data
+atomic_weight - Atomic mass
+molecular_weight - Calculate molecular mass
+avogadro - Avogadro's constant
+celsius_to_kelvin - Temperature conversion
+
+
+Theory: Based on IUPAC atomic masses and fundamental chemical constants
+
+Fractal Mathematics (fractal_ops.dll)
+
+Purpose: Fractal geometry and chaos theory
+Key Commands:
+
+mandelbrot - Mandelbrot set iteration
+sierpinski - Sierpinski triangle
+hausdorff - Hausdorff dimension
+
+
+Theory: Implements iterative algorithms for fractal generation and dimension calculation
+
+Logic Operations (logic_ops.dll)
+
+Purpose: Boolean logic and propositional calculus
+Key Commands: and, or, xor, not, tautology
+Theory: Standard Boolean algebra with truth table verification
+
+Music Theory (music.dll)
+
+Purpose: Musical calculations and harmony theory
+Key Commands: Musical interval calculations, frequency conversions
+Theory: Based on equal temperament and harmonic series
+
+Entropy & Chaos (entropy_ops.dll)
+
+Purpose: Information theory and chaos operations
+Key Commands: entropy, chaos, order
+Theory: Shannon entropy and deterministic chaos analysis
+
+Japanese Language (kanji_ops.dll)
+
+Purpose: Japanese character operations and linguistics
+Key Commands: Kanji analysis and processing
+Theory: Unicode-based Japanese text processing
+
+Void Operations (void_division_ops.dll)
+
+Purpose: Philosophical mathematical operations
+Key Commands: void_division, /0
+Theory: Explores mathematical infinity and undefined operations
+
+Stack Manipulation (stack_slayer_op.dll)
+
+Purpose: Advanced stack operations
+Key Commands: stack_slayer, resurrect
+Theory: Dramatic stack clearing and restoration
+
+Prophecy (prophecy_op.dll)
+
+Purpose: Mystical mathematical operations
+Key Commands: Esoteric mathematical functions
+Theory: Explores the mystical side of mathematics
+
+
+Mathematical Foundations
+Stack-Based Computing Theory
+WofLang implements a pure stack machine architecture, similar to Forth but optimized for mathematical computation. This design offers several advantages:
+
+Compositional: Operations naturally compose
+Minimal syntax: No operator precedence rules
+Memory efficient: Stack-based execution
+Mathematical intuition: Mirrors RPN calculators
+
+Numerical Precision
+
+Floating point: IEEE 754 double precision (64-bit)
+Range: ±1.7 × 10^308
+Precision: ~15-16 decimal digits
+Special values: Handles ±∞, NaN appropriately
+
+Unicode Mathematical Support
+WofLang provides native support for Unicode mathematical symbols:
+
+Greek letters: α, β, γ, π, σ, etc.
+Mathematical operators: ∫, ∑, ∏, ∇
+Set theory: ∈, ∉, ⊆, ⊇, ∪, ∩
+Quantum notation: |0⟩, |1⟩, ⟨φ|ψ⟩
+
+Quantum Computing Simulation
+The quantum operations plugin implements:
+
+State vector simulation: Complex amplitudes for qubits
+Unitary operations: All quantum gates preserve probability
+Measurement: Probabilistic collapse with Born rule
+Entanglement: Multi-qubit state support
+
+Cryptographic Algorithms
+The crypto plugin implements cutting-edge algorithms:
+
+Miller-Rabin: Probabilistic primality with deterministic witnesses
+Modular arithmetic: Fast exponentiation using binary method
+Security: Cryptographically secure random number generation
+
+
+Testing & Benchmarking
+Running Tests
+bash# Complete test suite
+./woflang --test
+
+# Individual test categories
+./woflang
+wof> # Test basic arithmetic
+wof> 5 3 + 8 = "Basic arithmetic" assert
+wof> # Test quantum operations
+wof> |0⟩ H measure drop "Quantum" assert
+Benchmarking Performance
+bash# Built-in benchmark suite
+./woflang --benchmark
+
+# Interactive benchmarking
+wof> benchmark
+wof> 1000000007 speed_compare
+wof> crypto_benchmark
+Test Programs
+The tests/ directory contains comprehensive test programs:
+
+basic_arithmetic.wof - Arithmetic operations
+quantum_ops.wof - Quantum computing tests
+stack_operations.wof - Stack manipulation
+unicode_support.wof - Unicode symbol support
+showcase.wof - Feature demonstration
+
+Performance Expectations
+Typical performance on modern hardware:
+
+Basic arithmetic: ~1M operations/second
+Prime testing (Miller-Rabin): Sub-millisecond for 64-bit numbers
+Quantum simulation: ~100K gate operations/second
+Stack operations: ~10M operations/second
+
+
+Advanced Usage
+Writing Test Programs
+Create .wof files with WofLang code:
+woflang# fibonacci.wof - Calculate Fibonacci numbers
+# Usage: n fibonacci
+: fibonacci
+  dup 2 < if
+    drop
+  else
+    dup 1 - fibonacci
+    swap 2 - fibonacci
+    +
+  endif ;
+
+# Test it
+10 fibonacci .   # Calculates 10th Fibonacci number
+Plugin Development
+Create custom plugins in C++:
+cpp// my_plugin.cpp
+#include "../../src/core/woflang.hpp"
+
+extern "C" {
+void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+    (*op_table)["my_op"] = [](std::stack<woflang::WofValue>& stack) {
+        // Your operation implementation
+    };
+}
+}
+Integration with Other Tools
+WofLang can be integrated into larger workflows:
+
+Scripting: Use .wof files for mathematical computations
+API: Link against libwoflang_core.a for C++ integration
+Pipeline: Process mathematical data in command pipelines
+
+
+Development Guide
+Building Custom Plugins
+
+Create plugin source in plugins/
+Follow the plugin template structure
+Add to CMakeLists.txt
+Build with make
+Plugins auto-load from plugins/ directory
+
+Code Organization
+woflang/
+├── src/core/          # Core interpreter
+├── src/io/            # Input/output handling
+├── src/repl/          # Interactive shell
+├── plugins/           # Plugin implementations
+├── tests/            # Test programs
+└── docs/             # Documentation
+Contributing
+
+Fork the repository
+Create feature branch
+Add tests for new functionality
+Update documentation
+Submit pull request
+
+Plugin API Reference
+cpp// Plugin initialization function
+extern "C" void init_plugin(woflang::WoflangInterpreter::OpTable* op_table);
+
+// Adding operations
+(*op_table)["operation_name"] = [](std::stack<woflang::WofValue>& stack) {
+    // Implementation
+};
+
+// Stack manipulation
+auto value = stack.top(); stack.pop();  // Get value
+woflang::WofValue result;
+result.d = computed_value;
+stack.push(result);                     // Push result
+
+Troubleshooting
+Common Issues
+Plugin not loading
+
+Check plugin exists in plugins/ directory
+Verify plugin compiled successfully
+Check for missing dependencies
+
+Stack underflow errors
+
+Ensure sufficient values on stack before operations
+Use .s to display current stack state
+Check operation parameter requirements
+
+Compilation errors
+
+Verify C++17 compiler support
+Check CMake version (3.10+ required)
+Install missing development packages
+
+Performance issues
+
+Large numbers may cause slower computation
+Use appropriate algorithms (Miller-Rabin vs trial division)
+Consider precision requirements
+
+Getting Help
+
+Use help command in interactive mode
+Check docs/ directory for detailed guides
+Run --test to verify installation
+Use benchmark to check performance
+
+Debug Mode
+Build with debug symbols:
+bashcmake -DCMAKE_BUILD_TYPE=Debug ..
+make
+gdb ./woflang
+Error Messages
+
+"Stack underflow": Not enough values for operation
+"Plugin load failed": Plugin compilation or linking issue
+"Invalid operation": Command not recognized
+"Numerical error": Division by zero or domain error
+
+
+Conclusion
+WofLang v1.1.0 represents a powerful mathematical computing environment that bridges theoretical mathematics with practical computation. Its plugin architecture allows for endless extensibility while maintaining elegant simplicity in its core design.
+Whether you're exploring quantum algorithms, testing cryptographic primes, or diving into fractal mathematics, WofLang provides the tools and performance needed for serious mathematical exploration.
+Happy computing, fren! 🐺⚡
+
+For the latest updates and community discussions, visit the WofLang repository and documentation.
