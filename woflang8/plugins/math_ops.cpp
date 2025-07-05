@@ -1,10 +1,19 @@
 // ==================================================
-// 3. math_ops.cpp - Essential Mathematical Operations
+// math_ops.cpp - Essential Mathematical Operations (Dynamic Loading)
 // ==================================================
 #include "../../src/core/woflang.hpp"
 #include <cmath>
 #include <iostream>
 #include <limits>
+
+// Define constants if not available
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#ifndef M_E
+#define M_E 2.71828182845904523536
+#endif
 
 extern "C" {
 
