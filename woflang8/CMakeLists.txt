@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(woflang VERSION 3.0.0 LANGUAGES CXX)
+project(woflang VERSION 1.0.0 LANGUAGES CXX)
 
 # Set C++23 standard
 set(CMAKE_CXX_STANDARD 23)
@@ -53,6 +53,11 @@ target_include_directories(woflang_core PUBLIC
 # Link system libraries
 if(NOT WIN32)
     target_link_libraries(woflang_core PUBLIC ${CMAKE_DL_LIBS})
+endif()
+
+# Static linking for Windows portability
+if(MINGW)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
 endif()
 
 # Main executable
@@ -110,3 +115,7 @@ else()
     message(STATUS "  SIMD Support:  Disabled")
 endif()
 message(STATUS "")
+
+if(WIN32)
+    target_sources(woflang PRIVATE woflang.rc)
+endif()

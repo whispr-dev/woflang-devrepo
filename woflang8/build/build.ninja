@@ -92,6 +92,13 @@ build CMakeFiles/woflang.dir/main.cpp.obj: CXX_COMPILER__woflang_unscanned_ D$:/
   OBJECT_DIR = CMakeFiles\woflang.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang.dir
 
+build CMakeFiles/woflang.dir/woflang.rc.obj: RC_COMPILER__woflang_unscanned_ D$:/code/woflang/woflang8/woflang.rc || cmake_object_order_depends_target_woflang
+  DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2
+  DEP_FILE = CMakeFiles\woflang.dir\woflang.rc.obj.d
+  INCLUDES = -I D:/code/woflang/woflang8/src/core -I D:/code/woflang/woflang8/src/io -I D:/code/woflang/woflang8/src
+  OBJECT_DIR = CMakeFiles\woflang.dir
+  OBJECT_FILE_DIR = CMakeFiles\woflang.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target woflang
@@ -100,7 +107,8 @@ build CMakeFiles/woflang.dir/main.cpp.obj: CXX_COMPILER__woflang_unscanned_ D$:/
 #############################################
 # Link the executable bin\woflang.exe
 
-build bin/woflang.exe: CXX_EXECUTABLE_LINKER__woflang_ CMakeFiles/woflang.dir/main.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/woflang.exe: CXX_EXECUTABLE_LINKER__woflang_ CMakeFiles/woflang.dir/main.cpp.obj CMakeFiles/woflang.dir/woflang.rc.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+  LINK_FLAGS = -static-libgcc -static-libstdc++ -static
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\woflang.dir
   POST_BUILD = cd .

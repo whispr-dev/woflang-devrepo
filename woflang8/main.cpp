@@ -4,11 +4,29 @@
 #include <filesystem>
 #include <cstring>  // Added for strcmp
 
+#ifdef _WIN32
+    #include <windows.h>
+#endif
+
+// ASCII art banner
+const char* WOFLANG_BANNER = R"(
+╦ ╦┌─┐┌─┐┬  ┌─┐┌┐┌┌─┐
+║║║│ │├┤ │  ├─┤││││ ┬
+╚╩╝└─┘└  ┴─┘┴ ┴┘└┘└─┘ v1.0.0
+A Unicode-native stack language
+)";
+
 // Function declarations
 void show_help();
 void run_tests();
 
 int main(int argc, char* argv[]) {
+    // Enable UTF-8 support on Windows
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#endif
+
     if (argc > 1) {
         if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) {
             show_help();
@@ -18,10 +36,18 @@ int main(int argc, char* argv[]) {
             run_tests();
             return 0;
         }
+        if (strcmp(argv[1], "--version") == 0 || strcmp(argv[1], "-v") == 0) {
+            std::cout << "wofLang v1.0.0\n";
+            std::cout << "Built: " << __DATE__ << " " << __TIME__ << "\n";
+            std::cout << "Compiler: " << __VERSION__ << "\n";
+            return 0;
+        }
     }
 
-    woflang::WoflangInterpreter interp;
+    std::cout << WOFLANG_BANNER << std::endl;
     
+    woflang::WoflangInterpreter interp;
+
     // Load plugins from the plugins directory
     std::filesystem::path plugin_dir = "plugins";
     if (std::filesystem::exists(plugin_dir)) {
@@ -30,11 +56,11 @@ int main(int argc, char* argv[]) {
         std::cout << "No plugins directory found. Running with built-in operations only.\n";
     }
     
-    std::cout << "Welcome to Woflang!\n";
+    std::cout << "Welcome to woflang!\n";
     std::string line;
     while (std::cout << "wof> ", std::getline(std::cin, line)) {
         if (line == "quit" || line == "exit") {
-            std::cout << "Goodbye from Woflang! 🐺\n";
+            std::cout << "Goodbye from woflang! 🐺\n";
             break;
         }
         interp.execute_line(line);
@@ -62,7 +88,8 @@ void show_help() {
     std::cout << "  prime_check    Check if number is prime (if crypto_ops loaded)\n";
 }
 
-/* void run_tests() {
+/* basic tesing ocde [switched for comprehensive]
+    void run_tests() {
     std::cout << "Running WofLang Test Suite...\n\n";
     
     woflang::WoflangInterpreter interp;
