@@ -1,0 +1,11 @@
+// src/core/woflang.cpp - Clean implementation file
+#include "woflang.hpp"
+#include <iostream>
+
+// This file is intentionally minimal since most implementation
+// is in the header file for template compatibility with plugins
+
+using namespace std;
+
+// Any additional implementation can go here if needed
+// Currently all functionality is in the header for plugin compatibility

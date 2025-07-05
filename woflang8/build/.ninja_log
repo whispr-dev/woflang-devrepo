@@ -1,0 +1,9 @@
+# ninja log v7
+11	1260	7733959224381399	CMakeFiles/woflang_core.dir/src/io/tokenizer.cpp.obj	f2471f4a7b0ddbf4
+18	1686	7733959224539408	CMakeFiles/woflang.dir/main.cpp.obj	be2e24c903ce35c2
+25	1846	7733959224539408	CMakeFiles/kanji_ops.dir/plugins/kanji_ops.cpp.obj	98ac83a82d930f0b
+5	2973	7733959224381399	CMakeFiles/woflang_core.dir/src/core/woflang.cpp.obj	eb708be0082072c4
+2976	3095	7733959254138642	lib/libwoflang_core.a	205c84f4d828c7f8
+3104	3252	7733959256758360	bin/plugins/libkanji_ops.dll	67dab86b37a31e40
+3104	3252	7733959256758360	lib/libkanji_ops.dll.a	67dab86b37a31e40
+3095	3263	7733959255324603	bin/woflang.exe	48953e969c6fa6c1

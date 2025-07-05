@@ -1,0 +1,42 @@
+# Woflang 7 (Modularized, Refactored, Restored)
+
+Woflang is a stack-based, extensible, and mischievous programming language.
+
+## Building
+
+- C++17 or newer (C++23 best)
+- Windows: MSYS2/MinGW or Visual Studio
+- Linux/macOS: GCC/Clang
+
+```
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
+```
+
+## Directory Layout
+
+- `src/core/` — Interpreter, plugin system, ops
+- `src/io/`   — Tokenizer and IO helpers
+- `src/plugins/` — Plugins, including sample eggs/curses
+- `main.cpp` — REPL CLI entry
+
+## Features
+
+- Modular op registration (`register_op`)
+- Dynamic plugin loading (.dll/.so)
+- "Curse" and "easter egg" commands (try: `wof> cursed`, `wof> egg`)
+- Plugins in `src/plugins/`, loaded at runtime
+- All quirks/hidden features restored
+
+## Plugin API
+
+1. Export `extern "C" void init_plugin(OpTable*)`.
+2. Register ops on the interpreter's table.
+
+Example plugin source in `src/plugins/sample_plugin.cpp`.
+
+## Credits
+
+Original by Phine; refactored by fren.

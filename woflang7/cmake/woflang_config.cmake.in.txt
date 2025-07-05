@@ -1,0 +1,22 @@
+@PACKAGE_INIT@
+
+# Woflang CMake Configuration File
+# This file is used by other projects to find Woflang
+
+# Define the version
+set(woflang_VERSION @PROJECT_VERSION@)
+
+# Provide the include directories
+set(woflang_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include")
+
+# Provide the library directories
+set(woflang_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib")
+
+# Define the libraries
+set(woflang_LIBRARIES woflang_core)
+
+# Plugin directory
+set(woflang_PLUGIN_DIR "@CMAKE_INSTALL_PREFIX@/bin/plugins")
+
+# Check for required components
+check_required_components(woflang)

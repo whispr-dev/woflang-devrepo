@@ -1,0 +1,131 @@
+cmake_minimum_required(VERSION 3.16)
+project(woflang VERSION 3.0.0 LANGUAGES CXX)
+
+# Set C++23 standard
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Output directories
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+# Create plugins directory in build folder
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/bin/plugins)
+
+# Platform detection
+if(WIN32)
+    add_definitions(-DWOFLANG_PLATFORM_WINDOWS)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+else()
+    add_definitions(-DWOFLANG_PLATFORM_UNIX)
+endif()
+
+# Compiler settings
+if(MSVC)
+    add_compile_options(/W4 /permissive- /utf-8)
+    add_compile_options(/std:c++latest)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# SIMD detection (optional)
+include(CheckCXXCompilerFlag)
+check_cxx_compiler_flag("-mavx2" COMPILER_SUPPORTS_AVX2)
+if(COMPILER_SUPPORTS_AVX2)
+    add_compile_options(-mavx2)
+    add_definitions(-DWOFLANG_USE_AVX2)
+endif()
+
+# Core library
+add_library(woflang_core STATIC
+    src/core/woflang.cpp
+    src/io/tokenizer.cpp
+)
+
+target_include_directories(woflang_core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/io
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+# Link system libraries
+if(NOT WIN32)
+    target_link_libraries(woflang_core PUBLIC ${CMAKE_DL_LIBS})
+endif()
+
+# Main executable
+add_executable(woflang
+    src/repl/repl_main.cpp
+)
+
+target_link_libraries(woflang PRIVATE woflang_core)
+
+# Plugin building function
+function(add_woflang_plugin name source)
+    add_library(${name} SHARED ${source})
+    
+    target_include_directories(${name} PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/io
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+    )
+    
+    # Set output directory
+    set_target_properties(${name} PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/plugins"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/plugins"
+    )
+    
+    # Windows-specific: ensure .dll extension
+    if(WIN32)
+        set_target_properties(${name} PROPERTIES
+            SUFFIX ".dll"
+        )
+    endif()
+endfunction()
+
+# Build all plugins
+add_woflang_plugin(math_ops plugins/math_ops.cpp)
+add_woflang_plugin(logic_ops plugins/logic_ops.cpp)
+add_woflang_plugin(crypto_ops plugins/crypto_ops.cpp)
+add_woflang_plugin(fractal_ops plugins/fractal_ops.cpp)
+add_woflang_plugin(quantum_ops plugins/quantum_ops.cpp)
+add_woflang_plugin(chemistry_ops plugins/chemistry_ops.cpp)
+add_woflang_plugin(kanji_ops plugins/kanji_ops.cpp)
+add_woflang_plugin(music_ops plugins/music.cpp)
+add_woflang_plugin(entropy_op plugins/entropy_op.cpp)
+add_woflang_plugin(prophecy_op plugins/prophecy_op.cpp)
+add_woflang_plugin(stack_slayer_op plugins/stack_slayer_op.cpp)
+add_woflang_plugin(void_division_op plugins/void_division_op.cpp)
+
+# Test runner
+add_executable(woflang_test_runner
+    tests/woflang_test_runner.cpp
+)
+
+target_link_libraries(woflang_test_runner PRIVATE woflang_core)
+
+# Copy test scripts to build directory
+file(GLOB TEST_SCRIPTS "tests/*.wof")
+foreach(TEST_SCRIPT ${TEST_SCRIPTS})
+    get_filename_component(SCRIPT_NAME ${TEST_SCRIPT} NAME)
+    configure_file(${TEST_SCRIPT} ${CMAKE_BINARY_DIR}/tests/${SCRIPT_NAME} COPYONLY)
+endforeach()
+
+# Summary
+message(STATUS "")
+message(STATUS "Woflang Configuration Summary:")
+message(STATUS "  Version:       ${PROJECT_VERSION}")
+message(STATUS "  C++ Standard:  ${CMAKE_CXX_STANDARD}")
+message(STATUS "  Build Type:    ${CMAKE_BUILD_TYPE}")
+message(STATUS "  Platform:      ${CMAKE_SYSTEM_NAME}")
+message(STATUS "  Compiler:      ${CMAKE_CXX_COMPILER_ID}")
+if(COMPILER_SUPPORTS_AVX2)
+    message(STATUS "  SIMD:          AVX2 enabled")
+else()
+    message(STATUS "  SIMD:          None detected")
+endif()
+message(STATUS "  Plugins:       12 total")
+message(STATUS "")

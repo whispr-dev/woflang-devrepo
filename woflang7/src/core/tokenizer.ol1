@@ -1,0 +1,52 @@
+// src/io/tokenizer.cpp - Simple working tokenizer
+#include "../core/woflang.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+namespace woflang {
+
+// Simple but effective tokenizer - no codecvt dependency
+std::vector<std::string> WoflangInterpreter::tokenize(const std::string& line) {
+    std::vector<std::string> tokens;
+    std::string current_token;
+    bool in_string = false;
+    
+    for (size_t i = 0; i < line.length(); i++) {
+        char c = line[i];
+        
+        if (in_string) {
+            if (c == '"' && (i == 0 || line[i-1] != '\\')) {
+                in_string = false;
+                tokens.push_back("\"" + current_token + "\"");
+                current_token.clear();
+            } else {
+                current_token += c;
+            }
+        } else {
+            if (c == '"') {
+                if (!current_token.empty()) {
+                    tokens.push_back(current_token);
+                    current_token.clear();
+                }
+                in_string = true;
+            } else if (std::isspace(c)) {
+                if (!current_token.empty()) {
+                    tokens.push_back(current_token);
+                    current_token.clear();
+                }
+            } else {
+                current_token += c;
+            }
+        }
+    }
+    
+    if (!current_token.empty()) {
+        tokens.push_back(current_token);
+    }
+    
+    return tokens;
+}
+
+} // namespace woflang

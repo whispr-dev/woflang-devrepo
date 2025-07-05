@@ -1,0 +1,294 @@
+// src/repl/repl_main.cpp - Woflang REPL entry point
+// #include "woflang.hpp"
+// #include <iostream>
+// #include <string>
+// #include <filesystem>
+// #include <cstring>
+// #include <vector>
+
+
+
+// src/main.cpp - Main entry point for Woflang
+#include "core/woflang.hpp"
+#include <iostream>
+
+using namespace std;
+
+void print_banner() {
+    cout << "  Ôòª ÔòªÔöîÔöÇÔöÉÔöîÔöÇÔöÉÔö¼" << endl;
+    cout << "  ÔöîÔöÇÔöÉÔöîÔöÉÔöîÔöîÔöÇÔöÉ" << endl;
+    cout << " ÔòæÔòæÔòæÔöé ÔöéÔö£Ôöñ Ôöé" << endl;
+    cout << "  Ôö£ÔöÇÔöñÔöéÔöéÔöéÔöé" << endl;
+    cout << " Ôö¼ ÔòÜÔò®ÔòØÔööÔöÇÔöÿÔöö" << endl;
+    cout << "  Ôö┤ÔöÇÔöÿÔö┤ Ôö┤ÔöÿÔööÔöÿÔööÔöÇÔöÿ v3.0.0" << endl;
+    cout << endl;
+    cout << "A Unicode-native stack language" << endl;
+    cout << endl;
+    cout << "Copyright (c) 2025 - MIT/CC0 License" << endl;
+    cout << "Built with 202302 standard" << endl;
+    cout << endl;
+}
+
+int main() {
+    print_banner();
+    
+    WoflangInterpreter interpreter;
+    interpreter.loadPlugins();
+    interpreter.repl();
+    
+    return 0;
+}
+
+
+
+// ASCII art banner
+// const char* WOFLANG_BANNER = R"(
+// ╦ ╦┌─┐┌─┐┬  ┌─┐┌┐┌┌─┐
+// ║║║│ │├┤ │  ├─┤││││ ┬
+// ╚╩╝└─┘└  ┴─┘┴ ┴┘└┘└─┘ v3.0.0
+// A Unicode-native stack language
+// )";
+
+'''
+void print_usage(const char* program_name) {
+    std::cout << "Usage: " << program_name << " [options] [script.wof]\n\n";
+    std::cout << "Options:\n";
+    std::cout << "  -h, --help            Show this help message\n";
+    std::cout << "  -v, --version         Show version information\n";
+    std::cout << "  -p, --plugins DIR     Specify plugins directory\n";
+    std::cout << "  -l, --list-plugins    List available plugins\n";
+    std::cout << "  -n, --no-plugins      Run without loading plugins\n";
+    std::cout << "  -i, --interactive     Start REPL after executing script\n";
+    std::cout << "  --no-sacred           Disable sacred operations\n";
+    std::cout << "  --no-unicode          Disable Unicode mode\n";
+    std::cout << "  --test                Run test suite\n";
+    std::cout << "\nIf no script is provided, starts the interactive REPL.\n";
+}
+
+void print_version() {
+    std::cout << WOFLANG_BANNER << "\n";
+    std::cout << "Copyright (c) 2025 - MIT/CC0 License\n";
+    std::cout << "Built with C++" << __cplusplus << " standard\n";
+#ifdef WOFLANG_USE_AVX2
+    std::cout << "SIMD: AVX2 enabled\n";
+#endif
+}
+
+bool list_plugins(const std::filesystem::path& plugin_dir) {
+    if (!std::filesystem::exists(plugin_dir)) {
+        std::cerr << "Plugin directory does not exist: " << plugin_dir << "\n";
+        return false;
+    }
+    
+    std::cout << "Available plugins in " << plugin_dir << ":\n";
+    bool found = false;
+    
+    for (const auto& entry : std::filesystem::directory_iterator(plugin_dir)) {
+        if (!entry.is_regular_file()) continue;
+        
+        auto ext = entry.path().extension().string();
+#ifdef _WIN32
+        if (ext == ".dll") {
+#else
+        if (ext == ".so" || ext == ".dylib") {
+#endif
+            std::cout << "  * " << entry.path().stem().string() << "\n";
+            found = true;
+        }
+    }
+    
+    if (!found) {
+        std::cout << "  (No plugins found)\n";
+    }
+    
+    return true;
+}
+
+void run_tests() {
+    std::cout << "Running Woflang test suite...\n\n";
+    
+    woflang::WoflangInterpreter interp;
+    int passed = 0;
+    int failed = 0;
+    
+    // Test 1: Basic arithmetic
+    std::cout << "Test 1: Basic arithmetic... ";
+    try {
+        interp.execute("2 3 + 5 =");
+        if (!interp.stack.empty() && interp.stack.back().type == woflang::WofType::Boolean &&
+            std::get<bool>(interp.stack.back().value)) {
+            std::cout << "PASSED\n";
+            passed++;
+        } else {
+            std::cout << "FAILED\n";
+            failed++;
+        }
+    } catch (...) {
+        std::cout << "FAILED (exception)\n";
+        failed++;
+    }
+    interp.clear_stack();
+    
+    // Test 2: Stack operations
+    std::cout << "Test 2: Stack operations... ";
+    try {
+        interp.execute("1 2 3 rot");
+        if (interp.stack.size() == 3 &&
+            std::get<int64_t>(interp.stack[0].value) == 2 &&
+            std::get<int64_t>(interp.stack[1].value) == 3 &&
+            std::get<int64_t>(interp.stack[2].value) == 1) {
+            std::cout << "PASSED\n";
+            passed++;
+        } else {
+            std::cout << "FAILED\n";
+            failed++;
+        }
+    } catch (...) {
+        std::cout << "FAILED (exception)\n";
+        failed++;
+    }
+    interp.clear_stack();
+    
+    // Test 3: Variables
+    std::cout << "Test 3: Variables... ";
+    try {
+        interp.execute("42 !answer $answer $answer +");
+        if (!interp.stack.empty() && 
+            interp.stack.back().type == woflang::WofType::Integer &&
+            std::get<int64_t>(interp.stack.back().value) == 84) {
+            std::cout << "PASSED\n";
+            passed++;
+        } else {
+            std::cout << "FAILED\n";
+            failed++;
+        }
+    } catch (...) {
+        std::cout << "FAILED (exception)\n";
+        failed++;
+    }
+    interp.clear_stack();
+    
+    // Test 4: String operations
+    std::cout << "Test 4: String operations... ";
+    try {
+        interp.execute("\"Hello\" \" World\" +");
+        if (!interp.stack.empty() && 
+            interp.stack.back().type == woflang::WofType::String &&
+            std::get<std::string>(interp.stack.back().value) == "Hello World") {
+            std::cout << "PASSED\n";
+            passed++;
+        } else {
+            std::cout << "FAILED\n";
+            failed++;
+        }
+    } catch (...) {
+        std::cout << "FAILED (exception)\n";
+        failed++;
+    }
+    
+    std::cout << "\nTest summary: " << passed << " passed, " << failed << " failed\n";
+}
+
+int main(int argc, char* argv[]) {
+    // Parse command line arguments
+    std::filesystem::path script_path;
+    std::filesystem::path plugin_dir = "plugins";
+    bool load_plugins = true;
+    bool interactive_after_script = false;
+    bool sacred_ops = true;
+    bool unicode_mode = true;
+    
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        
+        if (arg == "-h" || arg == "--help") {
+            print_usage(argv[0]);
+            return 0;
+        } else if (arg == "-v" || arg == "--version") {
+            print_version();
+            return 0;
+        } else if (arg == "-p" || arg == "--plugins") {
+            if (i + 1 < argc) {
+                plugin_dir = argv[++i];
+            } else {
+                std::cerr << "Error: Missing directory after " << arg << "\n";
+                return 1;
+            }
+        } else if (arg == "-l" || arg == "--list-plugins") {
+            return list_plugins(plugin_dir) ? 0 : 1;
+        } else if (arg == "-n" || arg == "--no-plugins") {
+            load_plugins = false;
+        } else if (arg == "-i" || arg == "--interactive") {
+            interactive_after_script = true;
+        } else if (arg == "--no-sacred") {
+            sacred_ops = false;
+        } else if (arg == "--no-unicode") {
+            unicode_mode = false;
+        } else if (arg == "--test") {
+            run_tests();
+            return 0;
+        } else if (arg[0] == '-') {
+            std::cerr << "Error: Unknown option " << arg << "\n";
+            print_usage(argv[0]);
+            return 1;
+        } else {
+            script_path = arg;
+        }
+    }
+    
+    try {
+        // Create interpreter
+        woflang::WoflangInterpreter interp;
+        interp.sacred_ops_enabled = sacred_ops;
+        interp.unicode_mode = unicode_mode;
+        
+        // Load plugins if requested
+        if (load_plugins) {
+            try {
+                // Try executable directory first
+                auto exe_dir = std::filesystem::path(argv[0]).parent_path();
+                auto exe_plugin_dir = exe_dir / "plugins";
+                
+                if (std::filesystem::exists(exe_plugin_dir)) {
+                    interp.load_plugins(exe_plugin_dir);
+                } else if (std::filesystem::exists(plugin_dir)) {
+                    interp.load_plugins(plugin_dir);
+                } else {
+                    std::cout << "Warning: Plugin directory not found\n";
+                }
+            } catch (const std::exception& e) {
+                std::cerr << "Warning: Failed to load plugins: " << e.what() << "\n";
+            }
+        }
+        
+        // Execute script if provided
+        if (!script_path.empty()) {
+            if (!std::filesystem::exists(script_path)) {
+                std::cerr << "Error: Script not found: " << script_path << "\n";
+                return 1;
+            }
+            
+            std::cout << "Executing: " << script_path << "\n";
+            interp.exec_script(script_path);
+            
+            if (!interactive_after_script) {
+                return 0;
+            }
+        }
+        
+        // Start REPL
+        if (script_path.empty()) {
+            print_version();
+            std::cout << "\n";
+        }
+        
+        interp.repl();
+        
+    } catch (const std::exception& e) {
+        std::cerr << "Fatal error: " << e.what() << "\n";
+        return 1;
+    }
+    
+    return 0;
+}
+'''
