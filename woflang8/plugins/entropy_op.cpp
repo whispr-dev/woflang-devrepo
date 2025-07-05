@@ -1,5 +1,5 @@
 // ==================================================
-// FIXED: entropy_op.cpp
+// 2. entropy_ops.cpp - Chaos and Information Theory
 // ==================================================
 #include "../../src/core/woflang.hpp"
 #include <iostream>
@@ -7,6 +7,7 @@
 #include <random>
 #include <chrono>
 #include <map>
+#include <algorithm>
 
 extern "C" {
 
@@ -75,59 +76,29 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         result.d = chaos_value;
         stack.push(result);
     };
-}
-
-} // extern "C"
-
-// ==================================================
-// FIXED: void_division_op.cpp
-// ==================================================
-#include "../../src/core/woflang.hpp"
-#include <iostream>
-#include <limits>
-
-extern "C" {
-
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
-    (*op_table)["void_division"] = [](std::stack<woflang::WofValue>& stack) {
-        std::cout << "⚠️  FORBIDDEN OPERATION DETECTED ⚠️\n";
-        std::cout << "Attempting to divide by the void...\n";
-        
-        if (stack.size() < 2) {
-            std::cout << "The void requires a sacrifice.\n";
-            return;
-        }
-        
-        auto divisor = stack.top(); stack.pop();
-        auto dividend = stack.top(); stack.pop();
-        
-        std::cout << "Dividing " << dividend.d 
-                 << " by the essence of nothingness...\n";
-        
-        // The void consumes all
-        while (!stack.empty()) stack.pop();
-        
-        // But leaves behind infinity
-        woflang::WofValue result;
-        result.d = std::numeric_limits<double>::infinity();
-        stack.push(result);
-        
-        std::cout << "The operation succeeds. Infinity remains.\n";
-        std::cout << "You have gazed into the abyss.\n";
-    };
     
-    (*op_table)["/0"] = [](std::stack<woflang::WofValue>& stack) {
-        if (stack.empty()) {
-            std::cout << "Even the void requires something to consume.\n";
+    (*op_table)["order"] = [](std::stack<woflang::WofValue>& stack) {
+        if (stack.size() < 2) {
+            std::cout << "Order requires at least two elements.\n";
             return;
         }
         
-        auto value = stack.top(); stack.pop();
+        // Sort stack elements
+        std::vector<woflang::WofValue> values;
+        while (!stack.empty()) {
+            values.push_back(stack.top());
+            stack.pop();
+        }
         
-        std::cout << "÷0: " << value.d << " → ∞\n";
-        woflang::WofValue result;
-        result.d = std::numeric_limits<double>::infinity();
-        stack.push(result);
+        std::sort(values.begin(), values.end(), [](const woflang::WofValue& a, const woflang::WofValue& b) {
+            return a.d < b.d;
+        });
+        
+        for (const auto& val : values) {
+            stack.push(val);
+        }
+        
+        std::cout << "Order has been restored to the stack.\n";
     };
 }
 

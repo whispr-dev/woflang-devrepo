@@ -19,10 +19,10 @@ struct WofValue {
     
     // Constructors for convenience
     WofValue() = default;
-    WofValue(double val) : d(val) {}
-    WofValue(int val) : i(val), d(static_cast<double>(val)) {}
-    WofValue(const std::string& val) : s(val) {}
-    WofValue(const char* val) : s(val) {}
+    WofValue(double val) : i(0), d(val) {}
+    WofValue(int val) : i(val), d(0.0) {}
+    WofValue(const std::string& val) : i(0), d(0.0), s(val) {}
+    WofValue(const char* val) : i(0), d(0.0), s(val) {}
     
     // Plugin-expected methods
     bool is_numeric() const {
@@ -34,13 +34,16 @@ struct WofValue {
     }
     
     double as_numeric() const {
-        return d != 0.0 ? d : static_cast<double>(i);
+        if (d != 0.0) return d;
+        if (i != 0) return static_cast<double>(i);
+        return 0.0;
     }
     
     std::string to_string() const {
         if (!s.empty()) return s;
         if (d != 0.0) return std::to_string(d);
-        return std::to_string(i);
+        if (i != 0) return std::to_string(i);
+        return "0";
     }
 };
 

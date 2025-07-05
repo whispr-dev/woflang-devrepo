@@ -1,15 +1,19 @@
-// ==================================================
-// FIXED: math_greek_ops.cpp  
-// ==================================================
+// ===================================== 
+// YET ANOTHER greek_math_op.cpp FIX
+// =====================================
 #include "../../src/core/woflang.hpp"
 #include <iostream>
 #include <cmath>
 #include <limits>
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 extern "C" {
 
 void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
-    // π (pi) - Mathematical constant
+    // π (pi) - Mathematical constant - multiple ways to access
     (*op_table)["π"] = [](std::stack<woflang::WofValue>& stack) {
         woflang::WofValue val;
         val.d = M_PI;
@@ -17,7 +21,21 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::cout << "π = " << M_PI << "\n";
     };
     
-    // Σ (sigma) - Summation
+    (*op_table)["PI"] = [](std::stack<woflang::WofValue>& stack) {
+        woflang::WofValue val;
+        val.d = M_PI;
+        stack.push(val);
+        std::cout << "π = " << M_PI << "\n";
+    };
+    
+    (*op_table)["pi"] = [](std::stack<woflang::WofValue>& stack) {
+        woflang::WofValue val;
+        val.d = M_PI;
+        stack.push(val);
+        std::cout << "π = " << M_PI << "\n";
+    };
+    
+    // Σ (sigma) - Summation - multiple ways to access
     (*op_table)["Σ"] = [](std::stack<woflang::WofValue>& stack) {
         if (stack.empty()) {
             std::cout << "Σ: Stack is empty\n";
@@ -27,13 +45,31 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         double sum = 0.0;
         while (!stack.empty()) {
             auto val = stack.top(); stack.pop();
-            sum += val.d;
+            sum += val.as_numeric();
         }
         
         woflang::WofValue result;
         result.d = sum;
         stack.push(result);
         std::cout << "Σ = " << sum << "\n";
+    };
+    
+    (*op_table)["sum"] = [](std::stack<woflang::WofValue>& stack) {
+        if (stack.empty()) {
+            std::cout << "sum: Stack is empty\n";
+            return;
+        }
+        
+        double sum = 0.0;
+        while (!stack.empty()) {
+            auto val = stack.top(); stack.pop();
+            sum += val.as_numeric();
+        }
+        
+        woflang::WofValue result;
+        result.d = sum;
+        stack.push(result);
+        std::cout << "sum = " << sum << "\n";
     };
     
     // Π (pi) - Product
@@ -46,13 +82,31 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         double product = 1.0;
         while (!stack.empty()) {
             auto val = stack.top(); stack.pop();
-            product *= val.d;
+            product *= val.as_numeric();
         }
         
         woflang::WofValue result;
         result.d = product;
         stack.push(result);
         std::cout << "Π = " << product << "\n";
+    };
+    
+    (*op_table)["product"] = [](std::stack<woflang::WofValue>& stack) {
+        if (stack.empty()) {
+            std::cout << "product: Stack is empty\n";
+            return;
+        }
+        
+        double product = 1.0;
+        while (!stack.empty()) {
+            auto val = stack.top(); stack.pop();
+            product *= val.as_numeric();
+        }
+        
+        woflang::WofValue result;
+        result.d = product;
+        stack.push(result);
+        std::cout << "product = " << product << "\n";
     };
     
     // Δ (delta) - Difference
@@ -65,52 +119,27 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         auto b = stack.top(); stack.pop();
         auto a = stack.top(); stack.pop();
         
-        double delta = std::abs(a.d - b.d);
+        double delta = std::abs(a.as_numeric() - b.as_numeric());
         woflang::WofValue result;
         result.d = delta;
         stack.push(result);
         std::cout << "Δ = " << delta << "\n";
     };
     
-    // σ (sigma) - Standard deviation (simplified)
-    (*op_table)["σ"] = [](std::stack<woflang::WofValue>& stack) {
-        if (stack.empty()) {
-            std::cout << "σ: Stack is empty\n";
+    (*op_table)["delta"] = [](std::stack<woflang::WofValue>& stack) {
+        if (stack.size() < 2) {
+            std::cout << "delta: Need at least 2 values\n";
             return;
         }
         
-        std::vector<double> values;
-        while (!stack.empty()) {
-            auto val = stack.top(); stack.pop();
-            values.push_back(val.d);
-        }
+        auto b = stack.top(); stack.pop();
+        auto a = stack.top(); stack.pop();
         
-        if (values.empty()) {
-            std::cout << "σ: No values\n";
-            return;
-        }
-        
-        // Calculate mean
-        double mean = 0.0;
-        for (double v : values) {
-            mean += v;
-        }
-        mean /= values.size();
-        
-        // Calculate variance
-        double variance = 0.0;
-        for (double v : values) {
-            variance += (v - mean) * (v - mean);
-        }
-        variance /= values.size();
-        
-        // Standard deviation
-        double std_dev = std::sqrt(variance);
-        
+        double delta = std::abs(a.as_numeric() - b.as_numeric());
         woflang::WofValue result;
-        result.d = std_dev;
+        result.d = delta;
         stack.push(result);
-        std::cout << "σ = " << std_dev << "\n";
+        std::cout << "delta = " << delta << "\n";
     };
     
     // √ (square root)
@@ -121,7 +150,7 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         }
         
         auto val = stack.top(); stack.pop();
-        double x = val.d;
+        double x = val.as_numeric();
         if (x >= 0) {
             double result = std::sqrt(x);
             woflang::WofValue res;
@@ -130,23 +159,8 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
             std::cout << "√" << x << " = " << result << "\n";
         } else {
             std::cout << "√: Cannot take square root of negative number\n";
+            stack.push(val); // Put it back
         }
-    };
-    
-    // ∛ (cube root)
-    (*op_table)["∛"] = [](std::stack<woflang::WofValue>& stack) {
-        if (stack.empty()) {
-            std::cout << "∛: Stack underflow\n";
-            return;
-        }
-        
-        auto val = stack.top(); stack.pop();
-        double x = val.d;
-        double result = std::cbrt(x);
-        woflang::WofValue res;
-        res.d = result;
-        stack.push(res);
-        std::cout << "∛" << x << " = " << result << "\n";
     };
     
     // ∞ (infinity)
@@ -157,12 +171,35 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::cout << "∞: Infinity pushed to stack\n";
     };
     
+    (*op_table)["inf"] = [](std::stack<woflang::WofValue>& stack) {
+        woflang::WofValue val;
+        val.d = std::numeric_limits<double>::infinity();
+        stack.push(val);
+        std::cout << "inf: Infinity pushed to stack\n";
+    };
+    
+    (*op_table)["infinity"] = [](std::stack<woflang::WofValue>& stack) {
+        woflang::WofValue val;
+        val.d = std::numeric_limits<double>::infinity();
+        stack.push(val);
+        std::cout << "infinity: Infinity pushed to stack\n";
+    };
+    
     // ∅ (empty set / void)
     (*op_table)["∅"] = [](std::stack<woflang::WofValue>& stack) {
         std::cout << "∅: The void consumes all. Stack cleared.\n";
         while (!stack.empty()) stack.pop();
     };
+    
+    (*op_table)["void"] = [](std::stack<woflang::WofValue>& stack) {
+        std::cout << "void: The void consumes all. Stack cleared.\n";
+        while (!stack.empty()) stack.pop();
+    };
+    
+    (*op_table)["empty"] = [](std::stack<woflang::WofValue>& stack) {
+        std::cout << "empty: Stack cleared.\n";
+        while (!stack.empty()) stack.pop();
+    };
 }
 
 } // extern "C"
-

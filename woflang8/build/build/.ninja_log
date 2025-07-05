@@ -1,0 +1,21 @@
+# ninja log v7
+12	1814	7734060764394686	CMakeFiles/woflang_core.dir/src/io/tokenizer.cpp.obj	f2471f4a7b0ddbf4
+19	2517	7734060764464693	CMakeFiles/woflang.dir/main.cpp.obj	be2e24c903ce35c2
+26	2612	7734060764534712	CMakeFiles/kanji_ops.dir/plugins/kanji_ops.cpp.obj	98ac83a82d930f0b
+51	2870	7734060764784779	CMakeFiles/stack_slayer_op.dir/plugins/stack_slayer_op.cpp.obj	233e217c150ca6e6
+60	2907	7734060764864892	CMakeFiles/music.dir/plugins/music.cpp.obj	b25a53152339f09a
+42	2959	7734060764694723	CMakeFiles/math_greek_ops.dir/plugins/math_greek_ops.cpp.obj	9f845fac38a0f186
+32	3027	7734060764604712	CMakeFiles/prophecy_op.dir/plugins/prophecy_op.cpp.obj	4ea5e11add6dcb16
+5	4385	7734060764330761	CMakeFiles/woflang_core.dir/src/core/woflang.cpp.obj	eb708be0082072c4
+4388	4515	7734060808155139	lib/libwoflang_core.a	205c84f4d828c7f8
+4523	4751	7734060811592987	bin/plugins/libkanji_ops.dll	67dab86b37a31e40
+4523	4751	7734060811592987	lib/libkanji_ops.dll.a	67dab86b37a31e40
+4530	4757	7734060811632998	bin/plugins/libprophecy_op.dll	740065b3971e3c11
+4530	4757	7734060811632998	lib/libprophecy_op.dll.a	740065b3971e3c11
+4538	4779	7734060811893141	bin/plugins/libmath_greek_ops.dll	16cca839b1760725
+4538	4779	7734060811893141	lib/libmath_greek_ops.dll.a	16cca839b1760725
+4547	4795	7734060812018246	bin/plugins/libstack_slayer_op.dll	9a6b11be8579cf53
+4547	4795	7734060812018246	lib/libstack_slayer_op.dll.a	9a6b11be8579cf53
+4515	4801	7734060809429938	bin/woflang.exe	48953e969c6fa6c1
+4559	4814	7734060812258316	bin/plugins/libmusic.dll	b2c108ccc7a512d3
+4559	4814	7734060812258316	lib/libmusic.dll.a	b2c108ccc7a512d3

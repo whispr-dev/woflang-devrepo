@@ -9,24 +9,34 @@ std::vector<std::string> tokenize(const std::string& input) {
     std::string token;
     std::istringstream iss(input);
     char c;
+    
     while (iss.get(c)) {
         if (std::isspace(static_cast<unsigned char>(c))) {
+            // Whitespace - end current token
             if (!token.empty()) {
                 tokens.push_back(token);
                 token.clear();
             }
-        } else if (std::ispunct(static_cast<unsigned char>(c))) {
+        } 
+        else if (c == '(' || c == ')' || c == '[' || c == ']' || 
+                 c == '{' || c == '}' || c == ',' || c == ';') {
+            // Only treat specific punctuation as separators
             if (!token.empty()) {
                 tokens.push_back(token);
                 token.clear();
             }
             tokens.emplace_back(1, c);
-        } else {
+        }
+        else {
+            // Everything else (including underscores, Unicode, etc.) goes into tokens
             token += c;
         }
     }
-    if (!token.empty())
+    
+    if (!token.empty()) {
         tokens.push_back(token);
+    }
+    
     return tokens;
 }
 

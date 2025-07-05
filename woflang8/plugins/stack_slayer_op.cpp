@@ -1,5 +1,5 @@
 // ==================================================
-// FIXED: stack_slayer_op.cpp
+// FIXED: stack_slayer_op.cpp - Simple extern C style
 // ==================================================
 #include "../../src/core/woflang.hpp"
 #include <iostream>
