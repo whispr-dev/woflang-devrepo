@@ -3,9 +3,6 @@
 #include <string>
 #include <filesystem>
 #include <cstring>  // Added for strcmp
-#include <chrono>
-#include <iomanip>
-#include <vector>
 
 #ifdef _WIN32
     #include <windows.h>
@@ -22,7 +19,6 @@ A Unicode-native stack language
 // Function declarations
 void show_help();
 void run_tests();
-void run_benchmark();
 
 int main(int argc, char* argv[]) {
     // Enable UTF-8 support on Windows
@@ -38,10 +34,6 @@ int main(int argc, char* argv[]) {
         }
         if (strcmp(argv[1], "--test") == 0) {
             run_tests();
-            return 0;
-        }
-        if (strcmp(argv[1], "--benchmark") == 0) {
-            run_benchmark();
             return 0;
         }
         if (strcmp(argv[1], "--version") == 0 || strcmp(argv[1], "-v") == 0) {
@@ -65,138 +57,15 @@ int main(int argc, char* argv[]) {
     }
     
     std::cout << "Welcome to woflang!\n";
-    std::cout << "Type 'help' for commands, 'quit' to exit, or '--benchmark' for speed tests.\n";
     std::string line;
     while (std::cout << "wof> ", std::getline(std::cin, line)) {
         if (line == "quit" || line == "exit") {
             std::cout << "Goodbye from woflang! 🐺\n";
             break;
         }
-        if (line == "help") {
-            show_help();
-            continue;
-        }
-        if (line == "benchmark") {
-            run_benchmark();
-            continue;
-        }
         interp.execute_line(line);
     }
     return 0;
-}
-
-void run_benchmark() {
-    std::cout << "🔢 WofLang Prime Benchmarking Suite\n";
-    std::cout << "===================================\n\n";
-    
-    woflang::WoflangInterpreter interp;
-    
-    // Load plugins
-    std::filesystem::path plugin_dir = "plugins";
-    if (std::filesystem::exists(plugin_dir)) {
-        interp.load_plugins(plugin_dir);
-        std::cout << "Plugins loaded successfully\n\n";
-    } else {
-        std::cout << "Warning: No plugins directory found\n\n";
-    }
-    
-    struct BenchTest {
-        std::string name;
-        uint64_t number;
-        bool expected_prime;
-    };
-    
-    std::vector<BenchTest> tests = {
-        // Small primes
-        {"Small Prime 1", 97, true},
-        {"Small Prime 2", 997, true},
-        {"Small Prime 3", 9973, true},
-        
-        // Medium primes
-        {"Medium Prime 1", 982451653, true},
-        {"Medium Prime 2", 2147483647, true},  // 2^31-1
-        
-        // Large primes
-        {"Large Prime 1", 1000000007, true},
-        {"Large Prime 2", 1000000009, true},
-        {"Large Prime 3", 10000000019ULL, true},
-        
-        // Composite numbers
-        {"Composite 1", 1000000000, false},
-        {"Composite 2", 999999999999ULL, false},
-        {"Composite 3", 1000000000001ULL, false},
-        
-        // Stress tests
-        {"13-digit Prime", 1000000000039ULL, true},
-        {"12-digit Prime", 100000000003ULL, true},
-        
-        // Pseudoprimes
-        {"Carmichael 1", 561, false},
-        {"Carmichael 2", 1105, false},
-        {"Carmichael 3", 1729, false},
-        {"Pseudoprime", 2047, false},
-    };
-    
-    std::cout << std::left << std::setw(20) << "Test Name" 
-              << std::setw(15) << "Number"
-              << std::setw(10) << "Expected"
-              << std::setw(10) << "Result"
-              << std::setw(12) << "Time (ms)" 
-              << std::setw(5) << "OK" << "\n";
-    std::cout << std::string(70, '-') << "\n";
-    
-    double total_time = 0.0;
-    int correct = 0;
-    
-    for (const auto& test : tests) {
-        std::cout << std::left << std::setw(20) << test.name
-                  << std::setw(15) << test.number
-                  << std::setw(10) << (test.expected_prime ? "PRIME" : "COMPOSITE");
-        std::cout.flush();
-        
-        auto start = std::chrono::high_resolution_clock::now();
-        
-        try {
-            // Clear stack
-            interp.execute_line("stack_slayer");
-            
-            // Run prime check
-            std::string command = std::to_string(test.number) + " prime_check";
-            interp.execute_line(command);
-            
-            auto end = std::chrono::high_resolution_clock::now();
-            double duration = std::chrono::duration<double, std::milli>(end - start).count();
-            
-            // Get result from stack
-            bool result = false;
-            if (!interp.stack.empty()) {
-                auto top_value = interp.stack.top();
-                result = (top_value.d == 1.0);
-            }
-            
-            bool is_correct = (result == test.expected_prime);
-            
-            std::cout << std::setw(10) << (result ? "PRIME" : "COMPOSITE")
-                      << std::setw(12) << std::fixed << std::setprecision(2) << duration
-                      << std::setw(5) << (is_correct ? "✓" : "✗") << "\n";
-            
-            total_time += duration;
-            if (is_correct) correct++;
-            
-        } catch (const std::exception& e) {
-            std::cout << std::setw(10) << "ERROR"
-                      << std::setw(12) << "0.00"
-                      << std::setw(5) << "✗" << "\n";
-            std::cout << "    Error: " << e.what() << "\n";
-        }
-    }
-    
-    std::cout << std::string(70, '-') << "\n";
-    std::cout << "Total time: " << std::fixed << std::setprecision(2) << total_time << " ms\n";
-    std::cout << "Average time: " << std::fixed << std::setprecision(2) << total_time / tests.size() << " ms\n";
-    std::cout << "Correct results: " << correct << "/" << tests.size() << "\n";
-    std::cout << "Success rate: " << std::fixed << std::setprecision(1) << (100.0 * correct / tests.size()) << "%\n";
-    std::cout << "\n🐺 Benchmark complete! 🐺\n\n";
 }
 
 void show_help() {
@@ -205,12 +74,9 @@ void show_help() {
     std::cout << "Options:\n";
     std::cout << "  -h, --help     Show this help message\n";
     std::cout << "  -v, --version  Show version information\n";
-    std::cout << "  --test         Run test suite\n";
-    std::cout << "  --benchmark    Run prime benchmarking suite\n\n";
+    std::cout << "  --test         Run test suite\n\n";
     std::cout << "Interactive Commands:\n";
     std::cout << "  exit, quit     Exit the interpreter\n";
-    std::cout << "  help           Show this help\n";
-    std::cout << "  benchmark      Run benchmarking suite\n";
     std::cout << "  <number>       Push number onto stack\n";
     std::cout << "  +, -, *, /     Basic arithmetic\n";
     std::cout << "  dup, drop      Stack manipulation\n";
