@@ -10,6 +10,7 @@ D:/code/woflang/woflang8/build/CMakeFiles/quantum_ops.dir
 D:/code/woflang/woflang8/build/CMakeFiles/crypto_ops.dir
 D:/code/woflang/woflang8/build/CMakeFiles/fractal_ops.dir
 D:/code/woflang/woflang8/build/CMakeFiles/chemistry_ops.dir
+D:/code/woflang/woflang8/build/CMakeFiles/symbolic_logic_ops.dir
 D:/code/woflang/woflang8/build/CMakeFiles/logic_ops.dir
 D:/code/woflang/woflang8/build/CMakeFiles/math_ops.dir
 D:/code/woflang/woflang8/build/CMakeFiles/entropy_ops.dir

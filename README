@@ -191,7 +191,7 @@ Key Commands:
 mandelbrot - Mandelbrot set iteration
 sierpinski - Sierpinski triangle
 hausdorff - Hausdorff dimension
-
+menger_square     <level> menger_square      Prints a Sierpinski carpet / Menger square of specified depth (max 4 recommended)
 
 Theory: Implements iterative algorithms for fractal generation and dimension calculation
 
