@@ -725,4 +725,172 @@ What’s Covered
 
 
 
+Usage Example
+Switch Modes:
+
+cpp
+Copy
+Edit
+woflang::analog_state.set_mode(woflang::AnalogMode::FLOAT_UNIT);
+woflang::analog_state.set_mode(woflang::AnalogMode::FLOAT_CUSTOM, -5.0f, 5.0f);
+Clamp Value:
+
+cpp
+Copy
+Edit
+float clamped = woflang::analog_state.clamp(250.0f);
+Check Integer Mode:
+
+cpp
+Copy
+Edit
+if (woflang::analog_state.is_integer_mode()) {
+    // Integer math rules apply
+}
+Design Wins
+✅ Singleton analog settings
+✅ Live min/max accessible everywhere
+✅ Safe clamps for math ops
+✅ Supports dynamic mode swaps
+
+
+#####
+
+
+Interpreter Hook Examples
+Setting Mode from Script:
+
+cpp
+Copy
+Edit
+woflang::set_analog_mode_from_string("int2001");
+woflang::set_analog_mode_from_string("float_custom", -10.0f, 10.0f);
+Getting Current Status:
+
+cpp
+Copy
+Edit
+std::string status = woflang::get_analog_status();
+std::cout << status << std::endl;
+Error Handling:
+
+cpp
+Copy
+Edit
+try {
+    woflang::set_analog_mode_from_string("unknown_mode");
+} catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+}
+Interpreter Integration Suggestion
+If your scripting layer uses string commands, you can:
+
+cpp
+Copy
+Edit
+// Inside your command dispatch system:
+if (cmd == "analog_status") {
+    std::cout << woflang::get_analog_status() << std::endl;
+}
+if (cmd == "analog_mode") {
+    std::string mode;
+    float min = -1.0f, max = 1.0f;
+    iss >> mode >> min >> max;
+    woflang::set_analog_mode_from_string(mode, min, max);
+}
+
+
+#####
+
+
+Usage Example
+In REPL:
+
+yaml
+Copy
+Edit
+woflang> analog_status
+Analog Mode: int201
+Min: -100
+Max: 100
+
+woflang> analog_mode float_custom -5 5
+Analog mode updated.
+
+woflang> analog_status
+Analog Mode: float_custom (-5 to 5)
+Min: -5
+Max: 5
+Design Wins
+✅ Analog mode fully script-controllable
+✅ Live REPL interaction
+✅ Float custom range supported
+✅ Safe error handling for invalid modes
+
+
+#####
+
+
+New Commands Available
+Clamp a Value to Current Analog Range:
+
+shell
+Copy
+Edit
+woflang> analog_clamp 250
+Clamped Value: 100   (in int201 mode)
+Get Analog Min/Max Directly:
+
+makefile
+Copy
+Edit
+woflang> analog_range
+Min: -100
+Max: 100
+Remap a Value Between Ranges with Analog Clamp:
+
+shell
+Copy
+Edit
+woflang> analog_remap 5 0 10 -100 100
+Remapped Value: 0
+Design Wins
+✅ More math tools at REPL
+✅ Range remapping analog-clamped
+✅ Quick clamping debug
+✅ Error handling for invalid remaps
+
+
+#####
+
+
+New Commands Explained
+Apply Deadzone to Value:
+
+shell
+Copy
+Edit
+woflang> analog_deadzone 0.05 0.1
+Deadzone Applied: 0
+Query Current Analog Scale Range:
+
+mathematica
+Copy
+Edit
+woflang> analog_scalequery
+Analog Range Span: 200
+Check if Integer Analog Mode:
+
+yaml
+Copy
+Edit
+woflang> analog_isint
+Integer Mode: Yes
+Possible Next Quick Adds
+Normalize raw input to [0,1]
+
+
+#####
+
+
 

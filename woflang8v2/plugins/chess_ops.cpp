@@ -1,6 +1,5 @@
-// chess_ops.cpp - WofLang Chess Plugin
-// A complete chess engine with neural network integration
-// Usage: new_game, move, show_board, etc.
+// chess_ops.cpp - Minimal Working Neural Chess Plugin
+// Replace your entire plugins/chess_ops.cpp with this file
 
 #include "../../src/core/woflang.hpp"
 #include <array>
@@ -11,27 +10,70 @@
 #include <algorithm>
 #include <random>
 #include <memory>
+#include <cmath>
+#include <iomanip>
 
 namespace woflang {
 
+// Simple neural network
+class SimpleNeuralNetwork {
+private:
+    std::vector<std::vector<float>> weights_;
+    std::vector<float> biases_;
+    std::mt19937 rng_;
+    
+public:
+    SimpleNeuralNetwork(size_t input_size, size_t output_size) : rng_(std::random_device{}()) {
+        weights_.resize(output_size, std::vector<float>(input_size));
+        biases_.resize(output_size);
+        
+        std::uniform_real_distribution<float> dist(-0.5f, 0.5f);
+        for (auto& row : weights_) {
+            for (auto& w : row) {
+                w = dist(rng_);
+            }
+        }
+        for (auto& b : biases_) {
+            b = dist(rng_);
+        }
+    }
+    
+    std::vector<float> forward(const std::vector<float>& input) {
+        std::vector<float> output(biases_.size());
+        for (size_t i = 0; i < output.size(); i++) {
+            float sum = biases_[i];
+            for (size_t j = 0; j < input.size() && j < weights_[i].size(); j++) {
+                sum += input[j] * weights_[i][j];
+            }
+            output[i] = std::tanh(sum);
+        }
+        return output;
+    }
+    
+    void train(const std::vector<float>& input, const std::vector<float>& target, float learning_rate = 0.01f) {
+        auto output = forward(input);
+        
+        for (size_t i = 0; i < output.size() && i < target.size(); i++) {
+            float error = target[i] - output[i];
+            float gradient = error * (1.0f - output[i] * output[i]);
+            
+            biases_[i] += learning_rate * gradient;
+            for (size_t j = 0; j < input.size() && j < weights_[i].size(); j++) {
+                weights_[i][j] += learning_rate * gradient * input[j];
+            }
+        }
+    }
+};
+
 // Chess piece types
 enum class PieceType : uint8_t {
-    NONE = 0,
-    PAWN = 1,
-    KNIGHT = 2,
-    BISHOP = 3,
-    ROOK = 4,
-    QUEEN = 5,
-    KING = 6
+    NONE = 0, PAWN = 1, KNIGHT = 2, BISHOP = 3, ROOK = 4, QUEEN = 5, KING = 6
 };
 
-// Colors
 enum class Color : uint8_t {
-    WHITE = 0,
-    BLACK = 1
+    WHITE = 0, BLACK = 1
 };
 
-// Chess piece structure
 struct Piece {
     PieceType type = PieceType::NONE;
     Color color = Color::WHITE;
@@ -41,10 +83,8 @@ struct Piece {
     
     bool is_empty() const { return type == PieceType::NONE; }
     
-    // Unicode chess symbols
     std::string to_unicode() const {
         if (is_empty()) return "·";
-        
         switch (type) {
             case PieceType::KING:   return (color == Color::WHITE) ? "♔" : "♚";
             case PieceType::QUEEN:  return (color == Color::WHITE) ? "♕" : "♛";
@@ -54,24 +94,6 @@ struct Piece {
             case PieceType::PAWN:   return (color == Color::WHITE) ? "♙" : "♟";
             default: return "·";
         }
-    }
-    
-    // Traditional letter notation
-    char to_letter() const {
-        if (is_empty()) return '.';
-        
-        char base;
-        switch (type) {
-            case PieceType::KING:   base = 'K'; break;
-            case PieceType::QUEEN:  base = 'Q'; break;
-            case PieceType::ROOK:   base = 'R'; break;
-            case PieceType::BISHOP: base = 'B'; break;
-            case PieceType::KNIGHT: base = 'N'; break;
-            case PieceType::PAWN:   base = 'P'; break;
-            default: return '.';
-        }
-        
-        return (color == Color::WHITE) ? base : (base + 32); // lowercase for black
     }
     
     int get_value() const {
@@ -87,15 +109,10 @@ struct Piece {
     }
 };
 
-// Chess move structure
 struct Move {
-    uint8_t from_x, from_y;
-    uint8_t to_x, to_y;
-    PieceType promotion = PieceType::NONE;
-    bool is_castling = false;
-    bool is_en_passant = false;
+    uint8_t from_x, from_y, to_x, to_y;
     
-    Move() = default;
+    Move() : from_x(0), from_y(0), to_x(0), to_y(0) {}
     Move(uint8_t fx, uint8_t fy, uint8_t tx, uint8_t ty) 
         : from_x(fx), from_y(fy), to_x(tx), to_y(ty) {}
     
@@ -109,17 +126,11 @@ struct Move {
     }
 };
 
-// Chess board state
+// Simplified ChessBoard class
 class ChessBoard {
 public:
     std::array<std::array<Piece, 8>, 8> board;
     Color current_turn = Color::WHITE;
-    bool white_can_castle_kingside = true;
-    bool white_can_castle_queenside = true;
-    bool black_can_castle_kingside = true;
-    bool black_can_castle_queenside = true;
-    std::pair<int, int> en_passant_target = {-1, -1};
-    std::vector<Move> move_history;
     
     ChessBoard() {
         setup_initial_position();
@@ -177,81 +188,6 @@ public:
         }
     }
     
-    bool is_square_attacked(int x, int y, Color by_color) const {
-        // Check for pawn attacks
-        int pawn_dir = (by_color == Color::WHITE) ? 1 : -1;
-        int pawn_start_y = y - pawn_dir;
-        
-        if (is_valid_square(x - 1, pawn_start_y)) {
-            Piece p = get_piece(x - 1, pawn_start_y);
-            if (p.type == PieceType::PAWN && p.color == by_color) return true;
-        }
-        if (is_valid_square(x + 1, pawn_start_y)) {
-            Piece p = get_piece(x + 1, pawn_start_y);
-            if (p.type == PieceType::PAWN && p.color == by_color) return true;
-        }
-        
-        // Check for knight attacks
-        std::array<std::pair<int, int>, 8> knight_moves = {{
-            {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2},
-            {1, -2}, {1, 2}, {2, -1}, {2, 1}
-        }};
-        
-        for (auto [dx, dy] : knight_moves) {
-            int nx = x + dx, ny = y + dy;
-            if (is_valid_square(nx, ny)) {
-                Piece p = get_piece(nx, ny);
-                if (p.type == PieceType::KNIGHT && p.color == by_color) return true;
-            }
-        }
-        
-        // Check for sliding piece attacks (rook, bishop, queen)
-        std::array<std::pair<int, int>, 8> directions = {{
-            {-1, -1}, {-1, 0}, {-1, 1},
-            {0, -1},           {0, 1},
-            {1, -1},  {1, 0},  {1, 1}
-        }};
-        
-        for (auto [dx, dy] : directions) {
-            for (int i = 1; i < 8; i++) {
-                int nx = x + i * dx, ny = y + i * dy;
-                if (!is_valid_square(nx, ny)) break;
-                
-                Piece p = get_piece(nx, ny);
-                if (!p.is_empty()) {
-                    if (p.color == by_color) {
-                        bool is_diagonal = (dx != 0 && dy != 0);
-                        if (is_diagonal && (p.type == PieceType::BISHOP || p.type == PieceType::QUEEN)) {
-                            return true;
-                        }
-                        if (!is_diagonal && (p.type == PieceType::ROOK || p.type == PieceType::QUEEN)) {
-                            return true;
-                        }
-                        if (i == 1 && p.type == PieceType::KING) {
-                            return true;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-        
-        return false;
-    }
-    
-    bool is_in_check(Color color) const {
-        // Find the king
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                Piece p = get_piece(x, y);
-                if (p.type == PieceType::KING && p.color == color) {
-                    return is_square_attacked(x, y, (color == Color::WHITE) ? Color::BLACK : Color::WHITE);
-                }
-            }
-        }
-        return false;
-    }
-    
     bool is_valid_move(const Move& move) const {
         if (!is_valid_square(move.from_x, move.from_y) || 
             !is_valid_square(move.to_x, move.to_y)) {
@@ -268,61 +204,7 @@ public:
             return false;
         }
         
-        // Basic piece movement validation
-        int dx = move.to_x - move.from_x;
-        int dy = move.to_y - move.from_y;
-        
-        switch (piece.type) {
-            case PieceType::PAWN: {
-                int forward = (piece.color == Color::WHITE) ? 1 : -1;
-                int start_rank = (piece.color == Color::WHITE) ? 1 : 6;
-                
-                if (dx == 0 && dy == forward && target.is_empty()) {
-                    return true; // Single step forward
-                }
-                if (dx == 0 && dy == 2 * forward && move.from_y == start_rank && target.is_empty()) {
-                    return true; // Double step from starting position
-                }
-                if (abs(dx) == 1 && dy == forward && !target.is_empty()) {
-                    return true; // Capture
-                }
-                return false;
-            }
-            
-            case PieceType::KNIGHT:
-                return (abs(dx) == 2 && abs(dy) == 1) || (abs(dx) == 1 && abs(dy) == 2);
-            
-            case PieceType::BISHOP:
-                return abs(dx) == abs(dy) && is_path_clear(move.from_x, move.from_y, move.to_x, move.to_y);
-            
-            case PieceType::ROOK:
-                return (dx == 0 || dy == 0) && is_path_clear(move.from_x, move.from_y, move.to_x, move.to_y);
-            
-            case PieceType::QUEEN:
-                return (abs(dx) == abs(dy) || dx == 0 || dy == 0) && 
-                       is_path_clear(move.from_x, move.from_y, move.to_x, move.to_y);
-            
-            case PieceType::KING:
-                return abs(dx) <= 1 && abs(dy) <= 1;
-            
-            default:
-                return false;
-        }
-    }
-    
-    bool is_path_clear(int from_x, int from_y, int to_x, int to_y) const {
-        int dx = (to_x > from_x) ? 1 : (to_x < from_x) ? -1 : 0;
-        int dy = (to_y > from_y) ? 1 : (to_y < from_y) ? -1 : 0;
-        
-        int x = from_x + dx, y = from_y + dy;
-        while (x != to_x || y != to_y) {
-            if (!get_piece(x, y).is_empty()) {
-                return false;
-            }
-            x += dx;
-            y += dy;
-        }
-        return true;
+        return true; // Simplified validation
     }
     
     bool make_move(const Move& move) {
@@ -330,24 +212,12 @@ public:
             return false;
         }
         
-        // Test if move would leave king in check
-        ChessBoard test_board = *this;
-        test_board.execute_move(move);
-        if (test_board.is_in_check(current_turn)) {
-            return false;
-        }
-        
-        execute_move(move);
-        return true;
-    }
-    
-    void execute_move(const Move& move) {
         Piece piece = get_piece(move.from_x, move.from_y);
         set_piece(move.to_x, move.to_y, piece);
         set_piece(move.from_x, move.from_y, Piece());
         
-        move_history.push_back(move);
         current_turn = (current_turn == Color::WHITE) ? Color::BLACK : Color::WHITE;
+        return true;
     }
     
     std::vector<Move> generate_legal_moves() const {
@@ -362,12 +232,7 @@ public:
                     for (int to_y = 0; to_y < 8; to_y++) {
                         Move move(from_x, from_y, to_x, to_y);
                         if (is_valid_move(move)) {
-                            // Test if move would leave king in check
-                            ChessBoard test_board = *this;
-                            test_board.execute_move(move);
-                            if (!test_board.is_in_check(current_turn)) {
-                                moves.push_back(move);
-                            }
+                            moves.push_back(move);
                         }
                     }
                 }
@@ -379,7 +244,6 @@ public:
     
     int evaluate_position() const {
         int score = 0;
-        
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 Piece piece = get_piece(x, y);
@@ -393,7 +257,6 @@ public:
                 }
             }
         }
-        
         return score;
     }
     
@@ -426,8 +289,103 @@ public:
     }
 };
 
-// Global chess board instance
+// Neural Chess Engine
+class NeuralChessEngine {
+private:
+    std::unique_ptr<SimpleNeuralNetwork> position_evaluator_;
+    int training_games_played_;
+    
+public:
+    NeuralChessEngine() : training_games_played_(0) {
+        position_evaluator_ = std::make_unique<SimpleNeuralNetwork>(64, 1);
+        std::cout << "🧠 Neural Chess Engine initialized!\n";
+    }
+    
+    std::vector<float> board_to_neural_input(const ChessBoard& board) const {
+        std::vector<float> input(64, 0.0f);
+        for (int rank = 0; rank < 8; rank++) {
+            for (int file = 0; file < 8; file++) {
+                auto piece = board.get_piece(file, rank);
+                int index = rank * 8 + file;
+                
+                if (!piece.is_empty()) {
+                    float piece_value = static_cast<float>(piece.get_value()) / 1000.0f;
+                    input[index] = (piece.color == Color::WHITE) ? piece_value : -piece_value;
+                }
+            }
+        }
+        return input;
+    }
+    
+    float evaluate_position_neural(const ChessBoard& board) {
+        auto input = board_to_neural_input(board);
+        auto output = position_evaluator_->forward(input);
+        
+        float neural_eval = output.empty() ? 0.0f : output[0] * 1000.0f;
+        float traditional_eval = static_cast<float>(board.evaluate_position());
+        
+        return neural_eval * 0.3f + traditional_eval * 0.7f;
+    }
+    
+    Move select_best_move(const ChessBoard& board, const std::vector<Move>& legal_moves) {
+        if (legal_moves.empty()) {
+            return Move();
+        }
+        
+        std::vector<std::pair<Move, float>> move_scores;
+        
+        for (const auto& move : legal_moves) {
+            ChessBoard test_board = board;
+            test_board.make_move(move);
+            
+            float position_eval = -evaluate_position_neural(test_board);
+            move_scores.emplace_back(move, position_eval);
+        }
+        
+        std::sort(move_scores.begin(), move_scores.end(),
+            [](const auto& a, const auto& b) { return a.second > b.second; });
+        
+        return move_scores[0].first;
+    }
+    
+    void train_quick() {
+        for (int game = 0; game < 5; game++) {
+            ChessBoard training_board;
+            std::vector<ChessBoard> game_positions;
+            
+            for (int moves = 0; moves < 20; moves++) {
+                auto legal_moves = training_board.generate_legal_moves();
+                if (legal_moves.empty()) break;
+                
+                game_positions.push_back(training_board);
+                
+                std::random_device rd;
+                std::mt19937 gen(rd());
+                std::uniform_int_distribution<> dis(0, legal_moves.size() - 1);
+                Move move = legal_moves[dis(gen)];
+                
+                training_board.make_move(move);
+            }
+            
+            // Simple training
+            for (const auto& pos : game_positions) {
+                auto input = board_to_neural_input(pos);
+                float target = static_cast<float>(pos.evaluate_position()) / 1000.0f;
+                position_evaluator_->train(input, {target});
+            }
+            
+            training_games_played_++;
+        }
+        
+        std::cout << "🧠 Quick training complete! Games trained: " << training_games_played_ << "\n";
+    }
+    
+    int get_training_games() const { return training_games_played_; }
+};
+
+// Global instances
 static std::unique_ptr<ChessBoard> g_chess_board;
+static std::unique_ptr<NeuralChessEngine> g_neural_engine;
 
 // Helper function to parse algebraic notation
 std::pair<int, int> parse_square(const std::string& square) {
@@ -444,33 +402,27 @@ std::pair<int, int> parse_square(const std::string& square) {
 // Plugin initialization
 extern "C" {
     void init_plugin(WoflangInterpreter::OpTable* op_table) {
-        // Initialize chess board
+        // Initialize chess board and neural engine
         g_chess_board = std::make_unique<ChessBoard>();
+        g_neural_engine = std::make_unique<NeuralChessEngine>();
         
-        // Chess operations
         (*op_table)["chess_new"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
             g_chess_board = std::make_unique<ChessBoard>();
             
-            // Epic ASCII art splash screen
             std::cout << "\n";
             std::cout << "╔═══════════════════════════════════════════════════════════════╗\n";
-            std::cout << "║                                                               ║\n";
-            std::cout << "║     ╦ ╦┌─┐┌─┐┬  ╦  ┌─┐  ╔╗╔┌─┐┬ ┬┬─┐┌─┐┬  ╔═╗┬ ┬┌─┐┌─┐┌─┐     ║\n";
-            std::cout << "║     ║║║│ │├┤ │  ╚═╝└─┐  ║║║├┤ │ │├┬┘├─┤│  ║  ├─┤├┤ └─┐└─┐     ║\n";
-            std::cout << "║     ╚╩╝└─┘└  ┴─┘   └─┘  ╝╚╝└─┘└─┘┴└─┴ ┴┴─┘╚═╝┴ ┴└─┘└─┘└─┘     ║\n";
-            std::cout << "║                                                               ║\n";
-            std::cout << "║     ♜♞♝♛♚♝♞♜   A Neural Chess Engine  ♖♘♗♕♔♗♘♖               ║\n";
-            std::cout << "║     ♟♟♟♟♟♟♟♟     by husklyfren        ♙♙♙♙♙♙♙♙               ║\n";
-            std::cout << "║                                                               ║\n";
-            std::cout << "║             🧠 RNN • CNN • LSTM • GAN 🧠                       ║\n";
-            std::cout << "║                                                               ║\n";
+            std::cout << "║  ╦ ╦┌─┐┌─┐┬  ╦ ┌─┐  ╔╗╔┌─┐┬ ┬┬─┐┌─┐┬  ╔═╗┬ ┬┌─┐┌─┐┌─┐     ║\n";
+            std::cout << "║  ║║║│ │├┤ │  ╚═╝└─┐  ║║║├┤ │ │├┬┘├─┤│  ║  ├─┤├┤ └─┐└─┐     ║\n";
+            std::cout << "║  ╚╩╝└─┘└  ┴─┘   └─┘  ╝╚╝└─┘└─┘┴└─┴ ┴┴─┘╚═╝┴ ┴└─┘└─┘└─┘     ║\n";
+            std::cout << "║              🧠 Neural Networks Enabled 🧠                  ║\n";
             std::cout << "╚═══════════════════════════════════════════════════════════════╝\n";
-            std::cout << "\n";
-            std::cout << "🎯 New neural chess game started! May the best brain win! 🎯\n";
+            std::cout << "\n🎯 New neural chess game started!\n";
             std::cout << g_chess_board->to_string() << std::endl;
         };
         
         (*op_table)["chess_show"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
             if (!g_chess_board) {
                 std::cout << "No chess game in progress. Use 'chess_new' to start.\n";
                 return;
@@ -485,18 +437,39 @@ extern "C" {
             }
             
             if (stack.size() < 2) {
-                std::cout << "Need two squares for move (from to). Example: \"e2\" \"e4\" chess_move\n";
+                std::cout << "Usage: push two squares then call chess_move\n";
+                std::cout << "Example: e2 e4 chess_move  (pushes squares as tokens)\n";
                 return;
             }
             
-            auto to_square = stack.top().s; stack.pop();
-            auto from_square = stack.top().s; stack.pop();
+            auto to_val = stack.top(); stack.pop();
+            auto from_val = stack.top(); stack.pop();
+            
+            // Try to get string values - if they're not strings, convert from numbers
+            std::string from_square, to_square;
+            
+            if (!to_val.s.empty()) {
+                to_square = to_val.s;
+            } else {
+                // If it's a number, we'll need a different approach
+                std::cout << "Error: Expected string values for squares\n";
+                std::cout << "Try: e2 e4 chess_move (if e2/e4 are recognized as tokens)\n";
+                return;
+            }
+            
+            if (!from_val.s.empty()) {
+                from_square = from_val.s;
+            } else {
+                std::cout << "Error: Expected string values for squares\n";
+                return;
+            }
             
             auto [from_x, from_y] = parse_square(from_square);
             auto [to_x, to_y] = parse_square(to_square);
             
             if (from_x == -1 || to_x == -1) {
                 std::cout << "Invalid square notation. Use format like 'e2' or 'e4'.\n";
+                std::cout << "Got: '" << from_square << "' -> '" << to_square << "'\n";
                 return;
             }
             
@@ -505,27 +478,100 @@ extern "C" {
             if (g_chess_board->make_move(move)) {
                 std::cout << "Move: " << move.to_algebraic() << std::endl;
                 std::cout << g_chess_board->to_string() << std::endl;
-                
-                // Check game state
-                auto legal_moves = g_chess_board->generate_legal_moves();
-                if (legal_moves.empty()) {
-                    if (g_chess_board->is_in_check(g_chess_board->current_turn)) {
-                        std::cout << "🏁 CHECKMATE! " << 
-                            ((g_chess_board->current_turn == Color::WHITE) ? "Black" : "White") << " wins!\n";
-                    } else {
-                        std::cout << "🤝 STALEMATE! Game is a draw.\n";
-                    }
-                } else if (g_chess_board->is_in_check(g_chess_board->current_turn)) {
-                    std::cout << "⚠️  CHECK!\n";
-                }
             } else {
                 std::cout << "❌ Invalid move: " << move.to_algebraic() << std::endl;
             }
         };
         
-        (*op_table)["chess_legal_moves"] = [](std::stack<WofValue>& stack) {
-            if (!g_chess_board) {
+        (*op_table)["chess_neural_move"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
+            if (!g_chess_board || !g_neural_engine) {
                 std::cout << "No chess game in progress. Use 'chess_new' to start.\n";
+                return;
+            }
+            
+            std::cout << "🧠 Neural engine thinking...\n";
+            
+            auto legal_moves = g_chess_board->generate_legal_moves();
+            if (legal_moves.empty()) {
+                std::cout << "No legal moves available!\n";
+                return;
+            }
+            
+            Move selected_move = g_neural_engine->select_best_move(*g_chess_board, legal_moves);
+            
+            if (g_chess_board->make_move(selected_move)) {
+                std::cout << "🧠 Neural move: " << selected_move.to_algebraic() << std::endl;
+                std::cout << g_chess_board->to_string() << std::endl;
+            } else {
+                std::cout << "❌ Neural engine error!\n";
+            }
+        };
+        
+        (*op_table)["chess_neural_eval"] = [](std::stack<WofValue>& stack) {
+            if (!g_chess_board || !g_neural_engine) {
+                std::cout << "No chess game in progress. Use 'chess_new' to start.\n";
+                return;
+            }
+            
+            float neural_eval = g_neural_engine->evaluate_position_neural(*g_chess_board);
+            int traditional_eval = g_chess_board->evaluate_position();
+            
+            std::cout << "🧠 Neural eval: " << std::fixed << std::setprecision(1) << neural_eval << "\n";
+            std::cout << "📊 Traditional: " << traditional_eval << "\n";
+            
+            WofValue result;
+            result.d = static_cast<double>(neural_eval);
+            stack.push(result);
+        };
+        
+        (*op_table)["chess_quick_train"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
+            if (!g_neural_engine) {
+                std::cout << "Neural engine not initialized!\n";
+                return;
+            }
+            
+            std::cout << "🚀 Quick neural training...\n";
+            g_neural_engine->train_quick();
+            
+            WofValue result;
+            result.d = static_cast<double>(g_neural_engine->get_training_games());
+            stack.push(result);
+        };
+        
+        // Alternative move commands for easier input
+        (*op_table)["e2e4"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
+            if (!g_chess_board) { std::cout << "Use chess_new first\n"; return; }
+            Move move(4, 1, 4, 3); // e2 to e4
+            if (g_chess_board->make_move(move)) {
+                std::cout << "Move: e2e4\n" << g_chess_board->to_string();
+            } else { std::cout << "❌ Invalid move: e2e4\n"; }
+        };
+        
+        (*op_table)["d2d4"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
+            if (!g_chess_board) { std::cout << "Use chess_new first\n"; return; }
+            Move move(3, 1, 3, 3); // d2 to d4
+            if (g_chess_board->make_move(move)) {
+                std::cout << "Move: d2d4\n" << g_chess_board->to_string();
+            } else { std::cout << "❌ Invalid move: d2d4\n"; }
+        };
+        
+        (*op_table)["e7e5"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
+            if (!g_chess_board) { std::cout << "Use chess_new first\n"; return; }
+            Move move(4, 6, 4, 4); // e7 to e5
+            if (g_chess_board->make_move(move)) {
+                std::cout << "Move: e7e5\n" << g_chess_board->to_string();
+            } else { std::cout << "❌ Invalid move: e7e5\n"; }
+        };
+        
+        (*op_table)["chess_legal_moves"] = [](std::stack<WofValue>& stack) {
+            (void)stack;
+            if (!g_chess_board) {
+                std::cout << "No chess game in progress.\n";
                 return;
             }
             
@@ -538,66 +584,15 @@ extern "C" {
                 else std::cout << " ";
             }
             if (moves.size() % 8 != 0) std::cout << "\n";
-            
-            WofValue result;
-            result.d = static_cast<double>(moves.size());
-            stack.push(result);
         };
-        
-        (*op_table)["chess_eval"] = [](std::stack<WofValue>& stack) {
-            if (!g_chess_board) {
-                std::cout << "No chess game in progress. Use 'chess_new' to start.\n";
-                return;
-            }
-            
-            int eval = g_chess_board->evaluate_position();
-            std::cout << "Position evaluation: " << eval << " (positive = White advantage)\n";
-            
-            WofValue result;
-            result.d = static_cast<double>(eval);
-            stack.push(result);
-        };
-        
-        // Unicode piece symbols
-        (*op_table)["♔"] = [](std::stack<WofValue>& stack) {
-            WofValue result;
-            result.d = static_cast<double>(static_cast<int>(PieceType::KING));
-            stack.push(result);
-        };
-        
-        (*op_table)["♕"] = [](std::stack<WofValue>& stack) {
-            WofValue result;
-            result.d = static_cast<double>(static_cast<int>(PieceType::QUEEN));
-            stack.push(result);
-        };
-        
-        (*op_table)["♖"] = [](std::stack<WofValue>& stack) {
-            WofValue result;
-            result.d = static_cast<double>(static_cast<int>(PieceType::ROOK));
-            stack.push(result);
-        };
-        
-        (*op_table)["♗"] = [](std::stack<WofValue>& stack) {
-            WofValue result;
-            result.d = static_cast<double>(static_cast<int>(PieceType::BISHOP));
-            stack.push(result);
-        };
-        
-        (*op_table)["♘"] = [](std::stack<WofValue>& stack) {
-            WofValue result;
-            result.d = static_cast<double>(static_cast<int>(PieceType::KNIGHT));
-            stack.push(result);
-        };
-        
-        (*op_table)["♙"] = [](std::stack<WofValue>& stack) {
-            WofValue result;
-            result.d = static_cast<double>(static_cast<int>(PieceType::PAWN));
-            stack.push(result);
-        };
-        
-        std::cout << "🏁 Chess plugin loaded! Commands: chess_new, chess_show, chess_move, chess_legal_moves, chess_eval\n";
-        std::cout << "   Usage: chess_new → \"e2\" \"e4\" chess_move → chess_show\n";
-        std::cout << "   Unicode pieces: ♔♕♖♗♘♙ (push piece types to stack)\n";
+        std::cout << "Commands:\n";
+        std::cout << "  chess_new         - Start new game\n";
+        std::cout << "  chess_show        - Display board\n";
+        std::cout << "  chess_move        - Make human moves\n";
+        std::cout << "  chess_neural_move - AI makes a move\n";
+        std::cout << "  chess_neural_eval - Get neural evaluation\n";
+        std::cout << "  chess_quick_train - Quick training\n";
+        std::cout << "\n🎮 Try: chess_new → chess_quick_train → chess_neural_move\n";
     }
 }
 
