@@ -18,7 +18,7 @@
 #############################################
 # Minimal version of Ninja required by this file
 
-ninja_required_version = 1.5
+ninja_required_version = 1.8
 
 
 #############################################
@@ -51,9 +51,10 @@ build cmake_object_order_depends_target_woflang_core: phony || .
 
 build CMakeFiles/woflang_core.dir/src/core/woflang.cpp.obj: CXX_COMPILER__woflang_core_unscanned_Release D$:/code/woflang2/woflang9/src/core/woflang.cpp || cmake_object_order_depends_target_woflang_core
   CONFIG = Release
+  DEFINES = -DWOFLANG_BUILDING_CORE
   DEP_FILE = CMakeFiles\woflang_core.dir\src\core\woflang.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins
   OBJECT_DIR = CMakeFiles\woflang_core.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang_core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\woflang_core.dir\woflang_core.pdb
@@ -61,9 +62,10 @@ build CMakeFiles/woflang_core.dir/src/core/woflang.cpp.obj: CXX_COMPILER__woflan
 
 build CMakeFiles/woflang_core.dir/src/io/tokenizer.cpp.obj: CXX_COMPILER__woflang_core_unscanned_Release D$:/code/woflang2/woflang9/src/io/tokenizer.cpp || cmake_object_order_depends_target_woflang_core
   CONFIG = Release
+  DEFINES = -DWOFLANG_BUILDING_CORE
   DEP_FILE = CMakeFiles\woflang_core.dir\src\io\tokenizer.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins
   OBJECT_DIR = CMakeFiles\woflang_core.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang_core.dir\src\io
   TARGET_COMPILE_PDB = CMakeFiles\woflang_core.dir\woflang_core.pdb
@@ -71,9 +73,10 @@ build CMakeFiles/woflang_core.dir/src/io/tokenizer.cpp.obj: CXX_COMPILER__woflan
 
 build CMakeFiles/woflang_core.dir/src/repl/repl_main.cpp.obj: CXX_COMPILER__woflang_core_unscanned_Release D$:/code/woflang2/woflang9/src/repl/repl_main.cpp || cmake_object_order_depends_target_woflang_core
   CONFIG = Release
+  DEFINES = -DWOFLANG_BUILDING_CORE
   DEP_FILE = CMakeFiles\woflang_core.dir\src\repl\repl_main.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins
   OBJECT_DIR = CMakeFiles\woflang_core.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang_core.dir\src\repl
   TARGET_COMPILE_PDB = CMakeFiles\woflang_core.dir\woflang_core.pdb
@@ -109,8 +112,8 @@ build cmake_object_order_depends_target_woflang: phony || cmake_object_order_dep
 build CMakeFiles/woflang.dir/main.cpp.obj: CXX_COMPILER__woflang_unscanned_Release D$:/code/woflang2/woflang9/main.cpp || cmake_object_order_depends_target_woflang
   CONFIG = Release
   DEP_FILE = CMakeFiles\woflang.dir\main.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins
   OBJECT_DIR = CMakeFiles\woflang.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang.dir
   TARGET_COMPILE_PDB = CMakeFiles\woflang.dir\
@@ -165,88 +168,6 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 # =============================================================================
-# Object build statements for SHARED_LIBRARY target chemistry_ops
-
-
-#############################################
-# Order-only phony target for chemistry_ops
-
-build cmake_object_order_depends_target_chemistry_ops: phony || cmake_object_order_depends_target_woflang_core
-
-build plugins/CMakeFiles/chemistry_ops.dir/chemistry_ops.cpp.obj: CXX_COMPILER__chemistry_ops_unscanned_Release D$:/code/woflang2/woflang9/plugins/chemistry_ops.cpp || cmake_object_order_depends_target_chemistry_ops
-  CONFIG = Release
-  DEFINES = -Dchemistry_ops_EXPORTS
-  DEP_FILE = plugins\CMakeFiles\chemistry_ops.dir\chemistry_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
-  OBJECT_DIR = plugins\CMakeFiles\chemistry_ops.dir
-  OBJECT_FILE_DIR = plugins\CMakeFiles\chemistry_ops.dir
-  TARGET_COMPILE_PDB = plugins\CMakeFiles\chemistry_ops.dir\
-  TARGET_PDB = bin\Plugins\libchemistry_ops.pdb
-
-
-# =============================================================================
-# Link build statements for SHARED_LIBRARY target chemistry_ops
-
-
-#############################################
-# Link the shared library bin\Plugins\libchemistry_ops.dll
-
-build bin/Plugins/libchemistry_ops.dll bin/Plugins/liblibchemistry_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__chemistry_ops_Release plugins/CMakeFiles/chemistry_ops.dir/chemistry_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
-  CONFIG = Release
-  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
-  LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = plugins\CMakeFiles\chemistry_ops.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  RESTAT = 1
-  TARGET_COMPILE_PDB = plugins\CMakeFiles\chemistry_ops.dir\
-  TARGET_FILE = bin\Plugins\libchemistry_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibchemistry_ops.dll.a
-  TARGET_PDB = bin\Plugins\libchemistry_ops.pdb
-
-# =============================================================================
-# Object build statements for SHARED_LIBRARY target chess_ops
-
-
-#############################################
-# Order-only phony target for chess_ops
-
-build cmake_object_order_depends_target_chess_ops: phony || cmake_object_order_depends_target_woflang_core
-
-build plugins/CMakeFiles/chess_ops.dir/chess_ops.cpp.obj: CXX_COMPILER__chess_ops_unscanned_Release D$:/code/woflang2/woflang9/plugins/chess_ops.cpp || cmake_object_order_depends_target_chess_ops
-  CONFIG = Release
-  DEFINES = -Dchess_ops_EXPORTS
-  DEP_FILE = plugins\CMakeFiles\chess_ops.dir\chess_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
-  OBJECT_DIR = plugins\CMakeFiles\chess_ops.dir
-  OBJECT_FILE_DIR = plugins\CMakeFiles\chess_ops.dir
-  TARGET_COMPILE_PDB = plugins\CMakeFiles\chess_ops.dir\
-  TARGET_PDB = bin\Plugins\libchess_ops.pdb
-
-
-# =============================================================================
-# Link build statements for SHARED_LIBRARY target chess_ops
-
-
-#############################################
-# Link the shared library bin\Plugins\libchess_ops.dll
-
-build bin/Plugins/libchess_ops.dll bin/Plugins/liblibchess_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__chess_ops_Release plugins/CMakeFiles/chess_ops.dir/chess_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
-  CONFIG = Release
-  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
-  LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = plugins\CMakeFiles\chess_ops.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  RESTAT = 1
-  TARGET_COMPILE_PDB = plugins\CMakeFiles\chess_ops.dir\
-  TARGET_FILE = bin\Plugins\libchess_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibchess_ops.dll.a
-  TARGET_PDB = bin\Plugins\libchess_ops.pdb
-
-# =============================================================================
 # Object build statements for SHARED_LIBRARY target crypto_ops
 
 
@@ -259,12 +180,12 @@ build plugins/CMakeFiles/crypto_ops.dir/crypto_ops.cpp.obj: CXX_COMPILER__crypto
   CONFIG = Release
   DEFINES = -Dcrypto_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\crypto_ops.dir\crypto_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\crypto_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\crypto_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\crypto_ops.dir\
-  TARGET_PDB = bin\Plugins\libcrypto_ops.pdb
+  TARGET_PDB = bin\plugins\libcrypto_ops.pdb
 
 
 # =============================================================================
@@ -272,9 +193,9 @@ build plugins/CMakeFiles/crypto_ops.dir/crypto_ops.cpp.obj: CXX_COMPILER__crypto
 
 
 #############################################
-# Link the shared library bin\Plugins\libcrypto_ops.dll
+# Link the shared library bin\plugins\libcrypto_ops.dll
 
-build bin/Plugins/libcrypto_ops.dll bin/Plugins/liblibcrypto_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__crypto_ops_Release plugins/CMakeFiles/crypto_ops.dir/crypto_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libcrypto_ops.dll lib/libcrypto_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__crypto_ops_Release plugins/CMakeFiles/crypto_ops.dir/crypto_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -283,9 +204,9 @@ build bin/Plugins/libcrypto_ops.dll bin/Plugins/liblibcrypto_ops.dll.a: CXX_SHAR
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\crypto_ops.dir\
-  TARGET_FILE = bin\Plugins\libcrypto_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibcrypto_ops.dll.a
-  TARGET_PDB = bin\Plugins\libcrypto_ops.pdb
+  TARGET_FILE = bin\plugins\libcrypto_ops.dll
+  TARGET_IMPLIB = lib\libcrypto_ops.dll.a
+  TARGET_PDB = bin\plugins\libcrypto_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target discrete_math_ops
@@ -300,12 +221,12 @@ build plugins/CMakeFiles/discrete_math_ops.dir/discrete_math_ops.cpp.obj: CXX_CO
   CONFIG = Release
   DEFINES = -Ddiscrete_math_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\discrete_math_ops.dir\discrete_math_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\discrete_math_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\discrete_math_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\discrete_math_ops.dir\
-  TARGET_PDB = bin\Plugins\libdiscrete_math_ops.pdb
+  TARGET_PDB = bin\plugins\libdiscrete_math_ops.pdb
 
 
 # =============================================================================
@@ -313,9 +234,9 @@ build plugins/CMakeFiles/discrete_math_ops.dir/discrete_math_ops.cpp.obj: CXX_CO
 
 
 #############################################
-# Link the shared library bin\Plugins\libdiscrete_math_ops.dll
+# Link the shared library bin\plugins\libdiscrete_math_ops.dll
 
-build bin/Plugins/libdiscrete_math_ops.dll bin/Plugins/liblibdiscrete_math_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__discrete_math_ops_Release plugins/CMakeFiles/discrete_math_ops.dir/discrete_math_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libdiscrete_math_ops.dll lib/libdiscrete_math_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__discrete_math_ops_Release plugins/CMakeFiles/discrete_math_ops.dir/discrete_math_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -324,9 +245,9 @@ build bin/Plugins/libdiscrete_math_ops.dll bin/Plugins/liblibdiscrete_math_ops.d
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\discrete_math_ops.dir\
-  TARGET_FILE = bin\Plugins\libdiscrete_math_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibdiscrete_math_ops.dll.a
-  TARGET_PDB = bin\Plugins\libdiscrete_math_ops.pdb
+  TARGET_FILE = bin\plugins\libdiscrete_math_ops.dll
+  TARGET_IMPLIB = lib\libdiscrete_math_ops.dll.a
+  TARGET_PDB = bin\plugins\libdiscrete_math_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target fractal_ops
@@ -341,12 +262,12 @@ build plugins/CMakeFiles/fractal_ops.dir/fractal_ops.cpp.obj: CXX_COMPILER__frac
   CONFIG = Release
   DEFINES = -Dfractal_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\fractal_ops.dir\fractal_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\fractal_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\fractal_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\fractal_ops.dir\
-  TARGET_PDB = bin\Plugins\libfractal_ops.pdb
+  TARGET_PDB = bin\plugins\libfractal_ops.pdb
 
 
 # =============================================================================
@@ -354,9 +275,9 @@ build plugins/CMakeFiles/fractal_ops.dir/fractal_ops.cpp.obj: CXX_COMPILER__frac
 
 
 #############################################
-# Link the shared library bin\Plugins\libfractal_ops.dll
+# Link the shared library bin\plugins\libfractal_ops.dll
 
-build bin/Plugins/libfractal_ops.dll bin/Plugins/liblibfractal_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__fractal_ops_Release plugins/CMakeFiles/fractal_ops.dir/fractal_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libfractal_ops.dll lib/libfractal_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__fractal_ops_Release plugins/CMakeFiles/fractal_ops.dir/fractal_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -365,9 +286,9 @@ build bin/Plugins/libfractal_ops.dll bin/Plugins/liblibfractal_ops.dll.a: CXX_SH
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\fractal_ops.dir\
-  TARGET_FILE = bin\Plugins\libfractal_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibfractal_ops.dll.a
-  TARGET_PDB = bin\Plugins\libfractal_ops.pdb
+  TARGET_FILE = bin\plugins\libfractal_ops.dll
+  TARGET_IMPLIB = lib\libfractal_ops.dll.a
+  TARGET_PDB = bin\plugins\libfractal_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target geom_transform_ops
@@ -382,12 +303,12 @@ build plugins/CMakeFiles/geom_transform_ops.dir/geom_transform_ops.cpp.obj: CXX_
   CONFIG = Release
   DEFINES = -Dgeom_transform_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\geom_transform_ops.dir\geom_transform_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\geom_transform_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\geom_transform_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\geom_transform_ops.dir\
-  TARGET_PDB = bin\Plugins\libgeom_transform_ops.pdb
+  TARGET_PDB = bin\plugins\libgeom_transform_ops.pdb
 
 
 # =============================================================================
@@ -395,9 +316,9 @@ build plugins/CMakeFiles/geom_transform_ops.dir/geom_transform_ops.cpp.obj: CXX_
 
 
 #############################################
-# Link the shared library bin\Plugins\libgeom_transform_ops.dll
+# Link the shared library bin\plugins\libgeom_transform_ops.dll
 
-build bin/Plugins/libgeom_transform_ops.dll bin/Plugins/liblibgeom_transform_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__geom_transform_ops_Release plugins/CMakeFiles/geom_transform_ops.dir/geom_transform_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libgeom_transform_ops.dll lib/libgeom_transform_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__geom_transform_ops_Release plugins/CMakeFiles/geom_transform_ops.dir/geom_transform_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -406,9 +327,9 @@ build bin/Plugins/libgeom_transform_ops.dll bin/Plugins/liblibgeom_transform_ops
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\geom_transform_ops.dir\
-  TARGET_FILE = bin\Plugins\libgeom_transform_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibgeom_transform_ops.dll.a
-  TARGET_PDB = bin\Plugins\libgeom_transform_ops.pdb
+  TARGET_FILE = bin\plugins\libgeom_transform_ops.dll
+  TARGET_IMPLIB = lib\libgeom_transform_ops.dll.a
+  TARGET_PDB = bin\plugins\libgeom_transform_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target gradient_hessian_ops
@@ -423,12 +344,12 @@ build plugins/CMakeFiles/gradient_hessian_ops.dir/gradient_hessian_ops.cpp.obj: 
   CONFIG = Release
   DEFINES = -Dgradient_hessian_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\gradient_hessian_ops.dir\gradient_hessian_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\gradient_hessian_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\gradient_hessian_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\gradient_hessian_ops.dir\
-  TARGET_PDB = bin\Plugins\libgradient_hessian_ops.pdb
+  TARGET_PDB = bin\plugins\libgradient_hessian_ops.pdb
 
 
 # =============================================================================
@@ -436,9 +357,9 @@ build plugins/CMakeFiles/gradient_hessian_ops.dir/gradient_hessian_ops.cpp.obj: 
 
 
 #############################################
-# Link the shared library bin\Plugins\libgradient_hessian_ops.dll
+# Link the shared library bin\plugins\libgradient_hessian_ops.dll
 
-build bin/Plugins/libgradient_hessian_ops.dll bin/Plugins/liblibgradient_hessian_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__gradient_hessian_ops_Release plugins/CMakeFiles/gradient_hessian_ops.dir/gradient_hessian_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libgradient_hessian_ops.dll lib/libgradient_hessian_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__gradient_hessian_ops_Release plugins/CMakeFiles/gradient_hessian_ops.dir/gradient_hessian_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -447,9 +368,9 @@ build bin/Plugins/libgradient_hessian_ops.dll bin/Plugins/liblibgradient_hessian
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\gradient_hessian_ops.dir\
-  TARGET_FILE = bin\Plugins\libgradient_hessian_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibgradient_hessian_ops.dll.a
-  TARGET_PDB = bin\Plugins\libgradient_hessian_ops.pdb
+  TARGET_FILE = bin\plugins\libgradient_hessian_ops.dll
+  TARGET_IMPLIB = lib\libgradient_hessian_ops.dll.a
+  TARGET_PDB = bin\plugins\libgradient_hessian_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target graph_coloring_ops
@@ -464,12 +385,12 @@ build plugins/CMakeFiles/graph_coloring_ops.dir/graph_coloring_ops.cpp.obj: CXX_
   CONFIG = Release
   DEFINES = -Dgraph_coloring_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\graph_coloring_ops.dir\graph_coloring_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\graph_coloring_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\graph_coloring_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\graph_coloring_ops.dir\
-  TARGET_PDB = bin\Plugins\libgraph_coloring_ops.pdb
+  TARGET_PDB = bin\plugins\libgraph_coloring_ops.pdb
 
 
 # =============================================================================
@@ -477,9 +398,9 @@ build plugins/CMakeFiles/graph_coloring_ops.dir/graph_coloring_ops.cpp.obj: CXX_
 
 
 #############################################
-# Link the shared library bin\Plugins\libgraph_coloring_ops.dll
+# Link the shared library bin\plugins\libgraph_coloring_ops.dll
 
-build bin/Plugins/libgraph_coloring_ops.dll bin/Plugins/liblibgraph_coloring_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__graph_coloring_ops_Release plugins/CMakeFiles/graph_coloring_ops.dir/graph_coloring_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libgraph_coloring_ops.dll lib/libgraph_coloring_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__graph_coloring_ops_Release plugins/CMakeFiles/graph_coloring_ops.dir/graph_coloring_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -488,9 +409,9 @@ build bin/Plugins/libgraph_coloring_ops.dll bin/Plugins/liblibgraph_coloring_ops
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\graph_coloring_ops.dir\
-  TARGET_FILE = bin\Plugins\libgraph_coloring_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibgraph_coloring_ops.dll.a
-  TARGET_PDB = bin\Plugins\libgraph_coloring_ops.pdb
+  TARGET_FILE = bin\plugins\libgraph_coloring_ops.dll
+  TARGET_IMPLIB = lib\libgraph_coloring_ops.dll.a
+  TARGET_PDB = bin\plugins\libgraph_coloring_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target graph_search_ops
@@ -505,12 +426,12 @@ build plugins/CMakeFiles/graph_search_ops.dir/graph_search_ops.cpp.obj: CXX_COMP
   CONFIG = Release
   DEFINES = -Dgraph_search_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\graph_search_ops.dir\graph_search_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\graph_search_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\graph_search_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\graph_search_ops.dir\
-  TARGET_PDB = bin\Plugins\libgraph_search_ops.pdb
+  TARGET_PDB = bin\plugins\libgraph_search_ops.pdb
 
 
 # =============================================================================
@@ -518,9 +439,9 @@ build plugins/CMakeFiles/graph_search_ops.dir/graph_search_ops.cpp.obj: CXX_COMP
 
 
 #############################################
-# Link the shared library bin\Plugins\libgraph_search_ops.dll
+# Link the shared library bin\plugins\libgraph_search_ops.dll
 
-build bin/Plugins/libgraph_search_ops.dll bin/Plugins/liblibgraph_search_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__graph_search_ops_Release plugins/CMakeFiles/graph_search_ops.dir/graph_search_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libgraph_search_ops.dll lib/libgraph_search_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__graph_search_ops_Release plugins/CMakeFiles/graph_search_ops.dir/graph_search_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -529,9 +450,9 @@ build bin/Plugins/libgraph_search_ops.dll bin/Plugins/liblibgraph_search_ops.dll
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\graph_search_ops.dir\
-  TARGET_FILE = bin\Plugins\libgraph_search_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibgraph_search_ops.dll.a
-  TARGET_PDB = bin\Plugins\libgraph_search_ops.pdb
+  TARGET_FILE = bin\plugins\libgraph_search_ops.dll
+  TARGET_IMPLIB = lib\libgraph_search_ops.dll.a
+  TARGET_PDB = bin\plugins\libgraph_search_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target graph_theory_ops
@@ -546,12 +467,12 @@ build plugins/CMakeFiles/graph_theory_ops.dir/graph_theory_ops.cpp.obj: CXX_COMP
   CONFIG = Release
   DEFINES = -Dgraph_theory_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\graph_theory_ops.dir\graph_theory_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\graph_theory_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\graph_theory_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\graph_theory_ops.dir\
-  TARGET_PDB = bin\Plugins\libgraph_theory_ops.pdb
+  TARGET_PDB = bin\plugins\libgraph_theory_ops.pdb
 
 
 # =============================================================================
@@ -559,9 +480,9 @@ build plugins/CMakeFiles/graph_theory_ops.dir/graph_theory_ops.cpp.obj: CXX_COMP
 
 
 #############################################
-# Link the shared library bin\Plugins\libgraph_theory_ops.dll
+# Link the shared library bin\plugins\libgraph_theory_ops.dll
 
-build bin/Plugins/libgraph_theory_ops.dll bin/Plugins/liblibgraph_theory_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__graph_theory_ops_Release plugins/CMakeFiles/graph_theory_ops.dir/graph_theory_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libgraph_theory_ops.dll lib/libgraph_theory_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__graph_theory_ops_Release plugins/CMakeFiles/graph_theory_ops.dir/graph_theory_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -570,9 +491,9 @@ build bin/Plugins/libgraph_theory_ops.dll bin/Plugins/liblibgraph_theory_ops.dll
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\graph_theory_ops.dir\
-  TARGET_FILE = bin\Plugins\libgraph_theory_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibgraph_theory_ops.dll.a
-  TARGET_PDB = bin\Plugins\libgraph_theory_ops.pdb
+  TARGET_FILE = bin\plugins\libgraph_theory_ops.dll
+  TARGET_IMPLIB = lib\libgraph_theory_ops.dll.a
+  TARGET_PDB = bin\plugins\libgraph_theory_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target kanji_ops
@@ -587,12 +508,12 @@ build plugins/CMakeFiles/kanji_ops.dir/kanji_ops.cpp.obj: CXX_COMPILER__kanji_op
   CONFIG = Release
   DEFINES = -Dkanji_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\kanji_ops.dir\kanji_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\kanji_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\kanji_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\kanji_ops.dir\
-  TARGET_PDB = bin\Plugins\libkanji_ops.pdb
+  TARGET_PDB = bin\plugins\libkanji_ops.pdb
 
 
 # =============================================================================
@@ -600,9 +521,9 @@ build plugins/CMakeFiles/kanji_ops.dir/kanji_ops.cpp.obj: CXX_COMPILER__kanji_op
 
 
 #############################################
-# Link the shared library bin\Plugins\libkanji_ops.dll
+# Link the shared library bin\plugins\libkanji_ops.dll
 
-build bin/Plugins/libkanji_ops.dll bin/Plugins/liblibkanji_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__kanji_ops_Release plugins/CMakeFiles/kanji_ops.dir/kanji_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libkanji_ops.dll lib/libkanji_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__kanji_ops_Release plugins/CMakeFiles/kanji_ops.dir/kanji_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -611,9 +532,9 @@ build bin/Plugins/libkanji_ops.dll bin/Plugins/liblibkanji_ops.dll.a: CXX_SHARED
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\kanji_ops.dir\
-  TARGET_FILE = bin\Plugins\libkanji_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibkanji_ops.dll.a
-  TARGET_PDB = bin\Plugins\libkanji_ops.pdb
+  TARGET_FILE = bin\plugins\libkanji_ops.dll
+  TARGET_IMPLIB = lib\libkanji_ops.dll.a
+  TARGET_PDB = bin\plugins\libkanji_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target logic_ops
@@ -628,12 +549,12 @@ build plugins/CMakeFiles/logic_ops.dir/logic_ops.cpp.obj: CXX_COMPILER__logic_op
   CONFIG = Release
   DEFINES = -Dlogic_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\logic_ops.dir\logic_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\logic_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\logic_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\logic_ops.dir\
-  TARGET_PDB = bin\Plugins\liblogic_ops.pdb
+  TARGET_PDB = bin\plugins\liblogic_ops.pdb
 
 
 # =============================================================================
@@ -641,9 +562,9 @@ build plugins/CMakeFiles/logic_ops.dir/logic_ops.cpp.obj: CXX_COMPILER__logic_op
 
 
 #############################################
-# Link the shared library bin\Plugins\liblogic_ops.dll
+# Link the shared library bin\plugins\liblogic_ops.dll
 
-build bin/Plugins/liblogic_ops.dll bin/Plugins/libliblogic_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__logic_ops_Release plugins/CMakeFiles/logic_ops.dir/logic_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/liblogic_ops.dll lib/liblogic_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__logic_ops_Release plugins/CMakeFiles/logic_ops.dir/logic_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -652,9 +573,9 @@ build bin/Plugins/liblogic_ops.dll bin/Plugins/libliblogic_ops.dll.a: CXX_SHARED
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\logic_ops.dir\
-  TARGET_FILE = bin\Plugins\liblogic_ops.dll
-  TARGET_IMPLIB = bin\Plugins\libliblogic_ops.dll.a
-  TARGET_PDB = bin\Plugins\liblogic_ops.pdb
+  TARGET_FILE = bin\plugins\liblogic_ops.dll
+  TARGET_IMPLIB = lib\liblogic_ops.dll.a
+  TARGET_PDB = bin\plugins\liblogic_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target math_greek_ops
@@ -669,12 +590,12 @@ build plugins/CMakeFiles/math_greek_ops.dir/math_greek_ops.cpp.obj: CXX_COMPILER
   CONFIG = Release
   DEFINES = -Dmath_greek_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\math_greek_ops.dir\math_greek_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\math_greek_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\math_greek_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\math_greek_ops.dir\
-  TARGET_PDB = bin\Plugins\libmath_greek_ops.pdb
+  TARGET_PDB = bin\plugins\libmath_greek_ops.pdb
 
 
 # =============================================================================
@@ -682,9 +603,9 @@ build plugins/CMakeFiles/math_greek_ops.dir/math_greek_ops.cpp.obj: CXX_COMPILER
 
 
 #############################################
-# Link the shared library bin\Plugins\libmath_greek_ops.dll
+# Link the shared library bin\plugins\libmath_greek_ops.dll
 
-build bin/Plugins/libmath_greek_ops.dll bin/Plugins/liblibmath_greek_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__math_greek_ops_Release plugins/CMakeFiles/math_greek_ops.dir/math_greek_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libmath_greek_ops.dll lib/libmath_greek_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__math_greek_ops_Release plugins/CMakeFiles/math_greek_ops.dir/math_greek_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -693,9 +614,9 @@ build bin/Plugins/libmath_greek_ops.dll bin/Plugins/liblibmath_greek_ops.dll.a: 
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\math_greek_ops.dir\
-  TARGET_FILE = bin\Plugins\libmath_greek_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibmath_greek_ops.dll.a
-  TARGET_PDB = bin\Plugins\libmath_greek_ops.pdb
+  TARGET_FILE = bin\plugins\libmath_greek_ops.dll
+  TARGET_IMPLIB = lib\libmath_greek_ops.dll.a
+  TARGET_PDB = bin\plugins\libmath_greek_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target math_ops
@@ -710,12 +631,12 @@ build plugins/CMakeFiles/math_ops.dir/math_ops.cpp.obj: CXX_COMPILER__math_ops_u
   CONFIG = Release
   DEFINES = -Dmath_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\math_ops.dir\math_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\math_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\math_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\math_ops.dir\
-  TARGET_PDB = bin\Plugins\libmath_ops.pdb
+  TARGET_PDB = bin\plugins\libmath_ops.pdb
 
 
 # =============================================================================
@@ -723,9 +644,9 @@ build plugins/CMakeFiles/math_ops.dir/math_ops.cpp.obj: CXX_COMPILER__math_ops_u
 
 
 #############################################
-# Link the shared library bin\Plugins\libmath_ops.dll
+# Link the shared library bin\plugins\libmath_ops.dll
 
-build bin/Plugins/libmath_ops.dll bin/Plugins/liblibmath_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__math_ops_Release plugins/CMakeFiles/math_ops.dir/math_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libmath_ops.dll lib/libmath_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__math_ops_Release plugins/CMakeFiles/math_ops.dir/math_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -734,9 +655,9 @@ build bin/Plugins/libmath_ops.dll bin/Plugins/liblibmath_ops.dll.a: CXX_SHARED_L
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\math_ops.dir\
-  TARGET_FILE = bin\Plugins\libmath_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibmath_ops.dll.a
-  TARGET_PDB = bin\Plugins\libmath_ops.pdb
+  TARGET_FILE = bin\plugins\libmath_ops.dll
+  TARGET_IMPLIB = lib\libmath_ops.dll.a
+  TARGET_PDB = bin\plugins\libmath_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target modexp_ops
@@ -751,12 +672,12 @@ build plugins/CMakeFiles/modexp_ops.dir/modexp_ops.cpp.obj: CXX_COMPILER__modexp
   CONFIG = Release
   DEFINES = -Dmodexp_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\modexp_ops.dir\modexp_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\modexp_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\modexp_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\modexp_ops.dir\
-  TARGET_PDB = bin\Plugins\libmodexp_ops.pdb
+  TARGET_PDB = bin\plugins\libmodexp_ops.pdb
 
 
 # =============================================================================
@@ -764,9 +685,9 @@ build plugins/CMakeFiles/modexp_ops.dir/modexp_ops.cpp.obj: CXX_COMPILER__modexp
 
 
 #############################################
-# Link the shared library bin\Plugins\libmodexp_ops.dll
+# Link the shared library bin\plugins\libmodexp_ops.dll
 
-build bin/Plugins/libmodexp_ops.dll bin/Plugins/liblibmodexp_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__modexp_ops_Release plugins/CMakeFiles/modexp_ops.dir/modexp_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libmodexp_ops.dll lib/libmodexp_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__modexp_ops_Release plugins/CMakeFiles/modexp_ops.dir/modexp_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -775,9 +696,9 @@ build bin/Plugins/libmodexp_ops.dll bin/Plugins/liblibmodexp_ops.dll.a: CXX_SHAR
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\modexp_ops.dir\
-  TARGET_FILE = bin\Plugins\libmodexp_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibmodexp_ops.dll.a
-  TARGET_PDB = bin\Plugins\libmodexp_ops.pdb
+  TARGET_FILE = bin\plugins\libmodexp_ops.dll
+  TARGET_IMPLIB = lib\libmodexp_ops.dll.a
+  TARGET_PDB = bin\plugins\libmodexp_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target numeric_diff_ops
@@ -792,12 +713,12 @@ build plugins/CMakeFiles/numeric_diff_ops.dir/numeric_diff_ops.cpp.obj: CXX_COMP
   CONFIG = Release
   DEFINES = -Dnumeric_diff_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\numeric_diff_ops.dir\numeric_diff_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\numeric_diff_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\numeric_diff_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\numeric_diff_ops.dir\
-  TARGET_PDB = bin\Plugins\libnumeric_diff_ops.pdb
+  TARGET_PDB = bin\plugins\libnumeric_diff_ops.pdb
 
 
 # =============================================================================
@@ -805,9 +726,9 @@ build plugins/CMakeFiles/numeric_diff_ops.dir/numeric_diff_ops.cpp.obj: CXX_COMP
 
 
 #############################################
-# Link the shared library bin\Plugins\libnumeric_diff_ops.dll
+# Link the shared library bin\plugins\libnumeric_diff_ops.dll
 
-build bin/Plugins/libnumeric_diff_ops.dll bin/Plugins/liblibnumeric_diff_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__numeric_diff_ops_Release plugins/CMakeFiles/numeric_diff_ops.dir/numeric_diff_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libnumeric_diff_ops.dll lib/libnumeric_diff_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__numeric_diff_ops_Release plugins/CMakeFiles/numeric_diff_ops.dir/numeric_diff_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -816,9 +737,50 @@ build bin/Plugins/libnumeric_diff_ops.dll bin/Plugins/liblibnumeric_diff_ops.dll
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\numeric_diff_ops.dir\
-  TARGET_FILE = bin\Plugins\libnumeric_diff_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibnumeric_diff_ops.dll.a
-  TARGET_PDB = bin\Plugins\libnumeric_diff_ops.pdb
+  TARGET_FILE = bin\plugins\libnumeric_diff_ops.dll
+  TARGET_IMPLIB = lib\libnumeric_diff_ops.dll.a
+  TARGET_PDB = bin\plugins\libnumeric_diff_ops.pdb
+
+# =============================================================================
+# Object build statements for SHARED_LIBRARY target prime_ops
+
+
+#############################################
+# Order-only phony target for prime_ops
+
+build cmake_object_order_depends_target_prime_ops: phony || cmake_object_order_depends_target_woflang_core
+
+build plugins/CMakeFiles/prime_ops.dir/prime_ops.cpp.obj: CXX_COMPILER__prime_ops_unscanned_Release D$:/code/woflang2/woflang9/plugins/prime_ops.cpp || cmake_object_order_depends_target_prime_ops
+  CONFIG = Release
+  DEFINES = -Dprime_ops_EXPORTS
+  DEP_FILE = plugins\CMakeFiles\prime_ops.dir\prime_ops.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
+  OBJECT_DIR = plugins\CMakeFiles\prime_ops.dir
+  OBJECT_FILE_DIR = plugins\CMakeFiles\prime_ops.dir
+  TARGET_COMPILE_PDB = plugins\CMakeFiles\prime_ops.dir\
+  TARGET_PDB = bin\plugins\libprime_ops.pdb
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target prime_ops
+
+
+#############################################
+# Link the shared library bin\plugins\libprime_ops.dll
+
+build bin/plugins/libprime_ops.dll lib/libprime_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__prime_ops_Release plugins/CMakeFiles/prime_ops.dir/prime_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+  CONFIG = Release
+  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = plugins\CMakeFiles\prime_ops.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  RESTAT = 1
+  TARGET_COMPILE_PDB = plugins\CMakeFiles\prime_ops.dir\
+  TARGET_FILE = bin\plugins\libprime_ops.dll
+  TARGET_IMPLIB = lib\libprime_ops.dll.a
+  TARGET_PDB = bin\plugins\libprime_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target quantum_ops
@@ -833,12 +795,12 @@ build plugins/CMakeFiles/quantum_ops.dir/quantum_ops.cpp.obj: CXX_COMPILER__quan
   CONFIG = Release
   DEFINES = -Dquantum_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\quantum_ops.dir\quantum_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\quantum_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\quantum_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\quantum_ops.dir\
-  TARGET_PDB = bin\Plugins\libquantum_ops.pdb
+  TARGET_PDB = bin\plugins\libquantum_ops.pdb
 
 
 # =============================================================================
@@ -846,9 +808,9 @@ build plugins/CMakeFiles/quantum_ops.dir/quantum_ops.cpp.obj: CXX_COMPILER__quan
 
 
 #############################################
-# Link the shared library bin\Plugins\libquantum_ops.dll
+# Link the shared library bin\plugins\libquantum_ops.dll
 
-build bin/Plugins/libquantum_ops.dll bin/Plugins/liblibquantum_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__quantum_ops_Release plugins/CMakeFiles/quantum_ops.dir/quantum_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libquantum_ops.dll lib/libquantum_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__quantum_ops_Release plugins/CMakeFiles/quantum_ops.dir/quantum_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -857,9 +819,9 @@ build bin/Plugins/libquantum_ops.dll bin/Plugins/liblibquantum_ops.dll.a: CXX_SH
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\quantum_ops.dir\
-  TARGET_FILE = bin\Plugins\libquantum_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibquantum_ops.dll.a
-  TARGET_PDB = bin\Plugins\libquantum_ops.pdb
+  TARGET_FILE = bin\plugins\libquantum_ops.dll
+  TARGET_IMPLIB = lib\libquantum_ops.dll.a
+  TARGET_PDB = bin\plugins\libquantum_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target shortest_path_ops
@@ -874,12 +836,12 @@ build plugins/CMakeFiles/shortest_path_ops.dir/shortest_path_ops.cpp.obj: CXX_CO
   CONFIG = Release
   DEFINES = -Dshortest_path_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\shortest_path_ops.dir\shortest_path_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\shortest_path_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\shortest_path_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\shortest_path_ops.dir\
-  TARGET_PDB = bin\Plugins\libshortest_path_ops.pdb
+  TARGET_PDB = bin\plugins\libshortest_path_ops.pdb
 
 
 # =============================================================================
@@ -887,9 +849,9 @@ build plugins/CMakeFiles/shortest_path_ops.dir/shortest_path_ops.cpp.obj: CXX_CO
 
 
 #############################################
-# Link the shared library bin\Plugins\libshortest_path_ops.dll
+# Link the shared library bin\plugins\libshortest_path_ops.dll
 
-build bin/Plugins/libshortest_path_ops.dll bin/Plugins/liblibshortest_path_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__shortest_path_ops_Release plugins/CMakeFiles/shortest_path_ops.dir/shortest_path_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libshortest_path_ops.dll lib/libshortest_path_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__shortest_path_ops_Release plugins/CMakeFiles/shortest_path_ops.dir/shortest_path_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -898,50 +860,50 @@ build bin/Plugins/libshortest_path_ops.dll bin/Plugins/liblibshortest_path_ops.d
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\shortest_path_ops.dir\
-  TARGET_FILE = bin\Plugins\libshortest_path_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibshortest_path_ops.dll.a
-  TARGET_PDB = bin\Plugins\libshortest_path_ops.pdb
+  TARGET_FILE = bin\plugins\libshortest_path_ops.dll
+  TARGET_IMPLIB = lib\libshortest_path_ops.dll.a
+  TARGET_PDB = bin\plugins\libshortest_path_ops.pdb
 
 # =============================================================================
-# Object build statements for SHARED_LIBRARY target simple_chess_ops
+# Object build statements for SHARED_LIBRARY target stack_ops
 
 
 #############################################
-# Order-only phony target for simple_chess_ops
+# Order-only phony target for stack_ops
 
-build cmake_object_order_depends_target_simple_chess_ops: phony || cmake_object_order_depends_target_woflang_core
+build cmake_object_order_depends_target_stack_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build plugins/CMakeFiles/simple_chess_ops.dir/simple_chess_ops.cpp.obj: CXX_COMPILER__simple_chess_ops_unscanned_Release D$:/code/woflang2/woflang9/plugins/simple_chess_ops.cpp || cmake_object_order_depends_target_simple_chess_ops
+build plugins/CMakeFiles/stack_ops.dir/stack_ops.cpp.obj: CXX_COMPILER__stack_ops_unscanned_Release D$:/code/woflang2/woflang9/plugins/stack_ops.cpp || cmake_object_order_depends_target_stack_ops
   CONFIG = Release
-  DEFINES = -Dsimple_chess_ops_EXPORTS
-  DEP_FILE = plugins\CMakeFiles\simple_chess_ops.dir\simple_chess_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
-  OBJECT_DIR = plugins\CMakeFiles\simple_chess_ops.dir
-  OBJECT_FILE_DIR = plugins\CMakeFiles\simple_chess_ops.dir
-  TARGET_COMPILE_PDB = plugins\CMakeFiles\simple_chess_ops.dir\
-  TARGET_PDB = bin\Plugins\libsimple_chess_ops.pdb
+  DEFINES = -Dstack_ops_EXPORTS
+  DEP_FILE = plugins\CMakeFiles\stack_ops.dir\stack_ops.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
+  OBJECT_DIR = plugins\CMakeFiles\stack_ops.dir
+  OBJECT_FILE_DIR = plugins\CMakeFiles\stack_ops.dir
+  TARGET_COMPILE_PDB = plugins\CMakeFiles\stack_ops.dir\
+  TARGET_PDB = bin\plugins\libstack_ops.pdb
 
 
 # =============================================================================
-# Link build statements for SHARED_LIBRARY target simple_chess_ops
+# Link build statements for SHARED_LIBRARY target stack_ops
 
 
 #############################################
-# Link the shared library bin\Plugins\libsimple_chess_ops.dll
+# Link the shared library bin\plugins\libstack_ops.dll
 
-build bin/Plugins/libsimple_chess_ops.dll bin/Plugins/liblibsimple_chess_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__simple_chess_ops_Release plugins/CMakeFiles/simple_chess_ops.dir/simple_chess_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libstack_ops.dll lib/libstack_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__stack_ops_Release plugins/CMakeFiles/stack_ops.dir/stack_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = plugins\CMakeFiles\simple_chess_ops.dir
+  OBJECT_DIR = plugins\CMakeFiles\stack_ops.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
   RESTAT = 1
-  TARGET_COMPILE_PDB = plugins\CMakeFiles\simple_chess_ops.dir\
-  TARGET_FILE = bin\Plugins\libsimple_chess_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibsimple_chess_ops.dll.a
-  TARGET_PDB = bin\Plugins\libsimple_chess_ops.pdb
+  TARGET_COMPILE_PDB = plugins\CMakeFiles\stack_ops.dir\
+  TARGET_FILE = bin\plugins\libstack_ops.dll
+  TARGET_IMPLIB = lib\libstack_ops.dll.a
+  TARGET_PDB = bin\plugins\libstack_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target symbolic_calc_ops
@@ -956,12 +918,12 @@ build plugins/CMakeFiles/symbolic_calc_ops.dir/symbolic_calc_ops.cpp.obj: CXX_CO
   CONFIG = Release
   DEFINES = -Dsymbolic_calc_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\symbolic_calc_ops.dir\symbolic_calc_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\symbolic_calc_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\symbolic_calc_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\symbolic_calc_ops.dir\
-  TARGET_PDB = bin\Plugins\libsymbolic_calc_ops.pdb
+  TARGET_PDB = bin\plugins\libsymbolic_calc_ops.pdb
 
 
 # =============================================================================
@@ -969,9 +931,9 @@ build plugins/CMakeFiles/symbolic_calc_ops.dir/symbolic_calc_ops.cpp.obj: CXX_CO
 
 
 #############################################
-# Link the shared library bin\Plugins\libsymbolic_calc_ops.dll
+# Link the shared library bin\plugins\libsymbolic_calc_ops.dll
 
-build bin/Plugins/libsymbolic_calc_ops.dll bin/Plugins/liblibsymbolic_calc_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__symbolic_calc_ops_Release plugins/CMakeFiles/symbolic_calc_ops.dir/symbolic_calc_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libsymbolic_calc_ops.dll lib/libsymbolic_calc_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__symbolic_calc_ops_Release plugins/CMakeFiles/symbolic_calc_ops.dir/symbolic_calc_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -980,9 +942,9 @@ build bin/Plugins/libsymbolic_calc_ops.dll bin/Plugins/liblibsymbolic_calc_ops.d
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\symbolic_calc_ops.dir\
-  TARGET_FILE = bin\Plugins\libsymbolic_calc_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibsymbolic_calc_ops.dll.a
-  TARGET_PDB = bin\Plugins\libsymbolic_calc_ops.pdb
+  TARGET_FILE = bin\plugins\libsymbolic_calc_ops.dll
+  TARGET_IMPLIB = lib\libsymbolic_calc_ops.dll.a
+  TARGET_PDB = bin\plugins\libsymbolic_calc_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target symbolic_logic_ops
@@ -997,12 +959,12 @@ build plugins/CMakeFiles/symbolic_logic_ops.dir/symbolic_logic_ops.cpp.obj: CXX_
   CONFIG = Release
   DEFINES = -Dsymbolic_logic_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\symbolic_logic_ops.dir\symbolic_logic_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\symbolic_logic_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\symbolic_logic_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\symbolic_logic_ops.dir\
-  TARGET_PDB = bin\Plugins\libsymbolic_logic_ops.pdb
+  TARGET_PDB = bin\plugins\libsymbolic_logic_ops.pdb
 
 
 # =============================================================================
@@ -1010,9 +972,9 @@ build plugins/CMakeFiles/symbolic_logic_ops.dir/symbolic_logic_ops.cpp.obj: CXX_
 
 
 #############################################
-# Link the shared library bin\Plugins\libsymbolic_logic_ops.dll
+# Link the shared library bin\plugins\libsymbolic_logic_ops.dll
 
-build bin/Plugins/libsymbolic_logic_ops.dll bin/Plugins/liblibsymbolic_logic_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__symbolic_logic_ops_Release plugins/CMakeFiles/symbolic_logic_ops.dir/symbolic_logic_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libsymbolic_logic_ops.dll lib/libsymbolic_logic_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__symbolic_logic_ops_Release plugins/CMakeFiles/symbolic_logic_ops.dir/symbolic_logic_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -1021,9 +983,9 @@ build bin/Plugins/libsymbolic_logic_ops.dll bin/Plugins/liblibsymbolic_logic_ops
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\symbolic_logic_ops.dir\
-  TARGET_FILE = bin\Plugins\libsymbolic_logic_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibsymbolic_logic_ops.dll.a
-  TARGET_PDB = bin\Plugins\libsymbolic_logic_ops.pdb
+  TARGET_FILE = bin\plugins\libsymbolic_logic_ops.dll
+  TARGET_IMPLIB = lib\libsymbolic_logic_ops.dll.a
+  TARGET_PDB = bin\plugins\libsymbolic_logic_ops.pdb
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target trig_ops
@@ -1038,12 +1000,12 @@ build plugins/CMakeFiles/trig_ops.dir/trig_ops.cpp.obj: CXX_COMPILER__trig_ops_u
   CONFIG = Release
   DEFINES = -Dtrig_ops_EXPORTS
   DEP_FILE = plugins\CMakeFiles\trig_ops.dir\trig_ops.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=c++23 -include D:/code/woflang2/woflang9/core/woflang_compat.hpp
-  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/core -ID:/code/woflang2/woflang9/plugins
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins -ID:/code/woflang2/woflang9/plugins/.. -ID:/code/woflang2/woflang9/plugins/../src -ID:/code/woflang2/woflang9/plugins/../src/core
   OBJECT_DIR = plugins\CMakeFiles\trig_ops.dir
   OBJECT_FILE_DIR = plugins\CMakeFiles\trig_ops.dir
   TARGET_COMPILE_PDB = plugins\CMakeFiles\trig_ops.dir\
-  TARGET_PDB = bin\Plugins\libtrig_ops.pdb
+  TARGET_PDB = bin\plugins\libtrig_ops.pdb
 
 
 # =============================================================================
@@ -1051,9 +1013,9 @@ build plugins/CMakeFiles/trig_ops.dir/trig_ops.cpp.obj: CXX_COMPILER__trig_ops_u
 
 
 #############################################
-# Link the shared library bin\Plugins\libtrig_ops.dll
+# Link the shared library bin\plugins\libtrig_ops.dll
 
-build bin/Plugins/libtrig_ops.dll bin/Plugins/liblibtrig_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__trig_ops_Release plugins/CMakeFiles/trig_ops.dir/trig_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+build bin/plugins/libtrig_ops.dll lib/libtrig_ops.dll.a: CXX_SHARED_LIBRARY_LINKER__trig_ops_Release plugins/CMakeFiles/trig_ops.dir/trig_ops.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -1062,9 +1024,9 @@ build bin/Plugins/libtrig_ops.dll bin/Plugins/liblibtrig_ops.dll.a: CXX_SHARED_L
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = plugins\CMakeFiles\trig_ops.dir\
-  TARGET_FILE = bin\Plugins\libtrig_ops.dll
-  TARGET_IMPLIB = bin\Plugins\liblibtrig_ops.dll.a
-  TARGET_PDB = bin\Plugins\libtrig_ops.pdb
+  TARGET_FILE = bin\plugins\libtrig_ops.dll
+  TARGET_IMPLIB = lib\libtrig_ops.dll.a
+  TARGET_PDB = bin\plugins\libtrig_ops.pdb
 
 
 #############################################
@@ -1092,95 +1054,91 @@ build plugins/rebuild_cache: phony plugins/CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build chemistry_ops: phony bin/Plugins/libchemistry_ops.dll
+build crypto_ops: phony bin/plugins/libcrypto_ops.dll
 
-build chess_ops: phony bin/Plugins/libchess_ops.dll
+build discrete_math_ops: phony bin/plugins/libdiscrete_math_ops.dll
 
-build crypto_ops: phony bin/Plugins/libcrypto_ops.dll
+build fractal_ops: phony bin/plugins/libfractal_ops.dll
 
-build discrete_math_ops: phony bin/Plugins/libdiscrete_math_ops.dll
+build geom_transform_ops: phony bin/plugins/libgeom_transform_ops.dll
 
-build fractal_ops: phony bin/Plugins/libfractal_ops.dll
+build gradient_hessian_ops: phony bin/plugins/libgradient_hessian_ops.dll
 
-build geom_transform_ops: phony bin/Plugins/libgeom_transform_ops.dll
+build graph_coloring_ops: phony bin/plugins/libgraph_coloring_ops.dll
 
-build gradient_hessian_ops: phony bin/Plugins/libgradient_hessian_ops.dll
+build graph_search_ops: phony bin/plugins/libgraph_search_ops.dll
 
-build graph_coloring_ops: phony bin/Plugins/libgraph_coloring_ops.dll
+build graph_theory_ops: phony bin/plugins/libgraph_theory_ops.dll
 
-build graph_search_ops: phony bin/Plugins/libgraph_search_ops.dll
+build kanji_ops: phony bin/plugins/libkanji_ops.dll
 
-build graph_theory_ops: phony bin/Plugins/libgraph_theory_ops.dll
+build libcrypto_ops.dll: phony bin/plugins/libcrypto_ops.dll
 
-build kanji_ops: phony bin/Plugins/libkanji_ops.dll
+build libdiscrete_math_ops.dll: phony bin/plugins/libdiscrete_math_ops.dll
 
-build libchemistry_ops.dll: phony bin/Plugins/libchemistry_ops.dll
+build libfractal_ops.dll: phony bin/plugins/libfractal_ops.dll
 
-build libchess_ops.dll: phony bin/Plugins/libchess_ops.dll
+build libgeom_transform_ops.dll: phony bin/plugins/libgeom_transform_ops.dll
 
-build libcrypto_ops.dll: phony bin/Plugins/libcrypto_ops.dll
+build libgradient_hessian_ops.dll: phony bin/plugins/libgradient_hessian_ops.dll
 
-build libdiscrete_math_ops.dll: phony bin/Plugins/libdiscrete_math_ops.dll
+build libgraph_coloring_ops.dll: phony bin/plugins/libgraph_coloring_ops.dll
 
-build libfractal_ops.dll: phony bin/Plugins/libfractal_ops.dll
+build libgraph_search_ops.dll: phony bin/plugins/libgraph_search_ops.dll
 
-build libgeom_transform_ops.dll: phony bin/Plugins/libgeom_transform_ops.dll
+build libgraph_theory_ops.dll: phony bin/plugins/libgraph_theory_ops.dll
 
-build libgradient_hessian_ops.dll: phony bin/Plugins/libgradient_hessian_ops.dll
+build libkanji_ops.dll: phony bin/plugins/libkanji_ops.dll
 
-build libgraph_coloring_ops.dll: phony bin/Plugins/libgraph_coloring_ops.dll
+build liblogic_ops.dll: phony bin/plugins/liblogic_ops.dll
 
-build libgraph_search_ops.dll: phony bin/Plugins/libgraph_search_ops.dll
+build libmath_greek_ops.dll: phony bin/plugins/libmath_greek_ops.dll
 
-build libgraph_theory_ops.dll: phony bin/Plugins/libgraph_theory_ops.dll
+build libmath_ops.dll: phony bin/plugins/libmath_ops.dll
 
-build libkanji_ops.dll: phony bin/Plugins/libkanji_ops.dll
+build libmodexp_ops.dll: phony bin/plugins/libmodexp_ops.dll
 
-build liblogic_ops.dll: phony bin/Plugins/liblogic_ops.dll
+build libnumeric_diff_ops.dll: phony bin/plugins/libnumeric_diff_ops.dll
 
-build libmath_greek_ops.dll: phony bin/Plugins/libmath_greek_ops.dll
+build libprime_ops.dll: phony bin/plugins/libprime_ops.dll
 
-build libmath_ops.dll: phony bin/Plugins/libmath_ops.dll
+build libquantum_ops.dll: phony bin/plugins/libquantum_ops.dll
 
-build libmodexp_ops.dll: phony bin/Plugins/libmodexp_ops.dll
+build libshortest_path_ops.dll: phony bin/plugins/libshortest_path_ops.dll
 
-build libnumeric_diff_ops.dll: phony bin/Plugins/libnumeric_diff_ops.dll
+build libstack_ops.dll: phony bin/plugins/libstack_ops.dll
 
-build libquantum_ops.dll: phony bin/Plugins/libquantum_ops.dll
+build libsymbolic_calc_ops.dll: phony bin/plugins/libsymbolic_calc_ops.dll
 
-build libshortest_path_ops.dll: phony bin/Plugins/libshortest_path_ops.dll
+build libsymbolic_logic_ops.dll: phony bin/plugins/libsymbolic_logic_ops.dll
 
-build libsimple_chess_ops.dll: phony bin/Plugins/libsimple_chess_ops.dll
-
-build libsymbolic_calc_ops.dll: phony bin/Plugins/libsymbolic_calc_ops.dll
-
-build libsymbolic_logic_ops.dll: phony bin/Plugins/libsymbolic_logic_ops.dll
-
-build libtrig_ops.dll: phony bin/Plugins/libtrig_ops.dll
+build libtrig_ops.dll: phony bin/plugins/libtrig_ops.dll
 
 build libwoflang_core.a: phony lib/libwoflang_core.a
 
-build logic_ops: phony bin/Plugins/liblogic_ops.dll
+build logic_ops: phony bin/plugins/liblogic_ops.dll
 
-build math_greek_ops: phony bin/Plugins/libmath_greek_ops.dll
+build math_greek_ops: phony bin/plugins/libmath_greek_ops.dll
 
-build math_ops: phony bin/Plugins/libmath_ops.dll
+build math_ops: phony bin/plugins/libmath_ops.dll
 
-build modexp_ops: phony bin/Plugins/libmodexp_ops.dll
+build modexp_ops: phony bin/plugins/libmodexp_ops.dll
 
-build numeric_diff_ops: phony bin/Plugins/libnumeric_diff_ops.dll
+build numeric_diff_ops: phony bin/plugins/libnumeric_diff_ops.dll
 
-build quantum_ops: phony bin/Plugins/libquantum_ops.dll
+build prime_ops: phony bin/plugins/libprime_ops.dll
 
-build shortest_path_ops: phony bin/Plugins/libshortest_path_ops.dll
+build quantum_ops: phony bin/plugins/libquantum_ops.dll
 
-build simple_chess_ops: phony bin/Plugins/libsimple_chess_ops.dll
+build shortest_path_ops: phony bin/plugins/libshortest_path_ops.dll
 
-build symbolic_calc_ops: phony bin/Plugins/libsymbolic_calc_ops.dll
+build stack_ops: phony bin/plugins/libstack_ops.dll
 
-build symbolic_logic_ops: phony bin/Plugins/libsymbolic_logic_ops.dll
+build symbolic_calc_ops: phony bin/plugins/libsymbolic_calc_ops.dll
 
-build trig_ops: phony bin/Plugins/libtrig_ops.dll
+build symbolic_logic_ops: phony bin/plugins/libsymbolic_logic_ops.dll
+
+build trig_ops: phony bin/plugins/libtrig_ops.dll
 
 build woflang: phony bin/woflang.exe
 
@@ -1203,23 +1161,37 @@ build all: phony lib/libwoflang_core.a bin/woflang.exe plugins/all
 #############################################
 # Folder: D:/code/woflang2/woflang9/build/plugins
 
-build plugins/all: phony bin/Plugins/libchemistry_ops.dll bin/Plugins/libchess_ops.dll bin/Plugins/libcrypto_ops.dll bin/Plugins/libdiscrete_math_ops.dll bin/Plugins/libfractal_ops.dll bin/Plugins/libgeom_transform_ops.dll bin/Plugins/libgradient_hessian_ops.dll bin/Plugins/libgraph_coloring_ops.dll bin/Plugins/libgraph_search_ops.dll bin/Plugins/libgraph_theory_ops.dll bin/Plugins/libkanji_ops.dll bin/Plugins/liblogic_ops.dll bin/Plugins/libmath_greek_ops.dll bin/Plugins/libmath_ops.dll bin/Plugins/libmodexp_ops.dll bin/Plugins/libnumeric_diff_ops.dll bin/Plugins/libquantum_ops.dll bin/Plugins/libshortest_path_ops.dll bin/Plugins/libsimple_chess_ops.dll bin/Plugins/libsymbolic_calc_ops.dll bin/Plugins/libsymbolic_logic_ops.dll bin/Plugins/libtrig_ops.dll
+build plugins/all: phony bin/plugins/libcrypto_ops.dll bin/plugins/libdiscrete_math_ops.dll bin/plugins/libfractal_ops.dll bin/plugins/libgeom_transform_ops.dll bin/plugins/libgradient_hessian_ops.dll bin/plugins/libgraph_coloring_ops.dll bin/plugins/libgraph_search_ops.dll bin/plugins/libgraph_theory_ops.dll bin/plugins/libkanji_ops.dll bin/plugins/liblogic_ops.dll bin/plugins/libmath_greek_ops.dll bin/plugins/libmath_ops.dll bin/plugins/libmodexp_ops.dll bin/plugins/libnumeric_diff_ops.dll bin/plugins/libprime_ops.dll bin/plugins/libquantum_ops.dll bin/plugins/libshortest_path_ops.dll bin/plugins/libstack_ops.dll bin/plugins/libsymbolic_calc_ops.dll bin/plugins/libsymbolic_logic_ops.dll bin/plugins/libtrig_ops.dll
 
 # =============================================================================
 # Built-in targets
 
 
 #############################################
+# Phony target to force glob verification run.
+
+build D$:/code/woflang2/woflang9/build/CMakeFiles/VerifyGlobs.cmake_force: phony
+
+
+#############################################
+# Re-run CMake to check if globbed directories changed.
+
+build D$:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs: VERIFY_GLOBS | D$:/code/woflang2/woflang9/build/CMakeFiles/VerifyGlobs.cmake_force
+  pool = console
+  restat = 1
+
+
+#############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja D$:/code/woflang2/woflang9/build/cmake_install.cmake D$:/code/woflang2/woflang9/build/plugins/cmake_install.cmake: RERUN_CMAKE | C$:/msys64/mingw64/share/cmake/Modules/CMakeCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCCompilerABI.c C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCCompiler.cmake CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang2/woflang9/CMakeLists.txt D$:/code/woflang2/woflang9/plugins/CMakeLists.txt
+build build.ninja D$:/code/woflang2/woflang9/build/cmake_install.cmake D$:/code/woflang2/woflang9/build/plugins/cmake_install.cmake: RERUN_CMAKE D$:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs | C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang2/woflang9/build/CMakeFiles/VerifyGlobs.cmake D$:/code/woflang2/woflang9/CMakeLists.txt D$:/code/woflang2/woflang9/plugins/CMakeLists.txt
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/msys64/mingw64/share/cmake/Modules/CMakeCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCCompilerABI.c C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCCompiler.cmake CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang2/woflang9/CMakeLists.txt D$:/code/woflang2/woflang9/plugins/CMakeLists.txt: phony
+build C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang2/woflang9/build/CMakeFiles/VerifyGlobs.cmake D$:/code/woflang2/woflang9/CMakeLists.txt D$:/code/woflang2/woflang9/plugins/CMakeLists.txt: phony
 
 
 #############################################

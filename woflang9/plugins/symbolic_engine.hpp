@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "woflang.hpp"
+#include "core/woflang.hpp"
 #include <regex>
 #include <unordered_map>
 #include <iostream>

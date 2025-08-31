@@ -9,86 +9,70 @@
 
 #include "core/woflang.hpp"
 #include <cmath>
+#include <iostream>
+#include <stack>
 #include <stdexcept>
 #include <string>
-#include <variant>
 
 namespace woflang {
 
-static inline double as_num(const WofValue& v, const char* opname){
-    if (!v.is_numeric()) throw std::runtime_error(std::string(opname)+": expected numeric");
+static inline double need_num(const WofValue& v, const char* op) {
+    if (!v.is_numeric()) throw std::runtime_error(std::string(op) + ": numeric required");
     return v.as_numeric();
 }
-static inline std::string as_str(const WofValue& v, const char* opname){
-    if (v.type != WofType::String && v.type != WofType::Symbol)
-        throw std::runtime_error(std::string(opname)+": expected string/symbol");
-    return std::get<std::string>(v.value);
-}
 
-// Stack contracts (top is rightmost):
-//   actual expected           expect_eq         -> (throws if not equal)
-//   actual expected tol       expect_approx     -> (|a-e|<=tol)
-//   cond                      expect_true       -> (numeric nonzero is true)
-//   msg                       note              -> (print note; does not touch test state)
 class AssertOpsPlugin : public WoflangPlugin {
 public:
     void register_ops(WoflangInterpreter& I) override {
+        // actual expected            expect_eq
+        I.register_op("expect_eq", [](std::stack<WofValue>& S){
+            if (S.size() < 2) throw std::runtime_error("expect_eq: need actual expected");
+            auto expected = S.top(); S.pop();
+            auto actual   = S.top(); S.pop();
 
-        I.register_op("expect_eq", [](WoflangInterpreter& I){
-            if (I.stack.size() < 2) throw std::runtime_error("expect_eq: need actual expected");
-            auto expected = I.stack.back(); I.stack.pop_back();
-            auto actual   = I.stack.back(); I.stack.pop_back();
-
-            if (actual.is_numeric() && expected.is_numeric()){
+            if (actual.is_numeric() && expected.is_numeric()) {
                 double a = actual.as_numeric();
                 double e = expected.as_numeric();
-                if (a != e){
+                if (a != e) {
                     throw std::runtime_error("expect_eq failed: got " + std::to_string(a) +
                                              ", expected " + std::to_string(e));
                 }
                 return;
             }
-            if ((actual.type == WofType::String || actual.type == WofType::Symbol) &&
-                (expected.type == WofType::String || expected.type == WofType::Symbol)) {
-                std::string a = std::get<std::string>(actual.value);
-                std::string e = std::get<std::string>(expected.value);
-                if (a != e){
-                    throw std::runtime_error("expect_eq failed: got \"" + a + "\" != \"" + e + "\"");
-                }
-                return;
+            // fallback: string compare of printed values
+            std::string a = actual.to_string();
+            std::string e = expected.to_string();
+            if (a != e) {
+                throw std::runtime_error("expect_eq failed: got \"" + a + "\" != \"" + e + "\"");
             }
-            throw std::runtime_error("expect_eq: unsupported types");
         });
 
-        I.register_op("expect_approx", [](WoflangInterpreter& I){
-            if (I.stack.size() < 3) throw std::runtime_error("expect_approx: need actual expected tol");
-            auto tolV = I.stack.back(); I.stack.pop_back();
-            auto expV = I.stack.back(); I.stack.pop_back();
-            auto actV = I.stack.back(); I.stack.pop_back();
-            double tol = as_num(tolV, "expect_approx");
-            double exp = as_num(expV, "expect_approx");
-            double act = as_num(actV, "expect_approx");
+        // actual expected tol        expect_approx
+        I.register_op("expect_approx", [](std::stack<WofValue>& S){
+            if (S.size() < 3) throw std::runtime_error("expect_approx: need actual expected tol");
+            double tol = need_num(S.top(), "expect_approx"); S.pop();
+            double e   = need_num(S.top(), "expect_approx"); S.pop();
+            double a   = need_num(S.top(), "expect_approx"); S.pop();
             if (!(std::isfinite(tol) && tol >= 0.0)) throw std::runtime_error("expect_approx: bad tol");
-            if (std::isnan(act) || std::isnan(exp) || std::fabs(act-exp) > tol){
-                throw std::runtime_error("expect_approx failed: got " + std::to_string(act) +
-                                         ", expected " + std::to_string(exp) +
+            if (std::isnan(a) || std::isnan(e) || std::fabs(a - e) > tol) {
+                throw std::runtime_error("expect_approx failed: got " + std::to_string(a) +
+                                         ", expected " + std::to_string(e) +
                                          " (tol " + std::to_string(tol) + ")");
             }
         });
 
-        I.register_op("expect_true", [](WoflangInterpreter& I){
-            if (I.stack.empty()) throw std::runtime_error("expect_true: need cond");
-            auto v = I.stack.back(); I.stack.pop_back();
-            double cond = as_num(v, "expect_true");
-            if (cond == 0.0) throw std::runtime_error("expect_true failed: condition is false (0)");
+        // cond                       expect_true      (nonzero numeric == true)
+        I.register_op("expect_true", [](std::stack<WofValue>& S){
+            if (S.size() < 1) throw std::runtime_error("expect_true: need cond");
+            double c = need_num(S.top(), "expect_true"); S.pop();
+            if (c == 0.0) throw std::runtime_error("expect_true failed: condition is false (0)");
         });
 
-        I.register_op("note", [](WoflangInterpreter& I){
-            if (I.stack.empty()) throw std::runtime_error("note: need message");
-            auto m = I.stack.back(); I.stack.pop_back();
-            std::string s = as_str(m, "note");
-            // stdout is fine for notes
-            std::cout << "[NOTE] " << s << std::endl;
+        // "message"                  note             (prints to stdout)
+        I.register_op("note", [](std::stack<WofValue>& S){
+            if (S.size() < 1) throw std::runtime_error("note: need message");
+            std::string m = S.top().to_string(); S.pop();
+            std::cout << "[NOTE] " << m << std::endl;
         });
     }
 };
