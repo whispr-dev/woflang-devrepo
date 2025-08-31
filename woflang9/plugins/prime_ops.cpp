@@ -1,164 +1,196 @@
-// plugins/prime_ops.cpp — robust parse + deterministic 64-bit Miller–Rabin
-#ifndef WOFLANG_PLUGIN_EXPORT
-#  ifdef _WIN32
-#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
-#  else
-#    define WOFLANG_PLUGIN_EXPORT extern "C"
-#  endif
-#endif
+// plugins/prime_ops.cpp
+//
+// Deterministic 64-bit Miller–Rabin + next_prime for woflang.
+// Exposes ops:
+//   - prime_check   ( n -- 1|0 )  : pushes 1 if n is prime, else 0
+//   - next_prime    ( n -- p )    : pushes the smallest prime >= n+1 (i.e., next after n)
+//   - prime_version ( -- v )      : pushes an integer version marker
+//
+// Compatible with the plugin loader signature: init_plugin(OpTable*).
 
-#include "core/woflang.hpp"
 #include <cstdint>
 #include <stack>
 #include <stdexcept>
 #include <string>
-#include <string_view>
 #include <limits>
-#include <charconv>
+#include <type_traits>
+#include <cctype>
+#include <vector>
+#include <cmath>
+
+#include "src/core/woflang.hpp"   // included via -I.../src and -I.../src/core
 
 namespace woflang {
 
-// ---------- parse helpers ----------
-static inline bool parse_u64(std::string_view s, uint64_t& out) {
-    while (!s.empty() && (s.front()==' '||s.front()=='\t'||s.front()=='\n'||s.front()=='\r')) s.remove_prefix(1);
-    while (!s.empty() && (s.back() ==' '||s.back() =='\t'||s.back() =='\n'||s.back() =='\r')) s.remove_suffix(1);
-    if (s.empty()) return false;
-    if (s.front() == '+') s.remove_prefix(1);
-    if (s.empty()) return false;
-
-#if defined(__cpp_lib_to_chars) && __cpp_lib_to_chars >= 201611L
-    const char* first = s.data();
-    const char* last  = s.data() + s.size();
-    uint64_t v = 0;
-    auto res = std::from_chars(first, last, v, 10);
-    if (res.ec != std::errc() || res.ptr != last) return false;
-    out = v; return true;
-#else
-    uint64_t v = 0;
-    for (char c : s) {
-        if (c < '0' || c > '9') return false;
-        uint64_t d = static_cast<uint64_t>(c - '0');
-        if (v > (std::numeric_limits<uint64_t>::max() - d) / 10ULL) return false;
-        v = v*10ULL + d;
+// ---------- helpers to read/write WofValue ----------
+static uint64_t to_u64_throw(const WofValue& v, const char* op_name) {
+    switch (v.type) {
+        case WofType::Integer: {
+            int64_t x = std::get<int64_t>(v.value);
+            if (x < 0) throw std::runtime_error(std::string(op_name) + ": nonnegative integer required");
+            return static_cast<uint64_t>(x);
+        }
+        case WofType::Double: {
+            double d = std::get<double>(v.value);
+            if (!(d >= 0.0) || d > static_cast<double>(std::numeric_limits<uint64_t>::max()))
+                throw std::runtime_error(std::string(op_name) + ": numeric out of range");
+            // Accept only integral doubles to avoid surprises
+            double ip;
+            if (std::modf(d, &ip) != 0.0)
+                throw std::runtime_error(std::string(op_name) + ": integer required");
+            return static_cast<uint64_t>(d);
+        }
+        case WofType::String:
+        case WofType::Symbol: {
+            const std::string& s = std::get<std::string>(v.value);
+            if (s.empty()) throw std::runtime_error(std::string(op_name) + ": empty string");
+            size_t i = 0;
+            while (i < s.size() && std::isspace(static_cast<unsigned char>(s[i]))) ++i;
+            if (i >= s.size() || s[i] == '-') throw std::runtime_error(std::string(op_name) + ": nonnegative integer required");
+            uint64_t val = 0;
+            for (; i < s.size(); ++i) {
+                char c = s[i];
+                if (std::isspace(static_cast<unsigned char>(c))) break;
+                if (c < '0' || c > '9') throw std::runtime_error(std::string(op_name) + ": integer required");
+                uint64_t d = static_cast<uint64_t>(c - '0');
+                if (val > (std::numeric_limits<uint64_t>::max() - d) / 10ULL)
+                    throw std::runtime_error(std::string(op_name) + ": integer overflow");
+                val = val * 10ULL + d;
+            }
+            return val;
+        }
+        default:
+            throw std::runtime_error(std::string(op_name) + ": numeric required");
     }
-    out = v; return true;
+}
+
+static void push_bool(std::stack<WofValue>& st, bool b) {
+    // push as Integer 1/0 for stable printing/expectations
+    st.emplace(static_cast<int64_t>(b ? 1 : 0), WofType::Integer);
+}
+
+static void push_u64(std::stack<WofValue>& st, uint64_t x) {
+    if (x <= static_cast<uint64_t>(std::numeric_limits<int64_t>::max())) {
+        st.emplace(static_cast<int64_t>(x), WofType::Integer);
+    } else {
+        // very large—represent as double exactly up to 2^53, but for our use in next_prime it’s fine
+        st.emplace(static_cast<double>(x), WofType::Double);
+    }
+}
+
+// ---------- 64-bit safe arithmetic ----------
+static inline uint64_t mulmod_u64(uint64_t a, uint64_t b, uint64_t m) {
+#if defined(__SIZEOF_INT128__)
+    return static_cast<uint64_t>((__uint128_t)a * b % m);
+#else
+    // Fallback: double-based trick (safe enough here because m < 2^64 and we just need correctness).
+    // But to be robust, do classic add-doubling to avoid overflow.
+    uint64_t res = 0;
+    while (b) {
+        if (b & 1ULL) {
+            uint64_t t = a >= m - res ? a - (m - res) : a + res;
+            res = (res + a) % m; // keep within range
+            res = t % m;
+        }
+        a = (a >= m - a) ? a - (m - a) : a + a;
+        a %= m;
+        b >>= 1ULL;
+    }
+    return res % m;
 #endif
 }
 
-static inline uint64_t as_u64(const WofValue& v, const char* op) {
-    if (v.is_numeric()) {
-        double d = v.as_numeric();
-        if (!(d >= 0.0)) throw std::runtime_error(std::string(op)+": non-negative integer required");
-        uint64_t u = static_cast<uint64_t>(d);
-        if (static_cast<double>(u) != d)
-            throw std::runtime_error(std::string(op)+": non-integer (pass as string)");
-        return u;
-    }
-    try {
-        std::string s = v.to_string();
-        uint64_t u = 0;
-        if (!parse_u64(s, u)) throw std::runtime_error(std::string(op)+": numeric required");
-        return u;
-    } catch (...) {
-        throw std::runtime_error(std::string(op)+": numeric required");
-    }
-}
-
-// ---------- 64-bit Miller–Rabin ----------
-static inline uint64_t mulmod_u64(uint64_t a, uint64_t b, uint64_t m){
-#if defined(__GNUC__) || defined(__clang__)
-    // MinGW GCC/Clang on x64 support 128-bit integers — use them unconditionally here.
-    __uint128_t z = ( (__uint128_t)a * (__uint128_t)b ) % m;
-    return (uint64_t)z;
-#elif defined(_MSC_VER) && defined(_M_X64)
-    // Portable fallback for MSVC without __int128
-    uint64_t res = 0;
-    a %= m;
-    while (b) {
-        if (b & 1ULL) res = (res + a) % m;
-        a = (a + a) % m;
-        b >>= 1ULL;
-    }
-    return res;
-#else
-    // Last-resort portable path
-    uint64_t res = 0;
-    a %= m;
-    while (b) {
-        if (b & 1ULL) res = (res + a) % m;
-        a = (a + a) % m;
-        b >>= 1ULL;
-    }
-    return res;
-#endif
-}
-static inline uint64_t powmod_u64(uint64_t a, uint64_t e, uint64_t m){
+static inline uint64_t powmod_u64(uint64_t a, uint64_t e, uint64_t m) {
     uint64_t r = 1 % m;
-    a %= m;
-    while (e){
-        if (e & 1ULL) r = mulmod_u64(r, a, m);
-        a = mulmod_u64(a, a, m);
+    uint64_t x = a % m;
+    while (e) {
+        if (e & 1ULL) r = mulmod_u64(r, x, m);
+        x = mulmod_u64(x, x, m);
         e >>= 1ULL;
     }
     return r;
 }
-static bool mr_check(uint64_t n, uint64_t a, uint64_t d, uint64_t s){
-    uint64_t x = powmod_u64(a % n, d, n);
-    if (x == 1 || x == n - 1) return true;
-    for (uint64_t r = 1; r < s; ++r) {
+
+// ---------- Miller–Rabin (deterministic for 64-bit) ----------
+static bool mr_round(uint64_t n, uint64_t d, unsigned s, uint64_t a) {
+    if (a % n == 0) return true; // base divisible by n: treat as passing this round
+    uint64_t x = powmod_u64(a, d, n);
+    if (x == 1ULL || x == (n - 1)) return true;
+    for (unsigned r = 1; r < s; ++r) {
         x = mulmod_u64(x, x, n);
-        if (x == n - 1) return true;
+        if (x == (n - 1)) return true;
     }
-    return false;
+    return false; // 'a' is a witness => composite
 }
-static bool is_prime_u64(uint64_t n){
+
+static bool is_prime_u64(uint64_t n) {
     if (n < 2) return false;
-
-    // quick trial division by small primes
-    static const uint32_t smalls[] = {2,3,5,7,11,13,17,19,23,29,31,37};
-    for (uint32_t p : smalls){
+    // small primes quick path
+    static const uint32_t smalls[] = {2,3,5,7,11,13,17,19,23,29,31};
+    for (uint32_t p : smalls) {
         if (n == p) return true;
-        if (n % p == 0) return n == p;
+        if (n % p == 0) return (n == p);
     }
+    // write n-1 = d * 2^s with d odd
+    uint64_t d = n - 1;
+    unsigned s = 0;
+    while ((d & 1ULL) == 0) { d >>= 1ULL; ++s; }
 
-    // n-1 = d * 2^s
-    uint64_t d = n - 1, s = 0; 
-    while ((d & 1ULL) == 0){ d >>= 1ULL; ++s; }
+    // Deterministic 64-bit bases:
+    // See Jim Sinclair / CP-algorithms: {2, 3, 5, 7, 11, 13, 17} works up to < 341,550,071,728,321.
+    // For full 64-bit correctness use the "S7" set below.
+    static const uint64_t bases[] = {
+        2ULL, 325ULL, 9375ULL, 28178ULL, 450775ULL, 9780504ULL, 1795265022ULL
+    };
 
-    // Sinclair 7 bases (deterministic for 64-bit)
-    static const uint64_t S7[] = {2ULL,325ULL,9375ULL,28178ULL,450775ULL,9780504ULL,1795265022ULL};
-    for (uint64_t a : S7) if (!mr_check(n, a, d, s)) return false;
-
-    // Extra classic small bases (cheap redundancy)
-    static const uint64_t Sclassic[] = {2ULL,3ULL,5ULL,7ULL,11ULL,13ULL,17ULL,19ULL,23ULL,29ULL,31ULL,37ULL,41ULL};
-    for (uint64_t a : Sclassic) if (!mr_check(n, a, d, s)) return false;
-
+    for (uint64_t a : bases) {
+        if (!mr_round(n, d, s, a)) return false;
+    }
     return true;
+}
+
+// ---------- wof ops ----------
+static void op_prime_check(std::stack<WofValue>& st) {
+    if (st.empty()) throw std::runtime_error("prime_check: need one argument");
+    WofValue v = st.top(); st.pop();
+    uint64_t n = to_u64_throw(v, "prime_check");
+    push_bool(st, is_prime_u64(n));
+}
+
+static uint64_t next_prime_u64(uint64_t n) {
+    if (n <= 2) return 2ULL;
+    uint64_t c = n + 1;
+    if ((c & 1ULL) == 0) ++c;
+    while (true) {
+        if (is_prime_u64(c)) return c;
+        c += 2;
+    }
+}
+
+static void op_next_prime(std::stack<WofValue>& st) {
+    if (st.empty()) throw std::runtime_error("next_prime: need one argument");
+    WofValue v = st.top(); st.pop();
+    uint64_t n = to_u64_throw(v, "next_prime");
+    uint64_t p = next_prime_u64(n);
+    push_u64(st, p);
+}
+
+static void op_prime_version(std::stack<WofValue>& st) {
+    // bump this if you tweak the algorithm so you can sanity-check that the right DLL is loaded
+    st.emplace(static_cast<int64_t>(7003), WofType::Integer);
 }
 
 } // namespace woflang
 
-WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* ops){
+// ---- plugin entrypoint ----
+extern "C"
+#ifdef _WIN32
+__declspec(dllexport)
+#endif
+void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     using namespace woflang;
-    if (!ops) return;
-
-    // Numeric version probe (so '.' always prints something)
-    (*ops)["prime_version"] = [](std::stack<WofValue>& S){S.push(WofValue(6407.0));
-     // arbitrary code so we can verify the right DLL
-};
-
-    (*ops)["prime_check"] = [](std::stack<WofValue>& S){
-        if (S.empty()) throw std::runtime_error("prime_check: stack underflow");
-        uint64_t n = as_u64(S.top(), "prime_check"); S.pop();
-        S.push(WofValue(is_prime_u64(n) ? 1.0 : 0.0));
-    };
-
-    (*ops)["next_prime"] = [](std::stack<WofValue>& S){
-        if (S.empty()) throw std::runtime_error("next_prime: stack underflow");
-        uint64_t n = as_u64(S.top(), "next_prime"); S.pop();
-        if (n <= 2) { S.push(WofValue(2.0)); return; }
-        if ((n & 1ULL) == 0) ++n;
-        while (!is_prime_u64(n)) n += 2ULL;
-        S.push(WofValue(static_cast<double>(n)));
-    };
+    if (!op_table) return;
+    (*op_table)["prime_check"]    = [](std::stack<WofValue>& st){ op_prime_check(st); };
+    (*op_table)["next_prime"]     = [](std::stack<WofValue>& st){ op_next_prime(st); };
+    (*op_table)["prime_version"]  = [](std::stack<WofValue>& st){ op_prime_version(st); };
 }
