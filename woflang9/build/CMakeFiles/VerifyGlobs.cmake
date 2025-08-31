@@ -14,6 +14,7 @@ set(OLD_GLOB
   "D:/code/woflang2/woflang9/plugins/graph_coloring_ops.cpp"
   "D:/code/woflang2/woflang9/plugins/graph_search_ops.cpp"
   "D:/code/woflang2/woflang9/plugins/graph_theory_ops.cpp"
+  "D:/code/woflang2/woflang9/plugins/io_debug_ops.cpp"
   "D:/code/woflang2/woflang9/plugins/kanji_ops.cpp"
   "D:/code/woflang2/woflang9/plugins/logic_ops.cpp"
   "D:/code/woflang2/woflang9/plugins/math_greek_ops.cpp"

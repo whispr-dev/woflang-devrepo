@@ -10,6 +10,7 @@ D:/code/woflang2/woflang9/build/plugins/CMakeFiles/gradient_hessian_ops.dir
 D:/code/woflang2/woflang9/build/plugins/CMakeFiles/graph_coloring_ops.dir
 D:/code/woflang2/woflang9/build/plugins/CMakeFiles/graph_search_ops.dir
 D:/code/woflang2/woflang9/build/plugins/CMakeFiles/graph_theory_ops.dir
+D:/code/woflang2/woflang9/build/plugins/CMakeFiles/io_debug_ops.dir
 D:/code/woflang2/woflang9/build/plugins/CMakeFiles/kanji_ops.dir
 D:/code/woflang2/woflang9/build/plugins/CMakeFiles/logic_ops.dir
 D:/code/woflang2/woflang9/build/plugins/CMakeFiles/math_greek_ops.dir

@@ -1,5 +1,5 @@
 # ninja log v7
-21	65	7783403575054398	D:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs	69bfe3e3b0f6a0a9
+23	59	7783465020214492	D:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs	69bfe3e3b0f6a0a9
 127	2664	7783403576106058	plugins/CMakeFiles/graph_coloring_ops.dir/graph_coloring_ops.cpp.obj	b4104bab2c384ee1
 96	2781	7783403575790565	plugins/CMakeFiles/discrete_math_ops.dir/discrete_math_ops.cpp.obj	bc58cf1b135b0160
 135	3159	7783403576188482	plugins/CMakeFiles/graph_search_ops.dir/graph_search_ops.cpp.obj	2f740a005771592c
@@ -16,7 +16,7 @@
 90	6758	7783403575744221	plugins/CMakeFiles/crypto_ops.dir/crypto_ops.cpp.obj	b0ff4e9561f087dd
 3909	7414	7783403613933483	plugins/CMakeFiles/shortest_path_ops.dir/shortest_path_ops.cpp.obj	32823dddbe2a5d19
 5305	8048	7783403628119299	plugins/CMakeFiles/symbolic_calc_ops.dir/symbolic_calc_ops.cpp.obj	4972bc86ede1c087
-3618	8208	7783403611318070	plugins/CMakeFiles/prime_ops.dir/prime_ops.cpp.obj	5f4adedb43ac880f
+64	1897	7783465020545636	plugins/CMakeFiles/prime_ops.dir/prime_ops.cpp.obj	5f4adedb43ac880f
 2674	8446	7783403601825212	plugins/CMakeFiles/math_greek_ops.dir/math_greek_ops.cpp.obj	d4128bb8936c6781
 84	8873	7783403575667471	CMakeFiles/woflang.dir/main.cpp.obj	2a5dbf789ae158e2
 5240	8907	7783403627552500	plugins/CMakeFiles/stack_ops.dir/stack_ops.cpp.obj	a2e0f8b3eb438770
@@ -59,8 +59,8 @@
 10456	10826	7783403682730772	lib/libshortest_path_ops.dll.a	d1c275cd3f5fd428
 10494	10829	7783403682873468	bin/plugins/libsymbolic_calc_ops.dll	90a2c3a1fcc5ebdc
 10494	10829	7783403682873468	lib/libsymbolic_calc_ops.dll.a	90a2c3a1fcc5ebdc
-10422	10843	7783403683065438	bin/plugins/libprime_ops.dll	a2805fd19dd20fc6
-10422	10843	7783403683065438	lib/libprime_ops.dll.a	a2805fd19dd20fc6
+1898	2066	7783465040386405	bin/plugins/libprime_ops.dll	a2805fd19dd20fc6
+1898	2066	7783465040386405	lib/libprime_ops.dll.a	a2805fd19dd20fc6
 10436	10865	7783403683324090	bin/plugins/libquantum_ops.dll	1b9e6684c86a82b5
 10436	10865	7783403683324090	lib/libquantum_ops.dll.a	1b9e6684c86a82b5
 10524	10874	7783403683416112	bin/plugins/libtrig_ops.dll	4e8798c2f11a3334
@@ -69,3 +69,13 @@
 10478	10881	7783403683496128	lib/libstack_ops.dll.a	3827fd2305afac1
 10510	10889	7783403683568694	bin/plugins/libsymbolic_logic_ops.dll	e63e0976e14b0998
 10510	10889	7783403683568694	lib/libsymbolic_logic_ops.dll.a	e63e0976e14b0998
+43	287	7783470854814830	build.ninja	50c1fba207cfeddb
+43	287	7783470854428110	D:/code/woflang2/woflang9/build/cmake_install.cmake	50c1fba207cfeddb
+43	287	7783470854782787	D:/code/woflang2/woflang9/build/plugins/cmake_install.cmake	50c1fba207cfeddb
+62	1964	7783429885344642	plugins/CMakeFiles/io_debug_ops.dir/io_debug_ops.cpp.obj	fb6762a4e6e1aab5
+1965	2131	7783429905918086	bin/plugins/libio_debug_ops.dll	ad696f7dba58f9ca
+1965	2131	7783429905918086	lib/libio_debug_ops.dll.a	ad696f7dba58f9ca
+36	89	7783473566462049	D:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs	69bfe3e3b0f6a0a9
+94	1941	7783473566797685	plugins/CMakeFiles/prime_ops.dir/prime_ops.cpp.obj	5f4adedb43ac880f
+1942	2105	7783473586798827	bin/plugins/libprime_ops.dll	a2805fd19dd20fc6
+1942	2105	7783473586798827	lib/libprime_ops.dll.a	a2805fd19dd20fc6
