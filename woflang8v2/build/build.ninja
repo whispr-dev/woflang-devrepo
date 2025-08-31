@@ -34,7 +34,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = D$:/code/woflang/woflang8v2/build/
+cmake_ninja_workdir = D$:/code/woflang2/woflang8v2/build/
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target woflang_core
 
@@ -44,21 +44,21 @@ cmake_ninja_workdir = D$:/code/woflang/woflang8v2/build/
 
 build cmake_object_order_depends_target_woflang_core: phony || .
 
-build CMakeFiles/woflang_core.dir/src/core/woflang.cpp.obj: CXX_COMPILER__woflang_core_unscanned_ D$:/code/woflang/woflang8v2/src/core/woflang.cpp || cmake_object_order_depends_target_woflang_core
+build CMakeFiles/woflang_core.dir/src/core/woflang.cpp.obj: CXX_COMPILER__woflang_core_unscanned_ D$:/code/woflang2/woflang8v2/src/core/woflang.cpp || cmake_object_order_depends_target_woflang_core
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2
   DEP_FILE = CMakeFiles\woflang_core.dir\src\core\woflang.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\woflang_core.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang_core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\woflang_core.dir\woflang_core.pdb
   TARGET_PDB = lib\libwoflang_core.pdb
 
-build CMakeFiles/woflang_core.dir/src/io/tokenizer.cpp.obj: CXX_COMPILER__woflang_core_unscanned_ D$:/code/woflang/woflang8v2/src/io/tokenizer.cpp || cmake_object_order_depends_target_woflang_core
+build CMakeFiles/woflang_core.dir/src/io/tokenizer.cpp.obj: CXX_COMPILER__woflang_core_unscanned_ D$:/code/woflang2/woflang8v2/src/io/tokenizer.cpp || cmake_object_order_depends_target_woflang_core
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2
   DEP_FILE = CMakeFiles\woflang_core.dir\src\io\tokenizer.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\woflang_core.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang_core.dir\src\io
   TARGET_COMPILE_PDB = CMakeFiles\woflang_core.dir\woflang_core.pdb
@@ -89,11 +89,11 @@ build lib/libwoflang_core.a: CXX_STATIC_LIBRARY_LINKER__woflang_core_ CMakeFiles
 
 build cmake_object_order_depends_target_woflang: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/woflang.dir/main.cpp.obj: CXX_COMPILER__woflang_unscanned_ D$:/code/woflang/woflang8v2/main.cpp || cmake_object_order_depends_target_woflang
+build CMakeFiles/woflang.dir/main.cpp.obj: CXX_COMPILER__woflang_unscanned_ D$:/code/woflang2/woflang8v2/main.cpp || cmake_object_order_depends_target_woflang
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2
   DEP_FILE = CMakeFiles\woflang.dir\main.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\woflang.dir
   OBJECT_FILE_DIR = CMakeFiles\woflang.dir
   TARGET_COMPILE_PDB = CMakeFiles\woflang.dir\
@@ -127,11 +127,11 @@ build bin/woflang.exe: CXX_EXECUTABLE_LINKER__woflang_ CMakeFiles/woflang.dir/ma
 
 build cmake_object_order_depends_target_kanji_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/kanji_ops.dir/plugins/kanji_ops.cpp.obj: CXX_COMPILER__kanji_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/kanji_ops.cpp || cmake_object_order_depends_target_kanji_ops
+build CMakeFiles/kanji_ops.dir/plugins/kanji_ops.cpp.obj: CXX_COMPILER__kanji_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/kanji_ops.cpp || cmake_object_order_depends_target_kanji_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dkanji_ops_EXPORTS
   DEP_FILE = CMakeFiles\kanji_ops.dir\plugins\kanji_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\kanji_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\kanji_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\kanji_ops.dir\
@@ -166,11 +166,11 @@ build bin/plugins/libkanji_ops.dll lib/libkanji_ops.dll.a: CXX_SHARED_LIBRARY_LI
 
 build cmake_object_order_depends_target_chess_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/chess_ops.dir/plugins/chess_ops.cpp.obj: CXX_COMPILER__chess_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/chess_ops.cpp || cmake_object_order_depends_target_chess_ops
+build CMakeFiles/chess_ops.dir/plugins/chess_ops.cpp.obj: CXX_COMPILER__chess_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/chess_ops.cpp || cmake_object_order_depends_target_chess_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dchess_ops_EXPORTS
   DEP_FILE = CMakeFiles\chess_ops.dir\plugins\chess_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\chess_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\chess_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\chess_ops.dir\
@@ -205,11 +205,11 @@ build bin/plugins/libchess_ops.dll lib/libchess_ops.dll.a: CXX_SHARED_LIBRARY_LI
 
 build cmake_object_order_depends_target_prophecy_op: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/prophecy_op.dir/plugins/prophecy_op.cpp.obj: CXX_COMPILER__prophecy_op_unscanned_ D$:/code/woflang/woflang8v2/plugins/prophecy_op.cpp || cmake_object_order_depends_target_prophecy_op
+build CMakeFiles/prophecy_op.dir/plugins/prophecy_op.cpp.obj: CXX_COMPILER__prophecy_op_unscanned_ D$:/code/woflang2/woflang8v2/plugins/prophecy_op.cpp || cmake_object_order_depends_target_prophecy_op
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dprophecy_op_EXPORTS
   DEP_FILE = CMakeFiles\prophecy_op.dir\plugins\prophecy_op.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\prophecy_op.dir
   OBJECT_FILE_DIR = CMakeFiles\prophecy_op.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\prophecy_op.dir\
@@ -244,11 +244,11 @@ build bin/plugins/libprophecy_op.dll lib/libprophecy_op.dll.a: CXX_SHARED_LIBRAR
 
 build cmake_object_order_depends_target_math_greek_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/math_greek_ops.dir/plugins/math_greek_ops.cpp.obj: CXX_COMPILER__math_greek_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/math_greek_ops.cpp || cmake_object_order_depends_target_math_greek_ops
+build CMakeFiles/math_greek_ops.dir/plugins/math_greek_ops.cpp.obj: CXX_COMPILER__math_greek_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/math_greek_ops.cpp || cmake_object_order_depends_target_math_greek_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dmath_greek_ops_EXPORTS
   DEP_FILE = CMakeFiles\math_greek_ops.dir\plugins\math_greek_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\math_greek_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\math_greek_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\math_greek_ops.dir\
@@ -283,11 +283,11 @@ build bin/plugins/libmath_greek_ops.dll lib/libmath_greek_ops.dll.a: CXX_SHARED_
 
 build cmake_object_order_depends_target_stack_slayer_op: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/stack_slayer_op.dir/plugins/stack_slayer_op.cpp.obj: CXX_COMPILER__stack_slayer_op_unscanned_ D$:/code/woflang/woflang8v2/plugins/stack_slayer_op.cpp || cmake_object_order_depends_target_stack_slayer_op
+build CMakeFiles/stack_slayer_op.dir/plugins/stack_slayer_op.cpp.obj: CXX_COMPILER__stack_slayer_op_unscanned_ D$:/code/woflang2/woflang8v2/plugins/stack_slayer_op.cpp || cmake_object_order_depends_target_stack_slayer_op
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dstack_slayer_op_EXPORTS
   DEP_FILE = CMakeFiles\stack_slayer_op.dir\plugins\stack_slayer_op.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\stack_slayer_op.dir
   OBJECT_FILE_DIR = CMakeFiles\stack_slayer_op.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\stack_slayer_op.dir\
@@ -322,11 +322,11 @@ build bin/plugins/libstack_slayer_op.dll lib/libstack_slayer_op.dll.a: CXX_SHARE
 
 build cmake_object_order_depends_target_music: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/music.dir/plugins/music.cpp.obj: CXX_COMPILER__music_unscanned_ D$:/code/woflang/woflang8v2/plugins/music.cpp || cmake_object_order_depends_target_music
+build CMakeFiles/music.dir/plugins/music.cpp.obj: CXX_COMPILER__music_unscanned_ D$:/code/woflang2/woflang8v2/plugins/music.cpp || cmake_object_order_depends_target_music
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dmusic_EXPORTS
   DEP_FILE = CMakeFiles\music.dir\plugins\music.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\music.dir
   OBJECT_FILE_DIR = CMakeFiles\music.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\music.dir\
@@ -361,11 +361,11 @@ build bin/plugins/libmusic.dll lib/libmusic.dll.a: CXX_SHARED_LIBRARY_LINKER__mu
 
 build cmake_object_order_depends_target_quantum_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/quantum_ops.dir/plugins/quantum_ops.cpp.obj: CXX_COMPILER__quantum_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/quantum_ops.cpp || cmake_object_order_depends_target_quantum_ops
+build CMakeFiles/quantum_ops.dir/plugins/quantum_ops.cpp.obj: CXX_COMPILER__quantum_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/quantum_ops.cpp || cmake_object_order_depends_target_quantum_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dquantum_ops_EXPORTS
   DEP_FILE = CMakeFiles\quantum_ops.dir\plugins\quantum_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\quantum_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\quantum_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\quantum_ops.dir\
@@ -400,11 +400,11 @@ build bin/plugins/libquantum_ops.dll lib/libquantum_ops.dll.a: CXX_SHARED_LIBRAR
 
 build cmake_object_order_depends_target_crypto_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/crypto_ops.dir/plugins/crypto_ops.cpp.obj: CXX_COMPILER__crypto_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/crypto_ops.cpp || cmake_object_order_depends_target_crypto_ops
+build CMakeFiles/crypto_ops.dir/plugins/crypto_ops.cpp.obj: CXX_COMPILER__crypto_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/crypto_ops.cpp || cmake_object_order_depends_target_crypto_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dcrypto_ops_EXPORTS
   DEP_FILE = CMakeFiles\crypto_ops.dir\plugins\crypto_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\crypto_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\crypto_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\crypto_ops.dir\
@@ -439,11 +439,11 @@ build bin/plugins/libcrypto_ops.dll lib/libcrypto_ops.dll.a: CXX_SHARED_LIBRARY_
 
 build cmake_object_order_depends_target_fractal_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/fractal_ops.dir/plugins/fractal_ops.cpp.obj: CXX_COMPILER__fractal_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/fractal_ops.cpp || cmake_object_order_depends_target_fractal_ops
+build CMakeFiles/fractal_ops.dir/plugins/fractal_ops.cpp.obj: CXX_COMPILER__fractal_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/fractal_ops.cpp || cmake_object_order_depends_target_fractal_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dfractal_ops_EXPORTS
   DEP_FILE = CMakeFiles\fractal_ops.dir\plugins\fractal_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\fractal_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\fractal_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\fractal_ops.dir\
@@ -478,11 +478,11 @@ build bin/plugins/libfractal_ops.dll lib/libfractal_ops.dll.a: CXX_SHARED_LIBRAR
 
 build cmake_object_order_depends_target_chemistry_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/chemistry_ops.dir/plugins/chemistry_ops.cpp.obj: CXX_COMPILER__chemistry_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/chemistry_ops.cpp || cmake_object_order_depends_target_chemistry_ops
+build CMakeFiles/chemistry_ops.dir/plugins/chemistry_ops.cpp.obj: CXX_COMPILER__chemistry_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/chemistry_ops.cpp || cmake_object_order_depends_target_chemistry_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dchemistry_ops_EXPORTS
   DEP_FILE = CMakeFiles\chemistry_ops.dir\plugins\chemistry_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\chemistry_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\chemistry_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\chemistry_ops.dir\
@@ -517,11 +517,11 @@ build bin/plugins/libchemistry_ops.dll lib/libchemistry_ops.dll.a: CXX_SHARED_LI
 
 build cmake_object_order_depends_target_symbolic_logic_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/symbolic_logic_ops.dir/plugins/symbolic_logic_ops.cpp.obj: CXX_COMPILER__symbolic_logic_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/symbolic_logic_ops.cpp || cmake_object_order_depends_target_symbolic_logic_ops
+build CMakeFiles/symbolic_logic_ops.dir/plugins/symbolic_logic_ops.cpp.obj: CXX_COMPILER__symbolic_logic_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/symbolic_logic_ops.cpp || cmake_object_order_depends_target_symbolic_logic_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dsymbolic_logic_ops_EXPORTS
   DEP_FILE = CMakeFiles\symbolic_logic_ops.dir\plugins\symbolic_logic_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\symbolic_logic_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\symbolic_logic_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\symbolic_logic_ops.dir\
@@ -556,11 +556,11 @@ build bin/plugins/libsymbolic_logic_ops.dll lib/libsymbolic_logic_ops.dll.a: CXX
 
 build cmake_object_order_depends_target_logic_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/logic_ops.dir/plugins/logic_ops.cpp.obj: CXX_COMPILER__logic_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/logic_ops.cpp || cmake_object_order_depends_target_logic_ops
+build CMakeFiles/logic_ops.dir/plugins/logic_ops.cpp.obj: CXX_COMPILER__logic_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/logic_ops.cpp || cmake_object_order_depends_target_logic_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dlogic_ops_EXPORTS
   DEP_FILE = CMakeFiles\logic_ops.dir\plugins\logic_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\logic_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\logic_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\logic_ops.dir\
@@ -595,11 +595,11 @@ build bin/plugins/liblogic_ops.dll lib/liblogic_ops.dll.a: CXX_SHARED_LIBRARY_LI
 
 build cmake_object_order_depends_target_math_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/math_ops.dir/plugins/math_ops.cpp.obj: CXX_COMPILER__math_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/math_ops.cpp || cmake_object_order_depends_target_math_ops
+build CMakeFiles/math_ops.dir/plugins/math_ops.cpp.obj: CXX_COMPILER__math_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/math_ops.cpp || cmake_object_order_depends_target_math_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dmath_ops_EXPORTS
   DEP_FILE = CMakeFiles\math_ops.dir\plugins\math_ops.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\math_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\math_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\math_ops.dir\
@@ -634,11 +634,11 @@ build bin/plugins/libmath_ops.dll lib/libmath_ops.dll.a: CXX_SHARED_LIBRARY_LINK
 
 build cmake_object_order_depends_target_entropy_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/entropy_ops.dir/plugins/entropy_op.cpp.obj: CXX_COMPILER__entropy_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/entropy_op.cpp || cmake_object_order_depends_target_entropy_ops
+build CMakeFiles/entropy_ops.dir/plugins/entropy_op.cpp.obj: CXX_COMPILER__entropy_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/entropy_op.cpp || cmake_object_order_depends_target_entropy_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dentropy_ops_EXPORTS
   DEP_FILE = CMakeFiles\entropy_ops.dir\plugins\entropy_op.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\entropy_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\entropy_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\entropy_ops.dir\
@@ -673,11 +673,11 @@ build bin/plugins/libentropy_ops.dll lib/libentropy_ops.dll.a: CXX_SHARED_LIBRAR
 
 build cmake_object_order_depends_target_void_division_ops: phony || cmake_object_order_depends_target_woflang_core
 
-build CMakeFiles/void_division_ops.dir/plugins/void_division_op.cpp.obj: CXX_COMPILER__void_division_ops_unscanned_ D$:/code/woflang/woflang8v2/plugins/void_division_op.cpp || cmake_object_order_depends_target_void_division_ops
+build CMakeFiles/void_division_ops.dir/plugins/void_division_op.cpp.obj: CXX_COMPILER__void_division_ops_unscanned_ D$:/code/woflang2/woflang8v2/plugins/void_division_op.cpp || cmake_object_order_depends_target_void_division_ops
   DEFINES = -DWOFLANG_PLATFORM_WINDOWS -DWOFLANG_USE_AVX2 -Dvoid_division_ops_EXPORTS
   DEP_FILE = CMakeFiles\void_division_ops.dir\plugins\void_division_op.cpp.obj.d
   FLAGS = -std=c++23 -static-libgcc -static-libstdc++ -Wall -Wextra -Wpedantic -mavx2
-  INCLUDES = -ID:/code/woflang/woflang8v2/src/core -ID:/code/woflang/woflang8v2/src/io -ID:/code/woflang/woflang8v2/src
+  INCLUDES = -ID:/code/woflang2/woflang8v2/src/core -ID:/code/woflang2/woflang8v2/src/io -ID:/code/woflang2/woflang8v2/src
   OBJECT_DIR = CMakeFiles\void_division_ops.dir
   OBJECT_FILE_DIR = CMakeFiles\void_division_ops.dir\plugins
   TARGET_COMPILE_PDB = CMakeFiles\void_division_ops.dir\
@@ -708,7 +708,7 @@ build bin/plugins/libvoid_division_ops.dll lib/libvoid_division_ops.dll.a: CXX_S
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\code\woflang\woflang8v2\build && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\code\woflang2\woflang8v2\build && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -719,7 +719,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\code\woflang\woflang8v2\build && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -SD:\code\woflang\woflang8v2 -BD:\code\woflang\woflang8v2\build"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\code\woflang2\woflang8v2\build && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -SD:\code\woflang2\woflang8v2 -BD:\code\woflang2\woflang8v2\build"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -803,7 +803,7 @@ build woflang_core: phony lib/libwoflang_core.a
 # =============================================================================
 
 #############################################
-# Folder: D:/code/woflang/woflang8v2/build
+# Folder: D:/code/woflang2/woflang8v2/build
 
 build all: phony lib/libwoflang_core.a bin/woflang.exe bin/plugins/libkanji_ops.dll bin/plugins/libchess_ops.dll bin/plugins/libprophecy_op.dll bin/plugins/libmath_greek_ops.dll bin/plugins/libstack_slayer_op.dll bin/plugins/libmusic.dll bin/plugins/libquantum_ops.dll bin/plugins/libcrypto_ops.dll bin/plugins/libfractal_ops.dll bin/plugins/libchemistry_ops.dll bin/plugins/libsymbolic_logic_ops.dll bin/plugins/liblogic_ops.dll bin/plugins/libmath_ops.dll bin/plugins/libentropy_ops.dll bin/plugins/libvoid_division_ops.dll
 
@@ -814,14 +814,14 @@ build all: phony lib/libwoflang_core.a bin/woflang.exe bin/plugins/libkanji_ops.
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja D$:/code/woflang/woflang8v2/build/cmake_install.cmake: RERUN_CMAKE | C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang/woflang8v2/CMakeLists.txt
+build build.ninja D$:/code/woflang2/woflang8v2/build/cmake_install.cmake: RERUN_CMAKE | C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang2/woflang8v2/CMakeLists.txt
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang/woflang8v2/CMakeLists.txt: phony
+build C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeNinjaFindMake.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCXXSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckCompilerFlag.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.0.3/CMakeCXXCompiler.cmake CMakeFiles/4.0.3/CMakeRCCompiler.cmake CMakeFiles/4.0.3/CMakeSystem.cmake D$:/code/woflang2/woflang8v2/CMakeLists.txt: phony
 
 
 #############################################

@@ -1,0 +1,20 @@
+# ninja log v7
+91	2761	7783331229562423	plugins/CMakeFiles/graph_coloring_ops.dir/graph_coloring_ops.cpp.obj	689f38accef36b45
+62	2851	7783331229277859	plugins/CMakeFiles/discrete_math_ops.dir/discrete_math_ops.cpp.obj	5a2e2b154a21cc87
+84	3066	7783331229500117	plugins/CMakeFiles/gradient_hessian_ops.dir/gradient_hessian_ops.cpp.obj	6b1d4a9ba933fc1a
+96	3270	7783331229623079	plugins/CMakeFiles/graph_search_ops.dir/graph_search_ops.cpp.obj	b54198a73dc995e0
+36	3469	7783331229026012	CMakeFiles/woflang_core.dir/src/repl/repl_main.cpp.obj	b3a237b61882fe39
+32	3486	7783331228973503	CMakeFiles/woflang_core.dir/src/io/tokenizer.cpp.obj	6bb39547cbee47e4
+104	3981	7783331229707444	plugins/CMakeFiles/graph_theory_ops.dir/graph_theory_ops.cpp.obj	dfe5724d5ed60dca
+76	4674	7783331229414878	plugins/CMakeFiles/geom_transform_ops.dir/geom_transform_ops.cpp.obj	e6eec2fb3305a74f
+68	4853	7783331229339770	plugins/CMakeFiles/fractal_ops.dir/fractal_ops.cpp.obj	cd94a6ee55ef1486
+3478	5657	7783331263435111	plugins/CMakeFiles/modexp_ops.dir/modexp_ops.cpp.obj	f9f52114c6e6d83
+3486	5713	7783331263520740	plugins/CMakeFiles/numeric_diff_ops.dir/numeric_diff_ops.cpp.obj	f160a25644e26901
+2790	6657	7783331256677201	plugins/CMakeFiles/kanji_ops.dir/kanji_ops.cpp.obj	f978d420713b0b2d
+46	6700	7783331229117862	plugins/CMakeFiles/chemistry_ops.dir/chemistry_ops.cpp.obj	1330d789d3c6177a
+2861	7019	7783331257347873	plugins/CMakeFiles/logic_ops.dir/logic_ops.cpp.obj	4fa2b96e25ee6e2f
+3090	7383	7783331259558491	plugins/CMakeFiles/math_greek_ops.dir/math_greek_ops.cpp.obj	35945ca1748e5175
+51	7502	7783331229167838	plugins/CMakeFiles/chess_ops.dir/chess_ops.cpp.obj	94de28516d482460
+41	7651	7783331229065987	CMakeFiles/woflang.dir/main.cpp.obj	a8ad8d0ce1a310ec
+27	8162	7783331228923827	CMakeFiles/woflang_core.dir/src/core/woflang.cpp.obj	a41b58cffb7a12af
+3301	8544	7783331261703661	plugins/CMakeFiles/math_ops.dir/math_ops.cpp.obj	b7377e3af37a2c3e
