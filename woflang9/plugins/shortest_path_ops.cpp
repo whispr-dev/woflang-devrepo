@@ -6,6 +6,16 @@
 #include <limits>
 #include <stdexcept>
 
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+
 namespace woflang {
 
 using Edge=std::tuple<int,int,double>;
@@ -39,4 +49,4 @@ std::vector<double> bellmanFord(const std::vector<Edge>& edges,int n,int start){
     return dist;
 }
 
-} // namespace woflang
+

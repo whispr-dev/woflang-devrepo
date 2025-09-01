@@ -4,6 +4,8 @@
 #include <cmath>
 #include <string>
 
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+
 namespace woflang {
 
 double forwardDifference(const std::vector<double>& x,const std::vector<double>& y,int i){
@@ -31,4 +33,3 @@ void computeDerivatives(const std::vector<double>& x,const std::vector<double>& 
     }
 }
 
-} // namespace woflang

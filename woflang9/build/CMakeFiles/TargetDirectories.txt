@@ -1,5 +1,7 @@
 D:/code/woflang2/woflang9/build/CMakeFiles/woflang_core.dir
 D:/code/woflang2/woflang9/build/CMakeFiles/woflang.dir
+D:/code/woflang2/woflang9/build/CMakeFiles/moses_op.dir
+D:/code/woflang2/woflang9/build/CMakeFiles/prime_heck_op.dir
 D:/code/woflang2/woflang9/build/CMakeFiles/edit_cache.dir
 D:/code/woflang2/woflang9/build/CMakeFiles/rebuild_cache.dir
 D:/code/woflang2/woflang9/build/plugins/CMakeFiles/crypto_ops.dir

@@ -4,6 +4,16 @@
 #include <stack>
 #include <queue>
 
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+
 namespace woflang {
 
 void depthFirstSearch(const std::vector<std::vector<int>>& adjList, int start) {
@@ -33,4 +43,3 @@ void breadthFirstSearch(const std::vector<std::vector<int>>& adjList, int start)
     }
 }
 
-} // namespace woflang

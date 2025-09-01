@@ -11,7 +11,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     (*op_table)["entropy"] = [](std::stack<woflang::WofValue>& stack) {
         if (stack.empty()) {
             std::cout << "The void has no entropy. Only chaos remains.\n";
@@ -101,5 +109,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::cout << "Order has been restored to the stack.\n";
     };
 }
-
-} // extern "C"

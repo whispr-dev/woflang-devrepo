@@ -6,6 +6,16 @@
 
 namespace woflang {
 
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+
 std::vector<double> computeGradient(const std::function<double(const std::vector<double>&)>& f,
                                     const std::vector<double>& x,double h=1e-5){
     int n=x.size(); std::vector<double> g(n);
@@ -38,4 +48,4 @@ std::vector<std::vector<double>> computeHessian(const std::function<double(const
     return H;
 }
 
-} // namespace woflang
+

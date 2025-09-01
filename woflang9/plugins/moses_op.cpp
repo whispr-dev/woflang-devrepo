@@ -1,5 +1,5 @@
 // ==================================================
-// moses_op.cpp - A Mystical Riddle Plugin
+// moses_op.cpp - A Mystical Riddle Plugin (C++23 Fixed)
 // ==================================================
 #include "../../src/core/woflang.hpp"
 #include <iostream>
@@ -32,9 +32,19 @@ void setup_utf8_console() {
 }
 
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     // This is a special command that has a chance to trigger the riddle.
     (*op_table)["那"] = [](std::stack<woflang::WofValue>& stack) {
+        (void)stack; // Suppress unused parameter warning
+        
         // Set up console on first run.
         static bool first_run = true;
         if (first_run) {
@@ -71,17 +81,22 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     };
 
     // The command to provide the answer to the riddle.
-    (*op_table)["answer"] = [](std::stack<woflang::WofValue>&) {
+    (*op_table)["answer"] = [](std::stack<woflang::WofValue>& stack) {
+        (void)stack; // Suppress unused parameter warning
+        
         if (hebrew_mode_active) {
             std::cout << "\nHe brews it.\n";
-            std::cout << u8"הוא מכין תה... (He brews it.)\n\n";
+            // Use regular string literal instead of u8 prefix
+            std::cout << "הוא מכין תה... (He brews it.)\n\n";
         } else {
             std::cout << "There is no riddle to answer.\n";
         }
     };
 
     // A command to reset the state back to normal.
-    (*op_table)["reset"] = [](std::stack<woflang::WofValue>&) {
+    (*op_table)["reset"] = [](std::stack<woflang::WofValue>& stack) {
+        (void)stack; // Suppress unused parameter warning
+        
         if (hebrew_mode_active) {
             hebrew_mode_active = false;
             std::cout << "The world returns to its former shape.\n";
@@ -90,5 +105,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         }
     };
 }
-
-} // extern "C"

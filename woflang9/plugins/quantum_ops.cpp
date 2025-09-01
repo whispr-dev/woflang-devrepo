@@ -8,8 +8,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
-    // Create quantum states
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     (*op_table)["|0⟩"] = [](std::stack<woflang::WofValue>& stack) {
         woflang::WofValue result;
         result.d = 0.0; // Represent |0⟩ as 0
@@ -221,5 +228,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::cout << "Try: |0⟩ H show measure\n";
     };
 }
-
-} // extern "C"

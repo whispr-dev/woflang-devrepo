@@ -18,7 +18,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     // First, ensure we have the core display operation
     // This preserves the stack display functionality
     (*op_table)["."] = [](std::stack<woflang::WofValue>& stack) {
@@ -523,5 +531,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         stack.push(result);
     };
 }
-
-} // extern "C"

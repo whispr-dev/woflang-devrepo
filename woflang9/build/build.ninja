@@ -129,6 +129,82 @@ build bin/woflang.exe: CXX_EXECUTABLE_LINKER__woflang_Release CMakeFiles/woflang
   TARGET_IMPLIB = lib\libwoflang.dll.a
   TARGET_PDB = woflang.exe.dbg
 
+# =============================================================================
+# Object build statements for SHARED_LIBRARY target moses_op
+
+
+#############################################
+# Order-only phony target for moses_op
+
+build cmake_object_order_depends_target_moses_op: phony || cmake_object_order_depends_target_woflang_core
+
+build CMakeFiles/moses_op.dir/plugins/moses_op.cpp.obj: CXX_COMPILER__moses_op_unscanned_Release D$:/code/woflang2/woflang9/plugins/moses_op.cpp || cmake_object_order_depends_target_moses_op
+  CONFIG = Release
+  DEFINES = -Dmoses_op_EXPORTS
+  DEP_FILE = CMakeFiles\moses_op.dir\plugins\moses_op.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins
+  OBJECT_DIR = CMakeFiles\moses_op.dir
+  OBJECT_FILE_DIR = CMakeFiles\moses_op.dir\plugins
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target moses_op
+
+
+#############################################
+# Link the shared library bin\libmoses_op.dll
+
+build bin/libmoses_op.dll lib/libmoses_op.dll.a: CXX_SHARED_LIBRARY_LINKER__moses_op_Release CMakeFiles/moses_op.dir/plugins/moses_op.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+  CONFIG = Release
+  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\moses_op.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  RESTAT = 1
+  TARGET_FILE = bin\libmoses_op.dll
+  TARGET_IMPLIB = lib\libmoses_op.dll.a
+  TARGET_PDB = moses_op.dll.dbg
+
+# =============================================================================
+# Object build statements for SHARED_LIBRARY target prime_heck_op
+
+
+#############################################
+# Order-only phony target for prime_heck_op
+
+build cmake_object_order_depends_target_prime_heck_op: phony || cmake_object_order_depends_target_woflang_core
+
+build CMakeFiles/prime_heck_op.dir/plugins/prime_heck_op.cpp.obj: CXX_COMPILER__prime_heck_op_unscanned_Release D$:/code/woflang2/woflang9/plugins/prime_heck_op.cpp || cmake_object_order_depends_target_prime_heck_op
+  CONFIG = Release
+  DEFINES = -Dprime_heck_op_EXPORTS
+  DEP_FILE = CMakeFiles\prime_heck_op.dir\plugins\prime_heck_op.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/code/woflang2/woflang9 -ID:/code/woflang2/woflang9/src -ID:/code/woflang2/woflang9/src/core -ID:/code/woflang2/woflang9/plugins
+  OBJECT_DIR = CMakeFiles\prime_heck_op.dir
+  OBJECT_FILE_DIR = CMakeFiles\prime_heck_op.dir\plugins
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target prime_heck_op
+
+
+#############################################
+# Link the shared library bin\libprime_heck_op.dll
+
+build bin/libprime_heck_op.dll lib/libprime_heck_op.dll.a: CXX_SHARED_LIBRARY_LINKER__prime_heck_op_Release CMakeFiles/prime_heck_op.dir/plugins/prime_heck_op.cpp.obj | lib/libwoflang_core.a || lib/libwoflang_core.a
+  CONFIG = Release
+  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = lib/libwoflang_core.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\prime_heck_op.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  RESTAT = 1
+  TARGET_FILE = bin\libprime_heck_op.dll
+  TARGET_IMPLIB = lib\libprime_heck_op.dll.a
+  TARGET_PDB = prime_heck_op.dll.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -1067,7 +1143,11 @@ build libmath_ops.dll: phony bin/plugins/libmath_ops.dll
 
 build libmodexp_ops.dll: phony bin/plugins/libmodexp_ops.dll
 
+build libmoses_op.dll: phony bin/libmoses_op.dll
+
 build libnumeric_diff_ops.dll: phony bin/plugins/libnumeric_diff_ops.dll
+
+build libprime_heck_op.dll: phony bin/libprime_heck_op.dll
 
 build libprime_ops.dll: phony bin/plugins/libprime_ops.dll
 
@@ -1093,7 +1173,11 @@ build math_ops: phony bin/plugins/libmath_ops.dll
 
 build modexp_ops: phony bin/plugins/libmodexp_ops.dll
 
+build moses_op: phony bin/libmoses_op.dll
+
 build numeric_diff_ops: phony bin/plugins/libnumeric_diff_ops.dll
+
+build prime_heck_op: phony bin/libprime_heck_op.dll
 
 build prime_ops: phony bin/plugins/libprime_ops.dll
 
@@ -1123,7 +1207,7 @@ build woflang_core: phony lib/libwoflang_core.a
 #############################################
 # Folder: D:/code/woflang2/woflang9/build
 
-build all: phony lib/libwoflang_core.a bin/woflang.exe plugins/all
+build all: phony lib/libwoflang_core.a bin/woflang.exe bin/libmoses_op.dll bin/libprime_heck_op.dll plugins/all
 
 # =============================================================================
 

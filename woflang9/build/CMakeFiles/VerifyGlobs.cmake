@@ -35,7 +35,7 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs")
 endif()
 
-# ALL_SRC_CPP at CMakeLists.txt:54 (file)
+# ALL_SRC_CPP at CMakeLists.txt:49 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/code/woflang2/woflang9/src/*.cpp")
 set(OLD_GLOB
   "D:/code/woflang2/woflang9/src/core/woflang.cpp"
@@ -47,7 +47,7 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs")
 endif()
 
-# ALL_SRC_CPP at CMakeLists.txt:54 (file)
+# ALL_SRC_CPP at CMakeLists.txt:49 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/code/woflang2/woflang9/src/*/*.cpp")
 set(OLD_GLOB
   "D:/code/woflang2/woflang9/src/core/woflang.cpp"
@@ -59,7 +59,7 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/code/woflang2/woflang9/build/CMakeFiles/cmake.verify_globs")
 endif()
 
-# ALL_SRC_CPP at CMakeLists.txt:54 (file)
+# ALL_SRC_CPP at CMakeLists.txt:49 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/code/woflang2/woflang9/src/*/*/*.cpp")
 set(OLD_GLOB
   )

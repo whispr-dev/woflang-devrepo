@@ -20,11 +20,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY         ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
 
-# plugins (DLL) go here:
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY         ${CMAKE_BINARY_DIR}/bin/plugins)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_BINARY_DIR}/bin/plugins)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/plugins)
-
 # import libs / static libs here:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY         ${CMAKE_BINARY_DIR}/lib)
 
@@ -60,12 +55,13 @@ file(GLOB_RECURSE ALL_SRC_CPP CONFIGURE_DEPENDS
 # exclude main
 list(REMOVE_ITEM ALL_SRC_CPP "${WOFLANG_MAIN}")
 
-# exclude anything under plugins/ or tests/
-set(WOFLANG_CORE_SRC "")
+# plugin n test not to core compiled final [they externs]
 foreach(SRC ${ALL_SRC_CPP})
   if (SRC MATCHES "/plugins/" OR SRC MATCHES "/tests/")
+    message(STATUS "EXCLUDING from core: ${SRC}")
     # skip
   else()
+    message(STATUS "INCLUDING in core: ${SRC}")
     list(APPEND WOFLANG_CORE_SRC "${SRC}")
   endif()
 endforeach()
@@ -87,3 +83,13 @@ set_target_properties(woflang PROPERTIES
 
 # --- plugins subdir
 add_subdirectory(plugins)
+
+# Moses mystical riddle plugin
+add_library(moses_op SHARED plugins/moses_op.cpp)
+target_link_libraries(moses_op woflang_core)
+target_include_directories(moses_op PRIVATE ${CMAKE_SOURCE_DIR}/src)
+
+# Prime heck typo plugin  
+add_library(prime_heck_op SHARED plugins/prime_heck_op.cpp)
+target_link_libraries(prime_heck_op woflang_core)
+target_include_directories(prime_heck_op PRIVATE ${CMAKE_SOURCE_DIR}/src)

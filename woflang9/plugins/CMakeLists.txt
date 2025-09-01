@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 # collect only this folder's *_ops.cpp
 file(GLOB PLUGIN_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*_ops.cpp")
+message(STATUS "GLOB found these files: ${PLUGIN_SOURCES}")
 
 if (PLUGIN_SOURCES STREQUAL "")
   message(WARNING "No *_ops.cpp plugin sources found in plugins/")

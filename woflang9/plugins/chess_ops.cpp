@@ -401,7 +401,15 @@ std::pair<int, int> parse_square(const std::string& square) {
 
 // Plugin initialization
 extern "C" {
-    void init_plugin(WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         // Initialize chess board and neural engine
         g_chess_board = std::make_unique<ChessBoard>();
         g_neural_engine = std::make_unique<NeuralChessEngine>();
@@ -595,5 +603,3 @@ extern "C" {
         std::cout << "\n🎮 Try: chess_new → chess_quick_train → chess_neural_move\n";
     }
 }
-
-} // namespace woflang

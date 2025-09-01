@@ -6,6 +6,16 @@
  * pattern matching, simplification rules, and unit handling.
  */
 
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+
 #pragma once
 
 #include "core/woflang.hpp"
@@ -600,5 +610,3 @@ inline void register_symbolic_ops(WoflangInterpreter& interp) {
         interp.stack.push_back(result_value);
     });
 }
-
-} // namespace woflang

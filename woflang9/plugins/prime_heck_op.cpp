@@ -4,9 +4,15 @@
 #include "../../src/core/woflang.hpp"
 #include <iostream>
 
-extern "C" {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     (*op_table)["pime_heck"] = [](std::stack<woflang::WofValue>& stack) {
         // Using a C++ raw string literal (R"()") makes embedding ASCII art
         // clean and easy, as no characters need to be escaped.
@@ -36,4 +42,3 @@ You typed 'pime_heck' instead of 'prime_check'.
     };
 }
 
-} // extern "C"

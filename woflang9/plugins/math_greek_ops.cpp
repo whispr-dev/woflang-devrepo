@@ -12,7 +12,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     // π (pi) - Mathematical constant - multiple ways to access
     (*op_table)["π"] = [](std::stack<woflang::WofValue>& stack) {
         woflang::WofValue val;
@@ -201,5 +209,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         while (!stack.empty()) stack.pop();
     };
 }
-
-} // extern "C"

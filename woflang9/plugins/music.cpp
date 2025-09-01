@@ -8,7 +8,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     // Note frequencies (A4 = 440Hz) - using ASCII names
     std::map<std::string, double> notes = {
         {"C", 261.63}, {"Cs", 277.18}, {"D", 293.66}, {"Ds", 311.13},
@@ -67,5 +75,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         stack.push(result);
     };
 }
-
-} // extern "C"

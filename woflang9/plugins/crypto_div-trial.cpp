@@ -201,7 +201,16 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         auto value = stack.top(); stack.pop();
         
         // Convert the numeric value to string for encoding
-        std::string str = std::to_string(value.d);
+        std::string str = std::to_string(value.d);#ifndef WOFLANG_PLUGIN_EXPORT
+
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::string encoded = base64_encode(str);
         
         std::cout << "Base64 encoded: " << encoded << std::endl;
@@ -550,4 +559,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     };
 }
 
-} // extern "C"

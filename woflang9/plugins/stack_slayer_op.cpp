@@ -8,7 +8,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     (*op_table)["stack_slayer"] = [](std::stack<woflang::WofValue>& stack) {
         if (stack.empty()) {
             std::cout << "The Stack Slayer finds nothing to slay.\n";
@@ -49,5 +57,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::cout << "Three sacred constants have risen from the void.\n";
     };
 }
-
-} // extern "C"

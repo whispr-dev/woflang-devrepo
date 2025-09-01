@@ -2,6 +2,16 @@
 #include <iostream>
 #include <vector>
 
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+
 namespace woflang {
 
 std::vector<int> greedyGraphColoring(const std::vector<std::vector<int>>& graph) {
@@ -16,4 +26,3 @@ std::vector<int> greedyGraphColoring(const std::vector<std::vector<int>>& graph)
     return res;
 }
 
-} // namespace woflang

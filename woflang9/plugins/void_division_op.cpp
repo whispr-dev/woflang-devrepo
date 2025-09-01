@@ -7,7 +7,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     (*op_table)["void_division"] = [](std::stack<woflang::WofValue>& stack) {
         std::cout << "⚠️  FORBIDDEN OPERATION DETECTED ⚠️\n";
         std::cout << "Attempting to divide by the void...\n";
@@ -49,5 +57,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         stack.push(result);
     };
 }
-
-} // extern "C"

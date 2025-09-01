@@ -79,7 +79,15 @@ static const KanjiEntry kaomoji[] = {
     {"(^_−)−☆", "wink", "wink", "wink, good job", "ナイス！(^_−)−☆"},
 };
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     // Core kanji ops
     for (const auto& entry : basic_kanji) {
         (*op_table)[entry.kanji] = [entry](std::stack<woflang::WofValue>&) {
@@ -135,5 +143,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::cout << "Try typing any Japanese character to see its information.\n";
     };
 }
-
-} // extern "C"

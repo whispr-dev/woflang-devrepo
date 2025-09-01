@@ -72,7 +72,15 @@ namespace {
     }
 }
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     // Get atomic weight by atomic number
     (*op_table)["atomic_weight"] = [](std::stack<woflang::WofValue>& stack) {
         if (stack.empty()) {
@@ -420,5 +428,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
         std::cout << "  4: NH3 (ammonia)  5: NaCl (salt)             6: C6H12O6 (glucose)" << std::endl;
     };
 }
-
-} // extern "C"

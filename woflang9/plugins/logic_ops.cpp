@@ -6,7 +6,15 @@
 
 extern "C" {
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     auto to_bool = [](const woflang::WofValue& val) -> bool {
         return val.d != 0.0;
     };
@@ -175,4 +183,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     };
 }
 
-} // extern "C"

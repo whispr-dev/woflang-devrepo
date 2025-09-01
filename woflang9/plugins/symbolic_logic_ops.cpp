@@ -12,7 +12,15 @@ bool to_bool(const woflang::WofValue& val) {
     return val.d != 0.0;
 }
 
-void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
+#ifndef WOFLANG_PLUGIN_EXPORT
+#  ifdef _WIN32
+#    define WOFLANG_PLUGIN_EXPORT extern "C" __declspec(dllexport)
+#  else
+#    define WOFLANG_PLUGIN_EXPORT extern "C"
+#  endif
+#endif
+
+WOFLANG_PLUGIN_EXPORT void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
     // Logical Operations
     (*op_table)["forall"] = [](std::stack<woflang::WofValue>& stack) {
         throw std::runtime_error("forall quantifier evaluation not implemented in stack mode");
@@ -102,5 +110,3 @@ void init_plugin(woflang::WoflangInterpreter::OpTable* op_table) {
 
     std::cout << "symbolic_ops plugin loaded.\n";
 }
-
-} // extern "C"
